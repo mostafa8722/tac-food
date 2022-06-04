@@ -1,0 +1,13 @@
+$material-light: ( 'text-fields': (
+  'filled': rgba(0, 0, 0, 0.06),
+  'filled-hover': rgba(0, 0, 0, 0.12),
+  'outlined': rgba(0, 0, 0, 0.2),
+  'outlined-disabled': rgba(0, 0, 0, 0.1),
+  'outlined-hover': rgba(0, 0, 0, 0.4)
+));
+$text-field-outlined-fieldset-border: 2px solid currentcolor;
+
+@mixin transition($second: 0.2s){
+  transition: all $second ease
+}
+

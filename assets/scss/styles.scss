@@ -1,0 +1,50 @@
+@import "fonts";
+@import "colors";
+
+
+body {
+  font-family: IranYekanFN !important;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #F2994A !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e3893a !important;
+}
+
+h1, h2, h3, h4, h5, h6, input, textarea, span, .v-application {
+  font-family: IranYekanFN !important;
+}
+
+.v-application {
+  [class*='text-'] {
+    color: $dark-grey;
+    font-family: IranYekanFN, serif !important;
+  }
+
+  font-family: IranYekanFN, serif !important;
+}
+
+.v-btn {
+  letter-spacing: 0 !important;
+}
+
+.v-text-field--outlined fieldset {
+  color: #E2E2E2;
+}
+
+.v-dialog {
+  border-radius: 28px !important;
+}
+.v-btn__content{ font-family: IranYekanFN !important;}
