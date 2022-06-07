@@ -1,7 +1,8 @@
 <template>
   <div class="containers">
     <div>
-
+   <SearchBox />   
+  
    <Sliders/>
    <Categories class="mt-3" />
 
@@ -14,6 +15,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import SearchBox from '~/components/app/SearchBox.vue'
 import Sliders from '~/components/home/Sliders.vue'
 import Categories from '~/components/home/Categories.vue'
 import Products from '~/components/home/Products.vue'
@@ -23,7 +25,8 @@ export default Vue.extend({
   components:{
     Sliders,
     Categories,
-    Products
+    Products,
+    SearchBox
 }
 })
 </script>
@@ -31,7 +34,7 @@ export default Vue.extend({
 <style>
  @import '~/assets/css/tailwind.css';
   h1, h2, h3, h4, h5, h6, input, textarea, span, .v-application {
-  font-family: yekanRegular !important;
+  font-family: yekanNumRegular !important;
 }
 .containers {
   margin: 0 auto;

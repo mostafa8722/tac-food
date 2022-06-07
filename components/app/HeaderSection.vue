@@ -2,7 +2,7 @@
  
      <div class="flex-header-container flex">
   <div class="flex-header-left"></div>
-    <h3 class="header-title">{{title}}</h3>
+    <h3 v-show="title" class="header-title">{{title}}</h3>
   <div class="flex-header-right"></div>
 </div>
   

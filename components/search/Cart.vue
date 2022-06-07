@@ -62,7 +62,7 @@ export default {
   props : ["product"]
 }
 </script>
-<style scoped>
+<style>
 .flex-none{
     flex:none;
 }

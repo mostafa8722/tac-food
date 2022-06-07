@@ -2,8 +2,8 @@
   <div class="containers">
     <div>
 
-   <Profile />
-   
+    <SearchBox />  
+    <SearchComponent />
      
     </div>
   </div>
@@ -11,12 +11,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Profile from '~/components/profile/Profile.vue'
+import SearchBox from '~/components/app/SearchBox.vue'
+import SearchComponent from '~/components/search/SearchComponent.vue'
 
 
 export default Vue.extend({
+    layout: 'custom',
   components:{
-    Profile
+    SearchBox,
+    SearchComponent
 }
 })
 </script>
@@ -24,7 +27,7 @@ export default Vue.extend({
 <style>
  @import '~/assets/css/tailwind.css';
   h1, h2, h3, h4, h5, h6, input, textarea,div, span, .v-application {
-  font-family: yekanNumRegular !important;
+  font-family: yekanRegular !important;
 }
 .containers {
   margin: 0 auto;

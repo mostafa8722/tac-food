@@ -24,9 +24,11 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, input, textarea, span, .v-application {
-  font-family: IranYekanFN !important;
+  font-family: yekanNumRegular !important;
 }
-
+input:focus {
+  outline: none /* Removes the border when the input is clicked */
+}
 .v-application {
   [class*='text-'] {
     color: $dark-grey;

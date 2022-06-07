@@ -1,29 +1,27 @@
 <template>
   <div class="containers">
-    <div>
-
-   <Profile />
-   
-     
-    </div>
+    <ProductsComponents />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Profile from '~/components/profile/Profile.vue'
 
+import Vue from "vue"
+import ProductsComponents from '~/components/products/ProductsComponents.vue'
 
 export default Vue.extend({
+   layout: 'home',
   components:{
-    Profile
+
+    ProductsComponents,
+   
 }
 })
 </script>
 
 <style>
  @import '~/assets/css/tailwind.css';
-  h1, h2, h3, h4, h5, h6, input, textarea,div, span, .v-application {
+  h1, h2, h3, h4, h5, h6, input, textarea, span, .v-application {
   font-family: yekanNumRegular !important;
 }
 .containers {
