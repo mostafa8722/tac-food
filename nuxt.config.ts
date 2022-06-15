@@ -18,6 +18,11 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    '~/plugins/axios.ts',
+    '~/plugins/repositories.ts',
+    {src: "~/plugins/vue-leaflet.ts", ssr: false}
+
+
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -29,15 +34,20 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/pwa',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/axios',
     ['@nuxtjs/vuetify', { /* module options */ }],
+   
     
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-  
+    ['nuxt-leaflet', { ssr: false /* module options */ }],
   ],
 
+  axios: {
+    baseURL: 'https://app.takfood.ir/api/', // Used as fallback if no runtime config is provided
+  },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
   }

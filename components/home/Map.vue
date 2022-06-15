@@ -1,0 +1,60 @@
+<template>
+   <section >
+     
+<div id="map-wrap" style="height: 100vh">
+ <client-only>
+  <l-map style="height: 300px" :zoom="zoom" :center="center">
+    <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+    <l-marker :lat-lng="markerLatLng"></l-marker>
+  </l-map>
+</client-only>
+</div>
+    </section>
+
+</template>
+<script>
+
+import Vue from 'vue';
+
+
+
+import { mapGetters } from 'vuex'
+export default {
+     data () {
+    return {
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution:
+        '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      zoom: 15,
+      center: [51.505, -0.159],
+      markerLatLng: [51.504, -0.159]
+    };
+  }
+   
+}
+</script>
+<style>
+.sliders-section{
+    width:100%;
+    overflow:hidden;
+    position:relative;
+    margin:10px;
+    width:95%;
+}
+.custom-image-slider{
+    border-radius:10px;
+ 
+    overflow:hidden;
+  
+    
+    object-fit:cover;
+    background-size : cover;
+}
+.costom-image-cover3{
+        border-radius:10px;
+        background-color:#ffffff;
+         margin : 10px;
+         padding : 10px;
+       
+}
+</style>

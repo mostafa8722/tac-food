@@ -13,19 +13,19 @@
       height="60"
       width="60"
       class="flex-none rounded-xl"
-      :src="product.img"
+      :src="product.logo"
     
     ></v-img>
 
     <div class="flex flex-col mr-2">
      <div>
-          <span class=" title">  {{product.title}}</span>
+          <span class=" title">  {{product.name}}</span>
              <span class=" circle-parent circle-green"> 
                <span class="circle-child"></span>
              </span>
      </div>
-      <span class=" body mt-2">  {{product.type}}</span>
-      <span class=" price mt-2">   تومان{{product.price}}هر کیلو</span>
+      <span v-for="cat in product.categories" class=" body mt-2">  {{cat}}</span>
+      <span class=" address mt-2">   {{product.address}}</span>
 
     </div>
     </div>
@@ -33,13 +33,14 @@
 <div class="divider mt-3"></div>
     
   <div class="flex justify-between items-center mr-2 ml-2">
-  <span class=" price flex-89"> تومان {{product.price}}</span>
+  <span v-if="product.delivery_cost==0" class=" price "> رایگان</span>
+  <span v-else class=" price "> تومان {{product.delivery_cost}}</span>
  
    <div class="flex ">
-      <div class=" type ">  11 نفر</div>
+      <div class=" type ">  {{product.vote}} رای</div>
      
       <v-rating
-      v-model="product.rate"
+      v-model="product.rating"
       background-color="warning lighten-1"
       color="red"
       size="10"
@@ -81,8 +82,11 @@ export default {
 .price{
   color:#717171;
     font-size:0.5rem;
-  font-family: yekanNumRegular!important;
-  
+    flex:84%;
+}
+.address{
+  color:#717171;
+    font-size:0.5rem;
 }
 .flex-89{flex:89%}
 .body{

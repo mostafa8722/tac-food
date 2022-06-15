@@ -15,7 +15,16 @@ export default Vue.extend({
 
     ProductsComponents,
    
-}
+},
+  created(){
+
+  
+    let params = this.$route.params;
+    let id = params.id;
+    console.log("ffff",id)
+ 
+   this.$store.dispatch('products/productsPage',{store_id:id})
+    }
 })
 </script>
 

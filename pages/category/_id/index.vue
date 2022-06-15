@@ -11,11 +11,15 @@ import CategoryComponents from '~/components/category/CategoryComponents.vue'
 
 export default Vue.extend({
    layout: 'home',
-  components:{
+  components:{CategoryComponents,},
+  created(){
 
-    CategoryComponents,
-   
-}
+  
+    let params = this.$route.params;
+    let id = params.id;
+ 
+   this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:id})
+    }
 })
 </script>
 

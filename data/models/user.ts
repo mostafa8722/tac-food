@@ -1,0 +1,26 @@
+type User = {
+    firstName: string,
+    lastName: string,
+    email: string,
+    userName: string,
+    displayName: string,
+    accountType: number,
+    mobile1: string,
+    mobile2: string,
+    password: string,
+    address: string,
+    latitude: number,
+    longitude: number,
+    provinceId: number,
+    cityId: number,
+    fatherName: string,
+    birthDate: string,
+    organization: string,
+    economicCode: string,
+    nationalId: string,
+    nationalCode: string,
+    registrationId: string,
+    phone: string,
+  }
+
+  export default User;

@@ -40,7 +40,7 @@
           
       </a>
 
-                <v-btn class="btn-add mt-2">
+                <v-btn @click.prevent="login" class="btn-add mt-2">
                      <span class="white"> ثبت </span>
                     <font-awesome-icon class="absolute left-2 white mr-5 " :icon="`fa-solid fa-angle-left`" />
               
@@ -75,6 +75,12 @@ export default {
         },
       ],
     }),
+    methods:{
+      login(){
+        this.$store.dispatch('auth-user/loginUser', this.user)
+      }
+
+    }
 }
 </script>
 <style scoped>

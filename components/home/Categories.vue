@@ -13,18 +13,14 @@
 <script>
 import HeaderSection from '../app/HeaderSection.vue';
 import Category from './Category.vue';
+import { mapGetters } from 'vuex'
 export default {
     components: { HeaderSection ,Category},
-    
+      computed: {
+    ...mapGetters({ categories: 'home/categories' })
+  },
   
-    data : ()  =>({
-        categories : [
-            {title:"غذا",color:"#ffaead",img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"میوه",color:"#cbffc1",img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"بستنی",color:"#a4e7e5",img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"نان",color:"#fefadf",img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-        ]
-    })
+   
 }
 </script>
 <style>

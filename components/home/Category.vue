@@ -1,6 +1,7 @@
 <template>
 <div class="flex flex-col items-center ml-3">
-  <v-card v-if="category.color"
+   <NuxtLink v-if="category.id" :to="`/category/${category.id}`">
+  <v-card 
     class="flex items-center justify-center rounded-xl"
     width="80"
     height="80"
@@ -13,12 +14,13 @@
       height="40"
       width="40"
       class="flex-none rounded-none"
-      :src="category.img"
+      :src="category.image"
     
     ></v-img>
  
   </v-card>
-   <span class="mt-2">  {{category.title}}</span>
+  </NuxtLink>
+   <span class="mt-2">  {{category.name}}</span>
 </div>
 
 

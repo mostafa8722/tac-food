@@ -31,9 +31,10 @@
         v-for="i in 3"
         :key="i"
         :value="'tab-' + i"
+        class="tab-item"
       >
         
-         <Comments :data="categories"/>
+         <Products :data="categories"/>
          
        
       </v-tab-item>
@@ -43,9 +44,11 @@
 </template>
 <script>
 import Categories from './Categories.vue';
+import Info from './Info.vue';
 import Comments from './Comments.vue';
+import Products from './Products.vue';
 export default {
-   components: { Categories,Comments},
+   components: { Categories,Info,Comments,Products},
     
   
     data : ()  =>({
@@ -75,5 +78,8 @@ color:#242424!important;
 }
 .v-tab--active .v-icon{
 color:#fe5c67!important;;
+}
+.tab-item{
+   background-color: #f6f6f6
 }
 </style>

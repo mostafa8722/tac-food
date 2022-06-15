@@ -1,6 +1,7 @@
 <template>
   <header class="flex justify-center items-center ">
     <h4 class="title">{{title}}</h4>
+    
          <font-awesome-icon v-if="back" class=" btn-back absolute right-3" :icon="`fa-solid fa-arrow-right`" />
               
   </header>

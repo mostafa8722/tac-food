@@ -3,9 +3,10 @@
      <HeaderSection :title= "title"/>
      
      <div class="mt-3 flex flex-row mr-3">
-     <div  v-for="(item, index) in products">
+           
+     <div  v-for="(item, index) in (type=='popular'?populars:discunts)">
   
-        <Product   :product="item" />
+        <Product    :product="item" />
       </div>
      </div>
     </section>
@@ -14,12 +15,23 @@
 <script>
 import HeaderSection from '../app/HeaderSection.vue';
 import Product from './Product.vue';
+import { mapGetters } from 'vuex'
 export default {
     components: { HeaderSection ,Product},
+       computed: {
+      ...mapGetters({
+           populars: 'home/populars',
+           discunts: 'home/discunts',
+            })
+         },
+   
       props: {
           title:{
               type:String
-          }
+          },
+           type:{
+              type:String
+          },
       },
   
     data : ()  =>({

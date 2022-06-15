@@ -1,6 +1,7 @@
 <template>
 <div class="flex flex-col items-center ml-3">
-  <v-card
+ <NuxtLink :to="`/products/${product.store_id}`">
+ <v-card
     class="flex flex-col items-center overflow-hidden  rounded-xl"
     width="100"
     height="170"
@@ -14,25 +15,25 @@
       height="90"
       width="100"
       class="flex-none rounded-none"
-      :src="product.img"
+      :src="product.logo"
     
     ></v-img>
 
-<div class="shape-octagon"><span>{{product.discount}}%</span></div>
+<div v-if="product.discount!=0" class="shape-octagon"><span>{{product.discount}}%</span></div>
     <v-rating
-      v-model="product.rate"
+      v-model="product.vote"
       background-color="warning lighten-1"
       color="red"
       size="10"
       class="rating-section"
         
     ></v-rating>
-  <span class=" title">  {{product.title}}</span>
-  <span class=" type">  {{product.type}}</span>
+  <span class=" title">  {{product.name}}</span>
+  <span class=" type">  {{product.category}}</span>
   <span class=" price">   تومان{{product.price}}هر کیلو</span>
 
   </v-card>
-  
+  </NuxtLink>
 </div>
 
 

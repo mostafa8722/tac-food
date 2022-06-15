@@ -11,7 +11,7 @@
   >
   
     <v-carousel-item
-      v-for="(slide, i) in slides"
+      v-for="(slide, i) in sliders"
       :key="i"
     >
      
@@ -19,9 +19,10 @@
           
 
                 
-
+      <NuxtLink :to="`/products/${slide.store_id}`">
     <img  class="flex-none custom-image-slider"
-      :src="slide" />
+      :src="slide.url" />
+      </NuxtLink>
           </div>
 
     </v-carousel-item>
@@ -33,22 +34,13 @@
 </template>
 <script>
 import HeaderSection from '../app/HeaderSection.vue';
-
+import { mapGetters } from 'vuex'
 export default {
     components: { HeaderSection },
-    data :()=>({
-        
-        slides: [
-          '/images/tac1.png',
-          '/images/tac2.png',
-          '/images/tac3.png',
-          '/images/tac4.png',
-          
-          
-          
-          
-        ],
-    })
+        computed: {
+    ...mapGetters({ sliders: 'home/sliders' })
+      },
+   
 }
 </script>
 <style>

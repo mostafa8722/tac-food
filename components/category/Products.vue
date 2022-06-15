@@ -2,8 +2,8 @@
    <section>
      <HeaderSection :title= "title"/>
      
-     <div class="flex flex-col mr-3">
-     <div  v-for="(item, index) in products">
+     <div class="flex flex-col ml-3 mr-3">
+     <div  v-for="(item, index) in shops">
   
         <Product   :product="item" />
       </div>
@@ -14,8 +14,13 @@
 <script>
 import HeaderSection from '../app/HeaderSection.vue';
 import Product from './Product.vue';
+import { mapGetters } from 'vuex'
 export default {
     components: { HeaderSection ,Product},
+        computed: {
+             ...mapGetters({ shops: 'categories/shops' })
+         },
+  
       props: {
           title:{
               type:String

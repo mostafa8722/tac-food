@@ -1,13 +1,13 @@
 <template>
-  <div class="containers">
+  <div class="containers pb-10">
     <div>
    <SearchBox />   
   
    <Sliders/>
    <Categories class="mt-3" />
 
-  <Products title="تخفیفات" class="mt-10" />
-  <Products title="محبوب ترین" class="mt-10" />
+  <Products type="discount" title="تخفیفات" class="mt-10" />
+  <Products type="popular" title="محبوب ترین" class="mt-10 mb-10" />
      
     </div>
   </div>
@@ -19,6 +19,7 @@ import SearchBox from '~/components/app/SearchBox.vue'
 import Sliders from '~/components/home/Sliders.vue'
 import Categories from '~/components/home/Categories.vue'
 import Products from '~/components/home/Products.vue'
+import Map from '~/components/home/Map.vue'
 
 export default Vue.extend({
    layout: 'home',
@@ -26,7 +27,11 @@ export default Vue.extend({
     Sliders,
     Categories,
     Products,
-    SearchBox
+    SearchBox,
+    Map
+},
+created(){
+   this.$store.dispatch('home/homePage',{lat:35.022731 , lng : 50.357277 })
 }
 })
 </script>

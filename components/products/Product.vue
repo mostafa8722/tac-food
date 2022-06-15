@@ -13,20 +13,20 @@
       height="60"
       width="60"
       class="flex-none rounded-xl"
-      :src="product.img"
+      :src="product.logo"
     
     ></v-img>
 
     <div class="flex flex-col mr-2">
-      <span class=" title">  {{product.title}}</span>
-      <span class=" body">  {{product.body}}</span>
-      <span class=" price">   تومان{{product.price}}هر کیلو</span>
+      <span class=" title">  {{product.name}}</span>
+      <span class=" body">  {{product.description}}</span>
+      
 
     </div>
     </div>
     <div class="flex flex-row-reverse ">
       <v-rating
-      v-model="product.rate"
+      v-model="product.rating"
       background-color="warning lighten-1"
       color="red"
       size="10"
@@ -34,7 +34,7 @@
         
     ></v-rating>
 
-      <span class=" type flex-100 text-left mt-3 ml-1">  11 نفر</span>
+      <span class=" type flex-100 text-left mt-3 ml-1">  {{product.vote}} رای</span>
 
     </div>
 <div class="divider"></div>
