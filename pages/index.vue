@@ -4,6 +4,7 @@
    <SearchBox />   
   
    <Sliders/>
+   
    <Categories class="mt-3" />
 
   <Products type="discount" title="تخفیفات" class="mt-10" />
