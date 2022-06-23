@@ -36,9 +36,10 @@ export const mutations: MutationTree<AuthState> = {
     state.isLoggedIn = true
     state.token = data.api_token; 
    
-    await  DB.users.clear();
+   
+    await  DB.table("users").clear();
   
-    await  DB.users.put(data);
+    await  DB.table("users").put(data);
 
 
    
