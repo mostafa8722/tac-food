@@ -2,9 +2,10 @@
    <section>
      <HeaderSection title="دسته بندی"/>
      
+     
      <div class="mt-3 flex flex-row mr-3">
      <div  v-for="(item, index) in categories">
-        <Category   :category="item" />
+        <Category   :key="item.id" :category="item" />
       </div>
      </div>
     </section>
@@ -17,7 +18,7 @@ import { mapGetters } from 'vuex'
 export default {
     components: { HeaderSection ,Category},
       computed: {
-    ...mapGetters({ categories: 'home/categories' })
+    ...mapGetters({ categories: 'home/categories',title:"home/status" })
   },
   
    

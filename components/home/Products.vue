@@ -6,7 +6,7 @@
            
      <div  v-for="(item, index) in (type=='popular'?populars:discunts)">
   
-        <Product    :product="item" />
+        <Product :key="item.id"   :product="item" />
       </div>
      </div>
     </section>

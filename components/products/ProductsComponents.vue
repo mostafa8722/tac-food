@@ -34,7 +34,9 @@
         class="tab-item"
       >
         
-         <Products :data="categories"/>
+         <Products v-if="i==1" :data="categories"/>
+         <Comments v-else-if="i==2" />
+         <Info v-else-if="i==3" />
          
        
       </v-tab-item>

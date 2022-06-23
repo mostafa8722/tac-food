@@ -6,6 +6,8 @@
     v-bind="attrs"
      class="bg-white "
   >
+
+   <font-awesome-icon @click.prevent="addHome" class="add-home pointer" :icon="`fa-solid  fa-add`" />
    
     <v-row
       justify="center"
@@ -15,7 +17,7 @@
     
       <v-btn
         v-for="(link,index) in links"
-        :key="link"
+        :key="index"
         color="white"
         text
         rounded
@@ -41,20 +43,35 @@
 import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faHouse,faUser,faCreditCard,faRectangleList } from '@fortawesome/free-solid-svg-icons'
+import {faHouse,faUser,faCreditCard,faRectangleList, faAdd } from '@fortawesome/free-solid-svg-icons'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-library.add(faHouse,faUser,faRectangleList,faCreditCard)
+library.add(faHouse,faUser,faRectangleList,faCreditCard,faAdd)
 
 
+import { mapGetters } from 'vuex'
+
+
+
+
+//Vue.use(VueToast);
 
 
   export default {
  
+   computed: {
+      ...mapGetters({
+           installPromptEvent: 'general/installPromptEvent',
+          
+            })
+         },
+   
     data: () => ({
       attrs : {"fixed":true},
       selected_page : 0,
+     
+     installPromptEvent2 : undefined,
       links: [
         {title:'خانه',icon:"fa-house",link:"/"},
         {title:'سفارشات',icon:"fa-rectangle-list",link:"/myOrders"},
@@ -64,6 +81,25 @@ library.add(faHouse,faUser,faRectangleList,faCreditCard)
        
       ],
     }),
+    mounted(){
+
+
+
+       if(typeof window !== "undefined"){
+       
+        window.addEventListener("beforeinstallprompt",e =>{
+  
+            e.preventDefault();
+          
+           this.$store.dispatch('general/addInstallPromptEvent',e)
+          
+            
+            
+     
+
+        })
+       }
+    },
     methods:{
       getUrl(index){
         let url = this.$route.path;
@@ -80,6 +116,30 @@ library.add(faHouse,faUser,faRectangleList,faCreditCard)
 
  return false;
            
+      },
+
+      addHome(){
+          
+        //    this.$toast.success('Profile saved.', {})
+
+ 
+
+        return ;
+          if(this.installPromptEvent){
+           
+            this.installPromptEvent.prompt();
+
+             this.installPromptEvent.userChoice
+            .then((choiceResult)=>{
+                if(choiceResult.outcome == "")
+                    console.log("outcome")
+                else
+                    console.log("nonoutcome")
+            })
+          
+          }
+
+
       }
     }
    
@@ -93,5 +153,17 @@ library.add(faHouse,faUser,faRectangleList,faCreditCard)
 }
 .active{
   color:#ea7c85;
+}
+.add-home{
+  position: absolute;
+  right: 20px;
+  bottom: 60px;
+  padding:10px;
+  background-color: green;
+  border-radius: 50%;
+  color:#ffffff;
+ 
+  font-size: 1rem;
+  
 }
 </style>

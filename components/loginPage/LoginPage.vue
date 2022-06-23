@@ -11,6 +11,7 @@
             label="نام"
               hint="از این پس با این نام شناخته می شوید"
             prepend-inner-icon="mdi-map-marker"
+            v-model="name"
           ></v-text-field>
 
                <v-text-field
@@ -20,11 +21,13 @@
             label="شماره تلفن"
               hint="شماره همراه خود را وارد کنید"
             prepend-inner-icon="mdi-map-marker"
+             v-model="mobile"
           ></v-text-field>
            
            
 
            <v-text-field
+           v-model="invite_code"
             label="کد معرف"
           ></v-text-field>
 
@@ -40,7 +43,7 @@
           
       </a>
 
-                <v-btn @click.prevent="login" class="btn-add mt-2">
+                <v-btn @click.prevent="login" class="btn-add pointer mt-2">
                      <span class="white"> ثبت </span>
                     <font-awesome-icon class="absolute left-2 white mr-5 " :icon="`fa-solid fa-angle-left`" />
               
@@ -61,11 +64,17 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faAngleLeft)
 // this.$vuetify.rtl = true;
+import VueToast from 'vue-toast-notification';
+
+Vue.use(VueToast);
 export default {
     components: {  },
     
   
     data: () => ({
+       name:"",
+       mobile:"",
+       invite_code :"",
       rules: [
         value => !!value || 'تومان',
         value => (value || '').length <= 20 || 'تعداد ارقام بیش از حد مجاز می باشد',
@@ -77,7 +86,18 @@ export default {
     }),
     methods:{
       login(){
-        this.$store.dispatch('auth-user/loginUser', this.user)
+ 
+
+        
+        let user = {
+        name:this.name,
+        phone:this.mobile,
+        invite_code:this.invite_code
+        }
+       
+         
+        this.$store.dispatch('auth-user/registerUser', user)
+        
       }
 
     }

@@ -18,7 +18,8 @@ export default Vue.extend({
   layout: 'custom',
   components:{
     Login
-}
+},
+
 })
 </script>
 

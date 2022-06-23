@@ -1,11 +1,15 @@
 <template>
   <div class="containers pb-10">
     <div>
-   <SearchBox />   
+
+
+   <SearchBox /> 
+     
   
    <Sliders/>
    
    <Categories class="mt-3" />
+ 
 
   <Products type="discount" title="تخفیفات" class="mt-10" />
   <Products type="popular" title="محبوب ترین" class="mt-10 mb-10" />
@@ -22,6 +26,11 @@ import Categories from '~/components/home/Categories.vue'
 import Products from '~/components/home/Products.vue'
 import Map from '~/components/home/Map.vue'
 
+import VueToast from 'vue-toast-notification';
+
+Vue.use(VueToast);
+
+
 export default Vue.extend({
    layout: 'home',
   components:{
@@ -31,9 +40,40 @@ export default Vue.extend({
     SearchBox,
     Map
 },
-created(){
-   this.$store.dispatch('home/homePage',{lat:35.022731 , lng : 50.357277 })
-}
+
+
+async asyncData(context){
+ //   console.log("loading dhhhh28888", context);
+   // console.log("loading dhhhh",this);
+ 
+
+  await context.store.dispatch('general/getLocation')
+
+  // context.store.dispatch('toast/showErrorToast')
+await context.$axios.post('v2/customer/home', context.store.getters['general/location'])
+  
+  .then((res:any) => {
+ 
+   // context.store.dispatch('toast/showErrorToast') 
+     context.store.dispatch('home/homePage3',res.data)
+     
+ 
+   
+  })
+  .catch((error:any) => {
+   
+     context.store.dispatch('toast/showErrorToast',error)
+     
+   // dispatch('toast/showErrorToast', error, { root: true })
+  })
+
+ 
+
+},
+
+
+
+
 })
 </script>
 
@@ -48,7 +88,7 @@ created(){
   min-height: 100vh;
 
  
- 
+
   background-color: #f6f6f6;
 }
 

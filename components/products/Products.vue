@@ -5,7 +5,7 @@
      <div class="mt-3 flex flex-col ml-3 mr-3">
      <div  v-for="(item, index) in products">
   
-        <Product   :product="item" />
+        <Product  :key="item.id"  :product="item" />
       </div>
      </div>
     </section>

@@ -8,12 +8,13 @@ export default class Auth extends Repository {
   }
 
   async registerUser(data: any): Promise<any> {
-    const response = await this.axios.post('/guest/register', data)
+    const response = await this.axios.post('v1/register', data)
     return response
   }
 
   async loginUser(data: any): Promise<any> {
-    const response = await this.axios.post('/guest/login', data)
+    const response = await this.axios.post('v1/login', data)
     return response
   }
+  
 }

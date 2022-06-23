@@ -1,4 +1,8 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
+import Vue from 'vue'
+import VueToast from 'vue-toast-notification';
+
+Vue.use(VueToast);
 
 export const state = () => ({
   showError: false,
@@ -26,9 +30,11 @@ export const getters: GetterTree<ToastState, any> = {
 export const mutations: MutationTree<ToastState> = {
   SHOW_ERROR(state, errorText) {   
      
+   
           state.showError = true
           state.errorText = "errorText.message"
-          console.log("errorText")    
+         
+          
           setTimeout(() => {
               state.showError = false
             }, 1000)
@@ -43,11 +49,16 @@ export const mutations: MutationTree<ToastState> = {
 }
 
 export const actions: ActionTree<ToastState, any> = {
-    showSuccessToast({ commit }, data) {
-        commit("SHOW_SUCCESS", data)
+    showSuccessToast({ commit }, message:string) {
+      Vue.$toast.success(message);
+      //  commit("SHOW_SUCCESS", data)
     },
-    showErrorToast({ commit }, data) {
-        console.log(data)
-        commit("SHOW_ERROR", data)
+    showErrorToast({ commit }, error) {
+      console.log(error)
+       //Vue.$toast.error("settings updated successfully",)
+       
+       
+        
+      //  commit("SHOW_ERROR", data)
     }
 }

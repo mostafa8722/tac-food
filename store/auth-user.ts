@@ -1,26 +1,47 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
+import  DB  from '~/data/db'
+import Vue from 'vue'
 
 export const state = () => ({
   token: '',
   status: '',
+  mobile: '',
+  inviteCode: '',
+  name: '',
   isLoggedIn: false,
+  isRegisterIn: false,
 })
 export type AuthState = ReturnType<typeof state>
 
 export const getters: GetterTree<AuthState, any> = {
-  isLoggedIn: (state: any) => !!state.token,
+  isLoggedIn: (state: any) => state.isLoggedIn,
+  isRegisterIn: (state: any) => state.isRegisterIn,
+  mobile: (state: any) => state.mobile,
+  name: (state: any) => state.name,
+  inviteCode: (state: any) => state.inviteCode,
+  token: (state: any) => state.token,
 }
 
 export const mutations: MutationTree<AuthState> = {
   registerError(state:any) {
     state.status = 'register_error'
   },
-  registered(state:any) {
-    state.status = 'registered'
+  registered(state:any,data:any) {
+    state.mobile = data.phone; 
+    state.name = data.name; 
+    state.inviteCode = data.invite_code; 
+    state.isRegisterIn = true;
   },
-  loggedIn(state:any, token:string) {
+  async loggedIn(state:any, data:any) {
     state.isLoggedIn = true
-    state.token = token
+    state.token = data.api_token; 
+   
+    await  DB.users.clear();
+  
+    await  DB.users.put(data);
+
+
+   
   },
 }
 
@@ -40,35 +61,41 @@ export const actions: ActionTree<AuthState, any> = {
       })
     commit('registered')
   },
-  async registerUser({ commit, dispatch }, data) {
+  async registerUser({ commit, dispatch }, data:{name:string,phone:string,invite_code:string}) {
+  
     await this.$repositories
       .user()
       .registerUser(data)
       .then((res:any) => {
-        const message = res.data.message
-        dispatch('toast/showSuccessToast', message, { root: true })
-        this.$router.replace('/login')
+
+        Vue.$toast.success("کدفعالسازی به شماره موبایل شما ارسال شد")
+       commit('registered', data)
+       this.$router.push('/login/verifyCode')
+      
       })
       .catch((error:any) => {
-        dispatch('toast/showErrorToast', error, { root: true })
+        //dispatch('toast/showErrorToast', error, { root: true })
+        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       })
    
   },
 
-  async loginUser({ commit, dispatch }, data) {
-      console.log("ttttt",this.$repositories)
-      dispatch('toast/showErrorToast', {}, { root: true })
-      alert("tt2")
-   /* await this.$repositories
+  async loginUser({ commit, dispatch }, data:{invite_code:string,code:string,phone:string}) {
+     
+
+    await this.$repositories
       .user()
       .loginUser(data)
       .then((res:any) => {
-        const token = res.data.data.access_token
-        window.localStorage.setItem('token', res.data.data.access_token)
-        commit('loggedIn', token)
+    
+        
+        Vue.$toast.success(" اطلاعات شما به روزرسانی گردید")
+      
+      commit('loggedIn', res.data.result)
+        this.$router.push('/profile')
       })
       .catch((error:any) => {
-        dispatch('toast/showErrorToast', error, { root: true })
-      })*/
+        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+      })
   },
 }

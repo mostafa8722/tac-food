@@ -1,29 +1,39 @@
 <template>
   <div class="containers">
-    <ProductsComponents />
+   
+     <ProductsComponents />
+      <ModalMap v-show="showModal" @close-modal="showModal = false"  />
   </div>
 </template>
 
 <script lang="ts">
 
 import Vue from "vue"
+import ModalMap from '~/components/map/ModalMap.vue'
 import ProductsComponents from '~/components/products/ProductsComponents.vue'
 
 export default Vue.extend({
-   layout: 'home',
+   layout: 'custom',
+   validate(data:any){
+     return /^\d+$/.test(data.params.id);
+   },
   components:{
 
-    ProductsComponents,
+    ProductsComponents,ModalMap
    
 },
+data :()=>({
+   showModal: true,
+}),
   created(){
 
   
     let params = this.$route.params;
     let id = params.id;
-    console.log("ffff",id)
+
  
    this.$store.dispatch('products/productsPage',{store_id:id})
+   this.$store.dispatch('products/commentSection',{store_id:id})
     }
 })
 </script>

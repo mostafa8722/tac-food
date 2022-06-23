@@ -2,15 +2,29 @@
      <div class=" bg-comment  ">
        <div class="flex justify-between ">
             <div >
-                <span>&#128516;</span>
+             <v-img
+                        height="35"
+                        width="35"
+                        class="profile-image"
+                        src="/images/emoj1.png"
+                        
+                        ></v-img>
            <span>{{comment.name}}</span>
             </div>
            <span>{{comment.date}}</span>
 
            
        </div>
-       <p>{{comment.comment}}</p>
-       <p class="mt-2 title">{{comment.title}}</p>
+       <p>{{comment.body}}</p>
+      <div class="flex justify-between mt-2 mb-1">
+          <p class=" title">{{comment.products[0]}}</p>
+          <div class="flex flex-row-reverse">
+            <font-awesome-icon class="icon-item pointer ml-2" icon="fa-solid fa-thumbs-up" />
+            <p class=" title ml-2">{{comment.like}}</p>
+            <font-awesome-icon class="icon-item pointer ml-2" icon="fa-solid fa-trash" />
+          </div>
+           
+      </div>
 
 
      
@@ -19,11 +33,23 @@
 </template>
 <script>
 
+import Vue from "vue"
+
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faTrash,faThumbsUp} from '@fortawesome/free-solid-svg-icons'
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+library.add(faTrash,faThumbsUp)
+
+
 export default {
     components: { },
       props: {
           comment:{
-              
+              type:Object,
+              require :true
           }
       },
   
@@ -49,5 +75,11 @@ p{
 .title{
 font-size:0.5rem;
 color:#ababab;
+ font-family: yekanNumRegular !important;
 }
+.icon-item{
+    color:#9c9c9c;
+    font-size: 0.7rem;
+}
+    
 </style>

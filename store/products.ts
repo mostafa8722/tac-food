@@ -1,5 +1,6 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import Product from '~/data/models/product'
+import Vue from 'vue'
 interface result  {
   result: Product[],
   delivery:number,
@@ -9,12 +10,14 @@ interface result  {
 
 export const state = () => ({
   products:[] ,
+  comments:[] ,
   
 })
 export type AuthState = ReturnType<typeof state>
 
 export const getters: GetterTree<AuthState, any> = {
   products: (state: any) => state.products,
+  comments: (state: any) => state.comments,
 
 }
 
@@ -22,6 +25,7 @@ export const mutations: MutationTree<AuthState> = {
  
   
   productsPage(state:any, data:result) {state.products = data.result},
+  commentsPage(state:any, data:result) {state.comments = data.result},
 
 }
 
@@ -42,8 +46,55 @@ export const actions: ActionTree<AuthState, any> = {
       })
       .catch((error:any) => {
        
+        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       
-       // dispatch('toast/showErrorToast', error, { root: true })
+      })
+  },
+
+  async commentSection({ commit, dispatch }, data) {
+      
+    
+    await this.$repositories
+      .comments()
+      .commentsPage(data)
+      .then((res:any) => {
+     
+        commit('commentsPage',res.data)
+      })
+      .catch((error:any) => {
+       
+        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+      
+      })
+  },
+  async customerCommentSection({ commit, dispatch }, data) {
+    await this.$repositories
+      .comments()
+      .customerCommentsPage(data)
+      .then((res:any) => {
+     
+        commit('commentsPage',res.data)
+      })
+      .catch((error:any) => {
+       
+      
+        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+      })
+  },
+  async customerPaymentSection({ commit, dispatch }, data) {
+    alert()
+    await this.$repositories
+      .payments()
+      .customerPaymentsPage(data)
+      .then((res:any) => {
+     
+        console.log("ttttt",res.data)
+       // commit('commentsPage',res.data)
+      })
+      .catch((error:any) => {
+       
+      
+        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       })
   },
 }

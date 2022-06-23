@@ -1,15 +1,17 @@
 <template>
  
-   
-     
-     <div class="mt-3 flex flex-col  header-comment">
-         <div class="flex">
-             <span>100%</span>
-             <span class="flex-100 bar-comment "><span class="bar-comment-percent"></span></span>
-             <span>&#128516;</span>
+       <div class="flex">
+             <span>{{item.percent}}%</span>
+             <span class="flex-100 bar-comment "><span class="bar-comment-percent" :style="`background:${item.color};width:${item.percent}%`"></span></span>
+            <v-img
+                        height="35"
+                        width="35"
+                        class="profile-image"
+                        :src="item.icon"
+                        
+                        ></v-img>
          </div>
      
-     </div>
    
 
 </template>
@@ -18,10 +20,15 @@
 export default {
    
       props: {
-          title:{
-              type:String
+          item:{
+              type:Object,
+              require:true
           }
       },
+      data() { return {
+    accentColor: '#fff300',
+    heroImage: 'https://vuejs.org/images/logo.png',
+  }},
   
   
 }
@@ -46,14 +53,8 @@ export default {
 .bar-comment-percent{
 position :absolute;
 height:100%;
-width:70%;
-  background: #ff2200;
+  
   left:0px;
 }
-.header-comment{
-    height:120px;
-    background:#ffffff;
 
-    padding: 10px 20px;
-}
 </style>

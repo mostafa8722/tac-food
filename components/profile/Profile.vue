@@ -2,21 +2,34 @@
    <section>
      
      
-        <Login />
+        <Dashboard  v-if="isLogin" />
+        <UnLogin  v-else />
+
     </section>
 
 </template>
 <script>
 
 
-import Login from './Login'
+import UnLogin from './UnLogin';
+import Dashboard from './Dashboard';
 
 
-
+import  DB  from '~/data/db'
 
 export default {
-    components: { Login },
-    
+    components: { UnLogin,Dashboard },
+     data :()=>({
+        isLogin: false,
+     }),
+     async created(){
+  
+        await DB.users.count(async (count)=> {
+            if(count!=0  )
+            this.isLogin = true;
+            });
+         
+     },
   
   
 }
