@@ -129,7 +129,7 @@ p{
     color :#cccccc;
 }
 .input-field{
-  width:50%;
+  width:100%;
 }
 .privcy-link{
     color:#fd5e63;
