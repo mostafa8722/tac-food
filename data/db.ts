@@ -9,4 +9,4 @@ import { DB_VERSION } from '~/data/default'
  export default DB;
 
 
-   // await this.db.users.put({id:1,name:"ali",family:"nazar"});
+  
