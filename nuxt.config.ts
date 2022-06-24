@@ -33,7 +33,6 @@ export default {
   components: true,
 
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     '@nuxtjs/pwa',
     '@nuxtjs/tailwindcss',
