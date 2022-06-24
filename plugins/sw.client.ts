@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
       }
     });
   }else {
-    //console.log('Service worker is not working')
+    console.log('Service worker is not working')
   }
   let that = this;
   window.addEventListener("beforeinstallprompt",e =>{
