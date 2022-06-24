@@ -23,7 +23,7 @@ export default {
     '~/plugins/axios.ts',
     '~/plugins/repositories.ts',
     {src: "~/plugins/vue-leaflet.ts", ssr: false},
-    '~/plugins/swclient.ts',
+    '~/plugins/sw.client.ts',
 
 
 
