@@ -42,7 +42,7 @@ export default {
     
   ],
 
-  // Modules (https://go.nuxtjs.dev/config-modules)
+ 
   modules: [
     ['nuxt-leaflet', { ssr: false /* module options */ }],
     '@nuxtjs/toast',
