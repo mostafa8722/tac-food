@@ -1,5 +1,5 @@
 import { Store } from "vuex/types/index";
-
+//
 if ('serviceWorker' in navigator) {
     console.log('Service worker:', 1)
     navigator.serviceWorker.register('/custom-sw.js').then((registrations:any) => {
