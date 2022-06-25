@@ -18,6 +18,14 @@ interface inputDataCustomer {
   api_token: string,
 
 }
+
+interface inputComment {
+  api_token: string,
+  store_id: string,
+  body: string,
+  rating: string,
+
+}
 export default class CommentsRepository extends Repository {
 
  
@@ -32,6 +40,13 @@ export default class CommentsRepository extends Repository {
 
   
     const response = await this.axios.post('v1/customer/comments', data)
+   
+    return response
+  }
+  async AddComment(data: inputComment): Promise<any> {
+
+  
+    const response = await this.axios.post('v1/comments/insert', data)
    
     return response
   }

@@ -49,7 +49,7 @@
 
       color="primary"
     >
-      <v-icon class="icon-custom"  >
+      <v-icon @click.prevent="addToCart" class="icon-custom"  >
          mdi-plus
       </v-icon>
     </v-btn>
@@ -62,7 +62,12 @@
 <script>
 
 export default {
-  props : ["product"]
+  props : ["product"],
+  methods:{
+    addToCart(){
+      //this.$store.dispatch('products/addCart', this.product)
+    }
+  }
 }
 </script>
 <style scoped>

@@ -12,9 +12,9 @@
          <p class="mt-2">مبلغ مورد نظر را در فیلد پایین وارد کنید</p>
          <p class="mt-1">حداقل افزایش 5000 تومان</p>
 
-            <v-text-field :rules="rules"></v-text-field>
+            <v-text-field v-model="payment" :rules="rules"></v-text-field>
 
-                <v-btn class="btn-add">
+                <v-btn @click.prevent="sendPyment" class="btn-add">
                      <span class="white"> افزایش</span>
                     <font-awesome-icon class="absolute white left-0" :icon="`fa-solid fa-credit-card`" />
               
@@ -35,12 +35,14 @@ import {faCreditCard } from '@fortawesome/free-solid-svg-icons'
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faCreditCard)
+import  DB  from '~/data/db'
 
 export default {
     components: {  },
     
   
     data: () => ({
+        payment : 0,
       rules: [
         value => !!value || 'تومان',
         value => (value || '').length <= 20 || 'تعداد ارقام بیش از حد مجاز می باشد',
@@ -50,6 +52,35 @@ export default {
         },
       ],
     }),
+    methods:{
+          async  sendPyment(){
+           
+             
+
+
+            let data = {
+                payment : this.payment
+            }
+              await DB.users.count(async (count)=> {
+            if(count==0  ){
+              this.$router.push('/login')
+            }else{
+                 await   DB.users.each( (item) =>{
+                    data . api_token = item.api_token;
+                
+                   this.$store.dispatch('home/addPyment', data)
+                });
+              
+              // this.isLogin = true;
+            }
+           
+          
+            });
+          
+     
+        }
+    }
+
 }
 </script>
 <style scoped>

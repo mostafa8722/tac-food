@@ -4,6 +4,7 @@ type  DetailProduct = {
     price: number,
     status: number,
     limited: number,
+    number_basket: number,
    }
 
    export default  DetailProduct;

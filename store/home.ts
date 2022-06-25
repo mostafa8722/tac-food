@@ -1,5 +1,5 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
-
+import Vue from 'vue'
 
 import Home from '~/data/models/home'
 interface resultHome  {
@@ -16,6 +16,7 @@ export const state = () => ({
 
   status: '',
   isLoggedIn: false,
+  isDataSent : false,
 })
 export type AuthState = ReturnType<typeof state>
 
@@ -25,12 +26,13 @@ export const getters: GetterTree<AuthState, any> = {
   populars: (state: any) => state.populars,
   discunts: (state: any) => state.discunts,
   status: (state: any) => state.status,
+  isDataSent: (state: any) => state.isDataSent,
 }
 
 export const mutations: MutationTree<AuthState> = {
  
   homePage(state:any, data:resultHome) {
-    console.log("loadin333...",data)
+ 
     state.categories = data.result.types
     state.sliders = data.result.advertises
     state.populars = data.result.most_popular
@@ -41,7 +43,14 @@ export const mutations: MutationTree<AuthState> = {
 
 
     console.log("rrrrrrrrrr",data)
-    state.categories = data;
+    state.isDataSent = data;
+ 
+   
+  },
+  setDataSent(state:any,isSent:boolean ) {
+
+
+    state.isDataSent = isSent;
  
    
   },
@@ -82,16 +91,12 @@ async homePage3({ commit, dispatch }, data) {
   
   commit('homePage',data)
   
- /* commit('homePage2',[
-    {name:"غذا",id:1,image:"https://ponisha.ir/asset/v1/img/fa-logo.png",color:"#ff2200"},
-    {name:"میوه",id:2,image:"https://ponisha.ir/asset/v1/img/fa-logo.png",color:"#ff2200"},
-    {name:"میوه",id:3,image:"https://ponisha.ir/asset/v1/img/fa-logo.png",color:"#ff2200"},
-  ]);*/
+
 },
 async homePage({ commit, dispatch }, data) {
   
    
-  console.log("loading data3................");
+ 
   
 
   await this.$repositories
@@ -108,5 +113,75 @@ async homePage({ commit, dispatch }, data) {
      // dispatch('toast/showErrorToast', error, { root: true })
     })
 }
+  ,
+  async addProposal({ commit, dispatch }, data) {
   
+   
+ 
+    commit('setDataSent',false)
+    console.log("loading error",data)
+    await this.$repositories
+      .home()
+      .AddPropsal(data)
+      .then((res:any) => {
+        commit('setDataSent',true)
+        Vue.$toast.success("پیشنهاد شما با موفقیت ارسال شد")
+       // commit('homePage',res.data)
+      })
+      .catch((error:any) => {
+        console.log("loading error",error)
+        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+        
+       // console.log("loading error",error);
+     
+       // dispatch('toast/showErrorToast', error, { root: true })
+      })
+  },
+  async addPyment({ commit, dispatch }, data) {
+  
+   
+ 
+    commit('setDataSent',false)
+    console.log("loading error",data)
+    await this.$repositories
+      .home()
+      .AddPropsal(data)
+      .then((res:any) => {
+        commit('setDataSent',true)
+        Vue.$toast.success("اطاعات شما با موفقیت ارسال شد")
+       // commit('homePage',res.data)
+      })
+      .catch((error:any) => {
+        console.log("loading error",error)
+        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+        
+       // console.log("loading error",error);
+     
+       // dispatch('toast/showErrorToast', error, { root: true })
+      })
+  },
+  async addCommnet({ commit, dispatch }, data) {
+  
+   
+ 
+    commit('setDataSent',false)
+    console.log("loading error",data)
+    await this.$repositories
+      .comments()
+      .AddComment(data)
+      .then((res:any) => {
+        commit('setDataSent',true)
+        Vue.$toast.success("نظر شما با موفقیت ارسال شد")
+       // commit('homePage',res.data)
+      })
+      .catch((error:any) => {
+        console.log("loading error",error)
+        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+        
+       // console.log("loading error",error);
+     
+       // dispatch('toast/showErrorToast', error, { root: true })
+      })
+  }
+    
 }

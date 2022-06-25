@@ -18,17 +18,19 @@
 
          <div class="flex justify-center">
              <div class="container-experiment  flex mt-3 ">
-                 <div class="flex-col flex container-item items-center justify-center ml-1r">
+
+                 <div @click="setExperiance('good')" class="flex-col flex container-item items-center justify-center ml-1r" :class="experiance=='good'?'experiance-selected':''" >
                       <v-img
                         height="35"
                         width="35"
                         class="profile-image"
                         src="/icons/good-emoj.png"
+
                         
                         ></v-img>
                      <span>خوب </span>
                  </div>
-                 <div class="flex-col flex container-item items-center justify-center  ml-1r">
+                 <div  @click="setExperiance('average')"  class="flex-col flex container-item items-center justify-center  ml-1r"  :class="experiance=='average'?'experiance-selected':''" >
                       <v-img
                         height="25"
                         width="25"
@@ -40,7 +42,7 @@
                  </div>
                  
 
-                 <div class="flex flex-col container-item items-center justify-center">
+                 <div  @click="setExperiance('bad')" class="flex flex-col container-item items-center justify-center"  :class="experiance=='bad'?'experiance-selected':''">
                       <v-img
                         height="30"
                         width="30"
@@ -64,6 +66,7 @@
          
          <div class="mt-3">
           <v-textarea
+          v-model="description"
           solo
           dir="rtl"
           class="text-right"
@@ -73,19 +76,20 @@
         <div class="red flex flex-row-reverse">0/300</div>
          </div>
          <div>
-                <v-radio-group row class="flex-row" v-model="radioGroup">
+                <v-radio-group row class="flex-row" v-model="subject">
       <v-radio
         v-for="n in 3"
         :key="n"
           color="#ff2200"
         :label="` ${labels[n-1]}`"
         :value="n"
+     
         class="ml-2"
       ></v-radio>
     </v-radio-group>
          </div>
            <div class="flex justify-center mb-5 mt-5">
-               <div class="btn-location pointer text-center relative mt-3">
+               <div @click.prevent ="sendProposal"  class="btn-location pointer text-center relative mt-3">
                   <span class="white" style="font-size: 0.8rem;"> ارسال </span>
                    <font-awesome-icon class=" mr-5  icon-item white" :icon="`fa-solid fa-location-dot`" />
                 </div>
@@ -118,11 +122,18 @@ library.add(faUser,faAngleLeft,faCreditCard,faMessage
 )
 import HeaderSection from '../app/HeaderSection.vue';
 import  DB  from '~/data/db'
+import { mapGetters } from 'vuex'
 export default {
     components: {ProfileTitle,HeaderSection},
+     computed: {
+             ...mapGetters({ isDataSent: 'home/isDataSent' })
+         },
     data :()=>({
           radioGroup: 1,
-        labels :["خطا","پیشنهاد","غیره" ]
+        labels :["خطا","پیشنهاد","غیره" ],
+        subject : 1,
+        experiance : '',
+        description:"",
     }),
     
       async created(){
@@ -144,6 +155,62 @@ export default {
             });
          
      },
+     methods:{
+        setExperiance(e){
+              this.experiance = e;
+        },
+      async  sendProposal(){
+           
+               let final_subject = "خطا";
+                let final_exprience = "خوب";
+                
+            if(this.subject==2)
+            final_subject = "غیره";
+            else  if(this.subject==3)
+            final_subject = "پیشنهاد";
+            else
+            final_subject = "خطا";
+
+             if(this.experiance=="good")
+            final_exprience = "خوب";
+            else  if(this.experiance=="average")
+            final_exprience = "متوسط";
+            else
+            final_exprience = "بد";
+
+
+            let data = {
+                subject : final_subject,
+                experiance : final_exprience,
+                describe : this.description,
+            }
+              await DB.users.count(async (count)=> {
+            if(count==0  ){
+              this.$router.push('/login')
+            }else{
+                 await   DB.users.each( (item) =>{
+                    data . api_token = item.api_token;
+                
+                   this.$store.dispatch('home/addProposal', data)
+                });
+              
+              // this.isLogin = true;
+            }
+           
+          
+            });
+          
+     
+        }
+     },
+     watch:{
+        isDataSent(new_val,old_val){
+            console.log("kkkk",new_val)
+            if(new_val){
+
+            }
+        }
+     }
     
   
 }
@@ -209,5 +276,9 @@ p{
 }
 .red{
     color:#f76068;
+}
+.experiance-selected{
+    background-color: #f76068;
+     color: #fff;
 }
 </style>

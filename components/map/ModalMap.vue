@@ -13,13 +13,13 @@
                موقعیت مکانی خود را برروی نقشه مشخص کنید
            </span>
         <div style="position:relative;height: 200px"><Map /></div>
-         <div class="flex justify-center mb-5 mt-5">
-             <div class="btn-gps ml-5  relative">
+         <div class="flex justify-center mb-5 mt-5 pointer">
+             <div @click.prevent="getCurrentLocation" class="btn-gps ml-5  relative">
              
                <font-awesome-icon class="  white" :icon="`fa-solid fa-location-crosshairs`" />
 
            </div>
-             <div class="btn-location relative">
+             <div class="btn-location pointer relative">
                <span class="white" style="font-size: 0.8rem;">انتخاب محل</span>
                <font-awesome-icon class=" mr-5  icon-item red" :icon="`fa-solid fa-location-dot`" />
 
@@ -49,7 +49,38 @@ library.add(faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRi
 )
 
 export default {
-    components:{Map}
+    components:{Map},
+    methods:{
+      getCurrentLocation(){
+        
+        if(! navigator.geolocation){
+alert("not support location")
+return ;
+        }
+
+        navigator.geolocation.getCurrentPosition(this.geoSuccess,this.geoError,{})
+      },
+      geoSuccess(pos){
+        console.log(pos.coords.longitude);
+        console.log(pos.coords.latitude);
+      },
+      geoError(err){
+     console.log(err.message);
+     switch(err.code){
+      case 0 :
+        console.log("unknown error");
+        break;
+          case 1 :
+        console.log("User denied Geolocation");
+        break;
+        default :
+        break;
+
+     }
+      }
+
+    }
+
 }
 </script>
 
