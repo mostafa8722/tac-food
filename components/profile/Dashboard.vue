@@ -104,7 +104,7 @@ export default {
         items :[
             {id:1,title:"نظرات ",icon:"fa-message",link:"/profile/comments"},
             {id:2,title:"سوابق پرداخت",icon:"fa-credit-card",link:"/profile/payments"},
-            {id:3,title:"انتقادات و پیشنهادات",icon:"fa-exclamation",link:"/profile/proposal"},
+            {id:3,title:"انتقادات و پیشنهادات",icon:"fa-exclamation",link:"/profile/proposals"},
             {id:4,title:"معرفی به دوستان",icon:"fa-share-nodes",link:"/profile/share"},
             {id:5,title:"تماس با پشتیبانی",icon:"fa-phone",link:"/profile/contact"},
         ]
