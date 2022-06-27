@@ -3,6 +3,7 @@
    
      <ProductsComponents />
       <ModalMap v-show="showModal" @close-modal="showModal = false"  />
+      <CartButton />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 
 import Vue from "vue"
 import ModalMap from '~/components/map/ModalMap.vue'
+import CartButton from '~/components/app/AddToCartButton.vue'
 import ProductsComponents from '~/components/products/ProductsComponents.vue'
 
 export default Vue.extend({
@@ -19,11 +21,11 @@ export default Vue.extend({
    },
   components:{
 
-    ProductsComponents,ModalMap
+    ProductsComponents,ModalMap,CartButton
    
 },
 data :()=>({
-   showModal: true,
+   showModal: false,
 }),
   created(){
 

@@ -65,7 +65,8 @@ export default {
   props : ["product"],
   methods:{
     addToCart(){
-      //this.$store.dispatch('products/addCart', this.product)
+      console.log(1)
+      this.$store.dispatch('products/addCart', this.product)
     }
   }
 }

@@ -12,6 +12,7 @@ export const state = () => ({
   products:[] ,
   comments:[] ,
   carts:[] ,
+  totalCart: 0,
   
 })
 export type AuthState = ReturnType<typeof state>
@@ -20,6 +21,7 @@ export const getters: GetterTree<AuthState, any> = {
   products: (state: any) => state.products,
   comments: (state: any) => state.comments,
   carts: (state: any) => state.carts,
+  totalCart: (state: any) => state.totalCart,
 
 }
 

@@ -7,8 +7,6 @@
      class="bg-white "
   >
 
-   <font-awesome-icon @click.prevent="addHome" class="add-home pointer" :icon="`fa-solid  fa-add`" />
-   
     <v-row
       justify="center"
       no-gutters
@@ -43,11 +41,11 @@
 import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faHouse,faUser,faCreditCard,faRectangleList, faAdd } from '@fortawesome/free-solid-svg-icons'
+import {faHouse,faUser,faCreditCard,faRectangleList } from '@fortawesome/free-solid-svg-icons'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-library.add(faHouse,faUser,faRectangleList,faCreditCard,faAdd)
+library.add(faHouse,faUser,faRectangleList,faCreditCard)
 
 
 import { mapGetters } from 'vuex'
