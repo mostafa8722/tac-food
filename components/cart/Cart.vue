@@ -14,15 +14,15 @@
       height="40"
       width="40"
       class="flex-none  rounded mr-2"
-      :src="product.img"
+      :src="product.logo"
     
     ></v-img>
 
 
   <div class="flex flex-col mr-2 mt-1">
-      <span class=" title">  {{product.title}}</span>
+      <span class=" title">  {{product.name}}</span>
  
-  <span class=" price">  2*3000</span>
+  <span class=" price"> {{formatPrice(product.count)}} * {{formatPrice(product.price)}} </span>
   </div>
 
  <v-btn
@@ -60,7 +60,12 @@
 <script>
 
 export default {
-  props : ["product"]
+  props : ["product"],
+  methods:{
+     formatPrice(price) {
+         return  Number(price).toLocaleString();
+      },
+  }
 }
 </script>
 <style scoped>

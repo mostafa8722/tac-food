@@ -40,19 +40,14 @@
 <div class="divider"></div>
     
   <div class="flex justify-between items-center mr-2 ml-2">
-  <span class=" price"> تومان {{product.price}}</span>
-  <v-btn
-      class="mx-2 btn-custom"
-      fab
-      dark
-      small
-
-      color="primary"
-    >
-      <v-icon @click.prevent="addToCart" class="icon-custom"  >
-         mdi-plus
-      </v-icon>
-    </v-btn>
+  <span class=" price ">  {{formatPrice(product.price)}}</span>
+  
+    <div class="flex flex-row-reverse">
+      <font-awesome-icon @click.prevent="addToCart" class="icon-custom pointer" :icon="`fa-solid  fa-add`" />
+      <span v-if="cart_product.count" class="mr-3 ml-3">{{cart_product.count}}</span>
+        <font-awesome-icon v-if="cart_product.count" @click.prevent="removeFromCart" class="icon-custom pointer" :icon="`fa-solid  fa-minus`" />
+    </div>
+  
 
   </div>
   </v-card>
@@ -61,12 +56,68 @@
 </template>
 <script>
 
+import Vue from "vue"
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faMinus,faTrash } from '@fortawesome/free-solid-svg-icons'
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+library.add(faMinus,faTrash)
+import { mapGetters } from 'vuex'
+
 export default {
   props : ["product"],
+   computed: {
+      ...mapGetters({
+           carts: 'products/carts',
+            totalCart: 'products/totalCart',
+        
+            })
+         },
+         data : ()=>({
+             cart_product : {}
+         }),
   methods:{
-    addToCart(){
-      console.log(1)
+     addToCart(){
+      
+     
+      
       this.$store.dispatch('products/addCart', this.product)
+    },
+     removeFromCart(){
+    //  console.log(this.product)
+      this.$store.dispatch('products/removeCart', this.product)
+    },
+      formatPrice(price) {
+         return  Number(price).toLocaleString()+" "+"تومان";
+      },
+  },
+  watch:{
+    totalCart(new_val,old_val){
+    
+  
+      
+
+   let item_remove = true;
+  if(this.carts.length>0 )
+     this.carts.map((item,index)=>{
+       item.products.map(item_detail=>{
+       
+           if(item_detail.id == this.product.id){
+             item_remove = false;
+              this.cart_product = item_detail;
+           }
+             
+        
+           
+       });
+     })
+
+     if(item_remove)
+  this.cart_product = [];
+    
+
     }
   }
 }
@@ -123,7 +174,10 @@ export default {
 }
 .icon-custom{
   color:#fe5c67!important;
-  font-size:17px!important;
+  font-size:0.9rem!important;
+  padding:0.1rem;
+  border:0.1rem solid #fe5c67;
+  border-radius: 50%;
 
 }
     

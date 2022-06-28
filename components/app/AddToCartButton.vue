@@ -4,8 +4,8 @@
       <div class="cart-container relative flex">
        
           
-  <font-awesome-icon  class="absolute white right-3 top-4" icon="fa-solid fa-magnifying-glass" />
-          <span class="white absolute white right-10 top-3"> {{totalCart}} تومان</span>  
+  <font-awesome-icon  class="absolute white right-3 top-4" icon="fa-solid fa-trash" />
+          <span class="white absolute white right-10 top-3 number-format"> {{formatPrice(totalCart)}} تومان</span>  
           <span class="white absolute white left-6 top-3">سبد خرید</span>  
            <font-awesome-icon   class="absolute  white left-3 top-4" icon="fa-solid fa-angle-left" />
 
@@ -19,11 +19,11 @@
 import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import {faAngleLeft,faTrash } from '@fortawesome/free-solid-svg-icons'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-library.add(faAngleLeft)
+library.add(faAngleLeft,faTrash)
 
 import { mapGetters } from 'vuex'
 
@@ -45,7 +45,10 @@ methods :{
   handleEvent(){
 
    this.$router.push("/search")
-  }
+  },
+  formatPrice(price) {
+    return  Number(price).toLocaleString();
+},
 }
 }
 </script>
@@ -66,5 +69,8 @@ methods :{
 .white{
   color:#ffffff;
   font-size: 0.8rem;
+}
+.number-format{
+   font-family: yekanNumRegular !important;
 }
 </style>

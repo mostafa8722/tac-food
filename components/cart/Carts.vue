@@ -11,14 +11,14 @@
   outlined
  
   >
-  <h3 class="text-center">فلافل </h3>
+  <h3 class="text-center">{{cart.store_name}} </h3>
   <HeaderCart class="mt-1" title="زمان"   value="فوری" />
   <HeaderCart class="mt-1" title="ارسال"   value="5000 تومان" />
   <HeaderCart class="mt-1" title="مالیات"   value="رایگان" />
   <HeaderCart class="mt-1" title="خرید"   value="123000 تومان" />
   <HeaderCart class="mt-1" title="مجموع"   value="13000 تومان" />
   
-  <div  v-for="(item, index) in products">
+  <div  v-for="(item, index) in cart.products">
   
         <Cart   :product="item" />
       </div>
@@ -36,9 +36,11 @@ export default {
     components: { HeaderCart ,Cart},
   
       props: {
-          title:{
-              type:String
-          }
+        cart :{
+            type:Object,
+            require :true,
+        },
+         
       },
   
     data : ()  =>({

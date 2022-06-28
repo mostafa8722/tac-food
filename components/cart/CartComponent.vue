@@ -2,9 +2,10 @@
    <section class="flex  items-center flex-col">
      
      
-        <Carts />
-        <Carts />
-        <Carts />
+    
+        <Carts v-if="carts.length>0" v-for="cart in carts" :cart="cart"  />
+        <Empty v-else />
+       
     </section>
 
 </template>
@@ -13,14 +14,24 @@
 
 import Empty from './Empty'
 import Carts from './Carts'
-
+import { mapGetters } from 'vuex'
 
 
 
 export default {
     components: { Empty,Carts },
     
-  
+   computed: {
+      ...mapGetters({
+           carts: 'products/carts',
+       
+        
+            })
+         },
+         created(){
+            console.log("ppp",this.carts)
+         }
+         
   
 }
 </script>
