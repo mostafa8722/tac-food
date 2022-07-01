@@ -2,9 +2,20 @@
    <section class="flex  items-center flex-col">
      
      
-    
-        <Carts v-if="carts.length>0" v-for="cart in carts" :cart="cart"  />
-        <Empty v-else />
+        <div v-if="carts.length>0" > <Carts  v-for="cart in carts" :cart="cart"  /></div>
+        <div v-else > <Empty   /></div>
+
+        <div v-show="carts.length>0 && descriptionCart==''" @click.prevent="handleAddDescription" class="add-address pointer mt-2">افزودن توضیحات </div>
+       
+       
+        <ModalDescription v-show="showModal" @close-modal="showModal = false"  />
+
+        <div v-show="descriptionCart" class="flex justify-between  mt-5 pt-3 add-desc-cart">
+            <p class="txt_description">
+                {{descriptionCart}}
+            </p>
+             <font-awesome-icon @click="clearDescription"  class="red pointer" icon="fa-solid fa-trash" />
+        </div>
        
     </section>
 
@@ -14,22 +25,43 @@
 
 import Empty from './Empty'
 import Carts from './Carts'
+import ModalDescription from '~/components/cart/ModalDescription.vue'
 import { mapGetters } from 'vuex'
+import Vue from "vue"
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faTrash } from '@fortawesome/free-solid-svg-icons'
 
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+library.add(faTrash)
 
 
 export default {
-    components: { Empty,Carts },
+    components: { Empty,Carts,ModalDescription },
     
    computed: {
       ...mapGetters({
-           carts: 'products/carts',
+           carts: 'carts/carts',
+           descriptionCart: 'carts/descriptionCart',
        
         
             })
          },
+         data :()=>({
+             showModal: false,
+            }),
          created(){
             console.log("ppp",this.carts)
+         },
+         methods:{
+            handleAddDescription(){
+                this.showModal = true;
+            },
+            clearDescription(){
+                 this.$store.dispatch('products/addDescriptionCart',"")
+      
+             }
          }
          
   
@@ -64,5 +96,23 @@ p{
 .white{
   
     color : #ffffff!important;
+}
+.red{
+  
+    color : #fd5e63!important;
+}
+.add-address{
+    color:#fd5e63;
+    border:0.1rem solid #fd5e63;
+    padding:0.5rem 1rem;
+    border-radius: 0.3rem;
+
+}
+.add-desc-cart{
+    border-top: 0.05rem solid #dedede;
+    width: 600px;
+}
+.txt_description{
+    color:#787878;
 }
 </style>

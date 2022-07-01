@@ -15,7 +15,7 @@
   <HeaderCart class="mt-1" title="زمان"   value="فوری" />
   <HeaderCart class="mt-1" title="ارسال"   value="5000 تومان" />
   <HeaderCart class="mt-1" title="مالیات"   value="رایگان" />
-  <HeaderCart class="mt-1" title="خرید"   value="123000 تومان" />
+  <HeaderCart class="mt-1" title="خرید"   :value="formatPrice(totalPrice)" />
   <HeaderCart class="mt-1" title="مجموع"   value="13000 تومان" />
   
   <div  v-for="(item, index) in cart.products">
@@ -32,26 +32,61 @@
 
 import Cart from './Cart.vue';
 import HeaderCart from './HeaderCart.vue';
+import { mapGetters } from 'vuex'
 export default {
     components: { HeaderCart ,Cart},
+      computed: {
+      ...mapGetters({
+           carts: 'carts/carts',
+              totalCart: 'carts/totalCart',
+       
+        
+            })
+         },
   
       props: {
         cart :{
             type:Object,
             require :true,
+            
         },
          
       },
+
+      data :() =>({
+        totalPrice : 0,
+      }),
+      created(){ this.totalPrice2(this.cart)},
+
+      methods:{
+             totalPrice2(cart){
+                this.totalPrice = 0 ;
+
+                let index = this.carts.findIndex((item) => item.id==cart.id);
+                 this.carts[index].products.map((item,index)=>{
+                    this.totalPrice =  this.totalPrice +item.price*item.count;
+
+                   item.details.map(item_product => {
+                    if(item_product.status)
+                     this.totalPrice  =  this.totalPrice + item_product.price * item_product.count;
+                   })
+                 });
+
+                 //return this.formatPrice(total)+" "+"تومان";
+             },
+              formatPrice(price) {
+                 return  Number(price).toLocaleString() +" "+"تومان";
+                 },
+      },
+      watch:{
+        totalCart(new_val,old_val){
+            console.log("total",new_val)
+            this.totalPrice2(this.cart)
+         
+        }
+      }
   
-    data : ()  =>({
-        products : [
-            {title:"گوجه فرنگی ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"موز ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"هلو ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"انبه ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-    
-        ]
-    })
+   
 }
 </script>
 <style scoped>

@@ -70,8 +70,8 @@ export default {
   props : ["product"],
    computed: {
       ...mapGetters({
-           carts: 'products/carts',
-            totalCart: 'products/totalCart',
+           carts: 'carts/carts',
+            totalCart: 'carts/totalCart',
         
             })
          },
@@ -83,11 +83,11 @@ export default {
       
      
       
-      this.$store.dispatch('products/addCart', this.product)
+      this.$store.dispatch('carts/addCart', this.product)
     },
      removeFromCart(){
     //  console.log(this.product)
-      this.$store.dispatch('products/removeCart', this.product)
+      this.$store.dispatch('carts/removeCart', this.product)
     },
       formatPrice(price) {
          return  Number(price).toLocaleString()+" "+"تومان";

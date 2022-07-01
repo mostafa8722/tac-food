@@ -6,6 +6,8 @@
            <font-awesome-icon class=" icon-triangle mt-5 " :icon="`fa-solid fa-triangle-exclamation`" />
               
          <p class="mt-2">سبد خرید خالی می باشد!</p>
+         <p class="mt-2"> از طریق صفحه ای فروشگاه محصول خود را به سبد اضافه کنید.</p>
+          <button @click.prevent="handleButton" class="add-address pointer mt-4"> فروشگاه </button>
          
                  
            
@@ -28,7 +30,11 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 library.add(faTriangleExclamation)
 
 export default {
-    
+  methods:{
+    handleButton(){
+        this.$router.push("/")
+    }
+  }   
     
 
 }
@@ -45,5 +51,12 @@ p{
 .icon-triangle{
     color :#cccccc;
     font-size:3rem;
+}
+.add-address{
+    background-color:#fd5e63;
+   color: #ffffff;
+    padding:0.3rem 1.5rem;
+    border-radius: 0.3rem;
+
 }
 </style>

@@ -34,4 +34,5 @@ interface ProductCartDetail {
     name: string,
     price: number,
     status:number,
+    count:number,
 }

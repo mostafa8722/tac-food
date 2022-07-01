@@ -1,10 +1,10 @@
 <template>
  
-  <NuxtLink to="/cart">
+  <NuxtLink  v-if="totalCart>0" to="/cart">
       <div class="cart-container relative flex">
        
           
-  <font-awesome-icon  class="absolute white right-3 top-4" icon="fa-solid fa-trash" />
+  <font-awesome-icon @click.prevent="clearCart"   class="absolute white right-3 top-4 pointer" icon="fa-solid fa-trash" />
           <span class="white absolute white right-10 top-3 number-format"> {{formatPrice(totalCart)}} تومان</span>  
           <span class="white absolute white left-6 top-3">سبد خرید</span>  
            <font-awesome-icon   class="absolute  white left-3 top-4" icon="fa-solid fa-angle-left" />
@@ -31,7 +31,7 @@ import { mapGetters } from 'vuex'
 export default {
    computed: {
       ...mapGetters({
-           totalCart: 'products/totalCart',
+           totalCart: 'carts/totalCart',
         
             })
          },
@@ -42,9 +42,10 @@ export default {
     this.url = this.$route.path
   },
 methods :{
-  handleEvent(){
+  clearCart(){
+       this.$store.dispatch('carts/addCart')
 
-   this.$router.push("/search")
+   
   },
   formatPrice(price) {
     return  Number(price).toLocaleString();

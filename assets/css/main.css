@@ -4,3 +4,4 @@ margin :0px;
 .pointer{
     cursor: pointer;
 }
+.ltr{direction:ltr;}

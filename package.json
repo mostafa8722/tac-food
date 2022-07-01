@@ -25,6 +25,7 @@
     "nuxt": "^2.14.6",
     "nuxt-leaflet": "^0.0.27",
     "use-indexeddb": "^1.0.9",
+   
     "vue-toast-notification": "^0.5.4",
     "vue-verification-code-input": "^1.0.0",
     "vue2-leaflet": "^2.7.1",
