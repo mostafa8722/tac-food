@@ -103,9 +103,8 @@ export const actions: ActionTree<AuthState, any> = {
        // commit('commentsPage',res.data)
       })
       .catch((error:any) => {
-       
-      ca
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+      
+       // Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       })
   },
 
