@@ -5,10 +5,10 @@
         <div v-if="carts.length>0" > <Carts  v-for="cart in carts" :cart="cart"  /></div>
         <div v-else > <Empty   /></div>
 
-        <div v-show="carts.length>0 && descriptionCart==''" @click.prevent="handleAddDescription" class="add-address pointer mt-2">افزودن توضیحات </div>
+        <div v-show="carts.length==0 && descriptionCart==''" @click.prevent="handleAddDescription" class="add-address pointer mt-2">افزودن توضیحات </div>
        
        
-        <ModalDescription v-show="showModal" @close-modal="showModal = false"  />
+        <ModalAddress v-show="showModal" @close-modal="showModal = false"  />
 
         <div v-show="descriptionCart" class="flex justify-between  mt-5 pt-3 add-desc-cart">
             <p class="txt_description">
@@ -26,6 +26,9 @@
 import Empty from './Empty'
 import Carts from './Carts'
 import ModalDescription from '~/components/cart/ModalDescription.vue'
+import ModalDiscount from '~/components/modals/ModalDiscount.vue'
+import ModalConfirmOrder from '~/components/modals/ModalConfirmOrder.vue'
+import ModalAddress from '~/components/modals/ModalAddress.vue'
 import { mapGetters } from 'vuex'
 import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -38,7 +41,7 @@ library.add(faTrash)
 
 
 export default {
-    components: { Empty,Carts,ModalDescription },
+    components: { Empty,Carts,ModalDescription,ModalDiscount,ModalConfirmOrder,ModalAddress },
     
    computed: {
       ...mapGetters({

@@ -3,24 +3,64 @@
     <div class="modal-overlay" @click="$emit('close-modal')">
    
       <div class="modal" @click.stop>
-           
+
+        <div class="header-modal flex justify-center relative">
+          <span>افزودن آدرس</span>
+           <font-awesome-icon class=" btn-back absolute right-3 top-3" :icon="`fa-solid fa-arrow-right`" />
+           <div class="line-h-40  btn-back absolute left-3 top-2">   <font-awesome-icon class="  " :icon="`fa-solid fa-check`" /></div>
+        </div>
+           <div class="mt-2 mr-2 ml-2" style="position:relative;height: 130px"><Map /></div>
            
          <div class="mt-5 mr-2 ml-2 mb-2">
              <v-text-field
             outlined
                 persistent-hint
                 class="input-field"
-            label="شماره تلفن"
-              hint="شماره همراه خود را وارد کنید"
-           
+            label="نام آدرس "
+              hint="مثال : خونه، محل کار ، خونه دایی ..."
+          
              v-model="mobile"
           ></v-text-field>
-         <div class="flex">
+
+          <v-text-field
+            outlined
+                persistent-hint
+                class="input-field mt-2"
+            label=" آدرس "
+              hint="مثال : میدان مادر ، خیابان زنجانی ، کوچه جهاد ، پلاک 2 "
+              maxlength="200"
+               counter="200"
+             v-model="mobile"
+          ></v-text-field>
+       
+
+         <v-text-field
+            outlined
+                persistent-hint
+                class="input-field mt-4"
+            label="پلاک (اختیاری) "
+              hint="مثال : 12 "
+              maxlength="10"
+               counter="10"
+             v-model="mobile"
+          ></v-text-field>
+
           
-           <span class="desc-text block mr-2">{{text_character}}</span>
-         </div>
-         <div class="flex justify-evenly mb-5 mt-5 ">
-                      <button @click.prevent="handleAddDescription" class="btn-save pointer mt-4"> بررسی کد </button>
+         <v-text-field
+            outlined
+                persistent-hint
+                class="input-field mt-2"
+            label="شماره تلفن (اختیاری) "
+              hint="مثال : 09123456789 "
+              maxlength="11"
+               counter="11"
+             v-model="mobile"
+          ></v-text-field>
+
+          <p>*برای آدرس خود یک انتخاب کنید</p>
+          <p  class="mt-1">*آدرس دقیق خود را در فیلد آدرس وارد کنید</p>
+         <div class="flex justify-evenly mb-2 mt-3 ">
+                      <button @click.prevent="handleAddDescription" class="btn-save pointer mt-4">  ذخیره </button>
 
          </div>
          </div>
@@ -45,9 +85,11 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRight
 )
-
+import Map from "./Map"
 export default {
-   
+   components:{
+    Map
+   },
    data : ()=>({
    
     description :"",
@@ -82,15 +124,20 @@ export default {
 .modal {
   text-align: center;
   background-color: white;
-  height:250px;
+  height: 100%;
+  overflow-y: auto;
   width:400px;
   margin:40px  30px;
-
+    padding-bottom: 50px;
   border-radius: 20px;
 }
 .close {
   margin: 20px 0 0 16px;
   cursor: pointer;
+}
+.header-modal {
+  height:40px;
+  line-height:40px;
 }
 .desc-text{
     color:#696969;
@@ -132,11 +179,7 @@ h6 {
   font-size: 28px;
   margin: 20px 0;
 }
-p {
-  /* font-weight: 500; */
-  font-size: 16px;
-  margin: 20px 0;
-}
+
 button {
   background-color: #ac003e;
   width: 150px;
@@ -161,6 +204,9 @@ button {
     border-radius: 0.3rem;
     flex:1;
 }
+p{
+  font-size: 0.9rem;
+}
 div ::v-deep .v-label.v-label--active.theme--light {
   right: -16px!important;
     top: -12px !important;;
@@ -170,5 +216,7 @@ div ::v-deep .v-label.v-label--active.theme--light {
 div ::v-deep .v-input__slot fieldset legend {
  background:#ffffff!important;
 }
-
+div ::v-deep .v-messages__message {
+  text-align: right;
+}
 </style>

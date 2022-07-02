@@ -1,13 +1,13 @@
 <template>
  <section class="flex justify-center">
-     <div class="mt-20 flex flex-col content-section items-center justify-center ml-3 mr-3">
+     <div class="mt-20 flex flex-col content-section login-page-component items-center justify-center ml-3 mr-3">
 
          
        
                  <v-text-field
             outlined
                 persistent-hint
-                class="input-field"
+                class="input-field ttt"
             label="نام"
               hint="از این پس با این نام شناخته می شوید"
             prepend-inner-icon="mdi-map-marker"
@@ -138,4 +138,5 @@ p{
 span{
   font-size:0.7rem;   
 }
+
 </style>

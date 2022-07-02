@@ -52,6 +52,9 @@ export default {
   axios: {
     baseURL: 'https://app.takfood.ir/api/', // Used as fallback if no runtime config is provided
   },
+  vuetify :{
+    customVariables: ["~/assets/scss/styles.scss"],
+  },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     publicPath :"http://localhost:3000"

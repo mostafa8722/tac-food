@@ -5,3 +5,21 @@ margin :0px;
     cursor: pointer;
 }
 .ltr{direction:ltr;}
+.v-label{
+    right: 0px !important;;
+    left: auto!important;
+}
+ .v-label--active ,div .v-label.v-label--active.theme--light {
+    transform: translateY(-4px) scale(0.75);
+    right: -34px!important;
+    top: 10px !important;;
+    left: auto!important;
+    position: absolute;
+  }
+   legend{
+    right: 0px;
+    position: absolute;
+    top: -10px;
+    height: 10px;
+    background: #f6f6f6;
+  }

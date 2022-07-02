@@ -63,6 +63,7 @@ export default {
       }
     },
     created(){
+      console.log("eeeee",this.$vuetify.breakpoint.width)
       this.count  = this.product.count;
     },
   methods:{

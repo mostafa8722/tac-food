@@ -1,28 +1,25 @@
 <template>
   <transition name="modal-fade">
-    <div class="modal-overlay" @click="$emit('close-modal')">
+    <div class="modal-overlay " @click="$emit('close-modal')">
    
-      <div class="modal" @click.stop>
+      <div class="modal relative" @click.stop>
            
-           
+            <div class="modal-header pt-3">
+              <span>آدرس های من</span>
+            </div>
          <div class="mt-2 mr-2 ml-2 mb-2">
-           <v-textarea
-           v-model="description"
-          solo
-          name="input-7-4"
-        maxlength="150"
-        counter="150"
-        ></v-textarea>
-         <div class="flex">
-          <span class="desc-text block mb-2 mr-3">
-            توضیحات مربوط به سفارشات خود را در این بخش وارد کنید
-           </span>
+         
+         <div class="flex flex-col">
+          <AddressCard :active="false" />
+          <AddressCard :active="true" />
            <span class="desc-text block mr-2">{{text_character}}</span>
          </div>
-         <div class="flex justify-evenly mb-5 mt-5 ">
-                      <button @click.prevent="handleAddDescription" class="btn-save pointer mt-4"> ذخیره </button>
-                      <button @click.prevent="$emit('close-modal')" class="btn-close pointer mt-4"> بستن </button>
-
+         <div class="grid grid-cols-4 footer-address ">
+          <div class="line-h-40">   <font-awesome-icon class="  " :icon="`fa-solid fa-check`" /></div>
+          <div class="line-h-40">   <font-awesome-icon class="  " :icon="`fa-solid fa-pen-to-square`" /></div>
+          <div class="line-h-40">   <font-awesome-icon class="  " :icon="`fa-solid fa-trash`" /></div>
+          <div  class="line-h-40">   <font-awesome-icon class="  " :icon="`fa-solid fa-circle-plus`" /></div>
+                    
          </div>
          </div>
          
@@ -36,15 +33,16 @@
 
 
 import Vue from "vue"
-
+import AddressCard from "./AddressCard.vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRight
+import {faTrash,faCirclePlus,faCheck,faPenToSquare
 } from '@fortawesome/free-solid-svg-icons'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-library.add(faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRight
+library.add(faTrash,faCirclePlus,faCheck,
+faPenToSquare
 )
 
 export default {
@@ -53,6 +51,7 @@ export default {
    
     description :"",
    }),
+   components:{AddressCard},
     methods:{
     handleAddDescription(){
       this.$store.dispatch('carts/addDescriptionCart',this.description)
@@ -82,8 +81,8 @@ export default {
 .w-100{width:100%;font-size: 0.75rem;}
 .modal {
   text-align: center;
-  background-color: white;
-  height:350px;
+  background-color: #f6f6f6;
+ min-height:350px;
   width:400px;
   margin:20px  30px;
 
@@ -99,54 +98,13 @@ export default {
     text-align: right;
 }
 .font-7{font-size: 0.7rem;}
-.btn-location{
-    height:40px ;
-    width:250px;
-    border-radius: 5px;
-    background-color: #fd5e63;
-    line-height: 35px;
-}
-.btn-gps{
-    height:40px ;
-    width:40px;
-    border-radius: 5px;
-    background-color: #fd5e63;
-    line-height: 35px;
-}
-.white{
-    color:#ffffff;
-}
-.btn-location svg{
-    position:absolute;
-    left:20px;
-    top:10px;
-    color: #ffffff;
-}
-.close-img {
-  width: 25px;
-}
-.check {
-  width: 150px;
-}
-h6 {
-  font-weight: 500;
-  font-size: 28px;
-  margin: 20px 0;
-}
-p {
-  /* font-weight: 500; */
-  font-size: 16px;
-  margin: 20px 0;
-}
-button {
-  background-color: #ac003e;
-  width: 150px;
-  height: 40px;
-  color: white;
-  font-size: 14px;
-  border-radius: 16px;
-  margin-top: 50px;
-}
+
+
+
+
+
+
+
 .modal-fade-enter,
 .modal-fade-leave-to {
   opacity: 0;
@@ -155,16 +113,20 @@ button {
 .modal-fade-leave-active {
   transition: opacity 0.5s ease;
 }
-.btn-save{
-   background-color:#fd5e63;
-   color: #ffffff;
-    padding:0.3rem 1.5rem;
-    border-radius: 0.3rem;
+
+.modal-header{
+  height:40px;
 }
-.btn-close{
-   background-color:#ffffff;
-   color: #454545;
-    padding:0.3rem 1.5rem;
-    border-radius: 0.3rem;
+.footer-address{
+  position: absolute;
+  background-color: #ffffff;
+  height: 40px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+
+}
+.line-h-40{
+  line-height: 40px;
 }
 </style>

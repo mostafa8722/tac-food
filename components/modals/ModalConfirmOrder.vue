@@ -5,22 +5,21 @@
       <div class="modal" @click.stop>
            
            
-         <div class="mt-5 mr-2 ml-2 mb-2">
-             <v-text-field
-            outlined
-                persistent-hint
-                class="input-field"
-            label="شماره تلفن"
-              hint="شماره همراه خود را وارد کنید"
-           
-             v-model="mobile"
-          ></v-text-field>
-         <div class="flex">
-          
-           <span class="desc-text block mr-2">{{text_character}}</span>
+         <div class=" mb-2">
+          <h3 class="header-modal pt-2">تایید سفارش</h3>
+         <div class="flex flex-col text-right">
+          <p class="red mt-4 mr-1 ml-1 text-center bold "> -> در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
+           <span class="mt-4 pr-2">سفارش شما -></span>
+            <p class="red  mr-1 ml-1  pr-2 ">  در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
+
+          <div class="mt-2 mr-2 ml-2 line-break"></div>
+          <span class="mt-4  pr-2">به آدرس  -></span>
+            <p class="red mr-1 ml-1  pr-2 ">  در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
+
          </div>
          <div class="flex justify-evenly mb-5 mt-5 ">
-                      <button @click.prevent="handleAddDescription" class="btn-save pointer mt-4"> بررسی کد </button>
+                      <button @click.prevent="handleAddDescription" class="btn-save pointer mt-4"> تایید </button>
+                      <button @click.prevent="$emit('close-modal')" class="btn-close pointer mt-4"> خیر </button>
 
          </div>
          </div>
@@ -36,15 +35,7 @@
 
 import Vue from "vue"
 
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import {faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRight
-} from '@fortawesome/free-solid-svg-icons'
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-library.add(faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRight
-)
 
 export default {
    
@@ -54,7 +45,7 @@ export default {
    }),
     methods:{
     handleAddDescription(){
-      this.$store.dispatch('products/addDescriptionCart',this.description)
+      this.$store.dispatch('carts/addDescriptionCart',this.description)
       this.$emit('close-modal');
     }
 
@@ -82,9 +73,9 @@ export default {
 .modal {
   text-align: center;
   background-color: white;
-  height:250px;
+  height:350px;
   width:400px;
-  margin:40px  30px;
+  margin:20px  30px;
 
   border-radius: 20px;
 }
@@ -132,11 +123,7 @@ h6 {
   font-size: 28px;
   margin: 20px 0;
 }
-p {
-  /* font-weight: 500; */
-  font-size: 16px;
-  margin: 20px 0;
-}
+
 button {
   background-color: #ac003e;
   width: 150px;
@@ -154,21 +141,35 @@ button {
 .modal-fade-leave-active {
   transition: opacity 0.5s ease;
 }
+.header-modal{
+  height: 35px;
+    background-color:#fd5e63;
+   color: #ffffff;
+   text-align: right;
+   padding-right: 10px;
+   border-top-left-radius: 1rem;
+   border-top-right-radius: 1rem;
+}
 .btn-save{
    background-color:#fd5e63;
    color: #ffffff;
     padding:0.3rem 1.5rem;
     border-radius: 0.3rem;
-    flex:1;
 }
-div ::v-deep .v-label.v-label--active.theme--light {
-  right: -16px!important;
-    top: -12px !important;;
-    left: auto!important;
+.btn-close{
+   background-color:#ffffff;
+   color: #454545;
+    padding:0.3rem 1.5rem;
+    border-radius: 0.3rem;
 }
+.red{
+  font-size: 0.9rem;
+  color:#fd5e63;
 
-div ::v-deep .v-input__slot fieldset legend {
- background:#ffffff!important;
 }
-
+.line-break{
+  background-color: #eeeeee;
+  height: 0.04rem;
+}
+.bold{font-weight: bold;}
 </style>
