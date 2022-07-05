@@ -3,6 +3,7 @@ import {NuxtAxiosInstance} from "@nuxtjs/axios";
 
 export default function ({$axios}: { $axios: NuxtAxiosInstance }) {
   $axios.onError((error: AxiosError) => {
+    console.log("ppppp",error)
     if (error.response?.data.message) {
       return Promise.reject(new Error(error.response?.data.message));
     }

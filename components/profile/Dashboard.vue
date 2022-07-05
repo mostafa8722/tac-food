@@ -51,7 +51,7 @@
        <div class="pointer" @click.prevent="logOut">
            
             <font-awesome-icon class=" mr-5  icon-item red" :icon="`fa-solid fa-arrow-right-from-bracket`" />
-            <span class=" text-profile-edit mr-1">  خروج</span>
+            <span  class=" text-profile-edit mr-1">  خروج</span>
           
       </div>
     </div>
@@ -136,6 +136,7 @@ export default {
     methods:{
         async logOut(){
            await  DB.users.clear();
+              this.$router.push('/')
 
             
         },

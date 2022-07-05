@@ -1,10 +1,10 @@
 <template>
-         <div :class="`container-address mt-2 flex justify-between items-center ${active?'active':''} `">
+         <div  @click.prevent="$emit('handle-click',address)" :class="`container-address mt-2 flex justify-between items-center pointer ${active?'active':''} ` ">
               <div class="flex">
-                 <div class="circle-address">و</div>
+                 <div class="circle-address">{{(address.title).substring(0,1)}}</div>
                  <div class="flex flex-col text-right mr-1">
-                    <span class="title">وو</span>
-                    <span class="body">نممم</span>
+                    <span class="title">{{address.title}}</span>
+                    <span class="body">{{address.address}}</span>
                  </div>
               </div>
               <span class="left-circle ">
@@ -33,6 +33,10 @@ export default {
         active:{
             type:Boolean,
             default :false
+        },
+        address:{
+            type:Object,
+            required: true
         }
     },
    

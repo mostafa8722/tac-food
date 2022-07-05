@@ -6,6 +6,7 @@ import CategoriesRepository from '~/data/repositories/categoriesRepository'
 
 import ProductsRepository from '~/data/repositories/productsRepository'
 import CommentsRepository from '~/data/repositories/commentsRepository'
+import UserRepository from '~/data/repositories/userRepository'
 import PaymentsRepository from '~/data/repositories/paymentsRepository'
 
 
@@ -22,6 +23,7 @@ export default class Repositories {
   products = () => new ProductsRepository(this.axios)
   comments = () => new CommentsRepository(this.axios)
   payments = () => new PaymentsRepository(this.axios)
+  users = () => new UserRepository(this.axios)
 
 
 }

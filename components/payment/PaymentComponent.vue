@@ -88,7 +88,8 @@
 
            </div>
        
-        <ModalAddAddress v-show="showModal" @close-modal="showModal = false"  />
+        <ModalConfirmOrder v-show="showModal" @close-modal="showModal = false" @add-address="handleAddAddress"  />
+        <ModalAddAddress v-show="showAddAddress" @close-modal="showAddAddress = false"  />
 
        
     </section>
@@ -101,6 +102,7 @@
 import ModalDescription from '~/components/cart/ModalDescription.vue'
 import ModalDiscount from '~/components/modals/ModalDiscount.vue'
 import ModalConfirmOrder from '~/components/modals/ModalConfirmOrder.vue'
+import ModalDeleteAddress from '~/components/modals/ModalDeleteAddress.vue'
 import ModalAddress from '~/components/modals/ModalAddress.vue'
 import ModalAddAddress from '~/components/modals/ModalAddAddress.vue'
 import { mapGetters } from 'vuex'
@@ -113,7 +115,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faTrash,faCheck)
 
-
+import  DB  from '~/data/db'
 export default {
     components: { 
     ModalDescription,ModalDiscount,ModalConfirmOrder,ModalAddress,
@@ -130,14 +132,39 @@ export default {
          },
          data :()=>({
              showModal: false,
+             showAddAddress: false,
              pay_type : "type_2"
             }),
-         created(){
-            console.log("ppp",this.carts)
+         async created(){
+            
+               await DB.users.count(async (count)=> {
+            if(count==0  ){
+             // this.$router.push('/login')
+            }else{
+                 await   DB.users.each( (item)=> {
+                       
+                    let token  = {
+                       api_token: item.api_token
+                    };
+
+                  this.$store.dispatch('user/userAddresses',token)
+                  
+
+                });
+              
+              // this.isLogin = true;
+            }
+           
+          
+            });
          },
          methods:{
             handleAddDescription(){
                 this.showModal = true;
+            },
+            handleAddAddress(){
+                alert()
+                     this.showAddAddress = true;
             },
             clearDescription(){
                  this.$store.dispatch('products/addDescriptionCart',"")

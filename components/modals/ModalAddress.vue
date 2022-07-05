@@ -10,21 +10,22 @@
          <div class="mt-2 mr-2 ml-2 mb-2">
          
          <div class="flex flex-col">
-          <AddressCard :active="false" />
-          <AddressCard :active="true" />
+          <AddressCard  v-for="address in addresses" :key="address.id" @handle-click="handleClickAddress" :address="address" :active="selected_address?selected_address.id==address.id?true:false:false" />
+          
            <span class="desc-text block mr-2">{{text_character}}</span>
          </div>
          <div class="grid grid-cols-4 footer-address ">
-          <div class="line-h-40">   <font-awesome-icon class="  " :icon="`fa-solid fa-check`" /></div>
-          <div class="line-h-40">   <font-awesome-icon class="  " :icon="`fa-solid fa-pen-to-square`" /></div>
-          <div class="line-h-40">   <font-awesome-icon class="  " :icon="`fa-solid fa-trash`" /></div>
-          <div  class="line-h-40">   <font-awesome-icon class="  " :icon="`fa-solid fa-circle-plus`" /></div>
+          <div class="line-h-40">   <font-awesome-icon class="pointer"  :icon="`fa-solid fa-check`" /></div>
+          <div class="line-h-40">   <font-awesome-icon  class="pointer"  :icon="`fa-solid fa-pen-to-square`" /></div>
+          <div class="line-h-40">   <font-awesome-icon  class="pointer"  @click.prevent="deleteAddress" :icon="`fa-solid fa-trash`" /></div>
+          <div  class="line-h-40">   <font-awesome-icon class="pointer"  @click.prevent="$emit('add-address')" :icon="`fa-solid fa-circle-plus`" /></div>
                     
          </div>
          </div>
          
       </div>
       
+
     </div>
   </transition>
 </template>
@@ -44,18 +45,61 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 library.add(faTrash,faCirclePlus,faCheck,
 faPenToSquare
 )
-
+import { mapGetters } from 'vuex'
 export default {
    
    data : ()=>({
    
     description :"",
+    selected_id : 0
    }),
    components:{AddressCard},
+    computed: {
+      ...mapGetters({
+           addresses: 'user/userAddresses',
+           selected_address: 'user/selected_address',
+
+          
+            })
+         },
     methods:{
     handleAddDescription(){
-      this.$store.dispatch('carts/addDescriptionCart',this.description)
+     // this.$store.dispatch('carts/addDescriptionCart',this.description)
       this.$emit('close-modal');
+    },
+       async deleteAddress(){
+     console.log(this.selected_address)
+      
+
+      return ;
+               await DB.users.count(async (count)=> {
+            if(count==0  ){
+             // this.$router.push('/login')
+            }else{
+                 await   DB.users.each( (item)=> {
+                       
+                    let data  = {
+                       api_token: item.api_token,
+                       id:`${this.selected_address.id}`
+                    };
+
+                  this.$store.dispatch('user/deleteAddress',data)
+                  this.$emit('close-modal');
+
+                });
+              
+              // this.isLogin = true;
+            }
+           
+          
+            });
+
+  
+      
+    },
+    handleClickAddress(address){
+        console.log("ttt",address)
+      this.$store.dispatch('user/changeSelectedAddress',address)
     }
 
     },

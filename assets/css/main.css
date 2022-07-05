@@ -11,8 +11,8 @@ margin :0px;
 }
  .v-label--active ,div .v-label.v-label--active.theme--light {
     transform: translateY(-4px) scale(0.75);
-    right: -34px!important;
-    top: 10px !important;;
+    right: -37px!important;
+    top: -11px !important;;
     left: auto!important;
     position: absolute;
   }

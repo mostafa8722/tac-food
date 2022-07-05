@@ -19,7 +19,7 @@
             label="نام آدرس "
               hint="مثال : خونه، محل کار ، خونه دایی ..."
           
-             v-model="mobile"
+             v-model="title"
           ></v-text-field>
 
           <v-text-field
@@ -30,7 +30,7 @@
               hint="مثال : میدان مادر ، خیابان زنجانی ، کوچه جهاد ، پلاک 2 "
               maxlength="200"
                counter="200"
-             v-model="mobile"
+             v-model="address"
           ></v-text-field>
        
 
@@ -42,7 +42,7 @@
               hint="مثال : 12 "
               maxlength="10"
                counter="10"
-             v-model="mobile"
+             v-model="postal_code"
           ></v-text-field>
 
           
@@ -54,13 +54,13 @@
               hint="مثال : 09123456789 "
               maxlength="11"
                counter="11"
-             v-model="mobile"
+             v-model="phone"
           ></v-text-field>
 
           <p>*برای آدرس خود یک انتخاب کنید</p>
           <p  class="mt-1">*آدرس دقیق خود را در فیلد آدرس وارد کنید</p>
          <div class="flex justify-evenly mb-2 mt-3 ">
-                      <button @click.prevent="handleAddDescription" class="btn-save pointer mt-4">  ذخیره </button>
+                      <button @click.prevent="handleAddAddress" class="btn-save pointer mt-4">  ذخیره </button>
 
          </div>
          </div>
@@ -85,7 +85,10 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRight
 )
+
 import Map from "./Map"
+import {LOCATION_DEFAULT} from "~/data/default"
+import  DB  from '~/data/db'
 export default {
    components:{
     Map
@@ -93,11 +96,52 @@ export default {
    data : ()=>({
    
     description :"",
+    title :"",
+    address :"",
+    phone :"",
+    postal_code :"",
+    lat :`${LOCATION_DEFAULT.lat}`,
+    lng :`${LOCATION_DEFAULT.lng}`,
+
    }),
     methods:{
     handleAddDescription(){
-      this.$store.dispatch('products/addDescriptionCart',this.description)
+     // this.$store.dispatch('products/addDescriptionCart',this.description)
       this.$emit('close-modal');
+    },
+
+    async handleAddAddress(){
+
+      
+               await DB.users.count(async (count)=> {
+            if(count==0  ){
+             // this.$router.push('/login')
+            }else{
+                 await   DB.users.each( (item)=> {
+                       
+                    let data  = {
+                       api_token: item.api_token,
+                       title:this.title,
+                       address:this.address,
+                       postal_code : this.postal_code,
+                       phone : this.phone,
+                       lat : this.lat,
+                       lng: this.lng,
+                    };
+
+                  this.$store.dispatch('user/addAddress',data);
+                  //this.$emit('close-modal');
+
+                });
+              
+              // this.isLogin = true;
+            }
+           
+          
+            });
+
+  
+      
     }
 
     },
