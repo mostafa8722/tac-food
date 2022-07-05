@@ -59,6 +59,7 @@ export default {
          },
          methods:{
             handleAddDescription(){
+                 //this.$router.push("/payment") 
                 this.showModal = true;
             },
             clearDescription(){

@@ -51,7 +51,7 @@
           </div>
 <v-radio
      color="#ff2200"
-        value="type_2"
+        value="online"
       > </v-radio>
      
     </div>
@@ -81,7 +81,7 @@
        </div>
 
         <div class="flex justify-center mb-5 mt-5">
-               <div @click.prevent ="sendProposal"  class="btn-send pointer text-center relative mt-3">
+               <div @click.prevent ="sendOrder"  class="btn-send pointer text-center relative mt-3">
                   <span class="white" style="font-size: 0.8rem;"> پرداخت </span>
                    <font-awesome-icon class=" mr-5  icon-item white" :icon="`fa-solid fa-location-dot`" />
                 </div>
@@ -126,6 +126,7 @@ export default {
       ...mapGetters({
            carts: 'carts/carts',
            descriptionCart: 'carts/descriptionCart',
+            selected_address: 'user/selected_address',
        
         
             })
@@ -133,7 +134,8 @@ export default {
          data :()=>({
              showModal: false,
              showAddAddress: false,
-             pay_type : "type_2"
+             pay_type : "online",
+             coupon_code : "",
             }),
          async created(){
             
@@ -166,6 +168,62 @@ export default {
                 alert()
                      this.showAddAddress = true;
             },
+
+            async sendOrder(){
+                
+                  await DB.users.count(async (count)=> {
+                  
+            if(count==0  ){
+             // this.$router.push('/login')
+             
+            }else{
+               
+                 await   DB.users.each( (item)=> {
+                       
+                   
+
+                  let orders = {};
+               orders =  this.carts.map((cart)=>{
+                        let new_cart ={};
+                        new_cart.store_id = cart.store_id;
+                        new_cart.order_time = null;
+                        new_cart.orders = cart.products.map((product)=>{
+                            let new_product = {};
+                            new_product .product_id = product.id ;
+                            new_product .count = product.count ;
+                            new_product .details = product.details.map((detail)=>{
+                              return {id:detail.id,count:detail.count}
+                            }) ;
+
+                            return new_product;
+                        });
+                    
+                        return new_cart ;
+               })
+
+                let data  = {
+                       api_token: item.api_token,
+                       orders : orders,
+                        payment: "20000",
+                        address_id: this.selected_address.id,
+                        comment: this.descriptionCart,
+                        coupon_code: this.coupon_code,
+                        method: this.pay_type,
+                    };
+                    console.log("tttt",data);
+                // this.$store.dispatch('orders/payment',data)
+                  
+
+                });
+              
+              // this.isLogin = true;
+            }
+           
+          
+            });
+               
+      
+             },
             clearDescription(){
                  this.$store.dispatch('products/addDescriptionCart',"")
       
