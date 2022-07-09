@@ -1,12 +1,39 @@
 import {AxiosError} from "axios";
 import {NuxtAxiosInstance} from "@nuxtjs/axios";
-
-export default function ({$axios}: { $axios: NuxtAxiosInstance }) {
+import { data } from "autoprefixer";
+import Vue from 'vue'
+export default function ({$axios,app}: { $axios: NuxtAxiosInstance,app:any }) {
   $axios.onError((error: AxiosError) => {
-    console.log("ppppp",error)
-    if (error.response?.data.message) {
+  
+    let status :any  = error.response?.status;
+    
+    handleError(status,app);
+    if (error.response) {
       return Promise.reject(new Error(error.response?.data.message));
     }
     return Promise.reject(new Error('خطای غیر منتظره‌ای رخ داده است'));
+  })
+}
+
+export const defaultErrorMessages = {
+  401: `Not Authenticated: Sorry, you have to be logged in to access this!`,
+  403: `Not Authorized: Sorry, you can't access this!`,
+  404: `Not Found: We couldn't find what you're looking for. Please refresh and try again, or contact the support team.`,
+  422: 'Validation Error',
+  500: 'Server Error: Please contact the support team.',
+}
+
+
+const handleError= (status:any,app:any)=>{
+  
+  let iterableErrorMessages = Object.entries(defaultErrorMessages);
+
+
+//if(status ==401)
+//return app.router.push("/");
+
+iterableErrorMessages.map(item=>{
+    if(item[0] == status )
+    Vue.$toast.error(item[1])
   })
 }

@@ -1,12 +1,12 @@
 <template>
 <v-card
-    class="flex flex-col mt-2  overflow-hidden content-product "
+    class="flex flex-col mt-2  overflow-hidden content-product pointer "
     width="100%"
     height="170"
      color="#ffffff"
   
   outlined
- 
+   @click.prevent="$emit('select-product',product)"
   >
     <div class="flex flex-row  ">
       <v-img
@@ -43,9 +43,9 @@
   <span class=" price ">  {{formatPrice(product.price)}}</span>
   
     <div class="flex flex-row-reverse">
-      <font-awesome-icon @click.prevent="addToCart" class="icon-custom pointer" :icon="`fa-solid  fa-add`" />
+      <font-awesome-icon @click.stop.prevent="addToCart" class="icon-custom pointer" :icon="`fa-solid  fa-add`" />
       <span v-if="cart_product.count" class="mr-3 ml-3">{{cart_product.count}}</span>
-        <font-awesome-icon v-if="cart_product.count" @click.prevent="removeFromCart" class="icon-custom pointer" :icon="`fa-solid  fa-minus`" />
+        <font-awesome-icon v-if="cart_product.count" @click.stop.prevent="removeFromCart" class="icon-custom pointer" :icon="`fa-solid  fa-minus`" />
     </div>
   
 

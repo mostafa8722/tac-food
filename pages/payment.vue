@@ -3,7 +3,7 @@
     <div>
 
    <Payment />
-   
+  
      
     </div>
   </div>
@@ -17,7 +17,7 @@ import Payment from '~/components/payment/PaymentComponent.vue'
 export default Vue.extend({
     layout: 'custom',
   components:{
-    Payment
+    Payment,
 }
 })
 </script>

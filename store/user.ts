@@ -51,6 +51,7 @@ export const actions: ActionTree<AuthState, any> = {
       .customerAddresses(data)
       .then((res:any) => {
      
+      
         commit('getAddresses',res.data)
       })
       .catch((error:any) => {
@@ -61,13 +62,15 @@ export const actions: ActionTree<AuthState, any> = {
   },
 
   async addAddress({ commit, dispatch }, data) {
-    console.log("tttt2",data)
+    let token = {
+      api_token : data.api_token
+    }
     await this.$repositories
       .users()
       .addCustomerAddress(data)
       .then((res:any) => {
      
-        console.log("tttt",res.data)
+        this.dispatch('user/userAddresses',token)
         Vue.$toast.success("آدرس با موفقیت اضافه گردید")
        // commit('getAddresses',res.data)
       })
@@ -78,12 +81,16 @@ export const actions: ActionTree<AuthState, any> = {
       })
   },
   async updateAddress({ commit, dispatch }, data) {
+    let token = {
+      api_token : data.api_token
+    }
     await this.$repositories
       .users()
       .updateCustomerAddress(data)
       .then((res:any) => {
-     
-        commit('getAddresses',res.data)
+        Vue.$toast.success("به روزسانی آدرس با موفقیت انجام شد")
+
+        this.dispatch('user/userAddresses',token)
       })
       .catch((error:any) => {
         //console.log(error.code)
@@ -93,17 +100,26 @@ export const actions: ActionTree<AuthState, any> = {
   },
 
   async deleteAddress({ commit, dispatch }, data) {
+    let token  = {
+      api_token: data.api_token
+   };
     await this.$repositories
       .users()
       .deleteCustomerAddress(data)
       .then((res:any) => {
      
-        commit('getAddresses',res.data)
+
+       if(!res.data.status){
+       Vue.$toast.success("حذف آدرس با موفقیت انجام شد")
+    
+         
+          this.dispatch('user/userAddresses',token)
+       }
       })
       .catch((error:any) => {
         //console.log(error.code)
       
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+       
       })
   },
 

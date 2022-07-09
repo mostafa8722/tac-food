@@ -9,16 +9,16 @@
             </div>
          <div class="mt-2 mr-2 ml-2 mb-2">
          
-         <div class="flex flex-col">
+         <div class="flex flex-col address-container">
           <AddressCard  v-for="address in addresses" :key="address.id" @handle-click="handleClickAddress" :address="address" :active="selected_address?selected_address.id==address.id?true:false:false" />
           
-           <span class="desc-text block mr-2">{{text_character}}</span>
+         
          </div>
          <div class="grid grid-cols-4 footer-address ">
           <div class="line-h-40">   <font-awesome-icon class="pointer"  :icon="`fa-solid fa-check`" /></div>
-          <div class="line-h-40">   <font-awesome-icon  class="pointer"  :icon="`fa-solid fa-pen-to-square`" /></div>
-          <div class="line-h-40">   <font-awesome-icon  class="pointer"  @click.prevent="deleteAddress" :icon="`fa-solid fa-trash`" /></div>
-          <div  class="line-h-40">   <font-awesome-icon class="pointer"  @click.prevent="$emit('add-address')" :icon="`fa-solid fa-circle-plus`" /></div>
+          <div class="line-h-40">   <font-awesome-icon  class="pointer"  @click.prevent="$emit('add-address','edit')"  :icon="`fa-solid fa-pen-to-square`" /></div>
+          <div class="line-h-40">   <font-awesome-icon  class="pointer"   @click.prevent="$emit('delete-address')" :icon="`fa-solid fa-trash`" /></div>
+          <div  class="line-h-40">   <font-awesome-icon class="pointer"  @click.prevent="$emit('add-address','')" :icon="`fa-solid fa-circle-plus`" /></div>
                     
          </div>
          </div>
@@ -67,36 +67,7 @@ export default {
      // this.$store.dispatch('carts/addDescriptionCart',this.description)
       this.$emit('close-modal');
     },
-       async deleteAddress(){
-     console.log(this.selected_address)
-      
-
-      return ;
-               await DB.users.count(async (count)=> {
-            if(count==0  ){
-             // this.$router.push('/login')
-            }else{
-                 await   DB.users.each( (item)=> {
-                       
-                    let data  = {
-                       api_token: item.api_token,
-                       id:`${this.selected_address.id}`
-                    };
-
-                  this.$store.dispatch('user/deleteAddress',data)
-                  this.$emit('close-modal');
-
-                });
-              
-              // this.isLogin = true;
-            }
-           
-          
-            });
-
-  
-      
-    },
+     
     handleClickAddress(address){
         console.log("ttt",address)
       this.$store.dispatch('user/changeSelectedAddress',address)
@@ -172,5 +143,10 @@ export default {
 }
 .line-h-40{
   line-height: 40px;
+}
+.address-container{
+  height: 410px;
+
+  overflow-y: auto;
 }
 </style>

@@ -88,8 +88,10 @@
 
            </div>
        
-        <ModalConfirmOrder v-show="showModal" @close-modal="showModal = false" @add-address="handleAddAddress"  />
-        <ModalAddAddress v-show="showAddAddress" @close-modal="showAddAddress = false"  />
+        <ModalConfirmOrder v-show="showModalConfirmOrder" @close-modal="showModalConfirmOrder = false"   />
+        <ModalAddress v-show="showModal" @close-modal="showModal = false" @add-address="handleAddAddress" @delete-address="handleDeleteAddress"  />
+        <ModalAddAddress v-show="showAddAddress" @close-modal="showAddAddress = false"  :editAddress="editAddress" />
+        <ModalDelete :data="deleteData" v-show="showDeleteAddress" @close-modal="showDeleteAddress = false" @confirm-delete-address="confirmDeleteAddress"   />
 
        
     </section>
@@ -99,10 +101,10 @@
 
 
 
-import ModalDescription from '~/components/cart/ModalDescription.vue'
 import ModalDiscount from '~/components/modals/ModalDiscount.vue'
 import ModalConfirmOrder from '~/components/modals/ModalConfirmOrder.vue'
-import ModalDeleteAddress from '~/components/modals/ModalDeleteAddress.vue'
+import ModalDelete from '~/components/modals/ModalDelete.vue'
+
 import ModalAddress from '~/components/modals/ModalAddress.vue'
 import ModalAddAddress from '~/components/modals/ModalAddAddress.vue'
 import { mapGetters } from 'vuex'
@@ -118,8 +120,8 @@ library.add(faTrash,faCheck)
 import  DB  from '~/data/db'
 export default {
     components: { 
-    ModalDescription,ModalDiscount,ModalConfirmOrder,ModalAddress,
-    ModalAddAddress
+      ModalDiscount,ModalConfirmOrder,ModalAddress,
+    ModalAddAddress,ModalDelete
      },
     
    computed: {
@@ -127,6 +129,7 @@ export default {
            carts: 'carts/carts',
            descriptionCart: 'carts/descriptionCart',
             selected_address: 'user/selected_address',
+            
        
         
             })
@@ -134,10 +137,14 @@ export default {
          data :()=>({
              showModal: false,
              showAddAddress: false,
+             showDeleteAddress: false,
+             showModalConfirmOrder: false,
              pay_type : "online",
              coupon_code : "",
+             editAddress : "",
+             deleteData :{title:"هشدار!",description:"آیا برای حذف این آیتم مطمئن هستید؟",cancelBtn:"بله",confirmBtn:"انصراف" },
             }),
-         async created(){
+       async created(){
             
                await DB.users.count(async (count)=> {
             if(count==0  ){
@@ -148,10 +155,8 @@ export default {
                     let token  = {
                        api_token: item.api_token
                     };
-
                   this.$store.dispatch('user/userAddresses',token)
                   
-
                 });
               
               // this.isLogin = true;
@@ -159,18 +164,26 @@ export default {
            
           
             });
-         },
+         },//
          methods:{
             handleAddDescription(){
                 this.showModal = true;
             },
-            handleAddAddress(){
-                alert()
+            handleAddAddress(address){
+                
                      this.showAddAddress = true;
+                     if(address=="")
+                     this.editAddress = "";
+                     else
+                       this.editAddress = this.selected_address;
+            },
+            handleDeleteAddress(){
+                
+                     this.showDeleteAddress = true;
             },
 
             async sendOrder(){
-                
+                this.showModalConfirmOrder = true;
                   await DB.users.count(async (count)=> {
                   
             if(count==0  ){
@@ -182,26 +195,27 @@ export default {
                        
                    
 
-                  let orders = {};
-               orders =  this.carts.map((cart)=>{
-                        let new_cart ={};
-                        new_cart.store_id = cart.store_id;
-                        new_cart.order_time = null;
-                        new_cart.orders = cart.products.map((product)=>{
-                            let new_product = {};
-                            new_product .product_id = product.id ;
-                            new_product .count = product.count ;
-                            new_product .details = product.details.map((detail)=>{
-                              return {id:detail.id,count:detail.count}
+                  
+                  let orders = "["
+                 this.carts.map((cart)=>{
+                        let orders_store = "[";
+                         cart.products.map((product)=>{
+                           
+                            let details = "[";
+                             product.details.map((detail)=>{
+                              details += JSON.stringify({"id":detail.id,"count":detail.count});
+
                             }) ;
+                            details += "]";
+                             orders_store  += JSON.stringify({"product_id":product.id ,"count":product.count,"details":details});
 
-                            return new_product;
                         });
-                    
-                        return new_cart ;
+                       orders_store += "]";
+                       orders += JSON.stringify({"store_id":cart.store_id ,"order_time":"","orders":orders_store});
+                        return {"store_id": "13","order_time":"","orders":'[]'} ;
                })
-
-                let data  = {
+                    orders +="]";
+                let data2  = {
                        api_token: item.api_token,
                        orders : orders,
                         payment: "20000",
@@ -210,8 +224,100 @@ export default {
                         coupon_code: this.coupon_code,
                         method: this.pay_type,
                     };
-                    console.log("tttt",data);
-                // this.$store.dispatch('orders/payment',data)
+let formData = new FormData();
+formData.append('api_token', item.api_token);
+formData.append("payment","20000");
+formData.append("address_id",  `${this.selected_address.id}`);
+formData.append("comment", this.descriptionCart);
+formData.append("coupon_code",this.coupon_code)
+formData.append("method", this.pay_type);
+formData.append("orders", orders);
+//formData.append("orders", '[{"store_id":13,"order_time":"","orders":"[object Object]"}]');
+
+//formData.append("orders", '[{"store_id":32,"order_time":"null","orders":[{"product_id":1307,"count":2,"details":[]}]}]');
+//formData.append("orders", '[{"store_id":"13","order_time":"","orders":"[]"}]');
+
+              
+                 
+                   
+                     let data  = {
+                       api_token: "tpd7rbxEROKV05wQs7I5wviJ9TBokrhUMmz9rgLoZ7EtewXCKuYkengGXukx0zx38csZrz9YFIkUuLLUsY9f16hdgfV2AAldxrv1",
+                       orders :[
+                        {
+                            store_id:"32",order_time:"null",
+                            orders :[
+                                {product_id:"1307",count:2,details:[]}
+                            ]
+                        }
+                       ],
+                        payment: "20000",
+                        address_id: "4396",
+                        comment: "",
+                        coupon_code:"",
+                        method:"online",
+                    };
+                    let ord = JSON.stringify( {
+                            store_id:"32",order_time:"null",
+                            orders :[
+                                {product_id:"1307",count:2,details:[]}
+                            ]
+                        });
+         //           let  formData = new FormData();
+                  /*  let  formData2 = new FormData();
+                    let  formData3 = new FormData();
+                    formData2.append("product_id","1307");
+                    formData2.append("count","2");
+                    formData2.append("details","[]");
+                    formData3.append("store_id","32");
+                    formData3.append("order_time","");
+                    formData3.append("details","[]");
+
+formData.append('api_token',"tpd7rbxEROKV05wQs7I5wviJ9TBokrhUMmz9rgLoZ7EtewXCKuYkengGXukx0zx38csZrz9YFIkUuLLUsY9f16hdgfV2AAldxrv1");
+formData.append("payment","20000");
+formData.append("address_id", '4396');
+formData.append("comment", "");
+formData.append("coupon_code", "");
+formData.append("method", "online");
+formData.append("orders", '[{"store_id":32,"order_time":"null","orders":[{"product_id":1307,"count":2,"details":[]}]}]');
+                 */
+                  
+                   console.log("tttt",orders);
+                this.$store.dispatch('orders/payment',formData)
+                  
+
+                });
+              
+              // this.isLogin = true;
+            }
+           
+          
+            });
+               
+      
+             },
+
+              async confirmDeleteAddress(){
+                
+                  await DB.users.count(async (count)=> {
+                  
+            if(count==0  ){
+             // this.$router.push('/login')
+             
+            }else{
+               
+                 await   DB.users.each( (item)=> {
+                       
+                
+
+                let data  = {
+                       api_token: item.api_token,
+            
+                        id: `${this.selected_address.id}`,
+                       
+                    };
+                 
+                this.$store.dispatch('user/deleteAddress',data)
+                   this.showDeleteAddress = false;
                   
 
                 });

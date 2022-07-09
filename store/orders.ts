@@ -38,7 +38,7 @@ export const actions: ActionTree<AuthState, any> = {
 
 
   async payment({ commit, dispatch }, data) {
-      
+  
     
     await this.$repositories
       .payments()
@@ -46,12 +46,16 @@ export const actions: ActionTree<AuthState, any> = {
       .then((res:any) => {
      
 
-        console.log("pay====>",res);
+       console.log("pppppp",res)
+        if(res.data.url && res.data.status==0){
+          let url = res.data.url;
+        
+          location.href = url;
+        }
        // commit('productsPage',res.data)
       })
       .catch((error:any) => {
-       
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+        console.log("paye====>",error);
       
       })
   },
@@ -68,7 +72,7 @@ export const actions: ActionTree<AuthState, any> = {
        // commit('productsPage',res.data)
       })
       .catch((error:any) => {
-       
+        
         Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       
       })

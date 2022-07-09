@@ -57,7 +57,7 @@ export default class UserRepository extends Repository {
   }
 
   async addCustomerAddress(data: IAddressAdd): Promise<any> {
-    console.log("tttt3",data)
+   
     const response = await this.axios.post('v1/address/customer/add', data)
     return response
   }

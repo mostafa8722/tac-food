@@ -10,11 +10,11 @@
          <div class="flex flex-col text-right">
           <p class="red mt-4 mr-1 ml-1 text-center bold "> -> در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
            <span class="mt-4 pr-2">سفارش شما -></span>
-            <p class="red  mr-1 ml-1  pr-2 ">  در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
+            <p class="red  mr-1 ml-1  pr-2 ">  {{getTitleCart(carts)}}</p>
 
           <div class="mt-2 mr-2 ml-2 line-break"></div>
           <span class="mt-4  pr-2">به آدرس  -></span>
-            <p class="red mr-1 ml-1  pr-2 ">  در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
+            <p class="red mr-1 ml-1  pr-2 ">  {{selected_address.address?selected_address.address:""}} </p>
 
          </div>
          <div class="flex justify-evenly mb-5 mt-5 ">
@@ -36,9 +36,16 @@
 import Vue from "vue"
 
 
-
+import { mapGetters } from 'vuex'
 export default {
-   
+    computed: {
+      ...mapGetters({
+           selected_address: 'user/selected_address',
+           carts: 'carts/carts',
+        
+            })
+         },
+
    data : ()=>({
    
     description :"",
@@ -47,6 +54,26 @@ export default {
     handleAddDescription(){
       this.$store.dispatch('carts/addDescriptionCart',this.description)
       this.$emit('close-modal');
+    },
+    getTitleCart(carts){
+     let title = "";
+         carts.map((cart)=>{
+                        let new_cart ={};
+                        new_cart.store_id = cart.store_id;
+                        new_cart.order_time = null;
+                        new_cart.orders = cart.products.map((product)=>{
+                            title += "- "+ product.count +"عدد" + product.name 
+                            product.details.map((detail)=>{
+                               title += "- "+ detail.count +"عدد" + detail.name 
+                            }) ;
+
+                          
+                        });
+                    
+                      
+               })
+
+     return title;
     }
 
     },

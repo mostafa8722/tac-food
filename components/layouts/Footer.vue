@@ -7,8 +7,7 @@
      class="bg-white "
   >
 
-   <font-awesome-icon @click.prevent="addHome" class="add-home pointer" :icon="`fa-solid  fa-add`" />
-   
+  
     <v-row
       justify="center"
       no-gutters

@@ -3,7 +3,7 @@
     <div>
 
    <Cart />
-   
+   <CartButton />
      
     </div>
   </div>
@@ -12,12 +12,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import Cart from '~/components/cart/CartComponent.vue'
-
+import CartButton from '~/components/app/AddToCartButton.vue'
 
 export default Vue.extend({
     layout: 'custom',
   components:{
-    Cart
+    Cart,CartButton
 }
 })
 </script>

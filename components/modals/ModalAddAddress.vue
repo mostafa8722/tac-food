@@ -93,8 +93,9 @@ export default {
    components:{
     Map
    },
+   props:["editAddress"],
    data : ()=>({
-   
+     id:"",
     description :"",
     title :"",
     address :"",
@@ -104,11 +105,31 @@ export default {
     lng :`${LOCATION_DEFAULT.lng}`,
 
    }),
+   
+   watch:{
+    editAddress(new_val,old_val){
+  
+    if(new_val!=""){
+         this.id =new_val.id;
+    this.title = new_val.title;
+    this.address = new_val.address;
+    this.phone = new_val.phone;
+    this.postal_code = new_val.postal_code;
+    this.lat = new_val.lat;
+    this.lng = new_val.lng;
+    }else{
+           this.id ="";
+    this.title = "";
+    this.address = "";
+    this.phone = "";
+    this.postal_code ="";
+    this.lat = `${LOCATION_DEFAULT.lat}`;
+    this.lng =`${LOCATION_DEFAULT.lng}`;
+    }
+    }
+   },
     methods:{
-    handleAddDescription(){
-     // this.$store.dispatch('products/addDescriptionCart',this.description)
-      this.$emit('close-modal');
-    },
+   
 
     async handleAddAddress(){
 
@@ -127,10 +148,14 @@ export default {
                        phone : this.phone,
                        lat : this.lat,
                        lng: this.lng,
+                       id: this.id,
                     };
+                    if(this.id=="")
+                   this.$store.dispatch('user/addAddress',data);
+                   else 
+                   this.$store.dispatch('user/updateAddress',data);
 
-                  this.$store.dispatch('user/addAddress',data);
-                  //this.$emit('close-modal');
+                  this.$emit('close-modal');
 
                 });
               

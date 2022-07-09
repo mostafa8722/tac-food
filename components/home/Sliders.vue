@@ -1,5 +1,6 @@
 <template>
    <section >
+   
      <HeaderSection title="پیشنهادات"/>
      <div class="sliders-section">
        <v-carousel
@@ -33,10 +34,11 @@
 
 </template>
 <script>
+import SearchBox from '~/components/app/SearchBox.vue'
 import HeaderSection from '../app/HeaderSection.vue';
 import { mapGetters } from 'vuex'
 export default {
-    components: { HeaderSection },
+    components: { HeaderSection ,SearchBox},
         computed: {
     ...mapGetters({ sliders: 'home/sliders' })
       },

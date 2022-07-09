@@ -36,7 +36,8 @@ export default class PaymentsRepository extends Repository {
     return response
   }
 
-  async addOrder(data: inputOrder): Promise<any> {
+  async addOrder(data: any): Promise<any> {
+    console.log("ttttttttt",data)
     const response = await this.axios.post('v1/orders/insert', data)
     return response
   }

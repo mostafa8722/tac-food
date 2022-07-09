@@ -1,18 +1,24 @@
 <template>
- 
-  <NuxtLink  v-if="totalCart>0" to="/cart">
+ <div>
+
+  
+  <NuxtLink  v-if="totalCart>0" :to="url">
       <div class="cart-container relative flex">
        
           
-  <font-awesome-icon @click.prevent="clearCart"   class="absolute white right-3 top-4 pointer" icon="fa-solid fa-trash" />
+  <font-awesome-icon @click.prevent="clearCart"   class="absolute white right-3 top-4 pr-1 pl-1 pointer" icon="fa-solid fa-trash" />
           <span class="white absolute white right-10 top-3 number-format"> {{formatPrice(totalCart)}} تومان</span>  
-          <span class="white absolute white left-6 top-3">سبد خرید</span>  
+          <span class="white absolute white left-6 top-3"> {{title}}</span>  
            <font-awesome-icon   class="absolute  white left-3 top-4" icon="fa-solid fa-angle-left" />
 
       </div>
   </NuxtLink>
    
-  
+  <ModalDelete v-show="showDelete" @close-modal="showDelete = false" 
+
+  :data="deleteData"
+  @confirm-delete="confirmDeleteCart"   />
+ </div>
 </template>
 
 <script>
@@ -20,7 +26,7 @@ import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faAngleLeft,faTrash } from '@fortawesome/free-solid-svg-icons'
-
+import ModalDelete from '~/components/modals/ModalDelete.vue'
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faAngleLeft,faTrash)
@@ -29,6 +35,11 @@ import { mapGetters } from 'vuex'
 
 
 export default {
+    components:{
+
+    ModalDelete
+   
+},
    computed: {
       ...mapGetters({
            totalCart: 'carts/totalCart',
@@ -36,16 +47,40 @@ export default {
             })
          },
   data :()=>({
-    url : ""
+    url : "/payment",
+    title : "پرداخت",
+    showDelete : false,
+    deleteData :{title:"حذف",description:"آیا برای حذف سبد  مطمئن هستید؟",cancelBtn:"خیر",confirmBtn:"بله" },
+    
+
   }),
   created(){
     this.url = this.$route.path
+    
+  
+     if(this.$router.history.current.name=="products-id"){
+this.url = "/cart" ,
+this.title = "سبد خرید"
+     }else  if(this.$router.history.current.name=="cart"){
+     this.url = "/payment" ;
+      this.title = " پرداخت";
+     }
+     
   },
 methods :{
   clearCart(){
-       this.$store.dispatch('carts/addCart')
+    this.showDelete = true;
+       //this.$store.dispatch('carts/clearCart')
 
    
+  },
+
+  confirmDeleteCart(){
+
+     this.$store.dispatch('carts/clearCart', {});
+      
+  
+ this.showDelete = false;
   },
   formatPrice(price) {
     return  Number(price).toLocaleString();

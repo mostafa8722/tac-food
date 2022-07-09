@@ -41,6 +41,7 @@ export const mutations: MutationTree<AuthState> = {
   
  
   clearCart(state:any, data:any) {
+   
     state.carts = [];
     state.totalCart = 0;
     state.descriptionCart = "";
@@ -211,6 +212,7 @@ export const actions: ActionTree<AuthState, any> = {
    
   },
   async clearCart({ commit, dispatch }) {
+   
     commit('clearCart')
    // Vue.$toast.error("به سبد خرید افزوده شد")
    

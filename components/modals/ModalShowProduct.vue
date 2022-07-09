@@ -6,20 +6,54 @@
            
            
          <div class=" mb-2">
-          <h3 class="header-modal pt-2">تایید سفارش</h3>
+        
          <div class="flex flex-col text-right">
-          <p class="red mt-4 mr-1 ml-1 text-center bold "> -> در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
-           <span class="mt-4 pr-2">سفارش شما -></span>
-            <p class="red  mr-1 ml-1  pr-2 ">  در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
+          <v-card
+    class="flex flex-col   overflow-hidden content-product pointer "
+    width="100%"
+    height="300"
+     color="#ffffff"
+  
+  outlined
+  
+  >
+    <div class="flex flex-col  ">
+      <v-img
+      height="200"
+      width="400"
+      class="flex-none rounded-xl"
+      :src="product.logo"
+    
+    ></v-img>
 
-          <div class="mt-2 mr-2 ml-2 line-break"></div>
-          <span class="mt-4  pr-2">به آدرس  -></span>
-            <p class="red mr-1 ml-1  pr-2 ">  در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
+<div class="flex flex-row-reverse justify-center ">
+      <v-rating
+      v-model="product.rating"
+      background-color="warning lighten-1"
+      color="red"
+      size="14"
+      class="rating-section flex flex-row-reverse ml-2"
+        
+    ></v-rating>
 
+      
+    </div>
+    <div class="flex flex-row justify-between mr-2">
+      <span class=" title unset-flex mr-1">  {{product.name}}</span>
+     <span class=" price unset-flex ml-1 ">  {{formatPrice(product.price)}}</span>
+      
+
+    </div>
+    </div>
+    
+
+
+  </v-card>
          </div>
-         <div class="flex justify-evenly mb-5 mt-5 ">
-                      <button @click.prevent="handleAddDescription" class="btn-save pointer mt-4"> تایید </button>
-                      <button @click.prevent="$emit('close-modal')" class="btn-close pointer mt-4"> خیر </button>
+         <div class="flex justify-between mb-5 mr-2 ml-2 mt-5 ">
+                                <button @click.prevent="$emit('close-modal')" class="btn-close pointer "> بستن </button>
+
+                      <button @click.prevent="addToCart" class="btn-save pointer "> افزودن </button>
 
          </div>
          </div>
@@ -38,16 +72,34 @@ import Vue from "vue"
 
 
 export default {
-   
+  props:{
+     product : {
+    type:Object,
+    default : true,
+   }
+  },
    data : ()=>({
    
     description :"",
    }),
     methods:{
     handleAddDescription(){
-      this.$store.dispatch('carts/addDescriptionCart',this.description)
+    //  this.$store.dispatch('carts/addDescriptionCart',this.description)
       this.$emit('close-modal');
-    }
+    },
+     addToCart(){
+      
+     
+      this.$store.dispatch('carts/addCart', this.product)
+        this.$emit('close-modal');
+    },
+     removeFromCart(){
+    //  console.log(this.product)
+      this.$store.dispatch('carts/removeCart', this.product)
+    },
+      formatPrice(price) {
+         return  Number(price).toLocaleString()+" "+"تومان";
+      },
 
     },
    
@@ -73,8 +125,8 @@ export default {
 .modal {
   text-align: center;
   background-color: white;
-  height:350px;
-  width:400px;
+  height:450px;
+  width:300px;
   margin:20px  30px;
 
   border-radius: 20px;
@@ -166,6 +218,9 @@ button {
   font-size: 0.9rem;
   color:#fd5e63;
 
+}
+.unset-flex{
+  flex:unset
 }
 .line-break{
   background-color: #eeeeee;
