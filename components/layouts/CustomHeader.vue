@@ -47,6 +47,7 @@ library.add(faArrowRight)
   }
   .btn-back{
     font-size:0.7rem;
+    height: 20px;
   }
 
 </style>
