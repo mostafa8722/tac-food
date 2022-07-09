@@ -1,5 +1,5 @@
 <template>
-<div class="flex flex-col items-center ml-3">
+<div class="flex flex-col items-center ml-3 relative">
  <NuxtLink :to="`/products/${product.store_id}`">
  <v-card
     class="flex flex-col items-center overflow-hidden  rounded-xl"

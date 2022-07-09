@@ -57,10 +57,60 @@ export default {
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    publicPath :"http://localhost:3000"
+    publicPath :"tac-food.vercel.app"
   },
   pwa: {
-   
+    manifest: {
+      name: 'My Awesome App',
+      short_name: 'My Awesome App2',
+      start_url : "/?source=pwa",
+      display :"standalone",
+      "scope" : ".",
+      lang: 'fa',
+      useWebmanifestExtension: false,
+      background_color:"#ff2200",
+      theme_color:"#fff300",
+      icons : [
+        {
+            "src" : "/icons/icon48.png",
+            "sizes" : "48x48",
+            "type" : "image/png"
+        },{
+            "src" : "/icons/icon72.png",
+            "sizes" : "72x72",
+            "type" : "image/png"
+        },{
+            "src" : "/icons/icon96.png",
+            "sizes" : "96x96",
+            "type" : "image/png"
+        },{
+            "src" : "/icons/icon144.png",
+            "sizes" : "144x144",
+            "type" : "image/png"
+        },{
+            "src" : "/icons/icon168.png",
+            "sizes" : "168x168",
+            "type" : "image/png"
+        },{
+            "src" : "/icons/icon192.png",
+            "sizes" : "192x192",
+            "type" : "image/png"
+        },{
+            "src" : "/icons/icon256.png",
+            "sizes" : "256x256",
+            "type" : "image/png"
+        },{
+            "src" : "/icons/icon512.png",
+            "sizes" : "512x512",
+            "type" : "image/png"
+        }
+    ]
+    },
+    workbox: {
+      importScripts: [
+          'custom-sw.js'
+      ],
+    }
     
   }
 }
