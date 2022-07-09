@@ -3,7 +3,7 @@
     <div>
 
 
-
+   <SearchBox /> 
      
   
    <Sliders/>
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-
+import SearchBox from '~/components/app/SearchBox.vue'
 import Sliders from '~/components/home/Sliders.vue'
 import Categories from '~/components/home/Categories.vue'
 import Products from '~/components/home/Products.vue'
@@ -37,7 +37,7 @@ export default Vue.extend({
     Sliders,
     Categories,
     Products,
-    
+    SearchBox,
     Map
 },
 

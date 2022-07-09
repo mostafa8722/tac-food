@@ -7,7 +7,8 @@
      class="bg-white "
   >
 
-  
+   <font-awesome-icon @click.prevent="addHome" class="add-home pointer" :icon="`fa-solid  fa-add`" />
+   
     <v-row
       justify="center"
       no-gutters
@@ -161,8 +162,8 @@ import { mapGetters } from 'vuex'
   background-color: green;
   border-radius: 50%;
   color:#ffffff;
- 
+   
   font-size: 1rem;
-  
+  height: 20px;
 }
 </style>

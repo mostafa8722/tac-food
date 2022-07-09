@@ -1,13 +1,11 @@
 <template>
    <section >
-   
+    
      <HeaderSection title="پیشنهادات"/>
      <div class="sliders-section">
        <v-carousel
        hide-delimiters
     cycle
-
-    
     height="400"
     hide-delimiter-background
     :show-arrows="false"
@@ -36,11 +34,10 @@
 
 </template>
 <script>
-import SearchBox from '~/components/app/SearchBox.vue'
 import HeaderSection from '../app/HeaderSection.vue';
 import { mapGetters } from 'vuex'
 export default {
-    components: { HeaderSection ,SearchBox},
+    components: { HeaderSection },
         computed: {
     ...mapGetters({ sliders: 'home/sliders' })
       },

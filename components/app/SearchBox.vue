@@ -3,7 +3,7 @@
      <div class="search-container relative flex">
        
           
-  <font-awesome-icon v-if="this.url!='/search'" color="#9d9d9d" class="absolute left-2 top-2" icon="fa-solid fa-magnifying-glass" />
+  <font-awesome-icon v-if="this.url!='/search'" color="#9d9d9d" class="absolute icon-search left-2 top-2" icon="fa-solid fa-magnifying-glass" />
            <input  @click="handleEvent()" placeholder="جست و جو در تک فود" class="absolute left-0 right-2" />
 
       </div>
@@ -51,5 +51,8 @@ methods :{
 }
 input:focus {
   outline: none /* Removes the border when the input is clicked */
+}
+.icon-search {
+  height:20px;
 }
 </style>
