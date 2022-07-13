@@ -3,8 +3,11 @@
 
   
   <NuxtLink  v-if="totalCart>0" :to="url">
-      <div class="cart-container relative flex">
-       
+      <div @click.prevent.stop="handleUrl($event)" class="cart-container relative flex">
+       <v-progress-circular
+      indeterminate
+      color="#ffffff"
+    ></v-progress-circular>
           
   <font-awesome-icon @click.prevent="clearCart"   class="absolute white right-3 top-4 pr-1 pl-1 pointer" icon="fa-solid fa-trash" />
           <span class="white absolute white right-10 top-3 number-format"> {{formatPrice(totalCart)}} تومان</span>  
@@ -32,7 +35,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 library.add(faAngleLeft,faTrash)
 
 import { mapGetters } from 'vuex'
-
+import { LOCATION_DEFAULT } from "~/data/default"
+import {GetStorage} from "~/utils/helpers"
 
 export default {
     components:{
@@ -43,6 +47,7 @@ export default {
    computed: {
       ...mapGetters({
            totalCart: 'carts/totalCart',
+           carts: 'carts/carts',
         
             })
          },
@@ -85,6 +90,37 @@ methods :{
   formatPrice(price) {
     return  Number(price).toLocaleString();
 },
+async handleUrl(e){
+  e.preventDefault();
+   e.stopPropagation();
+
+
+
+   if(this.url=="/cart")
+   this.$router.push("/cart")
+   else{
+  
+     let lat = GetStorage("lat")?GetStorage("lat"): LOCATION_DEFAULT.lat;
+     let lng = GetStorage("lng")?GetStorage("lng"): LOCATION_DEFAULT.lng;
+     let id = "[";
+
+     this.carts.map((item,index)=>{
+         if(this.carts.length-1 == index)
+         id += item.store_id ;
+         else 
+         id += item.store_id +","
+     })
+     id += "]";
+     let data = {
+      lat : lat +"",
+      lng : lng +"",
+      id : id ,
+     }
+ this.$store.dispatch('orders/updateOrder',data);
+   // this.$router.push("/payment")
+   }
+    
+}
 }
 }
 </script>

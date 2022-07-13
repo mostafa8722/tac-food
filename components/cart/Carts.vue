@@ -12,9 +12,10 @@
  
   >
   <h3 class="text-center">{{cart.store_name}} </h3>
+  <p class="text-center txt-ago" v-if="cart.ago">{{cart.ago}}</p>
   <HeaderCart class="mt-1" title="زمان"   value="فوری" />
-  <HeaderCart class="mt-1" title="ارسال"   value="5000 تومان" />
-  <HeaderCart class="mt-1" title="مالیات"   value="رایگان" />
+  <HeaderCart class="mt-1" title="ارسال"   :value="formatPrice(cart.cost_delivery)" />
+  <HeaderCart class="mt-1" title="مالیات"  :value="tax==0?'رایگان':formatPrice(cart.tax)" />
   <HeaderCart class="mt-1" title="خرید"   :value="formatPrice(totalPrice)" />
   <HeaderCart class="mt-1" title="مجموع"   value="13000 تومان" />
   
@@ -102,5 +103,9 @@ h3{
 }
 .card-content{
  border:1px solid #dddddd;
+}
+.txt-ago{
+  font-size: 0.6rem;
+  color:#ff2200;
 }
 </style>

@@ -61,14 +61,16 @@ export const actions: ActionTree<AuthState, any> = {
   },
   async updateOrder({ commit, dispatch }, data) {
       
-    
+    console.log("pay====>",data);
     await this.$repositories
       .payments()
       .updateStoreOrder(data)
       .then((res:any) => {
      
-
-        console.log("pay====>",res);
+       // dispatch('carts/updateStoreCart',res.data.result,{ root:true })
+        this.dispatch('carts/updateStoreCart',res.data.result,{ root:true })
+        console.log("pay2====>",res.data.result);
+        console.log("pay4====>",this.dispatch);
        // commit('productsPage',res.data)
       })
       .catch((error:any) => {

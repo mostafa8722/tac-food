@@ -2,7 +2,7 @@
 <v-card
     class="flex flex-col mt-2  overflow-hidden content-product pointer "
     width="100%"
-    height="170"
+    height="135"
      color="#ffffff"
   
   outlined
@@ -39,10 +39,10 @@
     </div>
 <div class="divider"></div>
     
-  <div class="flex justify-between items-center mr-2 ml-2">
+  <div class="flex justify-between items-center mr-2 ml-2 mt-2">
   <span class=" price ">  {{formatPrice(product.price)}}</span>
   
-    <div class="flex flex-row-reverse">
+    <div class="flex flex-row-reverse ">
       <font-awesome-icon @click.stop.prevent="addToCart" class="icon-custom pointer" :icon="`fa-solid  fa-add`" />
       <span v-if="cart_product.count" class="mr-3 ml-3">{{cart_product.count}}</span>
         <font-awesome-icon v-if="cart_product.count" @click.stop.prevent="removeFromCart" class="icon-custom pointer" :icon="`fa-solid  fa-minus`" />

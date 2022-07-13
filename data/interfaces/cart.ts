@@ -2,6 +2,11 @@ interface Cart {
     products: ProductCart[],
   store_id:number ,
   store_name:string ,
+  time_delivery:string,
+  cost_delivery:number,
+  tax:number,
+  ago : string,
+  status : number
 }
 export default Cart;
 

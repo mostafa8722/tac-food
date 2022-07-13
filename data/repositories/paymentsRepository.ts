@@ -19,6 +19,11 @@ interface inputOrder {
   method: string,
 
 }
+interface inputCart {
+  lat :string,
+  lng:string,
+  id:string[],
+}
 
 
 export default class PaymentsRepository extends Repository {
@@ -31,13 +36,14 @@ export default class PaymentsRepository extends Repository {
     return response
   }
 
-  async updateStoreOrder(data: inputOrder): Promise<any> {
+  async updateStoreOrder(data: inputCart): Promise<any> {
+
     const response = await this.axios.post('v2/customer/cart/store/update', data)
     return response
   }
 
   async addOrder(data: any): Promise<any> {
-    console.log("ttttttttt",data)
+   
     const response = await this.axios.post('v1/orders/insert', data)
     return response
   }

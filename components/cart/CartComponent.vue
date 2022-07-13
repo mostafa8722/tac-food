@@ -38,7 +38,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faTrash)
 
-
+import { LOCATION_DEFAULT } from "~/data/default"
+import {GetStorage} from "~/utils/helpers"
 export default {
     components: { Empty,Carts,ModalDescription , },
     
@@ -54,7 +55,23 @@ export default {
              showModal: false,
             }),
          created(){
-            console.log("ppp",this.carts)
+           let lat = GetStorage("lat")?GetStorage("lat"): LOCATION_DEFAULT.lat;
+            let lng = GetStorage("lng")?GetStorage("lng"): LOCATION_DEFAULT.lng;
+            let id = "[";
+
+            this.carts.map((item,index)=>{
+                if(this.carts.length-1 == index)
+                id += item.store_id ;
+                else 
+                id += item.store_id +","
+            })
+            id += "]";
+            let data = {
+            lat : lat +"",
+            lng : lng +"",
+            id : id ,
+            }
+        this.$store.dispatch('orders/updateOrder',data);
            
 
          },

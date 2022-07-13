@@ -281,7 +281,7 @@ formData.append("method", "online");
 formData.append("orders", '[{"store_id":32,"order_time":"null","orders":[{"product_id":1307,"count":2,"details":[]}]}]');
                  */
                   
-                   console.log("tttt",orders);
+                 
                 this.$store.dispatch('orders/payment',formData)
                   
 

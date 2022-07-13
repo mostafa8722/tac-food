@@ -58,7 +58,12 @@ export const mutations: MutationTree<AuthState> = {
  if(!isInCart){
 
   data.count = 1;
-  let data_cart:Cart={store_id:0,store_name:"",products:[]} ;
+  let data_cart:Cart={
+    store_id:0,store_name:"",
+    time_delivery:"",
+    cost_delivery:0,
+    tax:0,
+    status:0,ago:"",products:[]} ;
   data_cart.store_id = data.store_id;
   data_cart.store_name= data.store_name;
 
@@ -187,7 +192,23 @@ export const mutations: MutationTree<AuthState> = {
   
 
   addAddressCart(state:any, txt:string){state.addressCart = txt;},
-  addDescriptionCart(state:any, txt:string){state.descriptionCart = txt;}
+  addDescriptionCart(state:any, txt:string){state.descriptionCart = txt;},
+
+  updateStoreCart(state:any, data:any) {
+    //state.totalCart = state.totalCart + data.price;
+    data.map((data_item:any)=>{
+      let index = state.carts.findIndex((item:any) => item.store_id==data_item.id);
+       state.carts[index].status = data_item.status;
+       state.carts[index].ago = data_item.ago;
+       state.carts[index].tax = data_item.tax;
+       state.carts[index].cost_delivery = data_item.cost_delivery;
+       
+    })
+
+
+
+  },
+
 
 }
 
@@ -224,6 +245,11 @@ export const actions: ActionTree<AuthState, any> = {
   },
   async addDescriptionCart({ commit, dispatch }, data) {
     commit('addDescriptionCart',data)
+   // Vue.$toast.error("به سبد خرید افزوده شد")
+   
+  },
+  async updateStoreCart({ commit, dispatch }, data) {
+    commit('updateStoreCart',data)
    // Vue.$toast.error("به سبد خرید افزوده شد")
    
   },
