@@ -26,7 +26,7 @@
       >
        <NuxtLink :to="link.link">
        <span class="flex flex-col">
- <font-awesome-icon :icon="`fa-solid  ${link.icon}`" />
+ <font-awesome-icon class="custom-footer-icon" :icon="`fa-solid  ${link.icon}`" />
 
       <span class="mt-1">{{link.title}}</span>
        </span>
@@ -165,5 +165,8 @@ import { mapGetters } from 'vuex'
    
   font-size: 1rem;
   height: 20px;
+}
+.custom-footer-icon{
+  height:20px;
 }
 </style>

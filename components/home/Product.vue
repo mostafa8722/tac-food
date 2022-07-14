@@ -3,8 +3,8 @@
  <NuxtLink :to="`/products/${product.store_id}`">
  <v-card
     class="flex flex-col items-center overflow-hidden  rounded-xl"
-    width="100"
-    height="170"
+    width="120"
+    height="180"
      color="#ffffff"
      dir="ltr"
   
@@ -12,8 +12,8 @@
   >
     
 <v-img
-      height="90"
-      width="100"
+      height="100"
+      width="120"
       class="flex-none rounded-none"
       :src="product.logo"
     

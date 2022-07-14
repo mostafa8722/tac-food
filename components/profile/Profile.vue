@@ -15,19 +15,19 @@ import UnLogin from './UnLogin';
 import Dashboard from './Dashboard';
 
 
-import  DB  from '~/data/db'
+import Cookies from 'js-cookie'
 
 export default {
     components: { UnLogin,Dashboard },
      data :()=>({
         isLogin: false,
      }),
-     async created(){
+      created(){
   
-        await DB.users.count(async (count)=> {
-            if(count!=0  )
+    
+           if(Cookies.get("user"))
             this.isLogin = true;
-            });
+         
          
      },
   

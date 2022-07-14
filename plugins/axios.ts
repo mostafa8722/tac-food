@@ -1,6 +1,6 @@
 import {AxiosError} from "axios";
 import {NuxtAxiosInstance} from "@nuxtjs/axios";
-import { data } from "autoprefixer";
+
 import Vue from 'vue'
 export default function ({$axios,app}: { $axios: NuxtAxiosInstance,app:any }) {
   $axios.onError((error: AxiosError) => {
@@ -16,21 +16,25 @@ export default function ({$axios,app}: { $axios: NuxtAxiosInstance,app:any }) {
 }
 
 export const defaultErrorMessages = {
-  401: `Not Authenticated: Sorry, you have to be logged in to access this!`,
-  403: `Not Authorized: Sorry, you can't access this!`,
+ // 401: `Not Authenticated: Sorry, you have to be logged in to access this!`,
+  401: `ثبت نام نکرده اید !`,
+  403: `ثبت نام نکرده اید !`,
   404: `Not Found: We couldn't find what you're looking for. Please refresh and try again, or contact the support team.`,
   422: 'Validation Error',
   500: 'Server Error: Please contact the support team.',
 }
 
 
-const handleError= (status:any,app:any)=>{
+const handleError= async (status:any,app:any)=>{
   
   let iterableErrorMessages = Object.entries(defaultErrorMessages);
 
 
 //if(status ==401)
 //return app.router.push("/");
+if(status ==401 || status ==403 )
+app.store.dispatch('home/authenticatedCode', {status : status})
+
 
 iterableErrorMessages.map(item=>{
     if(item[0] == status )

@@ -117,7 +117,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faTrash,faCheck)
 
-import  DB  from '~/data/db'
+import Cookies from 'js-cookie';
 export default {
     components: { 
       ModalDiscount,ModalConfirmOrder,ModalAddress,
@@ -144,27 +144,21 @@ export default {
              editAddress : "",
              deleteData :{title:"هشدار!",description:"آیا برای حذف این آیتم مطمئن هستید؟",cancelBtn:"بله",confirmBtn:"انصراف" },
             }),
-       async created(){
+          created(){
             
-               await DB.users.count(async (count)=> {
-            if(count==0  ){
-             // this.$router.push('/login')
-            }else{
-                 await   DB.users.each( (item)=> {
-                       
-                    let token  = {
-                       api_token: item.api_token
+               if(Cookies.get("user")){
+           let user = JSON.parse (Cookies.get("user"));
+                 let token  = {
+                       api_token: user.api_token
                     };
-                  this.$store.dispatch('user/userAddresses',token)
-                  
-                });
-              
-              // this.isLogin = true;
-            }
+                 
+               this.$store.dispatch('user/userAddresses',token)                  
+                }else{
+                
+                 this.$store.dispatch('home/authenticatedCode',{status:401})
+                }
            
-          
-            });
-         },//
+         },
          methods:{
             handleAddDescription(){
                 this.showModal = true;
@@ -182,21 +176,14 @@ export default {
                      this.showDeleteAddress = true;
             },
 
-            async sendOrder(){
+             sendOrder(){
                 this.showModalConfirmOrder = true;
-                  await DB.users.count(async (count)=> {
-                  
-            if(count==0  ){
-             // this.$router.push('/login')
-             
-            }else{
-               
-                 await   DB.users.each( (item)=> {
-                       
-                   
 
-                  
-                  let orders = "["
+                if(Cookies.get("user")){
+              let user = JSON.parse (Cookies.get("user"));
+              
+
+                 let orders = "["
                  this.carts.map((cart)=>{
                         let orders_store = "[";
                          cart.products.map((product)=>{
@@ -215,84 +202,21 @@ export default {
                         return {"store_id": "13","order_time":"","orders":'[]'} ;
                })
                     orders +="]";
-                let data2  = {
-                       api_token: item.api_token,
-                       orders : orders,
-                        payment: "20000",
-                        address_id: this.selected_address.id,
-                        comment: this.descriptionCart,
-                        coupon_code: this.coupon_code,
-                        method: this.pay_type,
-                    };
+               
 let formData = new FormData();
-formData.append('api_token', item.api_token);
+formData.append('api_token',  user.api_token);
 formData.append("payment","20000");
 formData.append("address_id",  `${this.selected_address.id}`);
 formData.append("comment", this.descriptionCart);
 formData.append("coupon_code",this.coupon_code)
 formData.append("method", this.pay_type);
 formData.append("orders", orders);
-//formData.append("orders", '[{"store_id":13,"order_time":"","orders":"[object Object]"}]');
-
-//formData.append("orders", '[{"store_id":32,"order_time":"null","orders":[{"product_id":1307,"count":2,"details":[]}]}]');
-//formData.append("orders", '[{"store_id":"13","order_time":"","orders":"[]"}]');
-
+this.$store.dispatch('orders/payment',formData)
               
-                 
-                   
-                     let data  = {
-                       api_token: "tpd7rbxEROKV05wQs7I5wviJ9TBokrhUMmz9rgLoZ7EtewXCKuYkengGXukx0zx38csZrz9YFIkUuLLUsY9f16hdgfV2AAldxrv1",
-                       orders :[
-                        {
-                            store_id:"32",order_time:"null",
-                            orders :[
-                                {product_id:"1307",count:2,details:[]}
-                            ]
-                        }
-                       ],
-                        payment: "20000",
-                        address_id: "4396",
-                        comment: "",
-                        coupon_code:"",
-                        method:"online",
-                    };
-                    let ord = JSON.stringify( {
-                            store_id:"32",order_time:"null",
-                            orders :[
-                                {product_id:"1307",count:2,details:[]}
-                            ]
-                        });
-         //           let  formData = new FormData();
-                  /*  let  formData2 = new FormData();
-                    let  formData3 = new FormData();
-                    formData2.append("product_id","1307");
-                    formData2.append("count","2");
-                    formData2.append("details","[]");
-                    formData3.append("store_id","32");
-                    formData3.append("order_time","");
-                    formData3.append("details","[]");
-
-formData.append('api_token',"tpd7rbxEROKV05wQs7I5wviJ9TBokrhUMmz9rgLoZ7EtewXCKuYkengGXukx0zx38csZrz9YFIkUuLLUsY9f16hdgfV2AAldxrv1");
-formData.append("payment","20000");
-formData.append("address_id", '4396');
-formData.append("comment", "");
-formData.append("coupon_code", "");
-formData.append("method", "online");
-formData.append("orders", '[{"store_id":32,"order_time":"null","orders":[{"product_id":1307,"count":2,"details":[]}]}]');
-                 */
-                  
-                 
-                this.$store.dispatch('orders/payment',formData)
-                  
-
-                });
-              
-              // this.isLogin = true;
+            }else
+             this.$router.push('/login')
             }
-           
-          
-            });
-               
+                
       
              },
 
@@ -340,7 +264,7 @@ formData.append("orders", '[{"store_id":32,"order_time":"null","orders":[{"produ
          }
          
   
-}
+
 </script>
 <style scoped>
 .flex-none{

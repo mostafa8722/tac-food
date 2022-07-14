@@ -93,7 +93,8 @@ library.add(faUser,faAngleLeft,faCreditCard,faMessage
 ,faExclamation,faPencil,faArrowRightFromBracket
 )
 
-import  DB  from '~/data/db'
+
+import Cookies from 'js-cookie'
 export default {
     components: {ProfileTitle},
     data :()=>({
@@ -110,24 +111,15 @@ export default {
         ]
     }),
      
-   async created(){
+    created(){
   
-
-            await DB.users.count(async (count)=> {
-
-
+     if(Cookies.get("user")){
+        let user = JSON.parse (Cookies.get("user"));
+               this.name = user.name;
+                     this.mobile = user.phone;
+                   this.code = user.invite_code
+    }
    
-              if(count!=0  ){
-                await   DB.users.each( (item) =>{
-                     this.name = item.name;
-                     this.mobile = item.phone;
-                   this.code = item.invite_code
-                  
-
-                });
-
-            }
-        })
          
       
              
@@ -135,8 +127,8 @@ export default {
     },
     methods:{
         async logOut(){
-           await  DB.users.clear();
-              this.$router.push('/')
+          
+              this.$router.push('/logout')
 
             
         },

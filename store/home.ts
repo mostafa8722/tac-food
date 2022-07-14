@@ -1,5 +1,6 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import Vue from 'vue'
+import  DB  from '~/data/db'
 
 import Home from '~/data/models/home'
 interface resultHome  {
@@ -17,6 +18,7 @@ export const state = () => ({
   status: '',
   isLoggedIn: false,
   isDataSent : false,
+  authenticatedCode : 200,
 })
 export type AuthState = ReturnType<typeof state>
 
@@ -27,6 +29,7 @@ export const getters: GetterTree<AuthState, any> = {
   discunts: (state: any) => state.discunts,
   status: (state: any) => state.status,
   isDataSent: (state: any) => state.isDataSent,
+  authenticatedCode: (state: any) => state.authenticatedCode,
 }
 
 export const mutations: MutationTree<AuthState> = {
@@ -42,18 +45,23 @@ export const mutations: MutationTree<AuthState> = {
   homePage2(state:any, data:any) {
 
 
-    console.log("rrrrrrrrrr",data)
+
     state.isDataSent = data;
  
    
   },
-  setDataSent(state:any,isSent:boolean ) {
+  setDataSent(state:any,isSent:boolean ) {state.isDataSent = isSent;},
+   setAuthenticatedCode(state:any,data:any ) {
+   // await  DB.table("users").clear();
 
-
-    state.isDataSent = isSent;
+   // await DB.table("users").count((item:any) => console.log("ttttttttttt2",item));
+  
  
+   if(data.data.status ==401 || data.data.status==403)
+   data.router.push('/logout')
+
    
-  },
+    state.authenticatedCode = data.data.status;},
 }
 
 export const actions: ActionTree<AuthState, any> = {
@@ -118,13 +126,13 @@ async homePage({ commit, dispatch }, data) {
   
    
  
-    commit('setDataSent',false)
+    commit('setDataSent',true)
     console.log("loading error",data)
     await this.$repositories
       .home()
       .AddPropsal(data)
       .then((res:any) => {
-        commit('setDataSent',true)
+        commit('setDataSent',false)
         Vue.$toast.success("پیشنهاد شما با موفقیت ارسال شد")
        // commit('homePage',res.data)
       })
@@ -141,23 +149,21 @@ async homePage({ commit, dispatch }, data) {
   
    
  
-    commit('setDataSent',false)
+    commit('setDataSent',true)
     console.log("loading error",data)
     await this.$repositories
       .home()
       .AddPropsal(data)
       .then((res:any) => {
-        commit('setDataSent',true)
+        commit('setDataSent',false)
+     
+        console.log("tttt",res.data)
         Vue.$toast.success("اطاعات شما با موفقیت ارسال شد")
        // commit('homePage',res.data)
       })
       .catch((error:any) => {
-        console.log("loading error",error)
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
-        
-       // console.log("loading error",error);
-     
-       // dispatch('toast/showErrorToast', error, { root: true })
+        commit('setDataSent',false)
+
       })
   },
   async addCommnet({ commit, dispatch }, data) {
@@ -182,6 +188,18 @@ async homePage({ commit, dispatch }, data) {
      
        // dispatch('toast/showErrorToast', error, { root: true })
       })
+  },
+
+  async authenticatedCode({ commit, dispatch }, data) {
+  
+
+   let new_data ={
+data:data,
+router : this.$router
+   }
+    commit('setAuthenticatedCode',new_data)
+  
   }
+
     
 }

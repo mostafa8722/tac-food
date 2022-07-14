@@ -1,6 +1,7 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
-import  DB  from '~/data/db'
+
 import Vue from 'vue'
+import Cookies from 'js-cookie'
 
 export const state = () => ({
   token: '',
@@ -36,11 +37,12 @@ export const mutations: MutationTree<AuthState> = {
     state.isLoggedIn = true
     state.token = data.api_token; 
    
-   
-    await  DB.table("users").clear();
-  
-    await  DB.table("users").put(data);
 
+    Cookies.remove('user') ;
+  
+
+    Cookies.set('user',JSON.stringify(data)) ;
+    
 
    
   },
@@ -99,4 +101,8 @@ export const actions: ActionTree<AuthState, any> = {
         Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       })
   },
+   loginUserw({ commit, dispatch },data:any){
+    commit('loggedIn', {api_token:""})
+     }
+  
 }

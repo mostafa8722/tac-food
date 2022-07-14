@@ -25,7 +25,7 @@
 import Comment from '../products/Comment.vue';
 import { mapGetters } from 'vuex'
 
-import  DB  from '~/data/db'
+import Cookies from 'js-cookie';
 export default {
     components: {  Comment},
       props: {
@@ -51,28 +51,26 @@ export default {
          })
         }
     },
-       async created(){
-  
-        await DB.users.count(async (count)=> {
-            if(count==0  ){
-              this.$router.push('/login')
-            }else{
-                 await   DB.users.each( (item)=> {
-                       
-                    let token  = {
-                       api_token: item.api_token
+        created(){
+
+
+          if(Cookies.get("user")){
+            console.log("user_login",)
+        let user = JSON.parse (Cookies.get("user"));
+         
+                 let token  = {
+                       api_token: user.api_token
                     };
                  
                   this.$store.dispatch('products/customerCommentSection',token)
                   
-
-                });
-              
-              // this.isLogin = true;
-            }
-           
-          
-            });
+                }else{
+    
+                 this.$store.dispatch('home/authenticatedCode',{status:401})
+                }
+   
+  
+       
          
      },
 }

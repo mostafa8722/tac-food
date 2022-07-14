@@ -15,9 +15,18 @@
             <v-text-field v-model="payment" :rules="rules"></v-text-field>
 
                 <v-btn @click.prevent="sendPyment" class="btn-add">
-                     <span class="white"> افزایش</span>
-                    <font-awesome-icon class="absolute white left-0" :icon="`fa-solid fa-credit-card`" />
+                     <span  v-if="!isDataSent" class="white"> افزایش</span>
+                    <font-awesome-icon  v-if="!isDataSent" class="absolute white left-0" :icon="`fa-solid fa-credit-card`" />
               
+               <div  v-if="isDataSent" class="container-progress">
+                <span class="white ml-2">لطفا صبر کنید</span>
+                <v-progress-circular
+                 class="progress-circular"
+              
+               indeterminate
+               
+              color="#ffffff"/>
+               </div>
                 </v-btn>
          <p class="mt-3 mb-3">با افزایش کیف پول خود با اطمینان و با سرعت پرداخت کنید</p>
         
@@ -35,11 +44,21 @@ import {faCreditCard } from '@fortawesome/free-solid-svg-icons'
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faCreditCard)
-import  DB  from '~/data/db'
+
+import { mapGetters } from 'vuex'
+import Cookies from 'js-cookie'
 
 export default {
     components: {  },
-    
+      computed: {
+      ...mapGetters({
+           isDataSent: 'home/isDataSent',
+           authenticatedCode: 'home/authenticatedCode',
+       
+       
+        
+            })
+         },
   
     data: () => ({
         payment : 0,
@@ -53,32 +72,35 @@ export default {
       ],
     }),
     methods:{
-          async  sendPyment(){
-           
-             
-
+            sendPyment(){
 
             let data = {
                 payment : this.payment
             }
-              await DB.users.count(async (count)=> {
-            if(count==0  ){
-              this.$router.push('/login')
-            }else{
-                 await   DB.users.each( (item) =>{
-                    data . api_token = item.api_token;
-                
-                   this.$store.dispatch('home/addPyment', data)
-                });
-              
-              // this.isLogin = true;
+            if(Cookies.get("user")){
+              let user = JSON.parse (Cookies.get("user"));
+               data . api_token = user.api_token;
+               data.subject = "پیشنهاد"
+               data.experiance  = "خوب"
+               data.describe  = "خوب"
+             this.$store.dispatch('home/addPyment', data)
+            }else
+             this.$router.push('/login')
             }
-           
-          
-            });
-          
-     
-        }
+    },
+    watch:{
+     async authenticatedCode(new_val,old_val){
+      
+
+        
+
+        console.log("ttttt",new_val)
+        this.$store.dispatch('auth-user/loginUserw')
+          if(new_val==401 || new_val==403){
+        
+          }
+             console.log("ttttt",new_val)
+      }
     }
 
 }
@@ -112,5 +134,14 @@ p{
 .white{
   
     color : #ffffff!important;
+}
+.progress-circular{
+  height: 25px!important;
+  width: 25px!important;
+
+}
+.container-progress{
+display: flex;
+  position:absolute!important;
 }
 </style>

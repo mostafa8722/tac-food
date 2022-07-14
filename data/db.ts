@@ -7,6 +7,6 @@ import { DB_VERSION } from '~/data/default'
      location:'id',
  });
  export default DB;
-
+ 
 
   

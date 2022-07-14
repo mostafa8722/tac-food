@@ -121,7 +121,7 @@ library.add(faUser,faAngleLeft,faCreditCard,faMessage
 ,faExclamation,faPencil,faArrowRightFromBracket
 )
 import HeaderSection from '../app/HeaderSection.vue';
-import  DB  from '~/data/db'
+import Cookies from 'js-cookie';
 import { mapGetters } from 'vuex'
 export default {
     components: {ProfileTitle,HeaderSection},
@@ -136,23 +136,15 @@ export default {
         description:"",
     }),
     
-      async created(){
-  
-        await DB.users.count(async (count)=> {
-            if(count==0  ){
-              this.$router.push('/login')
-            }else{
-                 await   DB.users.each( (item) =>{
-                    let token  = item.api_token;
-                //  this.$store.dispatch('products/customerCommentSection',token)
+   
+    created(){
 
-                });
-              
-              // this.isLogin = true;
-            }
-           
-          
-            });
+          if(!Cookies.get("user"))
+          this.$store.dispatch('home/authenticatedCode',{status:401})
+                
+   
+  
+       
          
      },
      methods:{
