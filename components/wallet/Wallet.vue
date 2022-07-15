@@ -12,7 +12,14 @@
          <p class="mt-2">مبلغ مورد نظر را در فیلد پایین وارد کنید</p>
          <p class="mt-1">حداقل افزایش 5000 تومان</p>
 
-            <v-text-field v-model="payment" :rules="rules"></v-text-field>
+            <v-text-field
+            
+            v-model="payment"
+               class="custom-text-field" 
+                 @keypress="handleOnPress"
+                 :rules="rules"
+                single-line
+               ></v-text-field>
 
                 <v-btn @click.prevent="sendPyment" class="btn-add">
                      <span  v-if="!isDataSent" class="white"> افزایش</span>
@@ -62,6 +69,7 @@ export default {
   
     data: () => ({
         payment : 0,
+       
       rules: [
         value => !!value || 'تومان',
         value => (value || '').length <= 20 || 'تعداد ارقام بیش از حد مجاز می باشد',
@@ -74,32 +82,38 @@ export default {
     methods:{
             sendPyment(){
 
+           let payment = this.payment?this.payment : "0";
             let data = {
-                payment : this.payment
+                payment : payment.replaceAll(",","")
             }
             if(Cookies.get("user")){
               let user = JSON.parse (Cookies.get("user"));
                data . api_token = user.api_token;
-               data.subject = "پیشنهاد"
-               data.experiance  = "خوب"
-               data.describe  = "خوب"
+               
              this.$store.dispatch('home/addPyment', data)
             }else
              this.$router.push('/login')
-            }
+            },
+             formatPrice(price) {
+             return  Number(price).toLocaleString();
+           
+             },
+              handleOnPress(e) {
+             
+                 var validkeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+            if (validkeys.indexOf(e.key) < 0)
+                e.preventDefault();
+                else 
+                return true
+
+               //  this.payment = 2000;
+              }  
     },
     watch:{
-     async authenticatedCode(new_val,old_val){
+   payment(new_val,old_val){
       
-
-        
-
-        console.log("ttttt",new_val)
-        this.$store.dispatch('auth-user/loginUserw')
-          if(new_val==401 || new_val==403){
-        
-          }
-             console.log("ttttt",new_val)
+        this.payment = this.formatPrice(new_val.replaceAll(",",""))
+   
       }
     }
 
@@ -129,6 +143,7 @@ p{
 .btn-add{
     background-color : #fd5e63!important;
     width: 200px;
+    margin-top: 1rem;
    
 }
 .white{
@@ -143,5 +158,10 @@ p{
 .container-progress{
 display: flex;
   position:absolute!important;
+}
+.custom-text-field{
+  direction:ltr;
+  text-align: right;
+    font-family: yekanNumRegular !important;
 }
 </style>

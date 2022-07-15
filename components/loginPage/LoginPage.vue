@@ -45,7 +45,7 @@
 
                 <v-btn @click.prevent="login" class="btn-add pointer mt-2">
                      <span class="white"> ثبت </span>
-                    <font-awesome-icon class="absolute left-2 white mr-5 " :icon="`fa-solid fa-angle-left`" />
+                    <font-awesome-icon class="absolute left-2 white mr-5 h-20" :icon="`fa-solid fa-angle-left`" />
               
                 </v-btn>
         
@@ -138,5 +138,7 @@ p{
 span{
   font-size:0.7rem;   
 }
-
+.h-20{
+  height:20px;
+}
 </style>

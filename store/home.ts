@@ -52,10 +52,7 @@ export const mutations: MutationTree<AuthState> = {
   },
   setDataSent(state:any,isSent:boolean ) {state.isDataSent = isSent;},
    setAuthenticatedCode(state:any,data:any ) {
-   // await  DB.table("users").clear();
 
-   // await DB.table("users").count((item:any) => console.log("ttttttttttt2",item));
-  
  
    if(data.data.status ==401 || data.data.status==403)
    data.router.push('/logout')
@@ -148,17 +145,24 @@ async homePage({ commit, dispatch }, data) {
   async addPyment({ commit, dispatch }, data) {
   
    
+    if(data.payment<5000)
+    return Vue.$toast.error("حداقل مقدار وارد شده نمی تواند کمتر از 5000 هزار تومان باشد ")
+
  
     commit('setDataSent',true)
-    console.log("loading error",data)
+  
+
     await this.$repositories
       .home()
-      .AddPropsal(data)
+      .AddPyment(data)
       .then((res:any) => {
         commit('setDataSent',false)
-     
-        console.log("tttt",res.data)
-        Vue.$toast.success("اطاعات شما با موفقیت ارسال شد")
+        console.log(res.data)
+        console.log(res.data.status)
+        if( res.data.status==0)
+        location.href = res.data.url
+        else
+        Vue.$toast.error(" مشکلی در ارسال اطلاعات وجود دارد لطفا با پشتیبانی تماس بگیرید")
        // commit('homePage',res.data)
       })
       .catch((error:any) => {
