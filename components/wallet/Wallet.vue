@@ -60,9 +60,6 @@ export default {
       computed: {
       ...mapGetters({
            isDataSent: 'home/isDataSent',
-           authenticatedCode: 'home/authenticatedCode',
-       
-       
         
             })
          },
@@ -81,7 +78,9 @@ export default {
     }),
     methods:{
             sendPyment(){
-
+          if(this.isDataSent)
+           return ;
+           
            let payment = this.payment?this.payment : "0";
             let data = {
                 payment : payment.replaceAll(",","")
@@ -106,7 +105,7 @@ export default {
                 else 
                 return true
 
-               //  this.payment = 2000;
+              
               }  
     },
     watch:{

@@ -1,5 +1,5 @@
 <template>
-  <div class="containers pb-10">
+  <div class="home-containers pb-10">
     <div>
 
 
@@ -11,8 +11,8 @@
    <Categories class="mt-3" />
  
 
-  <Products type="discount" title="تخفیفات" class="mt-10" />
-  <Products type="popular" title="محبوب ترین" class="mt-10 mb-10" />
+  <Products  key="1" type="discount" title="تخفیفات" class="mt-10" />
+  <Products key="2" type="popular" title="محبوب ترین" class="mt-10 mb-10" />
      
     </div>
   </div>
@@ -77,19 +77,20 @@ await context.$axios.post('v2/customer/home', context.store.getters['general/loc
 })
 </script>
 
-<style>
+<style scoped>
  @import '~/assets/css/tailwind.css';
   h1, h2, h3, h4, h5, h6, input, textarea, span, .v-application {
   font-family: yekanNumRegular !important;
 }
-.containers {
+.home-containers {
   margin: 0 auto;
   padding:10px 0px  !important;
   min-height: 100vh;
-
- 
-
-  background-color: #f6f6f6;
+  max-width: 600px;
+  position: relative;
+  padding-bottom: 50px!important;
+  border-left:0.1rem solid #eeeeee;
+  border-right:0.1rem solid #eeeeee;
 }
 
 

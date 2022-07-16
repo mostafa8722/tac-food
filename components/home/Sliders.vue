@@ -51,6 +51,7 @@ export default {
     position:relative;
     margin:10px;
     width:95%;
+    height: 350px;
 }
 .custom-image-slider{
     border-radius:10px;
@@ -67,5 +68,10 @@ export default {
          margin : 10px;
          padding : 10px;
        
+}
+@media screen and (max-width:600px){
+.sliders-section{
+  height: 220px;
+}
 }
 </style>

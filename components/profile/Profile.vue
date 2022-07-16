@@ -8,7 +8,7 @@
     </section>
 
 </template>
-<script>
+<script >
 
 
 import UnLogin from './UnLogin';

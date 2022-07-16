@@ -24,7 +24,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped>
  @import '~/assets/css/tailwind.css';
   h1, h2, h3, h4, h5, h6, input, textarea,div, span, .v-application {
   font-family: yekanRegular !important;
@@ -33,6 +33,7 @@ export default Vue.extend({
   margin: 0 auto;
   padding:10px 0px  !important;
   min-height: 100vh;
+  width: 600px;
 
  
   background-color: #f6f6f6;

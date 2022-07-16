@@ -1,9 +1,9 @@
 <template>
   <header class="flex justify-center items-center ">
-    <h4 class="title">{{title}}</h4>
+    <h4 class="title">{{getUrl()}}</h4>
   
     
-         <font-awesome-icon v-if="back" class=" btn-back absolute right-3" :icon="`fa-solid fa-arrow-right`" />
+         <font-awesome-icon v-if="back" @click.prevent="handleBackBtn"  class="pointer btn-back absolute right-3 top-2" :icon="`fa-solid fa-arrow-right`" />
               
   </header>
       
@@ -14,7 +14,7 @@ import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import {GetStorage} from "~/utils/helpers"
+
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -22,7 +22,7 @@ library.add(faArrowRight)
   export default {
     props :["back"],
    data : ()=>({
-     title:"ورود و ثبت نام",
+    
    
    }),
    mounted(){
@@ -39,6 +39,30 @@ library.add(faArrowRight)
      this.title = "پروفایل"
 
 
+   },
+   methods:{
+       getUrl(){
+        let url = this.$route.path;
+       
+       
+        if(url=="/" )
+        return true
+        else if(url=="/myOrders" )
+        return "سفارشات";
+        else if(url=="/wallet")
+        return "کیف پول";
+        else if(url=="/profile" )
+        return "پروفایل";
+          else if(url=="/login" )
+        return "ورود و ثبت نام";  
+         else if(url=="/login/verifyCode" )
+        return " کد تایید  "; 
+          return "";
+           
+      },
+      handleBackBtn(){
+          this.$router.back();
+      }
    }
   }
 </script>

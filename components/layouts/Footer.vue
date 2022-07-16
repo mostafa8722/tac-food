@@ -7,6 +7,7 @@
      class="bg-white "
   >
 
+
    <font-awesome-icon @click.prevent="addHome" class="add-home pointer" :icon="`fa-solid  fa-add`" />
    
     <v-row
@@ -26,9 +27,14 @@
       >
        <NuxtLink :to="link.link">
        <span class="flex flex-col">
- <font-awesome-icon class="custom-footer-icon" :icon="`fa-solid  ${link.icon}`" />
+ <font-awesome-icon 
+ class="custom-footer-icon" 
+   :class="`${getUrl(index)? 'active':''}`"
+ :icon="`fa-solid  ${link.icon}`" />
 
-      <span class="mt-1">{{link.title}}</span>
+      <span
+        :class="`${getUrl(index)? 'active':''}`"
+      class="mt-1">{{link.title}}</span>
        </span>
        </NuxtLink>
     
@@ -168,5 +174,8 @@ import { mapGetters } from 'vuex'
 }
 .custom-footer-icon{
   height:20px;
+}
+.footer{
+  height:55px!important;
 }
 </style>

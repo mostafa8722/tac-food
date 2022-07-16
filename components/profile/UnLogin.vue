@@ -4,12 +4,12 @@
 
          
          <img  class="icon-users" src="/icons/users.svg" />
-         <p class="mt-2">شما ثبت نام نکردید</p>
+         <p class="mt-3">شما ثبت نام نکردید</p>
 
-                <v-btn class="btn-add mt-2">
+                <v-btn class="btn-add mt-5">
                       <NuxtLink to="/login">
                      <span class="white"> ثبت نام</span>
-                    <font-awesome-icon class=" white mr-5 " :icon="`fa-solid fa-user`" />
+                    <font-awesome-icon class=" white mr-5 h-15" :icon="`fa-solid fa-user`" />
                      </NuxtLink>
                 </v-btn>
         
@@ -55,6 +55,7 @@ p{
 }
 .btn-add{
     background-color : #fd5e63!important;
+  
 }
 .white{
   
@@ -63,7 +64,12 @@ p{
 }
 .icon-users{
    
-    height:25px;
+    height:30px;
+    font-size:1rem;
     color :#cccccc;
+    filter: invert(89%) sepia(0%) saturate(83%) hue-rotate(136deg) brightness(95%) contrast(87%);
+}
+.h-15{
+    height:15px;
 }
 </style>

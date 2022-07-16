@@ -11,7 +11,7 @@
 
             <div class="flex justify-center mt-3">
              
-                <font-awesome-icon class=" ml-2  icon-item green" :icon="`fa-solid fa-solid fa-circle-check`" />
+                <font-awesome-icon class=" ml-2 h-20  icon-item green" :icon="`fa-solid fa-solid fa-circle-check`" />
                 <span>{{mobile}}</span>
 
             </div>
@@ -31,9 +31,17 @@
             <p class="mt-1 text-center">زمان باقی مانده  </p>
             <div class="flex justify-center mb-5 mt-5">
                <div @click.prevent="confirm" class="btn-location text-center pointer relative mt-3">
-                  <span class="white" style="font-size: 0.8rem;"> تایید </span>
-                   <font-awesome-icon class=" mr-5  icon-item white" :icon="`fa-solid fa-clipboard-check`" />
-               
+                  <span class="white" v-if="!isDataSent && countDown>0" style="font-size: 0.8rem;"> تایید </span>
+                  <span class="white" v-if="!isDataSent && countDown==0" style="font-size: 0.8rem;"> تلاش دوباره  </span>
+                   <font-awesome-icon v-if="!isDataSent && countDown>0" class=" mr-5 h-20 icon-item white" :icon="`fa-solid fa-clipboard-check`" />
+                   <font-awesome-icon v-else-if="!isDataSent && countDown==0" class=" mr-5 h-20 icon-item white" :icon="`fa-solid fa-rotate-right`" />
+                <div  v-if="isDataSent" class="container-progress">
+                <span class="white ml-2">لطفا صبر کنید</span>
+                <v-progress-circular
+                 class="progress-circular"
+                     indeterminate
+                    color="#ffffff"/>
+               </div>
                 </div>
 
            </div>
@@ -52,12 +60,12 @@
 import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faClipboardCheck,faCircleCheck
+import {faClipboardCheck,faCircleCheck,faRotateRight
 } from '@fortawesome/free-solid-svg-icons'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-library.add(faClipboardCheck,faCircleCheck)
+library.add(faClipboardCheck,faCircleCheck,faRotateRight)
 import { mapGetters } from 'vuex'
 
 export default {
@@ -66,7 +74,11 @@ export default {
              ...mapGetters({ 
                  isRegisterIn: 'auth-user/isRegisterIn'
                  ,mobile: 'auth-user/mobile'
-                 ,inviteCode: 'auth-user/inviteCode'
+                 ,name: 'auth-user/name'
+                 ,inviteCode: 'auth-user/inviteCode',
+                 refresh_code: 'auth-user/refresh_code',
+                 isDataSent: 'home/isDataSent',
+
                  })
          },
     data :()=>({
@@ -78,14 +90,30 @@ export default {
      methods: {
   
     confirm() {
-       let data = {
-        invite_code:this.inviteCode,
+
+        if(this.isDataSent)
+        return ;
+
+
+       if(this.countDown>0){
+         let data = {
+              invite_code:this.inviteCode,
+              phone:this.mobile,
+              code:this.otp
+        }
+         this.$store.dispatch('auth-user/loginUser', data)
+       }else{
+     let user = {
+        name:this.name,
         phone:this.mobile,
-        code:this.otp
+        invite_code:this.invite_code,
+        send_again: true,
         }
        
          
-        this.$store.dispatch('auth-user/loginUser', data)
+        this.$store.dispatch('auth-user/registerUser', user)
+       }
+      
     },
       countDownTimer() {
         
@@ -113,8 +141,18 @@ export default {
       else
          this.$router.push('/login')
       
+  },
+  watch:{
+   refresh_code(new_val,old_val){
+      
+      if(new_val){
+        this.countDown = 180
+         this.countDownTimer()
+      }
+    }
   }
     
+   
   
 }
 </script>
@@ -159,4 +197,29 @@ p{
     color:#53bd5b;
 }
 .ltr{direction: ltr;}
+.container-progress{
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+  position:absolute!important;
+}
+.custom-text-field{
+  direction:ltr;
+  text-align: right;
+    font-family: yekanNumRegular !important;
+}
+.container-progress{
+display: flex;
+align-items: center;
+  position:absolute!important;
+}
+.progress-circular{
+  height: 25px!important;
+  width: 25px!important;
+
+}
+.h-20{
+    height: 20px;
+}
 </style>

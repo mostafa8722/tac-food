@@ -34,27 +34,5 @@ export default {
 }
 </script>
 <style>
-.sliders-section{
-    width:100%;
-    overflow:hidden;
-    position:relative;
-    margin:10px;
-    width:95%;
-}
-.custom-image-slider{
-    border-radius:10px;
- 
-    overflow:hidden;
-  
-    
-    object-fit:cover;
-    background-size : cover;
-}
-.costom-image-cover3{
-        border-radius:10px;
-        background-color:#ffffff;
-         margin : 10px;
-         padding : 10px;
-       
-}
+
 </style>

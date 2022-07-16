@@ -4,10 +4,22 @@
      
      <div class="mt-3 flex flex-row mr-3">
            
-     <div  v-for="(item, index) in (type=='popular'?populars:discunts)">
-  
-        <Product :key="item.id"   :product="item" />
-      </div>
+           <v-slide-group
+      v-model="model"
+      class="pa-4"
+      mandatory
+      show-arrows
+    >
+      <v-slide-item
+        
+         v-for="(item, index) in (type=='popular'?populars:discunts)"
+      :key="item.id"
+        v-slot="{ active, toggle }"
+      >
+      <Product :key="item.id"   :product="item" />
+      </v-slide-item>
+    </v-slide-group>
+     
      </div>
     </section>
 

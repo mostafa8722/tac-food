@@ -1,9 +1,11 @@
 html,body{
 margin :0px;
+background-color: #f6f6f6;
 }
 .pointer{
     cursor: pointer;
 }
+
 .ltr{direction:ltr;}
 .v-label{
     right: 0px !important;;
@@ -11,7 +13,7 @@ margin :0px;
 }
  .v-label--active ,div .v-label.v-label--active.theme--light {
     transform: translateY(-4px) scale(0.75);
-    right: -37px!important;
+    right: 0px!important;
     top: -11px !important;;
     left: auto!important;
     position: absolute;
@@ -23,3 +25,19 @@ margin :0px;
     height: 10px;
     background: #f6f6f6;
   }
+  .login-page-component .v-label{
+    right: 25px !important;;
+    left: auto!important;
+}
+.login-page-component input{
+  padding:0px 15px!important;
+}
+.login-page-component .v-text-field__slot{
+  position: static!important;
+}
+.input-phone input{text-align: left;direction: ltr;}
+.v-slide-group{
+  direction: ltr;
+
+}
+.v-slide-group__content{flex-direction: row-reverse;}

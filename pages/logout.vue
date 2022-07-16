@@ -19,7 +19,7 @@ export default Vue.extend({
 },
 created (){
   Cookies.remove("user");
-  this.$router.push("/login")
+  this.$router.push("/")
 }
 })
 </script>

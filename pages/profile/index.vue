@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" >
 import Vue from 'vue'
 import Profile from '~/components/profile/Profile.vue'
 
@@ -21,7 +21,7 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style  scoped>
  @import '~/assets/css/tailwind.css';
   h1, h2, h3, h4, h5, h6, input, textarea,div, span, .v-application {
   font-family: yekanNumRegular !important;

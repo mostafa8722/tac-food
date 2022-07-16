@@ -157,8 +157,7 @@ async homePage({ commit, dispatch }, data) {
       .AddPyment(data)
       .then((res:any) => {
         commit('setDataSent',false)
-        console.log(res.data)
-        console.log(res.data.status)
+        
         if( res.data.status==0)
         location.href = res.data.url
         else
@@ -203,7 +202,11 @@ router : this.$router
    }
     commit('setAuthenticatedCode',new_data)
   
-  }
+  },
+  async addDataSent({ commit, dispatch }, data) {
+       commit('setDataSent',data)
+   
+   }
 
     
 }

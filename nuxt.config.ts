@@ -62,8 +62,8 @@ export default {
   },
   pwa: {
     manifest: {
-      name: 'My Awesome App',
-      short_name: 'My Awesome App2',
+      name: 'تک فود',
+      short_name: 'سفارش آنلاین غذا در شرستان ساوه',
       start_url : "/?source=pwa",
       display :"standalone",
       "scope" : ".",
