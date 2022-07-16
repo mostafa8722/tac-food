@@ -123,7 +123,7 @@ return ;
         setTimeout(()=>{
           
         this. show_map =  new_val
-        },10)
+        },100)
       }
     }
 
