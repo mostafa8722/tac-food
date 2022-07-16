@@ -5,7 +5,7 @@
       <div class="modal" @click.stop>
            
            <div class="flex relative" style="height:40px;">
-                              <font-awesome-icon class="  mt-2 mr-3 font-7" :icon="`fa-solid fa-arrow-right`" />
+                              <font-awesome-icon  @click="$emit('close-modal')" class="pointer z-10  mt-2 mr-3 font-7" :icon="`fa-solid fa-arrow-right`" />
 
             <h5 class="absolute text-center w-100 top-2">انتخاب موقعیت </h5>
            </div>
@@ -47,7 +47,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 library.add(faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRight
 )
-
+import { LOCATION_DEFAULT } from "~/data/default"
 export default {
     components:{Map},
     methods:{
@@ -94,13 +94,17 @@ return ;
   display: flex;
   justify-content: center;
   background-color: #000000da;
+  z-index: 1000;
+
 }
 .w-100{width:100%;font-size: 0.75rem;}
 .modal {
   text-align: center;
   background-color: white;
-  height:calc(100% - 40px);
+  /*height:calc(100% - 40px);*/
+  height: 400px;
   width:calc(100% - 60px);
+  max-width: 600px;
   margin:20px  30px;
 
   border-radius: 20px;

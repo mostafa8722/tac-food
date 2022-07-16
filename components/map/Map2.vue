@@ -3,9 +3,9 @@
      
 <div id="map-wrap">
  <client-only>
-  <l-map  @click="handleClickMap" style="height: 200px;width:100%" :zoom="zoom" :center="center">
+  <l-map style="height: 200px;width:100%" :zoom="zoom" :center="center">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-    <l-marker  :lat-lng="markerLatLng"></l-marker>
+    <l-marker :lat-lng="markerLatLng"></l-marker>
   </l-map>
 </client-only>
 </div>
@@ -30,13 +30,6 @@ export default {
       center: [LOCATION_DEFAULT.lat, LOCATION_DEFAULT.lng],
       markerLatLng: [LOCATION_DEFAULT.lat, LOCATION_DEFAULT.lng]
     };
-  },
-  methods:{
-    handleClickMap(e){
-         console.log(e)
-         this.markerLatLng  = [e.latlng.lat,e.latlng.lng];
-    }
-
   }
    
 }
