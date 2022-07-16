@@ -11,6 +11,7 @@ background-color: #f6f6f6;
     right: 0px !important;;
     left: auto!important;
 }
+.height-20{height: 20px;}
  .v-label--active ,div .v-label.v-label--active.theme--light {
     transform: translateY(-4px) scale(0.75);
     right: 0px!important;

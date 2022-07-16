@@ -5,21 +5,21 @@
       <div class="modal" @click.stop>
            
            <div class="flex relative" style="height:40px;">
-                              <font-awesome-icon  @click="$emit('close-modal')" class="pointer z-10  mt-2 mr-3 font-7" :icon="`fa-solid fa-arrow-right`" />
+                              <font-awesome-icon  @click="$emit('close-modal')" class="pointer z-10  h-4 mt-2 mr-3 font-7" :icon="`fa-solid fa-arrow-right`" />
 
             <h5 class="absolute text-center w-100 top-2">انتخاب موقعیت </h5>
            </div>
             <span class="desc-text block mb-2 mr-3">
                موقعیت مکانی خود را برروی نقشه مشخص کنید
            </span>
-        <div style="position:relative;height: 200px"><Map /></div>
+        <div style="position:relative;height: 200px"><Map @handle-map="handleMapEvent" :markerLatLng="markerLatLng" :center="center" v-if="show_map" /></div>
          <div class="flex justify-center mb-5 mt-5 pointer">
              <div @click.prevent="getCurrentLocation" class="btn-gps ml-5  relative">
              
                <font-awesome-icon class="  white" :icon="`fa-solid fa-location-crosshairs`" />
 
            </div>
-             <div class="btn-location pointer relative">
+             <div @click.prevent="selecLocation" class="btn-location pointer relative">
                <span class="white" style="font-size: 0.8rem;">انتخاب محل</span>
                <font-awesome-icon class=" mr-5  icon-item red" :icon="`fa-solid fa-location-dot`" />
 
@@ -48,9 +48,45 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 library.add(faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRight
 )
 import { LOCATION_DEFAULT } from "~/data/default"
+import {GetStorage,SetStorage} from "~/utils/helpers"
 export default {
     components:{Map},
+    props : ["showModal"],
+    data :()=>({
+      latlng :[GetStorage("latlng")?GetStorage("latlng").split(',')[0]:
+        LOCATION_DEFAULT.lat, 
+        GetStorage("latlng")?GetStorage("latlng").split(',')[1]:
+        LOCATION_DEFAULT.lng],
+      show_map :false,
+   
+      center: [GetStorage("latlng")?GetStorage("latlng").split(',')[0]:
+        LOCATION_DEFAULT.lat, 
+        GetStorage("latlng")?GetStorage("latlng").split(',')[1]:
+        LOCATION_DEFAULT.lng],
+      markerLatLng: [
+        GetStorage("latlng")?GetStorage("latlng").split(',')[0]:
+        LOCATION_DEFAULT.lat, 
+        GetStorage("latlng")?GetStorage("latlng").split(',')[1]:
+        LOCATION_DEFAULT.lng
+        ]
+    }),
     methods:{
+
+      handleMapEvent(e){
+          this.latlng  = [e.latlng.lat,e.latlng.lng];
+         
+          this.markerLatLng =  [e.latlng.lat,e.latlng.lng];
+          this.center =  [e.latlng.lat,e.latlng.lng];
+         
+      },
+
+         selecLocation(){
+      
+          SetStorage("latlng",this.latlng);
+          this.markerLatLng =  this.latlng;
+          this.center =  this.latlng;
+           this.$emit('close-modal')
+      },
       getCurrentLocation(){
         
         if(! navigator.geolocation){
@@ -60,9 +96,11 @@ return ;
 
         navigator.geolocation.getCurrentPosition(this.geoSuccess,this.geoError,{})
       },
-      geoSuccess(pos){
-        console.log(pos.coords.longitude);
-        console.log(pos.coords.latitude);
+      geoSuccess(e){
+         this.latlng  = [e.coords.latitude,e.coords.longitude];
+         this.markerLatLng =  [e.coords.latitude,e.coords.longitude];
+          this.center =  [e.coords.latitude,e.coords.longitude];
+       
       },
       geoError(err){
      console.log(err.message);
@@ -79,6 +117,14 @@ return ;
      }
       }
 
+    },
+    watch:{
+      showModal(new_val,old_val){
+        setTimeout(()=>{
+          
+        this. show_map =  new_val
+        },10)
+      }
     }
 
 }
