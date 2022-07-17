@@ -85,7 +85,12 @@ export default {
           SetStorage("latlng",this.latlng);
           this.markerLatLng =  this.latlng;
           this.center =  this.latlng;
-           this.$emit('close-modal')
+          let data = {
+            lat:this.latlng[0],
+            lng:this.latlng[1],};
+            
+           this.$emit('set-location',data)
+
       },
       getCurrentLocation(){
         

@@ -20,6 +20,12 @@ interface Pyment{
   payment:string,  
 
 }
+interface AddressMap{
+  lat :string,
+  lng:string,  
+
+}
+
 
 export default class HomeRepository extends Repository {
 
@@ -40,6 +46,12 @@ export default class HomeRepository extends Repository {
   async AddPyment(data: Pyment): Promise<any> {
 
     const response = await this.axios.post('v1/customer/balance/increment', data)
+   
+    return response
+  }
+  async setMapAddress(data: AddressMap): Promise<any> {
+
+    const response = await this.axios.post('v2/customer/road', data)
    
     return response
   }

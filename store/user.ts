@@ -37,7 +37,7 @@ getAddresses(state:any,data:any) {
 
   changeSelectedAddress(state:any,data:any) {
 
-     console.log("ttt",data)
+   
     state.selected_address = data;
   },
 }
@@ -100,6 +100,7 @@ export const actions: ActionTree<AuthState, any> = {
   },
 
   async deleteAddress({ commit, dispatch }, data) {
+ 
     let token  = {
       api_token: data.api_token
    };
@@ -108,7 +109,7 @@ export const actions: ActionTree<AuthState, any> = {
       .deleteCustomerAddress(data)
       .then((res:any) => {
      
-
+      
        if(!res.data.status){
        Vue.$toast.success("حذف آدرس با موفقیت انجام شد")
     

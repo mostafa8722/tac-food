@@ -15,7 +15,7 @@
          
          </div>
          <div class="grid grid-cols-4 footer-address ">
-          <div class="line-h-40">   <font-awesome-icon class="pointer"  :icon="`fa-solid fa-check`" /></div>
+          <div class="line-h-40">   <font-awesome-icon class="pointer"  @click.prevent="$emit('close-modal')"   :icon="`fa-solid fa-check`" /></div>
           <div class="line-h-40">   <font-awesome-icon  class="pointer"  @click.prevent="$emit('add-address','edit')"  :icon="`fa-solid fa-pen-to-square`" /></div>
           <div class="line-h-40">   <font-awesome-icon  class="pointer"   @click.prevent="$emit('delete-address')" :icon="`fa-solid fa-trash`" /></div>
           <div  class="line-h-40">   <font-awesome-icon class="pointer"  @click.prevent="$emit('add-address','')" :icon="`fa-solid fa-circle-plus`" /></div>
@@ -69,8 +69,11 @@ export default {
     },
      
     handleClickAddress(address){
-        console.log("ttt",address)
+       
       this.$store.dispatch('user/changeSelectedAddress',address)
+      this.$store.dispatch('general/addLocalLocationAddress',
+      {address_title:address.title,address_postal:address.address}
+      )
     }
 
     },
@@ -92,6 +95,7 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #000000da;
+  z-index: 100;
 }
 .w-100{width:100%;font-size: 0.75rem;}
 .modal {
@@ -102,6 +106,7 @@ export default {
   margin:20px  30px;
 
   border-radius: 20px;
+  z-index: 100;
 }
 .close {
   margin: 20px 0 0 16px;
@@ -145,7 +150,7 @@ export default {
   line-height: 40px;
 }
 .address-container{
-  height: 410px;
+
 
   overflow-y: auto;
 }

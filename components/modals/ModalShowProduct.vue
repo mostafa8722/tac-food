@@ -120,6 +120,7 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #000000da;
+  z-index: 101;
 }
 .w-100{width:100%;font-size: 0.75rem;}
 .modal {

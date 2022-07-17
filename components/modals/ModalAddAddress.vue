@@ -9,7 +9,9 @@
            <font-awesome-icon class=" btn-back absolute right-3 top-3" :icon="`fa-solid fa-arrow-right`" />
            <div class="line-h-40  btn-back absolute left-3 top-2">   <font-awesome-icon class="  " :icon="`fa-solid fa-check`" /></div>
         </div>
-           <div class="mt-2 mr-2 ml-2" style="position:relative;height: 130px"><Map /></div>
+           <div class="mt-2 mr-2 ml-2" style="position:relative;height: 130px">
+           
+           <Map  :center="latlng"  :markerLatLng="latlng" v-if="show_map" /></div>
            
          <div class="mt-5 mr-2 ml-2 mb-2">
              <v-text-field
@@ -88,12 +90,12 @@ library.add(faArrowRightFromBracket,faLocationDot,faLocationCrosshairs,faArrowRi
 
 import Map from "./Map"
 import {LOCATION_DEFAULT} from "~/data/default"
-import  DB  from '~/data/db'
+import  Cookies  from 'js-cookie'
 export default {
    components:{
     Map
    },
-   props:["editAddress"],
+   props:["editAddress","latlng","showModal"],
    data : ()=>({
      id:"",
     description :"",
@@ -101,6 +103,7 @@ export default {
     address :"",
     phone :"",
     postal_code :"",
+    show_map : false,
     lat :`${LOCATION_DEFAULT.lat}`,
     lng :`${LOCATION_DEFAULT.lng}`,
 
@@ -126,22 +129,25 @@ export default {
     this.lat = `${LOCATION_DEFAULT.lat}`;
     this.lng =`${LOCATION_DEFAULT.lng}`;
     }
-    }
+    },
+
+     showModal(new_val,old_val){
+        setTimeout(()=>{
+          
+        this. show_map =  new_val
+        },100)
+      }
    },
     methods:{
    
 
-    async handleAddAddress(){
+     handleAddAddress(){
 
-      
-               await DB.users.count(async (count)=> {
-            if(count==0  ){
-             // this.$router.push('/login')
-            }else{
-                 await   DB.users.each( (item)=> {
-                       
-                    let data  = {
-                       api_token: item.api_token,
+ if(Cookies.get("user")){
+      this.isLogin  = true;
+        let user = JSON.parse (Cookies.get("user"));
+                let data  = {
+                       api_token: user.api_token,
                        title:this.title,
                        address:this.address,
                        postal_code : this.postal_code,
@@ -155,15 +161,11 @@ export default {
                    else 
                    this.$store.dispatch('user/updateAddress',data);
 
-                  this.$emit('close-modal');
-
-                });
-              
-              // this.isLogin = true;
-            }
-           
-          
-            });
+                  this.$emit('close-modal');   
+      }else
+      this.isLogin = false
+      
+            
 
   
       
@@ -188,6 +190,7 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #000000da;
+  z-index: 101;
 }
 .w-100{width:100%;font-size: 0.75rem;}
 .modal {

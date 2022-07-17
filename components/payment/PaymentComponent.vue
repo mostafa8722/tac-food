@@ -91,7 +91,8 @@
         <ModalConfirmOrder v-show="showModalConfirmOrder" @close-modal="showModalConfirmOrder = false"   />
         <ModalAddress v-show="showModal" @close-modal="showModal = false" @add-address="handleAddAddress" @delete-address="handleDeleteAddress"  />
         <ModalAddAddress v-show="showAddAddress" @close-modal="showAddAddress = false"  :editAddress="editAddress" />
-        <ModalDelete :data="deleteData" v-show="showDeleteAddress" @close-modal="showDeleteAddress = false" @confirm-delete-address="confirmDeleteAddress"   />
+       
+       <ModalDelete :data="deleteData" v-show="showDeleteAddress" @close-modal="showDeleteAddress = false" @confirm-delete-address="confirmDeleteAddress"   />
 
        
     </section>
@@ -107,6 +108,7 @@ import ModalDelete from '~/components/modals/ModalDelete.vue'
 
 import ModalAddress from '~/components/modals/ModalAddress.vue'
 import ModalAddAddress from '~/components/modals/ModalAddAddress.vue'
+
 import { mapGetters } from 'vuex'
 import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

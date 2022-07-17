@@ -167,7 +167,7 @@ p{
     color :#cccccc;
 }
 .input-field{
-  width:401px;
+  width:400px;
   margin-top:1.2rem;
 }
 .privcy-link{
