@@ -1,9 +1,13 @@
 <template>
-<div class="flex flex-col items-center  ml-3">
+<div @click="$emit('select-tab',category.id)" class="flex flex-col items-center  pointer ml-3">
 
 
-   <div class="category-icon" :style="`background-color:${category.color}`"></div>
-   <span class="mt-2 title">  {{category.title}}</span>
+   <div class="category-icon" :style="`background-color:${category.color}`">
+   <img :src="category.icon"  class="custom-icon"/>
+   
+   </div>
+   <span class="mt-2 title " :class="`${category.id==tab_selectd?'red':''}`">  {{category.title}}</span>
+  
 </div>
 
 
@@ -11,7 +15,7 @@
 <script>
 
 export default {
-  props : ["category"],
+  props : ["category","tab_selectd"],
   data :()=>({
    
   }),
@@ -22,8 +26,19 @@ export default {
   height:40px;
   width:40px;
   border-radius:50%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.custom-icon{
+  height:20px;
+  width:20px;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(310deg) brightness(102%) contrast(102%);
 }
 .title{
   font-size:0.7rem;
+}
+.red{
+  color: red !important;;
 }
 </style>

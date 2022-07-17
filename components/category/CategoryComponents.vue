@@ -1,9 +1,11 @@
 <template>
    <div>
        <SearchBox />  
-       <Categories/>
+       <Categories v-show="id==1"/>
          
         <Products   />
+
+        
        
   </div>
 
@@ -12,23 +14,25 @@
 import SearchBox from '~/components/app/SearchBox.vue'
 import Categories from './Categories.vue';
 import Products from './Products.vue';
+
 export default {
    components: { Categories,SearchBox,Products},
     
   
+
     data : ()  =>({
           tab: null,
-               text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-               categories : [
-                   {id:1,title:"پیتزا"},
-                   {id:1,title:"ساندویچ "},
-                   {id:1,title:"برگر "},
-                   {id:1,title:"سوخاری"},
-                   {id:1,title:"کتلت "},
-                   {id:1,title:"مرغ"},
-               ]
+          id : 0,
+              
 
-    })
+    }),
+    created(){
+       
+     
+        this.id = this.$route.params.id ;
+
+
+    }
 }
 </script>
 <style scoped>

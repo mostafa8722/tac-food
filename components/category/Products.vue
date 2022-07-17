@@ -5,8 +5,9 @@
      <div class="flex flex-col ml-3 mr-3">
      <div  v-for="(item, index) in shops">
   
-        <Product   :product="item" />
+        <Product :key="item.id"  :product="item" />
       </div>
+      <Empty v-if="shops.length==0" />
      </div>
     </section>
 
@@ -15,8 +16,9 @@
 import HeaderSection from '../app/HeaderSection.vue';
 import Product from './Product.vue';
 import { mapGetters } from 'vuex'
+import Empty from './Empty'
 export default {
-    components: { HeaderSection ,Product},
+    components: { HeaderSection ,Product,Empty},
         computed: {
              ...mapGetters({ shops: 'categories/shops' })
          },
@@ -28,13 +30,7 @@ export default {
       },
   
     data : ()  =>({
-        products : [
-            {title:"2گوجه فرنگی ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"موز ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"هلو ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"انبه ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-    
-        ]
+        
     })
 }
 </script>
