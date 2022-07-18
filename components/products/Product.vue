@@ -9,14 +9,25 @@
    @click.prevent="$emit('select-product',product)"
   >
     <div class="flex flex-row  ">
-      <v-img
+     <v-img
+       
       height="60"
       width="60"
       class="flex-none rounded-xl"
       :src="product.logo"
     
+    >
+     <template v-slot:placeholder>
+         <v-img
+        src="/icons/logo_.svg"
+      height="60"
+      width="60"
+      class="flex-none "
+    
+    
     ></v-img>
-
+        </template>
+    </v-img>
     <div class="flex flex-col mr-2">
       <span class=" title">  {{product.name}}</span>
       <span class=" body">  {{product.description}}</span>

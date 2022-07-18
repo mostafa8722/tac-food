@@ -1,14 +1,18 @@
 <template>
-   <section >
+   <section  >
     
      <HeaderSection title="پیشنهادات"/>
+ 
      <div class="sliders-section">
+     
        <v-carousel
+      
        hide-delimiters
     cycle
     height="400"
     hide-delimiter-background
     :show-arrows="false"
+     
   >
   
     <v-carousel-item
@@ -28,18 +32,24 @@
 
     </v-carousel-item>
   </v-carousel>
+  <SliderLoaders v-if="isLoading" />
   </div>
-
+  
     </section>
 
 </template>
 <script>
 import HeaderSection from '../app/HeaderSection.vue';
+import SliderLoaders from './SliderLoaders.vue';
 import { mapGetters } from 'vuex'
+
 export default {
-    components: { HeaderSection },
+    components: { HeaderSection, SliderLoaders },
         computed: {
-    ...mapGetters({ sliders: 'home/sliders' })
+    ...mapGetters({
+       sliders: 'home/sliders',
+       isLoading: 'home/isLoading',
+        })
       },
    
 }

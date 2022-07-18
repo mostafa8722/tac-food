@@ -1,32 +1,31 @@
 <template>
-    <v-sheet
-    
-    class="px-3 pt-3 pb-12"
+   <div
+    class="flex flex-col mt-2 ml-2 overflow-hidden   category-home-skeleton"
+
+ 
   >
     <v-responsive
-      :max-width="type.indexOf('table') > -1 ? 900 : 500"
-      class="mx-auto"
+     
     >
-      <v-responsive
-        class="mx-auto mb-12"
-        max-width="500"
-      >
-       
-      </v-responsive>
+   
 
       <v-skeleton-loader
         ref="skeleton"
         :boilerplate="boilerplate"
         :type="type"
         :tile="tile"
+        
         class="mx-auto"
-      ></v-skeleton-loader>
+      >
+       
+      </v-skeleton-loader>
     </v-responsive>
-  </v-sheet>
+ 
+</div>
+
 
 </template>
 <script>
-
 
   export default {
     // Vuetify components provide
@@ -37,8 +36,10 @@
     data: () => ({
       boilerplate: false,
       tile: true,
-      type: 'list-item-avatar-three-line,text',
+      type: 'image,text',
       types: [],
+      loading: true,
+      transition: 'scale-transition',
     }),
 
     mounted () {
@@ -46,9 +47,25 @@
     },
   }
 </script>
-<style scoped>
-.v-skeleton-loader--tile .v-skeleton-loader__bone{
-    margin-left: 5px!important;
+<style >
+.flex-none{
+    flex:none;
 }
 
+.category-home-skeleto{
+  border-radius:0.3rem!important;
+
+  width:80px!important;
+  height:80px!important;
+}
+
+
+
+
+
+
+    
+
+    
+  
 </style>

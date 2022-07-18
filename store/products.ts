@@ -47,17 +47,17 @@ export const actions: ActionTree<AuthState, any> = {
 
   async productsPage({ commit, dispatch }, data) {
       
-    
+    this.dispatch("home/handleLoading",true)
     await this.$repositories
       .products()
       .productsPage(data)
       .then((res:any) => {
-     
+        this.dispatch("home/handleLoading",false)
         commit('productsPage',res.data)
       })
       .catch((error:any) => {
-       
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+        this.dispatch("home/handleLoading",false)
+       // Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       
       })
   },

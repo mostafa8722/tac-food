@@ -44,9 +44,9 @@
     </div>
     </div>
   
-<div class="divider mt-3"></div>
+<div class="divider mt-5"></div>
     
-  <div class="flex justify-between items-center mr-2 ml-2">
+  <div class="flex justify-between items-center mt-2 mr-2 ml-2">
   <span v-if="product.delivery_cost==0" class=" price "> رایگان</span>
   <span v-else class=" price "> تومان {{product.delivery_cost}}</span>
  

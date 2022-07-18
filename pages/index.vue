@@ -48,6 +48,7 @@ async asyncData(context){
  
 
   await context.store.dispatch('general/getLocation')
+   context.store.dispatch('home/handleLoading',true)
 
   // context.store.dispatch('toast/showErrorToast')
 await context.$axios.post('v2/customer/home', context.store.getters['general/location'])
@@ -56,13 +57,16 @@ await context.$axios.post('v2/customer/home', context.store.getters['general/loc
  
    // context.store.dispatch('toast/showErrorToast') 
      context.store.dispatch('home/homePage3',res.data)
+     setTimeout(()=>{
+       context.store.dispatch('home/handleLoading',false)
+     },100)
      
  
    
   })
   .catch((error:any) => {
-   
-     context.store.dispatch('toast/showErrorToast',error)
+    context.store.dispatch('home/handleLoading',false)
+     //context.store.dispatch('toast/showErrorToast',error)
      
    // dispatch('toast/showErrorToast', error, { root: true })
   })
@@ -70,6 +74,11 @@ await context.$axios.post('v2/customer/home', context.store.getters['general/loc
  
 
 },
+created(){
+   setTimeout(()=>{
+       this.$store.dispatch('home/handleLoading',false)
+     },1000)
+}
 
 
 
