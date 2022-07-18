@@ -42,3 +42,22 @@ background-color: #f6f6f6;
 
 }
 .v-slide-group__content{flex-direction: row-reverse;}
+.category-skeleton .v-skeleton-loader--tile .v-skeleton-loader__bone{
+  margin-left: 5px!important;
+}
+.category-skeleton .v-skeleton-loader__list-item-avatar-three-line{
+  border-bottom: 0.05rem solid #eeeeee;
+  height: 80px;
+  margin-bottom: 20px;
+}
+.category-skeleton .v-skeleton-loader__button{
+  height: 30px!important;
+  width: calc(100% - 20px);
+  margin-right: 10px;
+  margin-left: 10px;
+
+}
+.category-skeleton .v-skeleton-loader__avatar{
+  width: 60px!important;height:60px!important;
+  border-radius: 5px!important;
+}

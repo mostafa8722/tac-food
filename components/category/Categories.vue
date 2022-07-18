@@ -1,5 +1,5 @@
 <template>
-   <div class="container-category flex items-center ">
+   <div class="container-category flex items-center justify-evenly ">
    
       <Category  v-for="category in categories"  @select-tab="handleSelectTab" :tab_selectd="tab_selectd" :key="category.id" :category="category" />
   </div>
@@ -12,17 +12,17 @@ import Category from './Category.vue';
 export default {
   
     props : ["data"],
-     components: {  },
+     components: {Category  },
     
     data : ()  =>({
           tab: null,
            tab_selectd : 1,
           title : "پیتزا",
           categories : [
-            {id:1,title:"همه " ,icon:"/icons/persian_food.svg",color:"#fa6062"},
+            {id:1,title:"همه " ,icon:"/icons/all.svg",color:"#fa6062"},
             {id:2,title:"فست فود" ,icon:"/icons/pizza.svg",color:"#61b15a"},
             {id:3,title:"ایرانی" ,icon:"/icons/persian_food.svg",color:"#653cb5"},
-            {id:4,title:"بین المللی" ,icon:"/icons/persian_food.svg",color:"#029686"}
+            {id:4,title:"بین المللی" ,icon:"/icons/foreign_food.svg",color:"#029686"}
           
         ]
 

@@ -1,8 +1,10 @@
 <template>
+<NuxtLink v-if="product.id" :to="`/products/${product.id}`">
 <v-card
     class="flex flex-col mt-2  overflow-hidden  content-product"
  
     height="140"
+
      color="#ffffff"
   
   outlined
@@ -10,12 +12,24 @@
   >
     <div class="flex flex-row mr-1 mt-1">
       <v-img
+       
       height="60"
       width="60"
       class="flex-none rounded-xl"
       :src="product.logo"
     
+    >
+     <template v-slot:placeholder>
+         <v-img
+        src="/icons/logo_.svg"
+      height="60"
+      width="60"
+      class="flex-none "
+    
+    
     ></v-img>
+        </template>
+    </v-img>
 
     <div class="flex flex-col mr-2">
      <div>
@@ -36,8 +50,8 @@
   <span v-if="product.delivery_cost==0" class=" price "> رایگان</span>
   <span v-else class=" price "> تومان {{product.delivery_cost}}</span>
  
-   <div class="flex ">
-      <div class=" type ">  {{product.vote}} رای</div>
+   <div class="grid grid-cols-2 ">
+      <div class=" type flex  ">  {{product.vote}} رای</div>
      
       <v-rating
       v-model="product.rating"
@@ -53,6 +67,8 @@
 
   </div>
   </v-card>
+</NuxtLink>
+
 
 
 </template>
@@ -82,13 +98,12 @@ export default {
 .price{
   color:#717171;
     font-size:0.5rem;
-    flex:84%;
 }
 .address{
   color:#717171;
     font-size:0.5rem;
 }
-.flex-89{flex:89%}
+
 .body{
   color:#8d8d8d;
     font-size:0.6rem;

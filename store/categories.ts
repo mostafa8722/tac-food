@@ -30,16 +30,16 @@ export const actions: ActionTree<AuthState, any> = {
 
   async categoriesPage({ commit, dispatch }, data) {
       
-    
+      this.dispatch("home/handleLoading",true)
     await this.$repositories
       .categories()
       .categoriesPage(data)
       .then((res:any) => {
-       
+        this.dispatch("home/handleLoading",false)
         commit('categoriesPage',res.data)
       })
       .catch((error:any) => {
-      
+        this.dispatch("home/handleLoading",false)
        // dispatch('toast/showErrorToast', error, { root: true })
       })
   },

@@ -18,6 +18,7 @@ export const state = () => ({
   status: '',
   isLoggedIn: false,
   isDataSent : false,
+  isLoading : false,
   authenticatedCode : 200,
 })
 export type AuthState = ReturnType<typeof state>
@@ -29,6 +30,7 @@ export const getters: GetterTree<AuthState, any> = {
   discunts: (state: any) => state.discunts,
   status: (state: any) => state.status,
   isDataSent: (state: any) => state.isDataSent,
+  isLoading: (state: any) => state.isLoading,
   authenticatedCode: (state: any) => state.authenticatedCode,
 }
 
@@ -51,6 +53,7 @@ export const mutations: MutationTree<AuthState> = {
    
   },
   setDataSent(state:any,isSent:boolean ) {state.isDataSent = isSent;},
+  setLoading(state:any,isSent:boolean ) {state.isLoading = isSent;},
    setAuthenticatedCode(state:any,data:any ) {
 
  
@@ -206,7 +209,11 @@ router : this.$router
   async addDataSent({ commit, dispatch }, data) {
        commit('setDataSent',data)
    
-   }
+   },
+   async handleLoading({ commit, dispatch }, data) {
+    commit('setLoading',data)
+
+}
 
     
 }
