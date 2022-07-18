@@ -70,7 +70,7 @@ export default {
       lang: 'fa',
       useWebmanifestExtension: false,
       background_color:"#ff2200",
-      theme_color:"#fff300",
+      theme_color:"#fc685a",
       icons : [
         {
             "src" : "/icons/icon48.png",
