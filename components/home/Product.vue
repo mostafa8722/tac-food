@@ -17,7 +17,18 @@
       class="flex-none rounded-none"
       :src="product.logo"
     
+    >
+   <template v-slot:placeholder>
+         <v-img
+        src="/icons/logo_.svg"
+       height="100"
+      width="140"
+      class="flex-none rounded-none"
+    
+    
     ></v-img>
+        </template> 
+    </v-img>
 
 <div v-if="product.discount!=0" class="shape-octagon"><span>{{product.discount}}%</span></div>
     <v-rating

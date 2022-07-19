@@ -10,8 +10,8 @@
             outlined
                 persistent-hint
                 class="input-field"
-            label="شماره تلفن"
-              hint="شماره همراه خود را وارد کنید"
+            label="کد تخفیف"
+              hint="کد تخفیف خود را وارد کنید"
            
              v-model="mobile"
           ></v-text-field>
@@ -54,7 +54,7 @@ export default {
    }),
     methods:{
     handleAddDescription(){
-      this.$store.dispatch('products/addDescriptionCart',this.description)
+      //.$store.dispatch('products/addDescriptionCart',this.description)
       this.$emit('close-modal');
     }
 

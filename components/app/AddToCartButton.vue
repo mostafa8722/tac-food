@@ -3,16 +3,17 @@
 
   
   <NuxtLink  v-if="totalCart>0" :to="url">
-      <div @click.prevent.stop="handleUrl($event)" class="cart-container relative flex">
+      <div @click.prevent.stop="handleUrl($event)" class="cart-container relative flex" :class="`${isDataSent?'justify-center items-center':''}`">
        <v-progress-circular
+       v-show="url=='/payment' && isDataSent"
       indeterminate
       color="#ffffff"
     ></v-progress-circular>
           
-  <font-awesome-icon @click.prevent="clearCart"   class="absolute white right-3 top-4 pr-1 pl-1 pointer" icon="fa-solid fa-trash" />
-          <span class="white absolute white right-10 top-3 number-format"> {{formatPrice(totalCart)}} تومان</span>  
-          <span class="white absolute white left-6 top-3"> {{title}}</span>  
-           <font-awesome-icon   class="absolute  white left-3 top-4" icon="fa-solid fa-angle-left" />
+  <font-awesome-icon v-show="!isDataSent" @click.prevent="clearCart"   class="absolute white right-3 top-4 pr-1 pl-1 pointer" icon="fa-solid fa-trash" />
+          <span v-show="!isDataSent" class="white absolute white right-10 top-3 number-format"> {{formatPrice(totalCart)}} تومان</span>  
+          <span v-show="!isDataSent" class="white absolute white left-6 top-3"> {{title}}</span>  
+           <font-awesome-icon    class="absolute  white left-3 top-4" icon="fa-solid fa-angle-left" />
 
       </div>
   </NuxtLink>
@@ -48,6 +49,7 @@ export default {
       ...mapGetters({
            totalCart: 'carts/totalCart',
            carts: 'carts/carts',
+             isDataSent: 'home/isDataSent',
         
             })
          },
@@ -60,8 +62,8 @@ export default {
 
   }),
   created(){
-    this.url = this.$route.path
-    
+   // this.url = this.$route.path
+    this.$store.dispatch("home/addDataSent",false);
   
      if(this.$router.history.current.name=="products-id"){
 this.url = "/cart" ,
@@ -94,14 +96,14 @@ async handleUrl(e){
   e.preventDefault();
    e.stopPropagation();
 
-
+  
 
    if(this.url=="/cart")
    this.$router.push("/cart")
    else{
   
-     let lat = GetStorage("lat")?GetStorage("lat"): LOCATION_DEFAULT.lat;
-     let lng = GetStorage("lng")?GetStorage("lng"): LOCATION_DEFAULT.lng;
+     let lat = GetStorage("latlng")?GetStorage("latlng").split(',')[0]: LOCATION_DEFAULT.lat;
+     let lng = GetStorage("latlng")?GetStorage("latlng").split(',')[1]: LOCATION_DEFAULT.lng;
      let id = "[";
 
      this.carts.map((item,index)=>{
@@ -115,6 +117,7 @@ async handleUrl(e){
       lat : lat +"",
       lng : lng +"",
       id : id ,
+       show_payemnt :true
      }
  this.$store.dispatch('orders/updateOrder',data);
    // this.$router.push("/payment")

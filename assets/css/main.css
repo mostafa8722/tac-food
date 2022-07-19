@@ -125,8 +125,15 @@ background-color: #f6f6f6;
     width: 60px!important;
     
     
-  }
+  } 
   
+  .v-tabs-slider{
+    background-color:#fe5c67!important;;
+}
+.product-tab .v-slide-group__next , .product-tab .v-slide-group__prev {
+background-color: #eeeeee;
+}
+.product-tab .v-tabs-bar__content{background-color: #ffffff;}
 
   @media screen and (max-width:600px){
     .slider-skeleton .v-skeleton-loader__image {

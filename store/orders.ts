@@ -61,21 +61,22 @@ export const actions: ActionTree<AuthState, any> = {
   },
   async updateOrder({ commit, dispatch }, data) {
       
-    console.log("pay====>",data);
+    this.dispatch("home/addDataSent",true);
     await this.$repositories
       .payments()
       .updateStoreOrder(data)
       .then((res:any) => {
-     
-       // dispatch('carts/updateStoreCart',res.data.result,{ root:true })
-        this.dispatch('carts/updateStoreCart',res.data.result,{ root:true })
-        console.log("pay2====>",res.data.result);
-        console.log("pay4====>",this.dispatch);
-       // commit('productsPage',res.data)
+       
+       
+        this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
+        
+        if(data.show_payemnt)
+        this.$router.push("/payment")
+      
       })
       .catch((error:any) => {
-        
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+        this.dispatch("home/addDataSent",false);
+     
       
       })
   },

@@ -70,6 +70,7 @@ export default {
             lat : lat +"",
             lng : lng +"",
             id : id ,
+            show_payemnt :false
             }
         this.$store.dispatch('orders/updateOrder',data);
            
@@ -81,7 +82,8 @@ export default {
                 this.showModal = true;
             },
             clearDescription(){
-                 this.$store.dispatch('products/addDescriptionCart',"")
+                
+                 this.$store.dispatch('carts/addDescriptionCart',"")
       
              }
          }

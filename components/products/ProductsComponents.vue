@@ -8,16 +8,32 @@
       icons-and-text
        slider-color="yellow"
     >
-      <v-tabs-slider></v-tabs-slider>
+  
 
       <v-tab href="#tab-1">
      
-        <v-icon>mdi-phone</v-icon>
+          <v-img
+        src="/icons/fruit.svg"
+       height="20"
+      width="20"
+      class="flex-none rounded-none"
+      
+    
+    
+    ></v-img>
       </v-tab>
 
       <v-tab href="#tab-2">
      
-        <v-icon>mdi-heart</v-icon>
+          <v-img
+        src="/icons/comment.svg"
+       height="20"
+      width="20"
+      class="flex-none rounded-none"
+      
+    
+    
+    ></v-img>
       </v-tab>
 
       <v-tab href="#tab-3">
@@ -34,7 +50,7 @@
         class="tab-item"
       >
         
-         <Products v-if="i==1" :data="categories"/>
+         <Products v-if="i==1"/>
          <Comments v-else-if="i==2" />
          <Info v-else-if="i==3" />
          
@@ -81,7 +97,13 @@ color:#242424!important;
 .v-tab--active .v-icon{
 color:#fe5c67!important;;
 }
+.v-tab--active .v-image{
+filter: invert(49%) sepia(54%) saturate(5146%) hue-rotate(329deg) brightness(118%) contrast(99%);
+}
 .tab-item{
-   background-color: #f6f6f6
+   background-color: #f6f6f6!important;
+}
+.active-tab{
+  color:#fe5c67!important;;
 }
 </style>

@@ -18,7 +18,7 @@
 
          </div>
          <div class="flex justify-evenly mb-5 mt-5 ">
-                      <button @click.prevent="handleAddDescription" class="btn-save pointer mt-4"> تایید </button>
+                      <button @click.prevent="$emit('handle-order')" class="btn-save pointer mt-4"> تایید </button>
                       <button @click.prevent="$emit('close-modal')" class="btn-close pointer mt-4"> خیر </button>
 
          </div>

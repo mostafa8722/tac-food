@@ -35,7 +35,7 @@
 
     </div>
     </div>
-    <div class="flex flex-row-reverse ">
+    <div class="flex flex-row-reverse mt-2 mb-2 items-center ">
       <v-rating
       v-model="product.rating"
       background-color="warning lighten-1"
@@ -45,7 +45,7 @@
         
     ></v-rating>
 
-      <span class=" type flex-100 text-left mt-3 ml-1">  {{product.vote}} رای</span>
+      <span class=" type flex-100 text-left  ml-1">  {{product.vote}} رای</span>
 
     </div>
 <div class="divider"></div>

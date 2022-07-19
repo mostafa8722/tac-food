@@ -18,6 +18,7 @@ interface result  {
 export const state = () => ({
   products:[] ,
   comments:[] ,
+  catgoriesStore:[] ,
 
   
 })
@@ -26,6 +27,7 @@ export type AuthState = ReturnType<typeof state>
 export const getters: GetterTree<AuthState, any> = {
   products: (state: any) => state.products,
   comments: (state: any) => state.comments,
+  catgoriesStore: (state: any) => state.catgoriesStore,
  
 
 }
@@ -33,7 +35,17 @@ export const getters: GetterTree<AuthState, any> = {
 export const mutations: MutationTree<AuthState> = {
  
   
-  productsPage(state:any, data:result) {state.products = data.result},
+  productsPage(state:any, data:result) {
+    state.products = data.result
+
+    let cats:any = [];
+      data.result .map((item:any,index:number)=>{
+       let isIndex= cats.find((cat:any,index:number) => cat.name == item.category) 
+       if(!isIndex)
+      cats.push({id:index+1 , name :item.category   })
+    })
+    state.catgoriesStore = cats ;
+  },
   commentsPage(state:any, data:result) {state.comments = data.result},
  
   
@@ -52,6 +64,8 @@ export const actions: ActionTree<AuthState, any> = {
       .products()
       .productsPage(data)
       .then((res:any) => {
+
+        console.log("tttt",res.data)
         this.dispatch("home/handleLoading",false)
         commit('productsPage',res.data)
       })

@@ -1,25 +1,22 @@
 <template>
   <div dir="rtl">
-       <h1>page error</h1>
-       <h1>{{ error }}</h1>
+    <Header/>
+    <Nuxt />
+   
   </div>
 </template>
 
 
+
 <script>
-import Header from '~/components/layouts/CustomHeader'
-import Footer from '~/components/layouts/Footer'
+import Header from '~/components/layouts/Header'
+
 
 export default {
-    props: ['error'],
-
   components:{
     Header,
-    Footer,
    
-},
-created(){
-  console.log("ttttt",this.error)
+   
 }
 }
 </script>

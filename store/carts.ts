@@ -139,6 +139,18 @@ export const mutations: MutationTree<AuthState> = {
     }else {
          state.carts[index].products.splice(index2,1);
     }
+
+
+
+   
+    if(state.carts[index].products.length==0){
+      console.log("ttt",state.carts[index].products.length)
+      state.carts.splice(index,1);
+    }
+ 
+    else
+    console.log("ttt2",state.carts[index].products.length)
+    
     
    
   },
@@ -250,7 +262,7 @@ export const actions: ActionTree<AuthState, any> = {
   },
   async updateStoreCart({ commit, dispatch }, data) {
     commit('updateStoreCart',data)
-   // Vue.$toast.error("به سبد خرید افزوده شد")
-   
+  
+    this.dispatch("home/addDataSent",false);
   },
 }

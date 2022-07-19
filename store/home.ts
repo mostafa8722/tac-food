@@ -1,6 +1,6 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex'
 import Vue from 'vue'
-import  DB  from '~/data/db'
+import Cookies  from 'js-cookie'
 
 import Home from '~/data/models/home'
 interface resultHome  {
@@ -57,9 +57,10 @@ export const mutations: MutationTree<AuthState> = {
    setAuthenticatedCode(state:any,data:any ) {
 
  
-   if(data.data.status ==401 || data.data.status==403)
-   data.router.push('/logout')
-
+   if((data.data.status ==401 || data.data.status==403) && !Cookies.get("user"))
+   data.router.push('/login')
+else if((data.data.status ==401 || data.data.status==403) && Cookies.get("user"))
+data.router.push('/logout')
    
     state.authenticatedCode = data.data.status;},
 }

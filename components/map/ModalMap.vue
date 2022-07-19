@@ -21,7 +21,7 @@
            </div>
              <div @click.prevent="selecLocation" class="btn-location pointer relative">
                <span class="white" style="font-size: 0.8rem;">انتخاب محل</span>
-               <font-awesome-icon class=" mr-5  icon-item red" :icon="`fa-solid fa-location-dot`" />
+               <font-awesome-icon class=" mr-5  icon-item white" :icon="`fa-solid fa-location-dot`" />
 
            </div>
          </div>

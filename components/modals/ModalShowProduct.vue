@@ -24,7 +24,18 @@
       class="flex-none rounded-xl"
       :src="product.logo"
     
+    >
+     <template v-slot:placeholder>
+         <v-img
+        src="/icons/logo_.svg"
+       height="200"
+      width="400"
+      class="flex-none rounded-xl"
+    
+    
     ></v-img>
+        </template> 
+    </v-img>
 
 <div class="flex flex-row-reverse justify-center ">
       <v-rating

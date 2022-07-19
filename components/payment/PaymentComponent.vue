@@ -4,12 +4,12 @@
      <p class="text-p mr-5">سفارش به آدرس زیر ارسال می شود </p>
      <div class="flex mr-5 mt-1 ">
     
-        <font-awesome-icon   class="red " icon="fa-solid fa-check mt-3 " />
-            <p class="red mr-2">خیابان شهید </p>
+        <font-awesome-icon   class="red height-20" icon="fa-solid fa-check mt-3 " />
+            <p class="red mr-2">{{selected_address.address}} </p>
      </div>
       
        <div class="flex justify-center mt-5">
-         <button  @click.prevent="handleAddDescription" class="add-discount   pointer mt-2">
+         <button  @click.prevent="showModal = true" class="add-discount   pointer mt-2">
             <font-awesome-icon   class="text-p2  " icon="fa-solid fa-check mt-3 " />
             <span class="text-p2 mr-2"> وارد کردن کد تخفیف </span>
          </button>
@@ -18,7 +18,7 @@
 
        <div class="flex justify-center mt-5">
             <span class="text-p2">مبلغ پرداخت:</span>
-            <span class="text-p2 mr-2 ml-2">{{formatPrice(150000)}}</span>
+            <span class="text-p2 mr-2 ml-2">{{formatPrice(totalCart)}}</span>
             
        </div>
 
@@ -81,17 +81,16 @@
        </div>
 
         <div class="flex justify-center mb-5 mt-5">
-               <div @click.prevent ="sendOrder"  class="btn-send pointer text-center relative mt-3">
+               <div @click.prevent ="showModalConfirmOrder=true"  class="btn-send pointer text-center relative mt-3">
                   <span class="white" style="font-size: 0.8rem;"> پرداخت </span>
                    <font-awesome-icon class=" mr-5  icon-item white" :icon="`fa-solid fa-location-dot`" />
                 </div>
 
            </div>
        
-        <ModalConfirmOrder v-show="showModalConfirmOrder" @close-modal="showModalConfirmOrder = false"   />
-        <ModalAddress v-show="showModal" @close-modal="showModal = false" @add-address="handleAddAddress" @delete-address="handleDeleteAddress"  />
-        <ModalAddAddress v-show="showAddAddress" @close-modal="showAddAddress = false"  :editAddress="editAddress" />
-       
+        <ModalConfirmOrder v-show="showModalConfirmOrder" @close-modal="showModalConfirmOrder = false"  @handle-order="sendOrder"  />
+        <ModalDiscount v-show="showModal" @close-modal="showModal = false"   />
+        
        <ModalDelete :data="deleteData" v-show="showDeleteAddress" @close-modal="showDeleteAddress = false" @confirm-delete-address="confirmDeleteAddress"   />
 
        
@@ -106,8 +105,6 @@ import ModalDiscount from '~/components/modals/ModalDiscount.vue'
 import ModalConfirmOrder from '~/components/modals/ModalConfirmOrder.vue'
 import ModalDelete from '~/components/modals/ModalDelete.vue'
 
-import ModalAddress from '~/components/modals/ModalAddress.vue'
-import ModalAddAddress from '~/components/modals/ModalAddAddress.vue'
 
 import { mapGetters } from 'vuex'
 import Vue from "vue"
@@ -122,15 +119,17 @@ library.add(faTrash,faCheck)
 import Cookies from 'js-cookie';
 export default {
     components: { 
-      ModalDiscount,ModalConfirmOrder,ModalAddress,
-    ModalAddAddress,ModalDelete
+      ModalDiscount,ModalConfirmOrder,
+    ModalDelete
      },
     
    computed: {
       ...mapGetters({
            carts: 'carts/carts',
            descriptionCart: 'carts/descriptionCart',
-            selected_address: 'user/selected_address',
+           selected_address: 'user/selected_address',
+           totalCart: 'carts/totalCart',
+           selected_address: 'user/selected_address',
             
        
         
@@ -138,7 +137,7 @@ export default {
          },
          data :()=>({
              showModal: false,
-             showAddAddress: false,
+            
              showDeleteAddress: false,
              showModalConfirmOrder: false,
              pay_type : "online",
@@ -157,7 +156,7 @@ export default {
                this.$store.dispatch('user/userAddresses',token)                  
                 }else{
                 
-                 this.$store.dispatch('home/authenticatedCode',{status:401})
+                // this.$store.dispatch('home/authenticatedCode',{status:401})
                 }
            
          },
@@ -179,7 +178,7 @@ export default {
             },
 
              sendOrder(){
-                this.showModalConfirmOrder = true;
+               
 
                 if(Cookies.get("user")){
               let user = JSON.parse (Cookies.get("user"));
@@ -217,52 +216,18 @@ this.$store.dispatch('orders/payment',formData)
               
             }else
              this.$router.push('/login')
-            }
-                
-      
-             },
-
-              async confirmDeleteAddress(){
-                
-                  await DB.users.count(async (count)=> {
-                  
-            if(count==0  ){
-             // this.$router.push('/login')
-             
-            }else{
-               
-                 await   DB.users.each( (item)=> {
-                       
-                
-
-                let data  = {
-                       api_token: item.api_token,
+            },
             
-                        id: `${this.selected_address.id}`,
-                       
-                    };
-                 
-                this.$store.dispatch('user/deleteAddress',data)
-                   this.showDeleteAddress = false;
-                  
-
-                });
-              
-              // this.isLogin = true;
-            }
-           
-          
-            });
-               
-      
-             },
-            clearDescription(){
-                 this.$store.dispatch('products/addDescriptionCart',"")
-      
-             },
-               formatPrice(price) {
+            
+                 formatPrice(price) {
                      return  Number(price).toLocaleString()+" "+"تومان";
                 },
+      
+             },
+
+           
+           
+              
          }
          
   
