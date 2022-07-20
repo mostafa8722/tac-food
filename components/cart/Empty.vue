@@ -51,6 +51,7 @@ p{
 .icon-triangle{
     color :#cccccc;
     font-size:3rem;
+    height: 50px;
 }
 .add-address{
     background-color:#fd5e63;

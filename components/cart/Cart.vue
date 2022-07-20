@@ -1,7 +1,6 @@
 <template>
-<div class="flex flex-col items-center mr-3 mt-2 ml-3 ">
-  <v-card
-    class="flex items-center overflow-hidden pb-2 rounded-xl"
+ <v-card
+    class="flex items-center overflow-hidden pb-2 mt-2  rounded-xl"
     width="100%"
   
      
@@ -15,10 +14,21 @@
       <v-img
       height="40"
       width="40"
-      class="flex-none  rounded mr-2"
+      class="flex-none  rounded "
       :src="product.logo"
     
+    >
+    <template v-slot:placeholder>
+         <v-img
+        src="/icons/food.svg"
+       height="40"
+      width="40"
+      class="flex-none  rounded"
+    
+    
     ></v-img>
+        </template>
+    </v-img>
 
 
   <div class="flex flex-col mr-2 mt-1">
@@ -37,8 +47,6 @@
    <CartOption v-for="item in product.details" :currentCart="product" :product="item" />
   </div>
   </v-card>
-   
-</div>
 
 
 </template>

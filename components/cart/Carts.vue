@@ -19,7 +19,7 @@
   <HeaderCart class="mt-1" title="خرید"   :value="formatPrice(totalPrice)" />
   <HeaderCart class="mt-1" title="مجموع"   value="13000 تومان" />
   
-  <div  v-for="(item, index) in cart.products">
+  <div  class="pl-2 pr-2" v-for="(item, index) in cart.products">
   
         <Cart   :product="item" />
       </div>
