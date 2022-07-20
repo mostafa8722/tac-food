@@ -38,7 +38,7 @@
                <span class="circle-child"></span>
              </span>
      </div>
-      <span class=" body mt-2"> 
+      <span class=" body flex mt-2"> 
         <span v-for="(cat,index) in product.categories" class="flex">  {{index==0?cat:`,${cat}`}}</span>
        </span>
       <span class=" address mt-2">   {{product.address}}</span>
