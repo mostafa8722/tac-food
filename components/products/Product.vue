@@ -2,7 +2,7 @@
 <v-card
     class="flex flex-col mt-2  overflow-hidden content-product pointer "
     width="100%"
-    height="135"
+    height="138"
      color="#ffffff"
   
   outlined

@@ -3,7 +3,7 @@
 <v-card
     class="flex flex-col mt-2  overflow-hidden  content-product"
  
-    height="140"
+    height="136"
 
      color="#ffffff"
   
@@ -38,7 +38,9 @@
                <span class="circle-child"></span>
              </span>
      </div>
-      <span v-for="cat in product.categories" class=" body mt-2">  {{cat}}</span>
+      <span class=" body mt-2"> 
+        <span v-for="(cat,index) in product.categories" class="flex">  {{index==0?cat:`,${cat}`}}</span>
+       </span>
       <span class=" address mt-2">   {{product.address}}</span>
 
     </div>
