@@ -1,6 +1,6 @@
 <template>
  <v-card
-    class="flex items-center overflow-hidden pb-2 mt-2  rounded-xl"
+    class=" overflow-hidden pb-2 mt-2  rounded-xl"
     width="100%"
   
      
