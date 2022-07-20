@@ -9,8 +9,8 @@
      </div>
       
        <div class="flex justify-center mt-5">
-         <button  @click.prevent="showModal = true" class="add-discount   pointer mt-2">
-            <font-awesome-icon   class="text-p2  " icon="fa-solid fa-check mt-3 " />
+         <button  @click.prevent="showModal = true" class="add-discount   pointer mt-2 ">
+            <font-awesome-icon   class="text-p2 height-20 " icon="fa-solid fa-check mt-3  " />
             <span class="text-p2 mr-2"> وارد کردن کد تخفیف </span>
          </button>
        
@@ -32,9 +32,9 @@
       row
       class="flex radio-group"
     >
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center flex-1">
           <div class="flex flex-col  mb-1 mr-4">
-            <font-awesome-icon :class="`${pay_type=='type_1'?'red':''}`" :icon="`fa-solid fa-location-dot`" />
+            <font-awesome-icon :class="`${pay_type=='type_1'?'red':''}  height-20`" :icon="`fa-solid fa-wallet`" />
             <span :class="`mt-1 ${pay_type=='type_1'?'red':''}`">کیف پول</span>
           </div>
 <v-radio
@@ -44,10 +44,10 @@
      
     </div>
 
-     <div class="flex flex-col items-center">
+     <div class="flex flex-col items-center flex-1">
           <div class="flex flex-col  mb-1 mr-4">
-            <font-awesome-icon :class="`${pay_type=='type_2'?'red':''}`" :icon="`fa-solid fa-location-dot`" />
-            <span :class="`mt-1 ${pay_type=='type_2'?'red':''}`">درگاه پرداخت</span>
+            <font-awesome-icon :class="`${pay_type=='online'?'red':''} height-20`" :icon="`fa-solid fa-credit-card`" />
+            <span :class="`mt-1 ${pay_type=='online'?'red':''}`">درگاه پرداخت</span>
           </div>
 <v-radio
      color="#ff2200"
@@ -57,9 +57,10 @@
     </div>
       
      
-      <div class="flex flex-col items-center">
+      <div class="flex flex-col items-center flex-1">
           <div class="flex flex-col  mb-1 mr-4">
-            <font-awesome-icon :class="`${pay_type=='type_3'?'red':''}`" :icon="`fa-solid fa-location-dot`" />
+            
+            <font-awesome-icon :class="`${pay_type=='type_3'?'red':''} height-20`" :icon="`fa-solid fa-money-bills`" />
             <span :class="`mt-1 ${pay_type=='type_3'?'red':''}`">در محل</span>
           </div>
 <v-radio
@@ -110,11 +111,12 @@ import { mapGetters } from 'vuex'
 import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faTrash,faCheck } from '@fortawesome/free-solid-svg-icons'
+import {faTrash,faCheck,faWallet,faCreditCard,faMoneyBills } from '@fortawesome/free-solid-svg-icons'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-library.add(faTrash,faCheck)
+library.add(faTrash,faCheck,faWallet,faCreditCard,faMoneyBills)
+
 
 import Cookies from 'js-cookie';
 export default {
@@ -184,25 +186,38 @@ export default {
               let user = JSON.parse (Cookies.get("user"));
               
 
-                 let orders = "["
-                 this.carts.map((cart)=>{
-                        let orders_store = "[";
-                         cart.products.map((product)=>{
+                 let orders = [];
+                let orders2 = {};
+                 this.carts.map((cart,index)=>{
+                       
+                    let   orders_store =   cart.products.map((product)=>{
                            
-                            let details = "[";
-                             product.details.map((detail)=>{
-                              details += JSON.stringify({"id":detail.id,"count":detail.count});
+                        
+                            //let details2 = "[";
+                              let details = product.details.map((detail)=>{
+                             return {"id":detail.id,"count":detail.count};
 
                             }) ;
-                            details += "]";
-                             orders_store  += JSON.stringify({"product_id":product.id ,"count":product.count,"details":details});
+                            //details = [];
+                             return {"product_id":product.id ,"count":product.count,"details":details};
 
                         });
-                       orders_store += "]";
-                       orders += JSON.stringify({"store_id":cart.store_id ,"order_time":"","orders":orders_store});
-                        return {"store_id": "13","order_time":"","orders":'[]'} ;
+                       //orders_store += "]";
+                       //orders_store  = [{"product_id":1307,"count":2,"details":[]}];
+                        if(index ==0)
+                       orders2  =  JSON.stringify({"store_id":cart.store_id,"order_time":"","orders":orders_store});
+                       else 
+                       orders2 += ","+ JSON.stringify({"store_id":cart.store_id,"order_time":"","orders":orders_store});
+                       
+                     
+
+                        //return {"store_id": "13","order_time":"","orders":'[]'} ;
                })
-                    orders +="]";
+                   orders = "[" + orders2 + "]";
+                
+              
+             
+                console.log(orders);
                
 let formData = new FormData();
 formData.append('api_token',  user.api_token);
@@ -320,5 +335,8 @@ width:500px;
 .red{
     color:#ff2200;
     font-size: 0.9rem;
+}
+.flex-1{
+  flex:1;
 }
 </style>

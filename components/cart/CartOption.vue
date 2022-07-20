@@ -1,7 +1,8 @@
 <template>
 
- <div class="flex mt-2 mb-2 cart-option">
-<v-img
+ <div class="flex mt-2 mb-2 justify-between cart-option">
+  <div class="flex">
+    <v-img
       height="40"
       width="40"
       class="flex-none  rounded mr-2 mt-2"
@@ -14,6 +15,7 @@
       <span :class=" `title ${product.status?'':'unactive'}`">  {{product.name}}</span>
  
   <span :class="`price ${product.status?'':'unactive'}`">{{count==0?1:count}} 	&#215; {{formatPrice(product.price)}} </span>
+  </div>
   </div>
 
  <div class="flex flex-row-reverse mt-2 ml-2">

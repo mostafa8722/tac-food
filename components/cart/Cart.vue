@@ -9,9 +9,10 @@
     outlined 
  
   >
-    <div class="flex flex-col">
-    <div class="flex mt-2">
-<v-img
+ 
+    <div class="flex mt-2 justify-between">
+    <div class="flex">
+      <v-img
       height="40"
       width="40"
       class="flex-none  rounded mr-2"
@@ -25,13 +26,14 @@
  
   <span class=" price"> {{formatPrice(product.count)}} 	&#215; {{formatPrice(product.price)}} </span>
   </div>
+    </div>
 
  <div class="flex flex-row-reverse mt-2 ml-2">
     <font-awesome-icon @click.prevent="addToCart" class="icon-custom ml-2 pointer" :icon="`fa-solid  fa-add`" />
       
         <font-awesome-icon  @click.prevent="removeFromCart" class="icon-custom ml-2 pointer" :icon="`fa-solid  fa-minus`" />
    </div>
-   </div>
+ 
    <CartOption v-for="item in product.details" :currentCart="product" :product="item" />
   </div>
   </v-card>

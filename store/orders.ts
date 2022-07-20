@@ -38,7 +38,8 @@ export const actions: ActionTree<AuthState, any> = {
 
 
   async payment({ commit, dispatch }, data) {
-  
+    console.log("pppppp22",data)
+
     
     await this.$repositories
       .payments()
@@ -49,9 +50,12 @@ export const actions: ActionTree<AuthState, any> = {
        console.log("pppppp",res)
         if(res.data.url && res.data.status==0){
           let url = res.data.url;
+         
         
           location.href = url;
         }
+        else
+        Vue.$toast.error(res.data.message)
        // commit('productsPage',res.data)
       })
       .catch((error:any) => {
