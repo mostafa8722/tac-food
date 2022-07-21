@@ -2,8 +2,8 @@
    <section class="flex  items-center flex-col">
      
      
-        <div v-if="carts.length>0" > <Carts  v-for="cart in carts" :cart="cart"  /></div>
-        <div v-else > <Empty   /></div>
+        <Carts v-if="carts.length>0" v-for="cart in carts" :cart="cart"  />
+        <div v-if="carts.length==0" > <Empty   /></div>
 
         <div v-show="carts.length>0 && descriptionCart==''" @click.prevent="handleAddDescription" class="add-address pointer mt-2">افزودن توضیحات </div>
        

@@ -2,10 +2,10 @@
  
 
      
-     <div class="mt-3 content-section ml-3 mr-3">
+     <div class="mt-3 content-section ">
          <v-card
     class=" items-center card-content pt-2 pb-2 pl-1 pr-1  rounded-xl"
-    width="600"
+
     
      dir="rtl"
   outlined
@@ -98,14 +98,31 @@ h3{
     flex:none;
 }
 .content-section{
-    max-width:600px;
+ 
+    display: flex;
+    justify-content: center;
+     width:500px;
    
 }
 .card-content{
  border:1px solid #dddddd;
+ max-width: 500px;
+ width:100%;
 }
 .txt-ago{
   font-size: 0.6rem;
   color:#ff2200;
+}
+@media screen and (max-width:500px){
+.content-section,.card-content{
+
+ width:400px;
+}
+}
+@media screen and (max-width:420px){
+.content-section,.card-content{
+
+ width:380px;
+}
 }
 </style>

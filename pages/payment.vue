@@ -39,7 +39,7 @@ export default Vue.extend({
 }
 .containers > div{
    margin: 0 auto;
-   width: 600px;
+
 }
 
 </style>

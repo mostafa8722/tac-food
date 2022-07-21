@@ -141,6 +141,9 @@ background-color: #eeeeee;
 .v-bottom-sheet.v-dialog.v-bottom-sheet--inset{
   max-width: 600px!important;
 }
+.leaflet-marker-pane img{
+  filter: invert(70%) sepia(74%) saturate(3730%) hue-rotate(320deg) brightness(94%) contrast(110%);
+}
   @media screen and (max-width:600px){
     .slider-skeleton .v-skeleton-loader__image {
       height: 220px!important;
