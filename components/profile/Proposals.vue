@@ -214,6 +214,7 @@ export default {
 .profile-container{
     width: 400px;
     margin:  0px auto;
+    padding-bottom: 60px;
 }
 .proposal-title{
     font-size: 1rem;

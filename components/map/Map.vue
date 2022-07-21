@@ -4,7 +4,7 @@
 <div id="map-wrap">
  
  <client-only>
-  <l-map  @click="$emit('handle-map',$event)" style="height: 200px;width:100%" :zoom="zoom" :center="center">
+  <l-map  @click="$emit('handle-map',$event)" class="absolute" style="height: 100%;width:100%" :zoom="zoom" :center="center">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     <l-marker  :lat-lng="markerLatLng"></l-marker>
   </l-map>

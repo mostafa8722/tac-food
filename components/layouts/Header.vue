@@ -47,6 +47,7 @@ import ModalDelete from '~/components/modals/ModalDelete.vue'
 
 import { mapGetters } from 'vuex'
 import Cookies from "js-cookie"
+import {GetStorage} from "~/utils/helpers"
 
   export default {
     components:{
@@ -83,6 +84,10 @@ import Cookies from "js-cookie"
                this.$store.dispatch('user/userAddresses',token)    
       }else
       this.isLogin = false
+
+      if(!GetStorage("latlng"))
+      setTimeout(()=>{this.showModalMap = true},200)
+      
     },
     methods:{
       handleMap(){

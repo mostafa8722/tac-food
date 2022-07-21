@@ -134,7 +134,13 @@ background-color: #f6f6f6;
 background-color: #eeeeee;
 }
 .product-tab .v-tabs-bar__content{background-color: #ffffff;}
-
+.v-dialog__container{display: block!important;}
+.v-dialog:not(.v-dialog--fullscreen) {
+  max-height: 100%!important;
+}
+.v-bottom-sheet.v-dialog.v-bottom-sheet--inset{
+  max-width: 600px!important;
+}
   @media screen and (max-width:600px){
     .slider-skeleton .v-skeleton-loader__image {
       height: 220px!important;
