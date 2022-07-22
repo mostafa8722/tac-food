@@ -14,7 +14,7 @@
       <v-img
       height="40"
       width="40"
-      class="flex-none  rounded "
+      class="flex-none  mr-2 rounded "
       :src="product.logo"
     
     >
