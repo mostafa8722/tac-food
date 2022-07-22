@@ -61,6 +61,10 @@ import {GetStorage,SetStorage} from "~/utils/helpers"
 export default {
     components:{Map},
     props : ["showModal"],
+    created(){
+     if(typeof navigator !== "undefined")
+       this.getCurrentLocation();
+    },
     data :()=>({
       latlng :[GetStorage("latlng")?GetStorage("latlng").split(',')[0]:
         LOCATION_DEFAULT.lat, 

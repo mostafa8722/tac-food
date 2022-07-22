@@ -57,13 +57,12 @@ export default {
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    //publicPath :"http://localhost:3000"
-
-    publicPath :"tac-food.vercel.app"
+    publicPath :"http://localhost:3000"
+    //publicPath :"tac-food.vercel.app"
   },
   pwa: {
     manifest: {
-      name: ' تک فود',
+      name: 'تک فود',
       short_name: 'سفارش آنلاین غذا در شرستان ساوه',
       start_url : "/?source=pwa",
       display :"standalone",

@@ -101,7 +101,7 @@ h3{
  
     display: flex;
     justify-content: center;
-     width:500px;
+     width:95%;
    
 }
 .card-content{
@@ -116,13 +116,13 @@ h3{
 @media screen and (max-width:500px){
 .content-section,.card-content{
 
- width:400px;
+
 }
 }
 @media screen and (max-width:420px){
 .content-section,.card-content{
 
- width:380px;
+ 
 }
 }
 </style>
