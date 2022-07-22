@@ -62,7 +62,7 @@ export default {
   },
   pwa: {
     manifest: {
-      name: 'تک فود',
+      name: ' تک فود',
       short_name: 'سفارش آنلاین غذا در شرستان ساوه',
       start_url : "/?source=pwa",
       display :"standalone",
