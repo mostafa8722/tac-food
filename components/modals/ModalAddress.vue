@@ -7,18 +7,21 @@
             <div class="modal-header pt-3">
               <span>آدرس های من</span>
             </div>
-         <div class="mt-2 mr-2 ml-2 mb-2">
+         <div class="mt-2 mr-2 ml-2 mb-2" :class="addresses.length==0?'flex items-center h-100':''">
          
-         <div class="flex flex-col address-container">
-          <AddressCard  v-for="address in addresses" :key="address.id" @handle-click="handleClickAddress" :address="address" :active="selected_address?selected_address.id==address.id?true:false:false" />
-          
+         <div class="flex flex-col address-container " :class="addresses.length==0?'items-center':''">
+          <AddressCard v-if="addresses.length!=0"  v-for="address in addresses" :key="address.id" @handle-click="handleClickAddress" :address="address" :active="selected_address?selected_address.id==address.id?true:false:false" />
+          <div v-if="addresses.length==0" @click.prevent="$emit('add-address','')"   class="flex add-address-box items-center justify-center pointer">
+                        <font-awesome-icon class="pointer height-20 ml-2" :icon="`fa-solid fa-circle-plus`" />
+                       <span>افزودن آدرس</span>
+          </div>
          
          </div>
          <div class="grid grid-cols-4 footer-address ">
-          <div class="line-h-40">   <font-awesome-icon class="pointer"  @click.prevent="$emit('close-modal')"   :icon="`fa-solid fa-check`" /></div>
-          <div class="line-h-40">   <font-awesome-icon  class="pointer"  @click.prevent="$emit('add-address','edit')"  :icon="`fa-solid fa-pen-to-square`" /></div>
-          <div class="line-h-40">   <font-awesome-icon  class="pointer"   @click.prevent="$emit('delete-address')" :icon="`fa-solid fa-trash`" /></div>
-          <div  class="line-h-40">   <font-awesome-icon class="pointer"  @click.prevent="$emit('add-address','')" :icon="`fa-solid fa-circle-plus`" /></div>
+          <div class="line-h-40">   <font-awesome-icon class="pointer height-20"  @click.prevent="$emit('close-modal')"   :icon="`fa-solid fa-check`" /></div>
+          <div class="line-h-40">   <font-awesome-icon  class="pointer height-20"  @click.prevent="$emit('add-address','edit')"  :icon="`fa-solid fa-pen-to-square`" /></div>
+          <div class="line-h-40">   <font-awesome-icon  class="pointer height-20"   @click.prevent="$emit('delete-address')" :icon="`fa-solid fa-trash`" /></div>
+          <div  class="line-h-40">   <font-awesome-icon class="pointer height-20"  @click.prevent="$emit('add-address','')" :icon="`fa-solid fa-circle-plus`" /></div>
                     
          </div>
          </div>
@@ -154,4 +157,12 @@ export default {
 
   overflow-y: auto;
 }
+.add-address-box{
+  border-radius: 0.3rem;
+  border:0.09rem solid #696969;
+  padding:0.1rem 0.5rem;
+  width: 150px;
+  height: 40px;
+}
+.h-100{height: 100%;}
 </style>

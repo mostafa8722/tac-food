@@ -2,7 +2,7 @@
  <section class="flex justify-center">
      <div class="mt-20 flex flex-col content-section  items-center justify-center ml-3 mr-3">
 
-        <div class="login-page-component  flex flex-col ">
+        <div class="login-page-component  flex flex-col items-center ">
        
                  <v-text-field
             outlined
@@ -167,9 +167,12 @@ p{
     color :#cccccc;
 }
 .input-field{
-  width:400px;
+  max-width:400px;
+  width: 90%;
   margin-top:1.2rem;
 }
+
+
 .privcy-link{
     color:#fd5e63;
     font-size:0.7rem;
@@ -202,4 +205,6 @@ align-items: center;
     font-family: yekanNumRegular !important;
 }
 .input-phone input{text-align: left;}
+.login-page-component{width: 100%;}
+
 </style>

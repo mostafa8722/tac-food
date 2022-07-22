@@ -8,7 +8,7 @@
             <p class="red mr-2">{{selected_address.address}} </p>
      </div>
       
-       <div class="flex justify-center mt-5">
+       <div class="flex justify-center mt-5 mb-20">
          <button  @click.prevent="showModal = true" class="add-discount   pointer mt-2 ">
             <font-awesome-icon   class="text-p2 height-20 " icon="fa-solid fa-check mt-3  " />
             <span class="text-p2 mr-2"> وارد کردن کد تخفیف </span>
@@ -82,10 +82,14 @@
        </div>
 
         <div class="flex justify-center mb-5 mt-5">
-               <div @click.prevent ="showModalConfirmOrder=true"  class="btn-send pointer text-center relative mt-3">
-                  <span class="white" style="font-size: 0.8rem;"> پرداخت </span>
-                   <font-awesome-icon class=" mr-5  icon-item white" :icon="`fa-solid fa-location-dot`" />
+               <div v-if="payment_btn.type!=='login'" @click.prevent =" hanlePayment"  class="btn-send pointer text-center relative mt-3">
+                  <span class="white" style="font-size: 0.8rem;"> {{payment_btn.title}} </span>
+                   <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
                 </div>
+                <NuxtLink v-else   class="btn-send pointer text-center relative mt-3" to="/login">
+                  <span class="white" style="font-size: 0.8rem;"> {{payment_btn.title}} </span>
+                   <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
+                </NuxtLink>
 
            </div>
        
@@ -111,11 +115,11 @@ import { mapGetters } from 'vuex'
 import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faTrash,faCheck,faWallet,faCreditCard,faMoneyBills } from '@fortawesome/free-solid-svg-icons'
+import {faTrash,faCheck,faWallet,faCreditCard,faMoneyBills,faClipboardUser } from '@fortawesome/free-solid-svg-icons'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-library.add(faTrash,faCheck,faWallet,faCreditCard,faMoneyBills)
+library.add(faTrash,faCheck,faWallet,faCreditCard,faMoneyBills,faClipboardUser)
 
 
 import Cookies from 'js-cookie';
@@ -131,7 +135,7 @@ export default {
            descriptionCart: 'carts/descriptionCart',
            selected_address: 'user/selected_address',
            totalCart: 'carts/totalCart',
-           selected_address: 'user/selected_address',
+           userAddresses: 'user/userAddresses',
             
        
         
@@ -142,9 +146,11 @@ export default {
             
              showDeleteAddress: false,
              showModalConfirmOrder: false,
+             
              pay_type : "online",
              coupon_code : "",
              editAddress : "",
+             payment_btn : {title:"پرداخت ",icon:"fa-credit-card",type:"payment"},
              deleteData :{title:"هشدار!",description:"آیا برای حذف این آیتم مطمئن هستید؟",cancelBtn:"بله",confirmBtn:"انصراف" },
             }),
           created(){
@@ -155,16 +161,31 @@ export default {
                        api_token: user.api_token
                     };
                  
-               this.$store.dispatch('user/userAddresses',token)                  
+               this.$store.dispatch('user/userAddresses',token)        
+                this.payment_btn = {title:"ثبت آدرس ",icon:"fa-credit-card",type:"address" }          
                 }else{
-                
+                  this.payment_btn = {title:"ثبت نام ",icon:"fa-clipboard-user" ,type:"login"}
                 // this.$store.dispatch('home/authenticatedCode',{status:401})
                 }
            
          },
+         watch :{
+          userAddresses(new_val,old_val){
+            if(new_val.length==0)
+            this.payment_btn = {title:"ثبت آدرس ",icon:"fa-credit-card",type:"address" } 
+            else
+             this.payment_btn = {title:"پرداخت ",icon:"fa-credit-card",type:"payment" } 
+          }
+         },
          methods:{
-            handleAddDescription(){
-                this.showModal = true;
+            hanlePayment(){
+              if(this.payment_btn.type =="payment")
+                this.showModalConfirmOrder = true;
+                else{
+                this.$store.dispatch('user/showUserAddresses',false) 
+                setTimeout(()=>{this.$store.dispatch('user/showUserAddresses',true)  },100) 
+                }
+                 
             },
             handleAddAddress(address){
                 
@@ -293,13 +314,14 @@ p{
 .payment-box{
    
     border:0.1rem solid #959595;
-    padding:0.1rem 1rem;
+    padding:0.2rem 1rem;
     border-radius: 0.3rem;
     background-color: #ffffff;
+    max-width: 400px;
     width: calc(100% - 2rem);
     margin-right: 1rem;
     margin-left: 1rem;
-    height: 150px;
+   
 }
 
 

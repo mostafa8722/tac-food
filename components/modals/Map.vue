@@ -5,7 +5,13 @@
  <client-only>
   <l-map style="height: 130px;width:100%" :zoom="zoom" :center="center">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-    <l-marker :lat-lng="markerLatLng"></l-marker>
+    <l-marker :lat-lng="markerLatLng">
+    <l-icon
+          :icon-size="icon.iconSize"
+          :icon-anchor="icon.iconAnchor"
+          :icon-url="icon.iconUrl"
+        />
+    </l-marker>
   </l-map>
 </client-only>
 </div>
@@ -27,7 +33,12 @@ export default {
       attribution:
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 15,
-      
+
+   icon: {
+        iconUrl: "icons/gps_fixed.svg",
+        iconSize: [32, 37],
+        iconAnchor: [16, 37]
+      },
     };
   }
    

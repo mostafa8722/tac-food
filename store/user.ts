@@ -8,6 +8,7 @@ export const state = () => ({
    selected_address:{},
   isLoggedIn: false,
   isRegisterIn: false,
+  showUserAddresses: false,
 })
 export type AuthState = ReturnType<typeof state>
 
@@ -20,6 +21,7 @@ export const getters: GetterTree<AuthState, any> = {
   token: (state: any) => state.token,
   userAddresses: (state: any) => state.userAddresses,
   selected_address: (state: any) => state.selected_address,
+  showUserAddresses: (state: any) => state.showUserAddresses,
 }
 
 export const mutations: MutationTree<AuthState> = {
@@ -39,6 +41,11 @@ getAddresses(state:any,data:any) {
 
    
     state.selected_address = data;
+  },
+  showUserAddresses(state:any,data:any) {
+
+   
+    state.showUserAddresses = data;
   },
 }
 
@@ -125,7 +132,11 @@ export const actions: ActionTree<AuthState, any> = {
   },
 
   async changeSelectedAddress({ commit, dispatch }, data) {
-    console.log("ttt2",data)
+   
     commit('changeSelectedAddress',data);
+  },
+  async showUserAddresses({ commit, dispatch }, data) {
+   
+    commit('showUserAddresses',data);
   },
 }

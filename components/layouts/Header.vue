@@ -59,6 +59,7 @@ import {GetStorage} from "~/utils/helpers"
            isSendingData: 'general/isSendingData',
            location_address: 'general/location_address',
             selected_address: 'user/selected_address',
+            showUserAddresses: 'user/showUserAddresses',
           
             })
          },
@@ -88,6 +89,13 @@ import {GetStorage} from "~/utils/helpers"
       if(!GetStorage("latlng"))
       setTimeout(()=>{this.showModalMap = true},200)
       
+    },
+    watch:{
+      showUserAddresses(new_val,old_val){
+        if(new_val)
+        this.showModal = true
+
+      },
     },
     methods:{
       handleMap(){
