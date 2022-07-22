@@ -147,6 +147,7 @@ computed: {
 }
 .content-section{
     max-width:600px;
+    width: 100%;
 }
 p{
     color :#cccccc;
