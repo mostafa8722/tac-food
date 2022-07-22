@@ -20,10 +20,10 @@
     >
    <template v-slot:placeholder>
          <v-img
-        src="/icons/logo_.svg"
-       height="100"
-      width="140"
-      class="flex-none rounded-none"
+        src="/icons/logo.svg"
+       height="40"
+      width="40"
+      class="flex-none rounded-none img-placeholder"
     
     
     ></v-img>
@@ -119,6 +119,11 @@ export default {
       transform: rotate(-20deg);
       left:4px;
        font-family: yekanNumRegular!important;
+    }
+    .img-placeholder{
+     position: absolute;
+    left: 50px;
+    top: 20%;
     }
   
 </style>

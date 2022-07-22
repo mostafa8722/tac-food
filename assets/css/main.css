@@ -144,6 +144,9 @@ background-color: #eeeeee;
 .leaflet-marker-pane img{
   filter: invert(70%) sepia(74%) saturate(3730%) hue-rotate(320deg) brightness(94%) contrast(110%);
 }
+.img-placeholder .v-image__image{
+  filter: invert(99%) sepia(0%) saturate(3238%) hue-rotate(32deg) brightness(114%) contrast(87%);
+}
   @media screen and (max-width:600px){
     .slider-skeleton .v-skeleton-loader__image {
       height: 220px!important;

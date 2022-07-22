@@ -13,10 +13,21 @@
 <v-img
       height="40"
       width="40"
-      class="flex-none rounded-none"
+      class="flex-none rounded-none "
       :src="category.image"
     
+    >
+     <template v-slot:placeholder>
+         <v-img
+        src="/icons/logo.svg"
+       height="40"
+      width="40"
+        class="flex-none rounded-none img-placeholder "
+    
+    
     ></v-img>
+        </template> 
+    </v-img>
  
   </v-card>
   </NuxtLink>

@@ -7,7 +7,7 @@
            <v-slide-group
            v-if="isLoading"
            key="1"
-      v-model="model"
+    
       class="pa-4"
       mandatory
       show-arrows
@@ -26,7 +26,7 @@
       <v-slide-group
       v-else
       key="2"
-      v-model="model"
+
       class="pa-4"
       mandatory
       show-arrows
@@ -70,13 +70,7 @@ export default {
       },
   
     data : ()  =>({
-        products : [
-            {title:"گوجه فرنگی ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"موز ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"هلو ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"انبه ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-    
-        ]
+       
     })
 }
 </script>

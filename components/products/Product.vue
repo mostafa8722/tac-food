@@ -19,10 +19,10 @@
     >
      <template v-slot:placeholder>
          <v-img
-        src="/icons/logo_.svg"
-      height="60"
-      width="60"
-      class="flex-none "
+        src="/icons/logo.svg"
+      height="40"
+      width="40"
+      class="flex-none img-placeholder "
     
     
     ></v-img>
@@ -191,7 +191,12 @@ export default {
   border-radius: 50%;
 
 }
-    
+.img-placeholder{
+     position: absolute;
+    left: 10px;
+    top: 10px;
+    }
+      
 
     
   
