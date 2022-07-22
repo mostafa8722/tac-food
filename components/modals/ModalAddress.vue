@@ -7,7 +7,7 @@
             <div class="modal-header pt-3">
               <span>آدرس های من</span>
             </div>
-         <div class="mt-2 mr-2 ml-2 mb-2" :class="addresses.length==0?'flex items-center h-100':''">
+         <div class="mt-2 mr-2 ml-2 mb-2" :class="addresses.length==0?'flex items-center justify-center h-100':''">
          
          <div class="flex flex-col address-container " :class="addresses.length==0?'items-center':''">
           <AddressCard v-if="addresses.length!=0"  v-for="address in addresses" :key="address.id" @handle-click="handleClickAddress" :address="address" :active="selected_address?selected_address.id==address.id?true:false:false" />
