@@ -13,6 +13,7 @@
        
       height="60"
       width="60"
+      
       class="flex-none rounded-xl"
       :src="product.logo"
     

@@ -71,7 +71,7 @@ export const actions: ActionTree<AuthState, any> = {
       .updateStoreOrder(data)
       .then((res:any) => {
        
-       
+        console.log("updateStoreCart11",res)
         this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
         
         if(data.show_payemnt)

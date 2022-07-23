@@ -226,9 +226,9 @@ export default {
                        //orders_store += "]";
                        //orders_store  = [{"product_id":1307,"count":2,"details":[]}];
                         if(index ==0)
-                       orders2  =  JSON.stringify({"store_id":cart.store_id,"order_time":"","orders":orders_store});
+                       orders2  =  JSON.stringify({"store_id":cart.store_id,"order_time":"null","orders":orders_store});
                        else 
-                       orders2 += ","+ JSON.stringify({"store_id":cart.store_id,"order_time":"","orders":orders_store});
+                       orders2 += ","+ JSON.stringify({"store_id":cart.store_id,"order_time":"null","orders":orders_store});
                        
                      
 
@@ -239,6 +239,7 @@ export default {
               
              
                 console.log(orders);
+                console.log("api",user.api_token);
                
 let formData = new FormData();
 formData.append('api_token',  user.api_token);

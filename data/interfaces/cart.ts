@@ -6,7 +6,8 @@ interface Cart {
   cost_delivery:number,
   tax:number,
   ago : string,
-  status : number
+  status : number,
+  store_total_price:number,
 }
 export default Cart;
 

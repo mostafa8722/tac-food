@@ -63,7 +63,7 @@ export default {
   pwa: {
     manifest: {
       name: ' تک فود',
-      short_name: 'سفارش آنلاین غذا در شرستان ساوه',
+      short_name: 'سفارش آنلاین غذا در شهرستان ساوه',
       start_url : "/?source=pwa",
       display :"standalone",
       "scope" : ".",

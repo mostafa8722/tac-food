@@ -62,6 +62,7 @@ export const mutations: MutationTree<AuthState> = {
     store_id:0,store_name:"",
     time_delivery:"",
     cost_delivery:0,
+    store_total_price : 0,
     tax:0,
     status:0,ago:"",products:[]} ;
   data_cart.store_id = data.store_id;
@@ -122,7 +123,7 @@ export const mutations: MutationTree<AuthState> = {
  }
 
  
-
+ updateCarts(state);
  
    // push(data)
   },
@@ -144,14 +145,12 @@ export const mutations: MutationTree<AuthState> = {
 
    
     if(state.carts[index].products.length==0){
-      console.log("ttt",state.carts[index].products.length)
+      
       state.carts.splice(index,1);
     }
- 
-    else
-    console.log("ttt2",state.carts[index].products.length)
+
     
-    
+    updateCarts(state);
    
   },
 
@@ -196,7 +195,7 @@ export const mutations: MutationTree<AuthState> = {
 
 
  
-
+  updateCarts(state);
  
    // push(data)
   },
@@ -208,21 +207,56 @@ export const mutations: MutationTree<AuthState> = {
 
   updateStoreCart(state:any, data:any) {
     //state.totalCart = state.totalCart + data.price;
+    let initialtTotalCart = 0;
     data.map((data_item:any)=>{
+     
       let index = state.carts.findIndex((item:any) => item.store_id==data_item.id);
        state.carts[index].status = data_item.status;
        state.carts[index].ago = data_item.ago;
        state.carts[index].tax = data_item.tax;
-       state.carts[index].cost_delivery = data_item.cost_delivery;
+       state.carts[index].cost_delivery = data_item.delivery_cost;
+     
+      
+      
+      
+
        
     })
+  
+    console.log("ttttt","cart5")
+      updateCarts(state); 
+
+
 
 
 
   },
 
+ 
 
 }
+
+function updateCarts(state:any){
+    
+  console.log("ttttt","cart")
+  let  initialtTotalCart = 0;
+  state.carts.map((item:any,index:any)=>{
+
+
+    let products_total_price =
+    item.products.length>1 ?
+    item.products.reduce(
+     (previousValue:any, currentValue:any) =>  (previousValue.price? (previousValue.price*previousValue.count) : previousValue) + (currentValue.price*currentValue.count)
+    ) :
+    item.products.map(( currentValue:any) => (currentValue.price*currentValue.count))[0];
+ 
+   state.carts[index].store_total_price =  products_total_price + item.cost_delivery + item.tax;
+   initialtTotalCart  += state.carts[index].store_total_price;
+   console.log("ttttt",state.carts[index])
+  });
+    state.totalCart = initialtTotalCart;
+}
+
 
 export const actions: ActionTree<AuthState, any> = {
 
@@ -265,4 +299,6 @@ export const actions: ActionTree<AuthState, any> = {
   
     this.dispatch("home/addDataSent",false);
   },
+ 
+  
 }
