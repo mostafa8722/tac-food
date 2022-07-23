@@ -6,7 +6,7 @@
 
          <div class="circle-border flex flex-col justify-center items-center">
              <span>موجودی</span>
-             <span>0</span>
+             <span>{{formatPrice(walletCredit)}}</span>
              <span>تومان</span>
          </div>
          <p class="mt-2">مبلغ مورد نظر را در فیلد پایین وارد کنید</p>
@@ -60,6 +60,7 @@ export default {
       computed: {
       ...mapGetters({
            isDataSent: 'home/isDataSent',
+           walletCredit: 'home/walletCredit',
         
             })
          },
@@ -76,6 +77,15 @@ export default {
         },
       ],
     }),
+    created(){
+       if(Cookies.get("user")){
+             let data = {};
+              let user = JSON.parse (Cookies.get("user"));
+               data . api_token = user.api_token;
+               
+             this.$store.dispatch('home/walletBill', data)
+            }
+    },
     methods:{
             sendPyment(){
           if(this.isDataSent)

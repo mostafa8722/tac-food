@@ -75,7 +75,7 @@
 
               <div class="flex justify-center mt-2">
                 <span class="text-p2">کیف پول :</span>
-                <span class="text-p2 mr-2 ml-2">{{formatPrice(150000)}}</span>
+                <span class="text-p2 mr-2 ml-2">{{formatPrice(walletCredit)}}</span>
                
               </div>
             </div>
@@ -136,6 +136,7 @@ export default {
            selected_address: 'user/selected_address',
            totalCart: 'carts/totalCart',
            userAddresses: 'user/userAddresses',
+             walletCredit: 'home/walletCredit',
             
        
         
@@ -161,8 +162,11 @@ export default {
                        api_token: user.api_token
                     };
                  
-               this.$store.dispatch('user/userAddresses',token)        
-                this.payment_btn = {title:"ثبت آدرس ",icon:"fa-credit-card",type:"address" }          
+               this.$store.dispatch('user/userAddresses',token)      
+                 this.$store.dispatch('home/walletBill', token)  
+                this.payment_btn = {title:"ثبت آدرس ",icon:"fa-credit-card",type:"address" } 
+                
+                
                 }else{
                   this.payment_btn = {title:"ثبت نام ",icon:"fa-clipboard-user" ,type:"login"}
                 // this.$store.dispatch('home/authenticatedCode',{status:401})

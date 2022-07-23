@@ -20,6 +20,7 @@ export const state = () => ({
   isDataSent : false,
   isLoading : false,
   authenticatedCode : 200,
+  walletCredit : 0,
 })
 export type AuthState = ReturnType<typeof state>
 
@@ -32,6 +33,7 @@ export const getters: GetterTree<AuthState, any> = {
   isDataSent: (state: any) => state.isDataSent,
   isLoading: (state: any) => state.isLoading,
   authenticatedCode: (state: any) => state.authenticatedCode,
+  walletCredit: (state: any) => state.walletCredit,
 }
 
 export const mutations: MutationTree<AuthState> = {
@@ -53,6 +55,7 @@ export const mutations: MutationTree<AuthState> = {
    
   },
   setDataSent(state:any,isSent:boolean ) {state.isDataSent = isSent;},
+  setWalletCredit(state:any,data:number ) {state.walletCredit = data;},
   setLoading(state:any,isSent:boolean ) {state.isLoading = isSent;},
    setAuthenticatedCode(state:any,data:any ) {
 
@@ -170,6 +173,28 @@ async homePage({ commit, dispatch }, data) {
       })
       .catch((error:any) => {
         commit('setDataSent',false)
+
+      })
+  },
+  
+  async walletBill({ commit, dispatch }, data) {
+  
+   
+  
+ 
+    //commit('setDataSent',true)
+  
+
+    await this.$repositories
+      .home()
+      .walletBill(data)
+      .then((res:any) => {
+    
+      if(res.data.credits)
+      commit('setWalletCredit',res.data.credits)
+      })
+      .catch((error:any) => {
+        //commit('setDataSent',false)
 
       })
   },

@@ -49,6 +49,12 @@ export default class HomeRepository extends Repository {
    
     return response
   }
+  async walletBill(data: any): Promise<any> {
+
+    const response = await this.axios.post('v1/customer/balance', data)
+   
+    return response
+  }
   async setMapAddress(data: AddressMap): Promise<any> {
 
     const response = await this.axios.post('v2/customer/road', data)
