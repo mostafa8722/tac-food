@@ -97,7 +97,7 @@ export const actions: ActionTree<AuthState, any> = {
 
 nuxtServerInit(vuexContext,context){
 
-  console.log("loading....................")
+ 
 },
 async homePage3({ commit, dispatch }, data) {
   
@@ -115,12 +115,12 @@ async homePage({ commit, dispatch }, data) {
     .home()
     .HomeCustomer(data)
     .then((res:any) => {
-      console.log("loading d",res.data);
+   
       commit('homePage',res.data)
     })
     .catch((error:any) => {
       
-      console.log("loading error",error);
+    
    
      // dispatch('toast/showErrorToast', error, { root: true })
     })
@@ -131,7 +131,7 @@ async homePage({ commit, dispatch }, data) {
    
  
     commit('setDataSent',true)
-    console.log("loading error",data)
+
     await this.$repositories
       .home()
       .AddPropsal(data)
@@ -141,12 +141,8 @@ async homePage({ commit, dispatch }, data) {
        // commit('homePage',res.data)
       })
       .catch((error:any) => {
-        console.log("loading error",error)
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
-        
-       // console.log("loading error",error);
-     
-       // dispatch('toast/showErrorToast', error, { root: true })
+      
+      
       })
   },
   async addPyment({ commit, dispatch }, data) {
@@ -203,7 +199,7 @@ async homePage({ commit, dispatch }, data) {
    
  
     commit('setDataSent',false)
-    console.log("loading error",data)
+  
     await this.$repositories
       .comments()
       .AddComment(data)
@@ -213,12 +209,7 @@ async homePage({ commit, dispatch }, data) {
        // commit('homePage',res.data)
       })
       .catch((error:any) => {
-        console.log("loading error",error)
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
-        
-       // console.log("loading error",error);
-     
-       // dispatch('toast/showErrorToast', error, { root: true })
+       
       })
   },
 

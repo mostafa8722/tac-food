@@ -33,7 +33,10 @@ interface IAddressAdd {
 
 
 
-
+interface IOrder {
+  api_token:string,
+  is_order : boolean
+}
 
 export default class UserRepository extends Repository {
 
@@ -59,6 +62,16 @@ export default class UserRepository extends Repository {
   async addCustomerAddress(data: IAddressAdd): Promise<any> {
    
     const response = await this.axios.post('v1/address/customer/add', data)
+    return response
+  }
+  async showMyOrders(data: IOrder): Promise<any> {
+   
+    const response = await this.axios.post('v1/orders', data)
+    return response
+  }
+  async showOrdersState(data: IOrder): Promise<any> {
+   
+    const response = await this.axios.post('v1/orders', data)
     return response
   }
 

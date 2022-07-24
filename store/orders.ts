@@ -14,6 +14,7 @@ import Order from '~/data/interfaces/order'
 export const state = () => ({
 
   orders:Array<Order>() ,
+  myOrders : [],
 
   
 })
@@ -21,12 +22,13 @@ export type AuthState = ReturnType<typeof state>
 
 export const getters: GetterTree<AuthState, any> = {
   orders: (state: any) => state.orders,
+  myOrders: (state: any) => state.myOrders,
  }
 
 export const mutations: MutationTree<AuthState> = {
  
   
- // commentsPage(state:any, data:result) {state.comments = data.result},
+  setMyOrders(state:any, data:any) {state.myOrders = data},
  
   
 
@@ -38,7 +40,7 @@ export const actions: ActionTree<AuthState, any> = {
 
 
   async payment({ commit, dispatch }, data) {
-    console.log("pppppp22",data)
+
 
     
     await this.$repositories
@@ -47,7 +49,7 @@ export const actions: ActionTree<AuthState, any> = {
       .then((res:any) => {
      
 
-       console.log("pppppp",res)
+     
         if(res.data.url && res.data.status==0){
           let url = res.data.url;
          
@@ -59,7 +61,7 @@ export const actions: ActionTree<AuthState, any> = {
        // commit('productsPage',res.data)
       })
       .catch((error:any) => {
-        console.log("paye====>",error);
+        
       
       })
   },
@@ -71,7 +73,7 @@ export const actions: ActionTree<AuthState, any> = {
       .updateStoreOrder(data)
       .then((res:any) => {
        
-        console.log("updateStoreCart11",res)
+      
         this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
         
         if(data.show_payemnt)
@@ -84,6 +86,49 @@ export const actions: ActionTree<AuthState, any> = {
       
       })
   },
+
+  async showMyOrders({ commit, dispatch }, data) {
+      
+    this.dispatch("home/handleLoading",true)
+    await this.$repositories
+      .users()
+      .showMyOrders(data)
+      .then((res:any) => {
+        this.dispatch("home/handleLoading",false)
+        commit("setMyOrders",res.data)
+        console.log("updateStoreCart11",res.data)
+       // this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
+        
+      
+      
+      })
+      .catch((error:any) => {
+        this.dispatch("home/handleLoading",false)
+     
+      
+      })
+  },
+  async showOrdersState({ commit, dispatch }, data) {
+      
+    this.dispatch("home/handleLoading",true)
+    await this.$repositories
+      .users()
+      .showOrdersState(data)
+      .then((res:any) => {
+        this.dispatch("home/handleLoading",false)
+        console.log("updateStoreCart11",res)
+       // this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
+        
+      
+      
+      })
+      .catch((error:any) => {
+        this.dispatch("home/handleLoading",false)
+     
+      
+      })
+  },
+
 
 
 

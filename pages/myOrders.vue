@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import myOrders from '~/components/myOrders/MyOrders.vue'
+import myOrders from '~/components/myOrders/MyOrdersComponent.vue'
 
 
 export default Vue.extend({
