@@ -45,5 +45,6 @@ p{
 .icon-triangle{
     color :#cccccc;
     font-size:3rem;
+    height: 30px;
 }
 </style>

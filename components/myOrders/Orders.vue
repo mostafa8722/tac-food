@@ -21,12 +21,13 @@
  
   >
 
-  <HeaderOrder class="mt-2" title="نام فروشگاه "  icon="fa-store"  value="20000000000" />
-  <HeaderOrder class="mt-2" title="زمان تحویل "  icon="fa-clock"  value="20000000000" />
-  <HeaderOrder class="mt-2" title=" هزینه ارسال "  icon="fa-moped"  value="20000000000" />
-  <HeaderOrder class="mt-2" title=" تخفیف "  icon="fa-tag"  value="20000000000" />
-  <HeaderOrder class="mt-2" title=" نوع پرداخت "  icon="fa-angle-left"  value="در محل" />
-  <HeaderOrder class="mt-2" title="مبلغ "  icon="fa-money-bills"  value="20000000000" />
+
+  <HeaderOrder class="mt-2" title="نام فروشگاه "  icon="fa-store"  :value="orderState.store_name" />
+  <HeaderOrder class="mt-3" title="زمان تحویل "  icon="fa-clock"  :value="deliveryTime()" />
+  <HeaderOrder class="mt-3" title=" هزینه ارسال "  icon="fa-moped"  :value="formatPrice(order.delivery)" />
+  <HeaderOrder class="mt-2" title=" تخفیف "  icon="fa-tag"  :value="formatPrice(order.discount)" />
+  <HeaderOrder class="mt-2" title=" نوع پرداخت "  icon="fa-angle-left"  :value="order.type" />
+  <HeaderOrder class="mt-2" title="مبلغ "  icon="fa-money-bills"  :value="order.payment" />
  
 
   <div @click.prevent="showOrders=!showOrders" class="flex-header-container  mt-10 mb-5 pointer pr-3 pl-3 flex ">
@@ -39,23 +40,42 @@
 
    </div>
    <div v-if="showOrders">
-       <Order/>
-   <Order/>
+       <Order v-for="product in order.products"  :key="product.id" :product="product" />
+   
    </div>
    
   
    </v-card>
 
 
-  <OrderState />
+  <OrderState :orderState="orderState" />
+  <Courier v-if="orderState.state!=1" :orderState="orderState" />
+
    <div class="flex justify-between mt-5 mr-5 items-center">
-    <div class="btn-report">
-      <font-awesome-icon class="white ml-1" icon="fa-solid fa-circle-info" />
-       <span class="white">گزارش تاخیر</span>
+    <div class="btn-report" v-if="orderState.state!=3"  :class="`${canReport?' pointer report-active':''}`" @click="sendReport">
+     <div  v-if="isDataSent" class="container-progress">
+                <span class="white ml-2">لطفا صبر کنید</span>
+                <v-progress-circular
+                 class="progress-circular"
+              
+               indeterminate
+               
+              color="#ffffff"/>
+               </div>
+      <font-awesome-icon  v-if="!isDataSent"   class="white ml-1" icon="fa-solid fa-circle-info" />
+       <span v-if="!isDataSent"  class="white">گزارش تاخیر</span>
     </div>
-    <span class="ml-5">23:22:10</span>
+
+      <div v-else class="btn-comment pointer" @click="showModalComment=true">
+    
+      <font-awesome-icon    class="white ml-1" icon="fa-solid fa-circle-check" />
+       <span  class="white">تایید و رای </span>
+    </div>
+    <span class="ml-5 timer-text"> {{showTime}}</span>
    </div>
   </v-card>
+   <ModalComment :data="deleteData" v-show="showModalComment" @close-modal="showModalComment = false" />
+
     
      </div>
     
@@ -66,27 +86,35 @@
 import Order from './Order.vue';
 import HeaderOrder from './HeaderOrder.vue';
 import OrderState from './OrderState.vue';
+import Courier from './Courier.vue';
+import ModalComment from './ModalComment.vue';
 import { mapGetters } from 'vuex'
 import Vue from "vue"
+import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
-import {faAngleLeft,faAngleDown,faAngleUp,faBasketShopping,faCircleInfo } from '@fortawesome/free-solid-svg-icons'
-library.add(faAngleLeft,faAngleDown,faBasketShopping,faCircleInfo,faAngleUp)
+import {faAngleLeft,faAngleDown,faAngleUp,faBasketShopping,faCircleInfo ,faCircleCheck} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faAngleLeft,faAngleDown,faBasketShopping,faCircleInfo,faAngleUp,faCircleCheck)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 export default {
-    components: { HeaderOrder ,Order,OrderState},
+    components: { HeaderOrder, Order, OrderState, Courier,ModalComment },
       computed: {
       ...mapGetters({
-           carts: 'carts/carts',
-              totalCart: 'carts/totalCart',
-       
+          
+          isDataSent: 'home/isDataSent',
         
             })
          },
   
       props: {
-        cart :{
+        order :{
+            type:Object,
+            require :true,
+            
+        },
+         orderState :{
             type:Object,
             require :true,
             
@@ -95,40 +123,116 @@ export default {
       },
 
       data :() =>({
-        totalPrice : 0,
-        showOrders:false
+        countDown : 600,
+        showTime  : '',
+        showOrders:false,
+        canReport : false,
+        showModalComment : false,
+              deleteData :{title:"هشدار!",description:"آیا برای حذف این آیتم مطمئن هستید؟",cancelBtn:"انصراف",confirmBtn:"بله" },
+
       }),
-      created(){
-        // this.totalPrice2(this.cart);
-      },
+    
+       created(){
 
+
+          const diffTime = Math.abs(new Date() - new Date(this.orderState.date));
+                    let seconds = Math.ceil(diffTime / (1000 )); 
+
+                   
+                    this.countDown = Math.ceil(600 - seconds);
+                    this.countDown =(this.orderState.prep_time -this.orderState.time );
+                    if(this.orderState.state ==2)
+                    this.countDown =(this.orderState.prep_time -this.orderState.time );
+
+
+                      if(this.orderState.state ==1 &&  this.countDown>0)
+                     this.countDownTimer();
+                       else if(this.orderState.state ==2 &&  this.countDown>0)
+                     this.countDownTimer();
+                      else if((this.orderState.state ==1 || this.orderState.state ==2) &&  this.countDown<=0)
+                     this.canReport = true;
+                     
+       },
       methods:{
-             totalPrice2(cart){
-                this.totalPrice = 0 ;
-
-                let index = this.carts.findIndex((item) => item.id==cart.id);
-                 this.carts[index].products.map((item,index)=>{
-                    this.totalPrice =  this.totalPrice +item.price*item.count;
-
-                   item.details.map(item_product => {
-                    if(item_product.status)
-                     this.totalPrice  =  this.totalPrice + item_product.price * item_product.count;
-                   })
-                 });
-
-                 //return this.formatPrice(total)+" "+"تومان";
-             },
+             
               formatPrice(price) {
                  return  Number(price).toLocaleString() +" "+"تومان";
                  },
+                  countDownTimer() {
+        
+                if(this.countDown > 0 && (this.orderState.state ==1 || this.orderState.state ==2)) {
+                    setTimeout(() => {
+                        this.countDown -= 1
+                        
+                        let min = parseInt(this.countDown/60);
+                        let sec = this.countDown%60
+                        if(sec<10)
+                        sec = `0${sec}`;
+
+                        this.showTime = `0${min}:${sec}`
+                        this.countDownTimer();
+                       
+                    }, 1000)
+                }
+            },
+            deliveryTime(){
+              return this.orderState.state==1?
+              (this.orderState.delivered_at==null?'نامشخص':this.orderState.delivered_at)
+              :(this.orderState.prep_time/60)+"دقیقه" ;
+            },
+            sendReport(){
+              if(!this.canReport)
+              return ;
+
+                      if(Cookies.get("user")){
+           let user = JSON.parse (Cookies.get("user"));
+                 let token  = {
+                       api_token: user.api_token,
+                       order_id : this.order.order_id,
+                       step : this.orderState.state,
+                    };
+                 
+               this.$store.dispatch('orders/sendReport',token)      
+              
+              
+              
+                
+                }
+
+              
+            },
+            sendComment(){
+              if(!this.canReport)
+              return ;
+
+                      if(Cookies.get("user")){
+           let user = JSON.parse (Cookies.get("user"));
+                 let token  = {
+                       api_token: user.api_token,
+                       store_id : this.orderState.store_id,
+                       body : this.orderState.state,
+                       store_id : this.orderState.state,
+                    };
+                 
+               this.$store.dispatch('orders/showMyOrders',token)      
+              
+              
+              
+                
+                }
+
+              
+            }
       },
       watch:{
-        totalCart(new_val,old_val){
-         
-            //this.totalPrice2(this.cart)
-         
+        countDown(new_val,old_val){
+           if(new_val<1){
+             this.canReport = true;
+             this.showTime = "";
+                        }
         }
       }
+     
   
    
 }
@@ -145,7 +249,7 @@ h3{
     display: flex;
     justify-content: center;
      width:92%;
-   
+       padding-bottom: 70px;
 }
 .card-content{
  border:0.1rem solid #dddddd;
@@ -168,8 +272,19 @@ h3{
   border-radius: 0.4rem;
    background-color: #dddddd;
 }
+.btn-comment{
+  padding:0.5rem 1.5rem;
+  border-radius: 0.4rem;
+   background-color: #3bb151;
+}
 .white{color:#ffffff;}
 .show-orders-active{
     color:#ff4d5c;
+}
+.timer-text{
+    font-family: "yekanNumRegular";
+}
+.report-active{
+  background-color:#ff4d5c ;
 }
 </style>

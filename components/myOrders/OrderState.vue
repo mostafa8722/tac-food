@@ -18,9 +18,9 @@
 
       <State :data="{title:'ثبت',icon:'order_placed.svg',active:true}"  key="1"/> 
       <h3 class="order-header-center bg-active"></h3>
-      <State  :data="{title:'تایید',icon:'order_confirm.svg',active:false}"  key="2"  /> 
-     <h3 class="order-header-center"></h3>
-      <State   :data="{title:'ارسال',icon:'food_delivery.svg',active:false}"  key="3" /> 
+      <State  :data="{title:'تایید',icon:'order_confirm.svg',active:orderState.state>1?true:false}"  key="2"  /> 
+     <h3 class="order-header-center" :class="orderState.state>1?'bg-active':''"></h3>
+      <State   :data="{title:'ارسال',icon:'food_delivery.svg',active:orderState.state>2?true:false}"  key="3" /> 
 
 
   
@@ -40,7 +40,7 @@ export default {
      
   
       props: {
-        cart :{
+        orderState :{
             type:Object,
             require :true,
             

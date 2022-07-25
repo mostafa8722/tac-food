@@ -1,9 +1,9 @@
-interface Cart {
+interface Order {
     orders: ProductOrder[],
   store_id:number ,
   order_time:string ,
 }
-export default Cart;
+export default Order;
 
 interface ProductOrder {
     product_id:number,

@@ -34,12 +34,12 @@
     >
     <div class="flex flex-col items-center flex-1">
           <div class="flex flex-col  mb-1 mr-4">
-            <font-awesome-icon :class="`${pay_type=='type_1'?'red':''}  height-20`" :icon="`fa-solid fa-wallet`" />
-            <span :class="`mt-1 ${pay_type=='type_1'?'red':''}`">کیف پول</span>
+            <font-awesome-icon :class="`${pay_type=='wallet'?'red':''}  height-20`" :icon="`fa-solid fa-wallet`" />
+            <span :class="`mt-1 ${pay_type=='wallet'?'red':''}`">کیف پول</span>
           </div>
 <v-radio
      color="#ff2200"
-        value="type_1"
+        value="wallet"
       > </v-radio>
      
     </div>
@@ -60,12 +60,12 @@
       <div class="flex flex-col items-center flex-1">
           <div class="flex flex-col  mb-1 mr-4">
             
-            <font-awesome-icon :class="`${pay_type=='type_3'?'red':''} height-20`" :icon="`fa-solid fa-money-bills`" />
-            <span :class="`mt-1 ${pay_type=='type_3'?'red':''}`">در محل</span>
+            <font-awesome-icon :class="`${pay_type=='cod'?'red':''} height-20`" :icon="`fa-solid fa-money-bills`" />
+            <span :class="`mt-1 ${pay_type=='cod'?'red':''}`">در محل</span>
           </div>
 <v-radio
      color="#ff2200"
-        value="type_3"
+        value="cod"
       > </v-radio>
      
     </div>

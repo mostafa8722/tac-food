@@ -1,6 +1,6 @@
 <template>
  <v-card
-    class=" overflow-hidden pb-2 mt-2  rounded-xl"
+    class=" overflow-hidden pb-4 pt-4 mt-2  rounded-xl"
     width="100%"
   
      
@@ -15,7 +15,7 @@
       height="40"
       width="40"
       class="flex-none  mr-2 rounded "
-        :src="product.logo"
+        :src="orderState.courier_photo"
     
     >
     <template v-slot:placeholder>
@@ -32,14 +32,17 @@
 
 
   <div class="flex flex-col mr-2 mt-1">
-      <span class=" title">{{product.name}}</span>
+      <span class=" title">{{orderState.courier_name}}</span>
  
-  <span class=" price"> {{formatPrice(product.count)}} عدد </span>
+  <span class=" price"> سفیر</span>
   </div>
     </div>
 
- <div class="flex flex-row-reverse mt-2 ml-2">
-      <span class=" price"> {{formatPrice(product.price)}} ت  </span>
+ <div class="flex flex-row-reverse mt-2 ml-5">
+      <a :href="`tel:${orderState.courier_phone}`">
+             <font-awesome-icon    class=" height-20 ml-1" icon="fa-solid fa-phone" />
+
+      </a>
    </div>
  
  
@@ -49,16 +52,23 @@
 
 </template>
 <script>
+import Vue from "vue"
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
 
+import {faPhone} from '@fortawesome/free-solid-svg-icons'
 
+library.add(faPhone)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 export default {
-  props : ["product"],
+  
+  props : ["orderState"],
   
   methods:{
-     formatPrice(price) {
-         return  Number(price).toLocaleString() ;
-      },
+    openPhone(){
+
+    }
     
   },
   
@@ -69,9 +79,9 @@ export default {
     flex:none;
 }
 .rounded-xl{
-  border-radius:0rem!important;
-  border:unset;
-  border-bottom: 0.1rem solid  #dddddd;
+  border-radius:0.35rem!important;
+
+  border: 0.1rem solid  #dddddd;
 }
 .rounded{
   border-radius:50%!important;

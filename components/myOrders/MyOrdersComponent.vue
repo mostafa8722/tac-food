@@ -2,8 +2,11 @@
    <section>
      
      
-        <Empty  v-if="myOrders.length==10" />
-        <Orders   />
+        <Empty  v-if="myOrders.length==0" />
+
+        
+        <Orders v-else v-for="order in myOrders" :key ="order.order_id" :order="order"  :orderState="getOrderState(order)"  />
+        
     </section>
 
 </template>
@@ -21,7 +24,8 @@ export default {
     components: { Empty, Orders },
    computed :{
     ...mapGetters({
-        myOrders : "orders/myOrders"
+        myOrders : "orders/myOrders",
+        myOrdersState : "orders/myOrdersState"
     })
    },
       created(){
@@ -29,10 +33,12 @@ export default {
                if(Cookies.get("user")){
            let user = JSON.parse (Cookies.get("user"));
                  let token  = {
-                       api_token: user.api_token
+                       api_token: user.api_token,
+                       is_order : true
                     };
                  
                this.$store.dispatch('orders/showMyOrders',token)      
+               this.$store.dispatch('orders/showOrdersState',token)      
               
               
                 
@@ -42,6 +48,11 @@ export default {
            
          },
     
+    methods :{
+        getOrderState(order){
+            return this.myOrdersState.filter(item => item.id== order.order_id )[0];
+        }
+    }
   
   
 }

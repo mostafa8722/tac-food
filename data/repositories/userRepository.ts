@@ -38,6 +38,20 @@ interface IOrder {
   is_order : boolean
 }
 
+interface IReport {
+  api_token:string,
+  order_id : string,
+  step : string,
+}
+
+interface IComment {
+  api_token:string,
+  store_id : string,
+  body : string,
+  rating : string,
+}
+
+
 export default class UserRepository extends Repository {
 
  
@@ -71,7 +85,19 @@ export default class UserRepository extends Repository {
   }
   async showOrdersState(data: IOrder): Promise<any> {
    
-    const response = await this.axios.post('v1/orders', data)
+    const response = await this.axios.post('v1/orders/state', data)
+    return response
+  }
+
+  async sendReport(data: IReport): Promise<any> {
+   
+    const response = await this.axios.post('v1/report/insert', data)
+    return response
+  }
+
+  async sendComment(data: IComment): Promise<any> {
+   
+    const response = await this.axios.post('v1/comments/insert', data)
     return response
   }
 

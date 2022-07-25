@@ -134,8 +134,7 @@ async handleUrl(e){
   background-color:#ea7c85;
   height: 45px;
   width: 80%;
-  left:10%;
-  right:10%;
+ max-width: 500px;
   position: fixed;
   bottom: 50px;
   border-radius: 5px;

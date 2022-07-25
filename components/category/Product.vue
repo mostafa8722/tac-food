@@ -39,7 +39,7 @@
              </span>
      </div>
       <span class=" body flex mt-2"> 
-        <span v-for="(cat,index) in product.categories" class="flex">  {{index==0?cat:`,${cat}`}}</span>
+        <span v-for="(cat,index) in product.categories" >  {{index==0?cat:`,${cat}`}}</span>
        </span>
       <span class=" address mt-2">   {{product.address}}</span>
 
