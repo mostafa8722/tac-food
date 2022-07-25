@@ -5,15 +5,34 @@
       <div class="modal" @click.stop>
            
            
-         <div class=" mb-2">
-          <h3 class="header-modal pt-2">{{data.title}}</h3>
+         <div class=" mb-2 flex flex-col" >
+
+            <v-img
+      height="40"
+      width="40"
+      class="flex-none  mr-2 rounded "
+        :src="data.img"
+    
+    >
+    <template v-slot:placeholder>
+         <v-img
+        src="/icons/food.svg"
+       height="40"
+      width="40"
+      class="flex-none  rounded"
+    
+    
+    ></v-img>
+        </template>
+    </v-img>
+         
         
          <p class="desc-text mr-1 ml-1  mt-5 pr-2 ">  {{data.description}}</p>
 
          <div class="flex flex-row-reverse mb-5 mt-5 ">
-                    <button  @click.prevent="$emit('confirm-delete')" class="btn-save pointer mt-4"> {{data.confirmBtn}} </button>
+                    <button  @click.prevent="$emit('confirm-delete')" class=" pointer mt-4">بعدی </button>
 
-                     <button @click.prevent="$emit('close-modal')" class="btn-close pointer mt-4"> {{data.cancelBtn}} </button>
+                     <button @click.prevent="$emit('close-modal')" class="btn-close pointer mt-4">قبلی</button>
 
 
          </div>
