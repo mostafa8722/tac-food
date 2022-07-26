@@ -137,6 +137,8 @@ export const actions: ActionTree<AuthState, any> = {
       })
   },
 
+
+
   async sendReport({ commit, dispatch }, data) {
     let token  = {
       api_token: data.api_token,
@@ -170,18 +172,21 @@ export const actions: ActionTree<AuthState, any> = {
   async sendComment({ commit, dispatch }, data) {
     let token  = {
       api_token: data.api_token,
-      is_order : true
+      is_order : true,
+      order_id:data.order_id
    };
 
     this.dispatch('home/addDataSent',true)
     await this.$repositories
       .users()
-      .sendComment(data)
+      .sendComment(data.formData)
       .then((res:any) => {
         this.dispatch('home/addDataSent',false)
+        
         console.log("updateStoreCart1233",res)
       
     
+  this.dispatch('orders/updateOrdersState',token)      
   this.dispatch('orders/showMyOrders',token)      
   this.dispatch('orders/showOrdersState',token)     
        // this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
@@ -192,6 +197,27 @@ export const actions: ActionTree<AuthState, any> = {
       .catch((error:any) => {
       
         this.dispatch('home/addDataSent',false)
+     
+      
+      })
+  },
+  async updateOrdersState({ commit, dispatch }, data) {
+      
+    this.dispatch("home/handleLoading",true)
+    await this.$repositories
+      .users()
+      .updateOrdersState(data)
+      .then((res:any) => {
+        this.dispatch("home/handleLoading",false)
+        console.log("updateStoreCart12",res)
+        commit("setMyOrdersState",res.data.result)
+       // this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
+        
+      
+      
+      })
+      .catch((error:any) => {
+        this.dispatch("home/handleLoading",false)
      
       
       })

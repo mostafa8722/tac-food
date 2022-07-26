@@ -37,6 +37,10 @@ interface IOrder {
   api_token:string,
   is_order : boolean
 }
+interface IUpdateOrder {
+  api_token:string,
+  order_id : string
+}
 
 interface IReport {
   api_token:string,
@@ -88,7 +92,11 @@ export default class UserRepository extends Repository {
     const response = await this.axios.post('v1/orders/state', data)
     return response
   }
-
+  async updateOrdersState(data: IUpdateOrder): Promise<any> {
+   
+    const response = await this.axios.post('v1/orders/status/update', data)
+    return response
+  }
   async sendReport(data: IReport): Promise<any> {
    
     const response = await this.axios.post('v1/report/insert', data)

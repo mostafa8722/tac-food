@@ -27,7 +27,7 @@
   <HeaderOrder class="mt-3" title=" هزینه ارسال "  icon="fa-moped"  :value="formatPrice(order.delivery)" />
   <HeaderOrder class="mt-2" title=" تخفیف "  icon="fa-tag"  :value="formatPrice(order.discount)" />
   <HeaderOrder class="mt-2" title=" نوع پرداخت "  icon="fa-angle-left"  :value="order.type" />
-  <HeaderOrder class="mt-2" title="مبلغ "  icon="fa-money-bills"  :value="order.payment" />
+  <HeaderOrder class="mt-2" title="مبلغ "  icon="fa-money-bills"  :value="formatPrice(order.payment)" />
  
 
   <div @click.prevent="showOrders=!showOrders" class="flex-header-container  mt-10 mb-5 pointer pr-3 pl-3 flex ">
@@ -284,14 +284,15 @@ this.rating.map((item,index)=>{
                      rating:rating
                     };
 
-                     /* let formData = new FormData();
+                     let formData = new FormData();
                        formData.append('api_token',  user.api_token);
                        formData.append('store_id',  this.orderState.store_id);
                        formData.append('body',   data.body);
-                       formData.append('rating',   rating);*/
+                       formData.append('rating',   rating);
                  
                  
-              this.$store.dispatch('orders/sendComment',data_comment)      
+              this.$store.dispatch('orders/sendComment'
+              ,{formData:formData,api_token:user.api_token,order_id:this.order.order_id})      
               
               
               
