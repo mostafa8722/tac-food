@@ -1,6 +1,6 @@
 <template>
  <v-card
-    class=" overflow-hidden pb-4 pt-4 mt-2  rounded-xl"
+    class=" overflow-hidden pb-3 pt-3 mt-2  rounded-xl"
     width="100%"
   
      

@@ -66,7 +66,7 @@
        <span v-if="!isDataSent"  class="white">گزارش تاخیر</span>
     </div>
 
-      <div v-else class="btn-comment pointer" @click="showModalComment=true">
+      <div v-else class="btn-comment pointer" @click="sendComment(0,0)">
     
       <font-awesome-icon    class="white ml-1" icon="fa-solid fa-circle-check" />
        <span  class="white">تایید و رای </span>
@@ -74,7 +74,7 @@
     <span class="ml-5 timer-text"> {{showTime}}</span>
    </div>
   </v-card>
-   <ModalComment :data="deleteData" v-show="showModalComment" @close-modal="showModalComment = false" />
+   <ModalComment :data="modalData" v-show="showModalComment"  @close-modal="showModalComment = false" @next-step="sendComment" @send-comment="ConfirmComment" />
 
     
      </div>
@@ -96,6 +96,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 import {faAngleLeft,faAngleDown,faAngleUp,faBasketShopping,faCircleInfo ,faCircleCheck} from '@fortawesome/free-solid-svg-icons'
 
+
 library.add(faAngleLeft,faAngleDown,faBasketShopping,faCircleInfo,faAngleUp,faCircleCheck)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 export default {
@@ -104,6 +105,7 @@ export default {
       ...mapGetters({
           
           isDataSent: 'home/isDataSent',
+          
         
             })
          },
@@ -128,7 +130,9 @@ export default {
         showOrders:false,
         canReport : false,
         showModalComment : false,
-              deleteData :{title:"هشدار!",description:"آیا برای حذف این آیتم مطمئن هستید؟",cancelBtn:"انصراف",confirmBtn:"بله" },
+        step_comment :0,
+           rating : [],
+              modalData :{img:"",description:"",cancelBtn:"انصراف",confirmBtn:"بله" },
 
       }),
     
@@ -201,28 +205,104 @@ export default {
 
               
             },
-            sendComment(){
-              if(!this.canReport)
-              return ;
+            sendComment(step,data){
+       
 
+
+            if(step>0){
+             this.rating[step-1] = {"product_id":data.product_id,"rating":data.rating,"is_courier":data.is_courier};
+            }
+              console.log("data3",this.rating)
+              this.step_comment = step ;
+
+             this.showModalComment=true;
+
+             if( step==0){
+             this.modalData  = {
+                  product_id : this.orderState.courier_id,
+              img:this.orderState.courier_photo,
+              description : `${this.orderState.courier_name}  هستم سفیر تک فود `,
+              text : "به عملکرد من امتیاز بدهید",
+              step : step,
+              send:false
+              }
+             }else  if(this.order.products.length==step-1) {
+                this.modalData  = {
+                  product_id : 0,
+              img:'',
+              description :''   ,
+              text : '',
+               step : step,
+                send:true,
+              } 
+              
+              }else{
+               let product = this.order.products[step-1];
+               this.modalData  = {
+                   product_id : product.id,
+              img:product.logo,
+              description : `${product.name}   `,
+              text : '',
+               step : step,
+                send:false
+              } 
+
+              } 
+             
+
+              
+            },
+             ConfirmComment(step,data){
+            
+
+         
+
+
+            
+             // this.step_comment = step ;
+
+            // this.showModalComment=false;
+
+             
+let rating2 = {};
+this.rating.map((item,index)=>{
+    if(index ==0)
+      rating2  =  JSON.stringify({"product_id":item.product_id,"rating":item.rating,"is_courier":item.is_courier});
+      else 
+      rating2 += ","+ JSON.stringify({"product_id":item.product_id,"rating":item.rating,"is_courier":item.is_courier});
+                       
+                     
+})
+
+ let  rating = "[" + rating2 + "]";
                       if(Cookies.get("user")){
            let user = JSON.parse (Cookies.get("user"));
-                 let token  = {
+                 let data_comment  = {
                        api_token: user.api_token,
                        store_id : this.orderState.store_id,
-                       body : this.orderState.state,
-                       store_id : this.orderState.state,
+                     body : data.body,
+                     rating:rating
                     };
+
+                     /* let formData = new FormData();
+                       formData.append('api_token',  user.api_token);
+                       formData.append('store_id',  this.orderState.store_id);
+                       formData.append('body',   data.body);
+                       formData.append('rating',   rating);*/
                  
-               this.$store.dispatch('orders/showMyOrders',token)      
+                 
+              this.$store.dispatch('orders/sendComment',data_comment)      
               
               
               
                 
                 }
+             
+             
 
               
-            }
+            },
+           
       },
       watch:{
         countDown(new_val,old_val){
@@ -230,7 +310,14 @@ export default {
              this.canReport = true;
              this.showTime = "";
                         }
-        }
+        },
+         isDataSent(new_val,old_val){
+           if(!new_val){
+            this.step_comment = 0 ;
+
+             this.showModalComment=false;
+                        }
+        },
       }
      
   

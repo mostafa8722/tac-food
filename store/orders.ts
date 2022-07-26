@@ -179,14 +179,14 @@ export const actions: ActionTree<AuthState, any> = {
       .sendComment(data)
       .then((res:any) => {
         this.dispatch('home/addDataSent',false)
-        console.log("updateStoreCart12",res)
+        console.log("updateStoreCart1233",res)
       
     
   this.dispatch('orders/showMyOrders',token)      
   this.dispatch('orders/showOrdersState',token)     
        // this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
         
-       Vue.$toast.success("گزارش ارسال شد")
+       Vue.$toast.success("نظر با موفقیت ارسال شد")
       
       })
       .catch((error:any) => {

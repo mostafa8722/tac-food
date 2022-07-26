@@ -242,8 +242,7 @@ export default {
                 
               
              
-                console.log(orders);
-                console.log("api",user.api_token);
+                
                
 let formData = new FormData();
 formData.append('api_token',  user.api_token);
