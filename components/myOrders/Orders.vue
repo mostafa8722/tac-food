@@ -144,7 +144,7 @@ export default {
 
                    
                     this.countDown = Math.ceil(600 - seconds);
-                    this.countDown =(this.orderState.prep_time -this.orderState.time );
+                    
                     if(this.orderState.state ==2)
                     this.countDown =(this.orderState.prep_time -this.orderState.time );
 
