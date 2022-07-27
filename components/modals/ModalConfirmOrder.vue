@@ -17,8 +17,15 @@
             <p class="red mr-1 ml-1  pr-2 ">  {{selected_address.address?selected_address.address:""}} </p>
 
          </div>
-         <div class="flex justify-evenly mb-5 mt-5 ">
-                      <button @click.prevent="$emit('handle-order')" class="btn-save pointer mt-4"> تایید </button>
+         <div class="flex justify-end mb-5 mt-5 relative ">
+                      <button v-if="!isDataSent" @click.prevent="$emit('handle-order')" class="btn-save absolute pointer mt-4"> تایید </button>
+                           <div class="btn-save absolute mt-4" v-else>
+                            <v-progress-circular
+                        
+                 class="progress-circular"
+               indeterminate
+              color="#ffffff"/>
+                           </div>
                       <button @click.prevent="$emit('close-modal')" class="btn-close pointer mt-4"> خیر </button>
 
          </div>
@@ -42,6 +49,8 @@ export default {
       ...mapGetters({
            selected_address: 'user/selected_address',
            carts: 'carts/carts',
+                     isDataSent: 'home/isDataSent',
+
         
             })
          },
@@ -182,6 +191,11 @@ button {
    color: #ffffff;
     padding:0.3rem 1.5rem;
     border-radius: 0.3rem;
+    bottom: 0px;
+    height: 40px;
+    width: 110px;
+    right: 30px;
+
 }
 .btn-close{
    background-color:#ffffff;
@@ -199,4 +213,7 @@ button {
   height: 0.04rem;
 }
 .bold{font-weight: bold;}
+.h-40{
+  height: 40px;
+}
 </style>

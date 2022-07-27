@@ -47,14 +47,14 @@ export const actions: ActionTree<AuthState, any> = {
   async payment({ commit, dispatch }, data) {
 
 
-    
+    this.dispatch("home/addDataSent",true);
     await this.$repositories
       .payments()
       .addOrder(data)
       .then((res:any) => {
-     
+        this.dispatch("home/addDataSent",false);
 
-        console.log("Ttt",res.data)
+        console.log("bbbnnn1",res.data)
      
         if(res.data.url && res.data.status==0){
           let url = res.data.url;
@@ -68,7 +68,8 @@ export const actions: ActionTree<AuthState, any> = {
        // commit('productsPage',res.data)
       })
       .catch((error:any) => {
-        
+        console.log("bbbnnn2",error)
+        this.dispatch("home/addDataSent",false);
       
       })
   },
