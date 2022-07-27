@@ -3,7 +3,7 @@
      
 <div id="map-wrap">
  <client-only>
-  <l-map style="height: 130px;width:100%" :zoom="zoom" :center="center">
+  <l-map style="height: 150px;width:100%" :zoom="zoom" :center="center">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     <l-marker :lat-lng="markerLatLng">
     <l-icon
@@ -35,7 +35,7 @@ export default {
       zoom: 15,
 
    icon: {
-        iconUrl: "icons/gps_fixed.svg",
+        iconUrl: "/icons/gps_fixed.svg",
         iconSize: [32, 37],
         iconAnchor: [16, 37]
       },

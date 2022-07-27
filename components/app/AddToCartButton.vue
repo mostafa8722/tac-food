@@ -2,7 +2,7 @@
  <div>
 
   
-  <NuxtLink  v-if="totalCart>0" :to="url">
+  <NuxtLink  v-if="totalCart>0 && show_button" :to="url">
       <div @click.prevent.stop="handleUrl($event)" class="cart-container relative flex" :class="`${isDataSent?'justify-center items-center':''}`">
        <v-progress-circular
        v-show="url=='/payment' && isDataSent"
@@ -57,6 +57,7 @@ export default {
     url : "/payment",
     title : "پرداخت",
     showDelete : false,
+    show_button : true,
     deleteData :{title:"حذف",description:"آیا برای حذف سبد  مطمئن هستید؟",cancelBtn:"خیر",confirmBtn:"بله" },
     
 
@@ -74,7 +75,23 @@ this.title = "سبد خرید"
      }
      
   },
+  mounted() {
+  window.addEventListener("scroll", this.onScroll)
+},
+beforeDestroy() {
+  console
+  window.removeEventListener("scroll", this.onScroll)
+},
+
 methods :{
+  onScroll(e) {
+    //console.log(e)
+  //  this.windowTop = window.top.scrollY /* or: e.target.documentElement.scrollTop */
+   //this.show_button = false;
+    setTimeout(()=>{
+    //   this.show_button = true;
+  }, 300);
+  },
   clearCart(){
     this.showDelete = true;
        //this.$store.dispatch('carts/clearCart')
@@ -134,10 +151,14 @@ async handleUrl(e){
   background-color:#ea7c85;
   height: 45px;
   width: 80%;
+ 
  max-width: 500px;
   position: fixed;
   bottom: 50px;
   border-radius: 5px;
+  left: 50%;
+    transform: translate(-50%, 0);
+  
   
 }
 .white{

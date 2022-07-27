@@ -5,9 +5,9 @@
      <div class="  mr-2 ml-2 ">
 
      <div class="mt-3 flex flex-col  header-comment">
-        <HeaderComment :key="1" :item="item1" class="mb-2" />
-        <HeaderComment :key="2" :item="item2" class="mb-2" />
-        <HeaderComment :key="3" :item="item3" class="mb-2" />
+        <HeaderComment :key="1" :item="getItem(comments,'high')" class="mb-2" />
+        <HeaderComment :key="2" :item="getItem(comments,'middle')" class="mb-2" />
+        <HeaderComment :key="3" :item="getItem(comments,'low')" class="mb-2" />
      
      </div>
           
@@ -32,7 +32,9 @@ export default {
           }
       },
   computed: {
-             ...mapGetters({ comments: 'products/comments' })
+             ...mapGetters({
+                  isLoading: 'home/isLoading',
+                 comments: 'products/comments' })
          },
     data : ()  =>({
         item1 : {icon:"/images/emoj1.png",percent:70,color:"#4baf52"},
@@ -40,12 +42,36 @@ export default {
         item3 : {icon:"/images/emoj3.png",percent:30,color:"#f65457"},
        
     }),
+    methods:{
+        getItem(comments,type){
+
+
+           let count = 0;
+           comments.map(item=>{
+            if(type=="high" && item.rating>=3 )
+            count++;
+            else if(type=="middle" && (item.rating<3 && item.rating>=1.5 ) )
+            count++;
+                else if(type=="middle" && (item.rating<1.5  ) )
+            count++;
+
+        
+         })
+         let percent  = Math.ceil(count /comments.length) * 100 ;
+         let color = type == "high" ? "#4baf52" : type == "middle" ? "#ff9501":"#f65457" ; 
+         let icon = type == "high" ? "/images/emoj1.png" : type == "middle" ? "/images/emoj2.png":"/images/emoj3.png" ; 
+         
+          
+            return  {icon:icon,percent:percent,color:color};
+        }
+    },
     watch:{
-        comments(new_val,old_val){
-            alert()
-            console.log(new_val)
-         new_val.map(item=>{
-             console.log(item)
+        isLoading(new_val,old_val){
+          
+            console.log("pppp33",new_val)
+            if(!new_val)
+         this.comments.map(item=>{
+             console.log("pppp",item)
          })
         }
     }

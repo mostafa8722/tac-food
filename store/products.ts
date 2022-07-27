@@ -78,17 +78,17 @@ export const actions: ActionTree<AuthState, any> = {
 
   async commentSection({ commit, dispatch }, data) {
       
-    
+    this.dispatch("home/handleLoading",true)
     await this.$repositories
       .comments()
       .commentsPage(data)
       .then((res:any) => {
-     
+        this.dispatch("home/handleLoading",false)
         commit('commentsPage',res.data)
       })
       .catch((error:any) => {
-       
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+        this.dispatch("home/handleLoading",false)
+        //Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       
       })
   },

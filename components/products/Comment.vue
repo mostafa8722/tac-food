@@ -1,7 +1,7 @@
 <template>
      <div class=" bg-comment  ">
        <div class="flex justify-between ">
-            <div >
+            <div class="d-flex items-center">
              <v-img
                         height="35"
                         width="35"
@@ -9,7 +9,7 @@
                         src="/images/emoj1.png"
                         
                         ></v-img>
-           <span>{{comment.name}}</span>
+           <span class="mr-2">{{comment.name}}</span>
             </div>
            <span>{{comment.date}}</span>
 
@@ -81,5 +81,6 @@ color:#ababab;
     color:#9c9c9c;
     font-size: 0.7rem;
 }
+.d-flex{display: flex;}
     
 </style>
