@@ -75,6 +75,7 @@ export const actions: ActionTree<AuthState, any> = {
       
       })
   },
+  
 
   async commentSection({ commit, dispatch }, data) {
       

@@ -41,7 +41,7 @@
     ></v-rating>
   <span class=" title">  {{product.name}}</span>
   <span class=" type">  {{product.category}}</span>
-  <span class=" price">   تومان{{product.price}}هر کیلو</span>
+  <span class=" price">   تومان{{formatPrice(product.price)}}هر کیلو</span>
 
   </v-card>
   </NuxtLink>
@@ -52,7 +52,13 @@
 <script>
 
 export default {
-  props : ["product"]
+  props : ["product"],
+  methods:{
+      formatPrice(price) {
+         return  Number(price).toLocaleString()+" "+"";
+      },
+  }
+
 }
 </script>
 <style scoped>

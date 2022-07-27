@@ -50,7 +50,7 @@
     
   <div class="flex justify-between items-center mt-2 mr-2 ml-2">
   <span v-if="product.delivery_cost==0" class=" price "> رایگان</span>
-  <span v-else class=" price "> تومان {{product.delivery_cost}}</span>
+  <span v-else class=" price "> تومان {{formatPrice(product.delivery_cost)}}</span>
  
    <div class="grid grid-cols-2 ">
       <div class=" type flex  ">  {{product.vote}} رای</div>
@@ -77,7 +77,12 @@
 <script>
 
 export default {
-  props : ["product"]
+  props : ["product"],
+  methods:{
+      formatPrice(price) {
+         return  Number(price).toLocaleString()+" "+"";
+      },
+  }
 }
 </script>
 <style >

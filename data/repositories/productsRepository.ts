@@ -26,4 +26,5 @@ export default class ProductsRepository extends Repository {
    
     return response
   }
+  
 }
