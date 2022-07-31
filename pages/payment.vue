@@ -35,7 +35,7 @@ export default Vue.extend({
  max-width: 600px;
 
  
-  background-color: #f6f6f6;
+  background-color: #f5f5f5;
 }
 .containers > div{
    margin: 0 auto;

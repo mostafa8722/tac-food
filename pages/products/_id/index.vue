@@ -55,7 +55,7 @@ data :()=>({
   padding:10px 0px  !important;
   min-height: 100vh;
  max-width: 600px;
-  background-color: #f6f6f6;
+  background-color: #f5f5f5;
 }
 
 

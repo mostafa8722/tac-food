@@ -38,7 +38,7 @@ methods :{
 
 
 .search-container{
-  height:35px;
+  height:46px;
   width:calc(100% - 20px);
   margin:5px 10px;
   border : 0.5px solid #eeeeee;
@@ -47,7 +47,7 @@ methods :{
 }
 .search-container input{
   height : 100%;
-  font-size:00.75rem;
+  font-size:0.9rem;
 }
 input:focus {
   outline: none /* Removes the border when the input is clicked */

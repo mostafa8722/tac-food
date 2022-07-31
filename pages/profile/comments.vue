@@ -36,7 +36,7 @@ export default Vue.extend({
   min-height: 100vh;
 
  
-  background-color: #f6f6f6;
+  background-color: #f5f5f5;
 }
 
 

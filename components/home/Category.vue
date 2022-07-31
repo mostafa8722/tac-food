@@ -2,12 +2,12 @@
 <div class="flex flex-col items-center ml-3">
    <NuxtLink v-if="category.id" :to="`/category/${category.id}`">
   <v-card 
-    class="flex items-center justify-center rounded-xl"
+    class="flex items-center justify-center rounded-xl-cat"
     width="80"
     height="80"
      :color="category.color"
    outlined
-   rounded
+
   >
     
 <v-img
@@ -31,7 +31,7 @@
  
   </v-card>
   </NuxtLink>
-   <span class="mt-2">  {{category.name}}</span>
+   <span class="mt-2 cat-title">  {{category.name}}</span>
 </div>
 
 
@@ -42,12 +42,13 @@ export default {
   props : ["category"]
 }
 </script>
-<style>
+<style scoped>
+.cat-title{color:#6b6b6b;font-size:0.9rem;}
 .flex-none{
     flex:none;
 }
-.rounded-xl{
-  border-radius:0.5rem!important;
+.rounded-xl-cat{
+  border-radius:0.6rem!important;
 }
 .rounded-none{
   border-radius:0rem!important;

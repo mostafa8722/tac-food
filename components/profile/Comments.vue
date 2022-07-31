@@ -80,7 +80,7 @@ export default {
     flex:none;
 }
 .bg{
-      background-color: #f6f6f6;
+      background-color: #f5f5f5;
 }
 .header-comment{
     height:120px;

@@ -4,7 +4,7 @@
      <v-tabs
      v-if="show_tab"
       v-model="tab"
-      background-color="#f6f6f6"
+      background-color="#f5f5f5"
       centered
       dark
       icons-and-text

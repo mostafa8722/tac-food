@@ -2,7 +2,7 @@
    <div>
     <v-tabs
       v-model="tab"
-      background-color="#f6f6f6"
+      background-color="#f5f5f5"
       centered
       dark
       icons-and-text
@@ -101,7 +101,7 @@ color:#fe5c67!important;;
 filter: invert(49%) sepia(54%) saturate(5146%) hue-rotate(329deg) brightness(118%) contrast(99%);
 }
 .tab-item{
-   background-color: #f6f6f6!important;
+   background-color: #f5f5f5!important;
 }
 .active-tab{
   color:#fe5c67!important;;

@@ -68,7 +68,7 @@ library.add(faArrowRight)
 </script>
 <style scoped>
   header{
-    background-color: #f6f6f6;
+    background-color: #f5f5f5;
     height:30px;
   }
   .title{

@@ -23,25 +23,28 @@ export default {
 }
 
 .flex-header-left {
-  background-color: #eee;
+  background-color: #d7d7d7;
   width: 15px;
-   height: 0.5px;
+     height: 0.05rem;
 
 }
 .header-title{
 background-color: #ffffff;
 border-radius: 5px;
-padding : 5px;
-min-width: 100px;
+height: 30px;
+width:100px;
+ display: flex;
+ justify-content: center;
 text-align: center;
-border: 1px solid #eee;  
-font-size:0.75rem;  
+border: 1px solid #e6e6e6;  
+font-size:0.9rem;  
+color:#6b6b6b;
 }
 .flex-header-right {
-   background-color: #eee;
+   background-color: #d7d7d7;
 
   flex: 100%;
-  height: 0.5px;
+    height: 0.05rem;
 }
 
 </style>

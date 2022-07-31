@@ -100,14 +100,13 @@ export default {
     methods:{
       getShopInfo(shops,products,type){
             
-           console.log("tt",shops)
-           console.log("tt2",products)
+           
+           
            let product = products[0];
-           console.log("tt3",product)
+          
                   
            let shop = shops.filter(item=> item.id == product.store_id)[0];
-                      console.log("tt24",shop)
-
+                 
           if(type=="lat")
            return [shop.lat,shop.lng];
            else if(type=="activeTime")
@@ -130,7 +129,7 @@ export default {
 }
 </script>
 <style scoped>
-.bg{ background-color: #f6f6f6;}
+.bg{ background-color: #f5f5f5;}
 .border-a{border:0.07rem solid #aeaeae!important;}
 .header-title{font-size: 0.75rem;color:#565656;font-weight: bold;}
 .header-value{font-size: 0.65rem;color:#b2b2b2}

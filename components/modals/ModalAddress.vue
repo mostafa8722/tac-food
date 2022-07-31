@@ -103,7 +103,7 @@ export default {
 .w-100{width:100%;font-size: 0.75rem;}
 .modal {
   text-align: center;
-  background-color: #f6f6f6;
+  background-color: #f5f5f5;
  min-height:350px;
   width:400px;
   margin:20px  30px;

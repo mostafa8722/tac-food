@@ -114,7 +114,7 @@ export const actions: ActionTree<AuthState, any> = {
       .customerPaymentsPage(data)
       .then((res:any) => {
      
-        console.log("ttttt",res.data)
+        console.log("tttttrrr",res.data)
        // commit('commentsPage',res.data)
       })
       .catch((error:any) => {

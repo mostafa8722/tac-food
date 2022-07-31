@@ -176,7 +176,7 @@ export default {
 .rating-section button{padding:0px!important}
 .rating-section .mdi-star{color:#fe5c67!important}
 .rating-section .mdi-star-outline{color:#cdcdcd!important}
-.divider{height:1px;width:100%;background-color:#f6f6f6}
+.divider{height:1px;width:100%;background-color:#f5f5f5}
 
   .btn-custom{
   background-color:#ffffff!important;
