@@ -153,6 +153,7 @@ background-color: #eeeeee;
 .active-order .v-image__image{
   filter: invert(59%) sepia(34%) saturate(828%) hue-rotate(79deg) brightness(90%) contrast(89%);
 }
+.v-bottom-sheet.v-dialog {height:100%}
 .w-100{width: 100%;}
   @media screen and (max-width:600px){
     .slider-skeleton .v-skeleton-loader__image {

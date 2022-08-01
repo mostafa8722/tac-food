@@ -43,7 +43,7 @@ export default {
 }
 </script>
 <style scoped>
-.cat-title{color:#6b6b6b;font-size:0.9rem;}
+.cat-title{color:#6b6b6b;font-size:0.95rem;}
 .flex-none{
     flex:none;
 }

@@ -4,11 +4,12 @@
         <v-bottom-sheet
       v-model="showModal"
       inset
+      class="bottom-sheet"
     >
      
       <v-sheet
-        class="text-center relative"
-        height="600px"
+        class="text-center relative custom-sheet"
+       
       >
       
         <div class="my-3">
@@ -238,5 +239,10 @@ button {
 .modal-fade-enter-active,
 .modal-fade-leave-active {
   transition: opacity 0.5s ease;
+}
+.bottom-sheet,.custom-sheet{
+  top: 0px;
+  bottom: 0px;
+  height: 100%;
 }
 </style>
