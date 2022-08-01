@@ -36,7 +36,7 @@ export default {
 }
 
 .header-side {
-   font-family: yekanNumRegular!important;
+   font-family: yekanBold!important;
   font-size:0.75rem;
   margin-left:5px;
   margin-right:5px;

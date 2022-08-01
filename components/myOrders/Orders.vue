@@ -370,7 +370,7 @@ h3{
     color:#ff4d5c;
 }
 .timer-text{
-    font-family: "yekanNumRegular";
+    font-family: "yekanBold";
 }
 .report-active{
   background-color:#ff4d5c ;

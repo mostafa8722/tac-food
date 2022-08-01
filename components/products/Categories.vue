@@ -75,7 +75,7 @@ export default {
 }
 .v-tab{
 color:#242424!important;
- font-family: yekanNumRegular!important;
+ font-family: yekanBold!important;
   
 }
 .v-tab--active {

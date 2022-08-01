@@ -12,24 +12,24 @@
        
       >
       
-        <div class="my-3">
+        <div class="my-1">
            <div class="flex relative" style="height:40px;">
-                              <font-awesome-icon  @click="$emit('close-modal')" class="pointer z-10  h-4 mt-2 mr-3 font-7" :icon="`fa-solid fa-arrow-right`" />
+                              <font-awesome-icon  @click="$emit('close-modal')" class="pointer z-10  h-4 mt-2 mr-3 height:20 color-0" :icon="`fa-solid fa-arrow-right`" />
 
-            <h5 class="absolute text-center w-100 top-2">انتخاب موقعیت </h5>
+            <h5 class="absolute text-center w-100 top-2 text-title">انتخاب موقعیت </h5>
            </div>
-            <span class="desc-text block mb-2 mr-3">
+            <span class="desc-text block mt-3 mr-3">
                موقعیت مکانی خود را برروی نقشه مشخص کنید
            </span>
-        <div class="w-100" style="position:absolute;top:100px;bottom: 100px"><Map @handle-map="handleMapEvent" :markerLatLng="markerLatLng" :center="center" v-if="show_map" /></div>
+        <div class="w-100" style="position:absolute;top:80px;bottom: 80px"><Map  @handle-map="handleMapEvent"  @handle-drag-map="handleMapDragEvent"   :markerLatLng="markerLatLng" :center="center" v-if="show_map" /></div>
          <div class="flex justify-center mb-5 mt-5 pointer absolute bottom-0 w-100">
-             <div @click.prevent="getCurrentLocation" class="btn-gps ml-5  relative">
+             <div @click.prevent="getCurrentLocation" class="btn-gps ml-5  items-center justify-center  relative">
              
                <font-awesome-icon class="  white" :icon="`fa-solid fa-location-crosshairs height-20`" />
 
            </div>
-             <div @click.prevent="selecLocation" class="btn-location pointer relative">
-               <span class="white" style="font-size: 0.8rem;">انتخاب محل</span>
+             <div @click.prevent="selecLocation" class="btn-location items-center justify-center pointer relative">
+               <span class="white" style="font-size: 0.9rem;">انتخاب محل</span>
                <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid fa-location-dot`" />
 
            </div>
@@ -87,10 +87,21 @@ export default {
     methods:{
 
       handleMapEvent(e){
+
+     
           this.latlng  = [e.latlng.lat,e.latlng.lng];
          
           this.markerLatLng =  [e.latlng.lat,e.latlng.lng];
           this.center =  [e.latlng.lat,e.latlng.lng];
+         
+      },
+        handleMapDragEvent(e){
+
+        
+          this.latlng  = [e.lat,e.lng];
+         
+          this.markerLatLng =  [e.lat,e.lng];
+          this.center =  [e.lat,e.lng];
          
       },
 
@@ -178,25 +189,32 @@ return ;
   margin: 20px 0 0 16px;
   cursor: pointer;
 }
+.text-title{
+  color:#000000;
+  font-size: 0.95rem;
+  font-family: "yekanBold"!important;
+}
 .desc-text{
-    color:#696969;
-    font-size: 0.65rem;
+    color:#939393;
+    font-size: 0.85rem;
     text-align: right;
 }
 .font-7{font-size: 0.7rem;}
 .btn-location{
-    height:40px ;
+    height:46px ;
     width:250px;
     border-radius: 5px;
     background-color: #fd5e63;
     line-height: 35px;
+    display: flex;
 }
 .btn-gps{
-    height:40px ;
-    width:40px;
+    height:46px ;
+    width:46px;
     border-radius: 5px;
     background-color: #fd5e63;
     line-height: 35px;
+    display: flex;
 }
 .white{
     color:#ffffff;
@@ -206,6 +224,11 @@ return ;
     left:20px;
     top:10px;
     color: #ffffff;
+    height:20px;
+}
+.btn-gps svg{
+    height:18px ;
+  
 }
 .close-img {
   width: 25px;
@@ -224,7 +247,7 @@ p {
   margin: 20px 0;
 }
 button {
-  background-color: #ac003e;
+  background-color: #fd5e63;
   width: 150px;
   height: 40px;
   color: white;
@@ -245,4 +268,5 @@ button {
   bottom: 0px;
   height: 100%;
 }
+.color-0{color:#000000}
 </style>

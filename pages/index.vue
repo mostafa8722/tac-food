@@ -6,7 +6,7 @@
    <SearchBox /> 
      
   
-   <Sliders/>
+   <Sliders class="mt-4"/>
    
    <Categories class="mt-3" />
  
@@ -89,7 +89,7 @@ created(){
 <style scoped>
  @import '~/assets/css/tailwind.css';
   h1, h2, h3, h4, h5, h6, input, textarea, span, .v-application {
-  font-family: yekanNumRegular !important;
+  font-family: yekanBold !important;
 }
 .home-containers {
   margin: 0 auto;

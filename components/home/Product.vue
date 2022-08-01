@@ -3,8 +3,8 @@
  <NuxtLink :to="`/products/${product.store_id}`">
  <v-card
     class="flex mb-3 mt-2 flex-col items-center overflow-hidden  rounded-xl"
-    width="140"
-    height="180"
+    width="160"
+    height="220"
      color="#ffffff"
      dir="ltr"
   
@@ -13,7 +13,7 @@
     
 <v-img
       height="100"
-      width="140"
+      width="160"
       class="flex-none rounded-none"
       :src="product.logo"
     
@@ -35,13 +35,18 @@
       v-model="product.vote"
       background-color="warning lighten-1"
       color="red"
-      size="10"
-      class="rating-section"
+      size="20"
+      class="rating-section mt-1"
         
     ></v-rating>
-  <span class=" title">  {{product.name}}</span>
-  <span class=" type">  {{product.category}}</span>
-  <span class=" price">   تومان{{formatPrice(product.price)}}هر کیلو</span>
+  <span class=" title mt-2">  {{product.name}}</span>
+  <span class=" type  mt-1">  {{product.category}}</span>
+  <span class=" price mt-2">    
+    <span class="mr-1">ت</span>
+    <span class="mr-1">{{formatPrice(product.price)}} </span>
+    <span class="mr-1">{{product.unit}}</span>
+    <span>هر</span>
+  </span>
 
   </v-card>
   </NuxtLink>
@@ -72,21 +77,25 @@ export default {
   border-radius:0rem!important;
 }
 .title{
-  color:#717171;
-  font-size:0.75rem;
+  color:#606060;
+  font-size:0.95rem;
+
 }
-.price{
-  color:#717171;
-    font-size:0.5rem;
-  font-family: yekanNumRegular!important;
+.price{  display: flex;}
+.price span{
+  color:#606060;
+    font-size:0.9rem;
+ 
+    
+  font-family: IranYekanFN!important;
   
 }
 .type{
-  color:#8d8d8d;
-    font-size:0.6rem;
+  color:#c1c1c1;
+    font-size:0.9rem;
 }
 .rating-section button{padding:0px!important}
-.rating-section .mdi-star{color:#fe5c67!important}
+.rating-section .mdi-star{color:#fd5e63!important}
 .rating-section .mdi-star-outline{color:#cdcdcd!important}
 
   
@@ -94,7 +103,7 @@ export default {
 
     
     .shape-octagon {
-      background: red;
+      background: #fd5e63;
       width: 20px;
       height: 20px;
       top:5px;
@@ -105,7 +114,7 @@ export default {
       transform: rotate(20deg);
       color:#fff;
       display:flex;
-      justify-centent:center;
+      justify-content:center;
       align-items :center;
     }
     .shape-octagon:before {
@@ -116,7 +125,7 @@ export default {
       height: 20px;
       width: 20px;
           border-radius: 2px;
-      background: red;
+      background: #fd5e63;
       transform: rotate(135deg);
     }
    .shape-octagon span {
@@ -124,7 +133,7 @@ export default {
       font-size: 0.5rem;
       transform: rotate(-20deg);
       left:4px;
-       font-family: yekanNumRegular!important;
+       font-family: yekanBold!important;
     }
     .img-placeholder{
      position: absolute;

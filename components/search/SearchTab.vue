@@ -30,6 +30,7 @@ export default {
        
         changeTab(index){
               this.selected_tab = index;
+              this.$emit("change-tab",this.selected_tab==0 ?"product":"category")
         }
     }
     

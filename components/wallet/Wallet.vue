@@ -142,12 +142,12 @@ export default {
 .circle-border span{
     color :#676767;
     font-size:0.75rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 p{
     color :#cccccc;
     font-size:0.6rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 .btn-add{
     background-color : #fd5e63!important;
@@ -171,6 +171,6 @@ display: flex;
 .custom-text-field{
   direction:ltr;
   text-align: right;
-    font-family: yekanNumRegular !important;
+    font-family: yekanBold !important;
 }
 </style>

@@ -75,7 +75,7 @@ p{
 .title{
 font-size:0.5rem;
 color:#ababab;
- font-family: yekanNumRegular !important;
+ font-family: yekanBold !important;
 }
 .icon-item{
     color:#9c9c9c;

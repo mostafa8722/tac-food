@@ -39,6 +39,7 @@ text-align: center;
 border: 1px solid #e6e6e6;  
 font-size:0.95rem;  
 color:#6b6b6b;
+
 }
 .flex-header-right {
    background-color: #d7d7d7;

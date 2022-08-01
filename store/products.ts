@@ -75,6 +75,29 @@ export const actions: ActionTree<AuthState, any> = {
       
       })
   },
+
+  async searchPage({ commit, dispatch }, data) {
+      
+    this.dispatch("home/handleLoading",true)
+    this.dispatch("home/addDataSent",true)
+    await this.$repositories
+      .products()
+      .searchPage(data)
+      .then((res:any) => {
+
+        console.log("tttt",res.data)
+        this.dispatch("home/handleLoading",false)
+        this.dispatch("home/addDataSent",false)
+        commit('productsPage',res.data)
+      })
+      .catch((error:any) => {
+        this.dispatch("home/handleLoading",false)
+        this.dispatch("home/addDataSent",false)
+       
+      
+      })
+  },
+  
   
 
   async commentSection({ commit, dispatch }, data) {
@@ -104,7 +127,7 @@ export const actions: ActionTree<AuthState, any> = {
       .catch((error:any) => {
        
       
-        Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+       // Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       })
   },
   async customerPaymentSection({ commit, dispatch }, data) {

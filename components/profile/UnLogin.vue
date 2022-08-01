@@ -51,7 +51,7 @@ export default {
 p{
     color :#cccccc;
     font-size:0.6rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 .btn-add{
     background-color : #fd5e63!important;

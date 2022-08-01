@@ -1,6 +1,6 @@
 <template>
    <section class="flex  items-center flex-col">
-        <SearchTab />
+        <SearchTab  @change-tab="handleTab" />
         <Empty/>
         
     </section>
@@ -18,6 +18,11 @@ import Carts from './Carts'
 
 export default {
     components: { Empty,Carts,SearchTab },
+    methods:{
+        handleTab (e){
+          this.$emit('change-tab',e); 
+        }
+    }
     
   
   
@@ -37,12 +42,12 @@ export default {
 .circle-border span{
     color :#676767;
     font-size:0.75rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 p{
     color :#cccccc;
     font-size:0.6rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 .btn-add{
     background-color : #fd5e63!important;

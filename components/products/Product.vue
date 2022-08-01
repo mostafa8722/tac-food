@@ -153,7 +153,7 @@ export default {
 .price{
   color:#717171;
     font-size:0.5rem;
-  font-family: yekanNumRegular!important;
+  font-family: yekanBold!important;
   
 }
 .body{

@@ -88,6 +88,15 @@ import {GetStorage} from "~/utils/helpers"
 
       if(!GetStorage("latlng"))
       setTimeout(()=>{this.showModalMap = true},200)
+      else{
+       
+        let data ={
+          lat :GetStorage("latlng").split(",")[0],
+          lng :GetStorage("latlng").split(",")[1],
+          
+        }
+          this.$store.dispatch('general/addLocationAddress', data)
+      }
       
     },
     watch:{

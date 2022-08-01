@@ -3,7 +3,7 @@
 
 
 body {
-  font-family: IranYekanFN !important;
+  font-family: yekanBold !important;
   margin: 0;
 }
 
@@ -24,7 +24,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, input, textarea, span, .v-application {
-  font-family: yekanNumRegular !important;
+  font-family: yekanBold !important;
 }
 input:focus {
   outline: none /* Removes the border when the input is clicked */

@@ -161,7 +161,7 @@ h6 {
 }
 
 button {
-  background-color: #ac003e;
+  background-color: #fd5e63;
   width: 150px;
   height: 40px;
   color: white;

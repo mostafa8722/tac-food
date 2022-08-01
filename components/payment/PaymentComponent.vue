@@ -287,12 +287,12 @@ this.$store.dispatch('orders/payment',formData)
 .circle-border span{
     color :#676767;
     font-size:0.75rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 p{
     color :#cccccc;
     font-size:0.6rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 .btn-add{
     background-color : #fd5e63!important;
@@ -336,7 +336,7 @@ p{
 .text-p2{
     color:#676767;
     font-size: 0.9rem;
-     font-family: yekanNumRegular!important;
+     font-family: yekanBold!important;
 }
 .btn-send{
     height:40px ;

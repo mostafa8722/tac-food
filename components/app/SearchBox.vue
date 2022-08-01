@@ -4,7 +4,13 @@
        
           
   <font-awesome-icon v-if="this.url!='/search'" color="#9d9d9d" class="absolute icon-search left-2 top-2" icon="fa-solid fa-magnifying-glass" />
-           <input  @click="handleEvent()" placeholder="جست و جو در تک فود" class="absolute left-0 right-2" />
+  <v-progress-circular
+       v-show="url=='/search' && isDataSent"
+      indeterminate
+      color="#fd5e63"
+      class="absolute icon-search left-2 top-2" 
+    ></v-progress-circular>
+           <input  @click="handleEvent()"  v-on:keyup="$emit('handle-input',$event)" placeholder="جست و جو در تک فود" class="absolute left-0 right-2" />
 
       </div>
   
@@ -16,10 +22,18 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+import {mapGetters} from "vuex";
 
 library.add(faMagnifyingGlass)
 export default {
+   computed: {
+      ...mapGetters({
+           
+             isDataSent: 'home/isDataSent',
+        
+            })
+         },
   data :()=>({
     url : ""
   }),
@@ -30,7 +44,8 @@ methods :{
   handleEvent(){
 
    this.$router.push("/search")
-  }
+  },
+ 
 }
 }
 </script>
@@ -54,5 +69,6 @@ input:focus {
 }
 .icon-search {
   height:20px;
+  position: absolute !important;;
 }
 </style>

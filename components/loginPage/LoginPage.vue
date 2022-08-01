@@ -152,7 +152,7 @@ computed: {
 p{
     color :#cccccc;
     font-size:0.6rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 .btn-add{
     background-color : #fd5e63!important;
@@ -203,7 +203,7 @@ align-items: center;
 .custom-text-field{
   direction:ltr;
   text-align: right;
-    font-family: yekanNumRegular !important;
+    font-family: yekanBold !important;
 }
 .input-phone input{text-align: left;}
 .login-page-component{width: 100%;}

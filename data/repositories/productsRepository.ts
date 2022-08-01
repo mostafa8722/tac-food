@@ -27,4 +27,11 @@ export default class ProductsRepository extends Repository {
     return response
   }
   
+  async searchPage(data: inputData): Promise<any> {
+
+    const response = await this.axios.post('v1/search', data)
+   
+    return response
+  }
+  
 }

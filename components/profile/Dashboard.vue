@@ -150,7 +150,7 @@ export default {
 p{
     color :#cccccc;
     font-size:0.6rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 .btn-add{
     background-color : #fd5e63!important;
@@ -163,7 +163,7 @@ p{
 .text-profile{
     color : #9c9c9c!important;
     font-size:0.8rem;
-     font-family: yekanNumRegular !important;
+     font-family: yekanBold !important;
 }
 .icon-users{
    

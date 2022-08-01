@@ -89,7 +89,7 @@ export default {
     color:#696969;
     font-size: 0.9rem;
     text-align: right;
-     font-family: yekanNumRegular !important;
+     font-family: yekanBold !important;
 }
 .font-7{font-size: 0.7rem;}
 
@@ -131,13 +131,13 @@ h6 {
 
    color: #fd5e63;
     padding:0.3rem 1.5rem;
-     font-family: yekanNumRegular !important;
+     font-family: yekanBold !important;
 }
 .btn-close{
 
    color: #fd5e63;
     padding:0.3rem 1.5rem;
-     font-family: yekanNumRegular !important;
+     font-family: yekanBold !important;
   
 }
 .red{

@@ -24,7 +24,7 @@ export default Vue.extend({
 <style  scoped>
  @import '~/assets/css/tailwind.css';
   h1, h2, h3, h4, h5, h6, input, textarea,div, span, .v-application {
-  font-family: yekanNumRegular !important;
+  font-family: yekanBold !important;
 }
 .containers {
   margin: 0 auto;

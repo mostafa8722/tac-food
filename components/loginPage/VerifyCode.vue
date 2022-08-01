@@ -167,7 +167,7 @@ export default {
 p{
     color :#747474;
     font-size:0.6rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 
 .red{
@@ -207,7 +207,7 @@ width: 100%;
 .custom-text-field{
   direction:ltr;
   text-align: right;
-    font-family: yekanNumRegular !important;
+    font-family: yekanBold !important;
 }
 .container-progress{
 display: flex;

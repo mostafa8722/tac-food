@@ -4,9 +4,9 @@
 <div id="map-wrap show-map">
  
  <client-only>
-  <l-map  @click="$emit('handle-map',$event)" class="absolute" style="height: 100%;width:100%" :zoom="zoom" :center="center">
+  <l-map   @update:center="$emit('handle-drag-map',$event)" @click="$emit('handle-map',$event)" class="absolute" style="height: 100%;width:100%" :zoom="zoom" :center="center">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-    <l-marker   :lat-lng="markerLatLng">
+    <l-marker    :lat-lng="markerLatLng">
       <l-icon
           :icon-size="icon.iconSize"
           :icon-anchor="icon.iconAnchor"

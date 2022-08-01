@@ -227,7 +227,7 @@ export default {
 p{
     color :#cccccc;
     font-size:0.7rem;
-    font-family: yekanNumRegular!important;
+    font-family: yekanBold!important;
 }
 
 .flex-header-right {

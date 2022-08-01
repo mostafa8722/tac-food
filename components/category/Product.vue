@@ -124,7 +124,7 @@ export default {
 .type{
   color:#8d8d8d;
     font-size:0.6rem;
-      font-family: yekanNumRegular!important;
+      font-family: yekanBold!important;
  
 }
 
