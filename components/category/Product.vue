@@ -113,7 +113,7 @@ export default {
 }
 .price span{
   color:#8e8e8e;
-    font-size:0.85rem;
+    font-size:0.75rem;
      font-family: IranYekanFN !important;
 }
 .address{
