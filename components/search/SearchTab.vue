@@ -1,6 +1,6 @@
 <template>
  
-     <div class="mt-20 flex flex-col items-center justify-center mr-3">
+     <div class="mt-2 flex flex-col items-center justify-center mr-3">
 
          
        

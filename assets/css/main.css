@@ -155,6 +155,18 @@ background-color: #eeeeee;
 }
 .v-bottom-sheet.v-dialog {height:100%}
 .w-100{width: 100%;}
+.v-card--link:before{
+  background-color: unset!important;
+}
+.v-ripple__animation--in {
+  transition: unset !important;;
+  opacity: 0!important;
+}
+.v-ripple__animation--out {
+  transition: unset !important;;
+  opacity: 0!important;
+}
+.product-tab .v-item-group{background-color: #ffffff!important;}
   @media screen and (max-width:600px){
     .slider-skeleton .v-skeleton-loader__image {
       height: 220px!important;

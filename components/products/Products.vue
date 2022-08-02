@@ -34,15 +34,22 @@
          
        
       </v-tab-item>
+      
     </v-tabs-items>
+    <div class="custom-active-time" >
+        <div class="active-time-shape">
+          <div class="active-time-shape-inline"></div>
+        </div>
+        <span class="active-time-text mr-2">فعالیت از 2000تا 2200</span>
+      </div>
      <HeaderSection class="mt-2" :title= "title"/>
      
      <div class="mt-3 flex flex-col ml-3 mr-3">
         <SkeletonLoaders v-if="isLoading" v-for="(item,index) in [1,2,3,4,5,6,7,8]" :key="index"  />
-     <div  v-if="!isLoading" v-for="(item, index) in catProducts">
+    
   
-        <Product   @select-product="showProduct" :key="item.id"  :product="item" />
-      </div>
+        <Product   v-if="!isLoading" v-for="(item, index) in catProducts"  @select-product="showProduct" :key="item.id"  :product="item" />
+      
       <Empty v-show="products.length==0 && !isLoading" />
      </div>
      <ModalShowProduct :product="selectedProduct"  v-show="showModal" @close-modal="showModal = false" />
@@ -115,4 +122,34 @@ export default {
 .v-tabs-slider{
       background-color:#fe5c67!important;;
 }
+.custom-active-time{
+  border-top: 0.05rem solid #e5e5e5;
+  background-color: #ffffff;
+  height: 30px;
+  display: flex;
+  padding-right: 1rem;
+  align-items: center;
+}
+.active-time-text{
+  color:#fe5c67;
+  font-size: 0.7rem;
+  font-family: IranYekanFN!important;
+
+}
+.active-time-shape{
+  height: 12px;
+  width: 12px;
+  border:0.05rem solid #fe5c67;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.active-time-shape-inline{
+  height: 7px;
+  width: 7px;
+  background-color: #fe5c67;
+  border-radius: 50%;
+}
+
 </style>

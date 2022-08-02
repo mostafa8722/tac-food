@@ -4,7 +4,7 @@
  <v-card
     class="flex mb-3 mt-2 flex-col items-center overflow-hidden  rounded-xl"
     width="160"
-    height="220"
+    height="215"
      color="#ffffff"
      dir="ltr"
   
@@ -41,7 +41,7 @@
     ></v-rating>
   <span class=" title mt-2">  {{product.name}}</span>
   <span class=" type  mt-1">  {{product.category}}</span>
-  <span class=" price mt-2">    
+  <span class=" price mt-1">    
     <span class="mr-1">ت</span>
     <span class="mr-1">{{formatPrice(product.price)}} </span>
     <span class="mr-1">{{product.unit}}</span>

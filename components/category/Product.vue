@@ -58,8 +58,8 @@
       <v-rating
       v-model="product.rating"
       background-color="warning lighten-1"
-      color="red"
-      size="10"
+      color="#fd5e63"
+      size="20"
       class="rating-section flex flex-row-reverse ml-2"
         
     ></v-rating>

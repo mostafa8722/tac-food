@@ -19,7 +19,7 @@ import ModalDelete from '~/components/modals/ModalDelete.vue'
 
 
 export default Vue.extend({
-   layout: 'custom',
+   layout: 'home',
    validate(data:any){
      return /^\d+$/.test(data.params.id);
    },

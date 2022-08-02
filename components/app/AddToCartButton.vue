@@ -148,7 +148,7 @@ async handleUrl(e){
 
 
 .cart-container{
-  background-color:#ea7c85;
+  background-color:#fd5e63;
   height: 45px;
   width: 80%;
  

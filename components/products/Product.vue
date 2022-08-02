@@ -1,18 +1,20 @@
 <template>
+<div class="content-product mt-2">
+
 <v-card
-    class="flex flex-col mt-2  overflow-hidden content-product pointer "
+    class="flex flex-col pt-2   overflow-hidden  pointer "
     width="100%"
-    height="138"
+    height="155"
      color="#ffffff"
   
   outlined
    @click.prevent="$emit('select-product',product)"
   >
-    <div class="flex flex-row  ">
+    <div class="flex flex-row  pr-2 pl-2 ">
      <v-img
        
-      height="60"
-      width="60"
+      height="65"
+      width="65"
       
       class="flex-none rounded-xl"
       :src="product.logo"
@@ -40,13 +42,13 @@
       <v-rating
       v-model="product.rating"
       background-color="warning lighten-1"
-      color="red"
-      size="10"
+      color="#fd5e63"
+      size="20"
       class="rating-section flex flex-row-reverse ml-2"
         
     ></v-rating>
 
-      <span class=" type flex-100 text-left  ml-1">  {{product.vote}} رای</span>
+      <span class=" type flex-100 text-left  ml-1">  {{product.vote}} نفر</span>
 
     </div>
 <div class="divider"></div>
@@ -56,13 +58,15 @@
   
     <div class="flex flex-row-reverse ">
       <font-awesome-icon @click.stop.prevent="addToCart" class="icon-custom pointer" :icon="`fa-solid  fa-add`" />
-      <span v-if="cart_product.count" class="mr-3 ml-3">{{cart_product.count}}</span>
+      <span v-if="cart_product.count" class="type mr-2  ml-2">{{cart_product.count}}</span>
         <font-awesome-icon v-if="cart_product.count" @click.stop.prevent="removeFromCart" class="icon-custom pointer" :icon="`fa-solid  fa-minus`" />
     </div>
   
 
   </div>
   </v-card>
+</div>
+
 
 
 </template>
@@ -140,55 +144,57 @@ export default {
 }
 
 .content-product{
-  border-radius:0.3rem!important;
-  border:0.5rem solid #dddddd;
+  border-radius:0.35rem!important;
+
+  border: 0.055rem solid #cccccc;
 }
 .rounded-none{
   border-radius:0rem!important;
 }
 .title{
-  color:#717171;
-  font-size:0.75rem;
+  color:#606060;
+  font-size:0.95rem;
 }
 .price{
-  color:#717171;
-    font-size:0.5rem;
-  font-family: yekanBold!important;
+  color:#606060;
+    font-size:0.9rem;
+  font-family: IranYekanFN!important;
   
 }
 .body{
-  color:#8d8d8d;
-    font-size:0.6rem;
+  color:#8e8e8e;
+    font-size:0.8rem;
      clear: both;
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 94%;
+    width: calc(100% - 70px);
 }
 .type{
-  color:#8d8d8d;
-    font-size:0.6rem;
+  color:#8e8e8e;
+    font-size:0.85rem;
+     font-family: IranYekanFN!important;
  
 }
 .flex-100{flex:100%;}
 
 .rating-section button{padding:0px!important}
-.rating-section .mdi-star{color:#fe5c67!important}
+.rating-section .mdi-star{color:#fd5e63!important}
 .rating-section .mdi-star-outline{color:#cdcdcd!important}
-.divider{height:1px;width:100%;background-color:#f5f5f5}
+.divider{height:1px;width:100%;background-color:#e5e5e5}
 
   .btn-custom{
   background-color:#ffffff!important;
-  border:1px solid #fe5c67;
+  border:1px solid #fd5e63;
   height:20px!important;
   width:20px!important;
 }
 .icon-custom{
-  color:#fe5c67!important;
-  font-size:0.9rem!important;
+  color:#fd5e63!important;
+  height: 10px;
   padding:0.1rem;
-  border:0.1rem solid #fe5c67;
+  border:0.1rem solid #fd5e63;
   border-radius: 50%;
 
 }

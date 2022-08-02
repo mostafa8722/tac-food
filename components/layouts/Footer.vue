@@ -108,7 +108,11 @@ import { mapGetters } from 'vuex'
     },
     methods:{
       getUrl(index){
+
+        
         let url = this.$route.path;
+        let name  = this.$route.name;
+
        
         if(url=="/" && index==0)
         return true
@@ -118,6 +122,10 @@ import { mapGetters } from 'vuex'
         return true;
         else if(url=="/profile" && index==3)
         return true; 
+        else if(name=="category-id" && index==0)
+          return true; 
+          else if(name=="products-id" && index==0)
+          return true; 
    
 
  return false;
