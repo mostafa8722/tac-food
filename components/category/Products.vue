@@ -7,7 +7,7 @@
 
      <div  v-if="!isLoading" v-for="(item, index) in shops">
   
-        <Product :key="item.id"  :product="item" />
+        <Product :key="item.id"  page="category" :product="item" />
       </div>
       <Empty v-if="shops.length==0 && !isLoading" />
      </div>

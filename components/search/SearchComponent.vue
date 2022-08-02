@@ -1,8 +1,12 @@
 <template>
    <section class="flex  items-center flex-col">
         <SearchTab  @change-tab="handleTab" />
-        <Empty/>
-        
+        <Empty v-if="products.length==0 && shops.length==0"/>
+       
+         <Product   v-if="!isDataSent && type=='product'" v-for="(item, index) in products" page="search" :key="item.id"  :product="item" />
+      
+        <ProductCat v-if="!isDataSent && type=='category'" v-for="(item, index) in shops" :key="item.id" page="search"  :product="item" />
+     
     </section>
 
 </template>
@@ -12,12 +16,26 @@
 import Empty from './Empty'
 import SearchTab from './SearchTab'
 import Carts from './Carts'
+import Product from '~/components/products/Product.vue';
+import ProductCat from '~/components/category/Product.vue';
 
-
+import {mapGetters} from "vuex"
 
 
 export default {
-    components: { Empty,Carts,SearchTab },
+    props :{
+        type:{
+            type:String
+        }
+    },
+    components: { Empty,Carts,SearchTab ,Product,ProductCat},
+      computed: {
+             ...mapGetters({
+                 products: 'products/products',
+                 shops: 'categories/shops',
+                  isDataSent: 'home/isDataSent',
+                 })
+         },
     methods:{
         handleTab (e){
           this.$emit('change-tab',e); 

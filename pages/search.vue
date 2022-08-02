@@ -3,24 +3,31 @@
     <div>
 
     <SearchBox @handle-input="handleSearchInput" />  
-    <SearchComponent  @change-tab="handleTab" />
-     
+    <SearchComponent :type="type" @change-tab="handleTab" />
+    
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import e from 'express'
+
 import Vue from 'vue'
 import SearchBox from '~/components/app/SearchBox.vue'
 import SearchComponent from '~/components/search/SearchComponent.vue'
-
-
+import {mapGetters} from "vuex"
 export default Vue.extend({
     layout: 'custom',
+     computed: {
+             ...mapGetters({
+               
+                  isDataSent: 'home/isDataSent',
+                 })
+         },
+   
   components:{
     SearchBox,
-    SearchComponent
+    SearchComponent,
+   
 },
 data : ()=>({
 type : "product",
@@ -35,7 +42,7 @@ methods :{
 console.log(e)
    
 
-   if(e.target.value.length<3){
+   if(e.target.value.length<3 && !this.isDataSent ){
     return ;
    }
     let data = {

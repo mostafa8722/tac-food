@@ -239,8 +239,8 @@ button {
   height: 0.04rem;
 }
 .bold{font-weight: bold;}
-.price span{
+.price {
   color:#606060;
     font-size:0.9rem;
- 
+ }
 </style>

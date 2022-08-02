@@ -43,4 +43,8 @@ export const actions: ActionTree<AuthState, any> = {
        // dispatch('toast/showErrorToast', error, { root: true })
       })
   },
+
+  async addShops({ commit, dispatch }, data) {
+    commit('categoriesPage',data)
+},
 }

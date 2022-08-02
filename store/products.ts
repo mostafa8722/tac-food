@@ -85,10 +85,14 @@ export const actions: ActionTree<AuthState, any> = {
       .searchPage(data)
       .then((res:any) => {
 
-        console.log("tttt",res.data)
+        console.log("tttt45",res.data)
         this.dispatch("home/handleLoading",false)
         this.dispatch("home/addDataSent",false)
+        if(data.category=='product')
         commit('productsPage',res.data)
+        else
+        this.dispatch("categories/addShops",res.data)
+        
       })
       .catch((error:any) => {
         this.dispatch("home/handleLoading",false)

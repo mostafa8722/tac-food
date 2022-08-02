@@ -1,6 +1,6 @@
 <template>
 <div class="content-product mt-2">
-
+ <NuxtLink :to="`/products/${product.store_id}`">
 <v-card
     class="flex flex-col pt-2   overflow-hidden  pointer "
     width="100%"
@@ -8,7 +8,7 @@
      color="#ffffff"
   
   outlined
-   @click.prevent="$emit('select-product',product)"
+   @click="$emit('select-product',product)"
   >
     <div class="flex flex-row  pr-2 pl-2 ">
      <v-img
@@ -56,15 +56,21 @@
   <div class="flex justify-between items-center mr-2 ml-2 mt-2">
   <span class=" price ">  {{formatPrice(product.price)}}</span>
   
-    <div class="flex flex-row-reverse ">
+    <div v-if="page=='store'" class="flex flex-row-reverse ">
       <font-awesome-icon @click.stop.prevent="addToCart" class="icon-custom pointer" :icon="`fa-solid  fa-add`" />
       <span v-if="cart_product.count" class="type mr-2  ml-2">{{cart_product.count}}</span>
         <font-awesome-icon v-if="cart_product.count" @click.stop.prevent="removeFromCart" class="icon-custom pointer" :icon="`fa-solid  fa-minus`" />
+    </div>
+    <div v-if="page=='search'" class="flex flex-row-reverse items-center ">
+      <font-awesome-icon  class="icon-left-angle-store pointer" :icon="`fa-solid  fa-angle-left`" />
+      <span  class="store-name mr-2  ml-2">{{product.store_name}}</span>
+      
     </div>
   
 
   </div>
   </v-card>
+  </NuxtLink>
 </div>
 
 
@@ -75,15 +81,15 @@
 import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faMinus,faTrash } from '@fortawesome/free-solid-svg-icons'
+import {faMinus,faTrash,faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-library.add(faMinus,faTrash)
+library.add(faMinus,faTrash,faAngleLeft)
 import { mapGetters } from 'vuex'
 
 export default {
-  props : ["product"],
+  props : ["product","page"],
    computed: {
       ...mapGetters({
            carts: 'carts/carts',
@@ -95,6 +101,7 @@ export default {
              cart_product : {}
          }),
   methods:{
+      
      addToCart(){
       
      
@@ -197,6 +204,14 @@ export default {
   border:0.1rem solid #fd5e63;
   border-radius: 50%;
 
+}
+.store-name{
+    color:#fd5e63!important;
+    font-size: 0.85rem;
+}
+.icon-left-angle-store {
+    color:#fd5e63!important;
+    font-size: 0.85rem;
 }
 .img-placeholder{
      position: absolute;

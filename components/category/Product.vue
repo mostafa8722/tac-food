@@ -1,5 +1,5 @@
 <template>
-<NuxtLink v-if="product.id" :to="`/products/${product.id}`">
+<NuxtLink v-if="product.id" :class="`${page=='search'?'w-100':''}`" :to="`/products/${product.id}`">
 <v-card
     class="flex flex-col mt-2  overflow-hidden  content-product"
  
@@ -38,10 +38,10 @@
                <span class="circle-child"></span>
              </span>
      </div>
-      <span class=" body flex mt-2"> 
+      <span class=" body flex mt-1"> 
         <span v-for="(cat,index) in product.categories" >  {{index==0?cat:`,${cat}`}}</span>
        </span>
-      <span class=" address mt-2">   {{product.address}}</span>
+      <span class=" address ">   {{product.address}}</span>
 
     </div>
     </div>
@@ -50,10 +50,13 @@
     
   <div class="flex justify-between items-center mt-2 mr-2 ml-2">
   <span v-if="product.delivery_cost==0" class=" price "> رایگان</span>
-  <span v-else class=" price "> تومان {{formatPrice(product.delivery_cost)}}</span>
+  <span v-else class=" price flex">
+    <span>{{formatPrice(product.delivery_cost)}}</span>
+    <span class="mr-2">تومان</span>
+  </span>
  
    <div class="grid grid-cols-2 ">
-      <div class=" type flex  ">  {{product.vote}} رای</div>
+      <div class=" type flex ml-2  ">  {{product.vote}} رای</div>
      
       <v-rating
       v-model="product.rating"
@@ -77,7 +80,7 @@
 <script>
 
 export default {
-  props : ["product"],
+  props : ["product",'page'],
   methods:{
       formatPrice(price) {
          return  Number(price).toLocaleString()+" "+"";
@@ -99,12 +102,19 @@ export default {
   border-radius:0rem!important;
 }
 .title{
-  color:#717171;
-  font-size:0.75rem;
+ color:#606060;
+    font-size:0.85rem;
+     font-family: IranYekanFN !important;
 }
 .price{
-  color:#717171;
-    font-size:0.5rem;
+  color:#8e8e8e;
+    font-size:0.85rem;
+     font-family: IranYekanFN !important;
+}
+.price span{
+  color:#8e8e8e;
+    font-size:0.85rem;
+     font-family: IranYekanFN !important;
 }
 .address{
   color:#717171;
@@ -112,8 +122,8 @@ export default {
 }
 
 .body{
-  color:#8d8d8d;
-    font-size:0.6rem;
+  color:#8e8e8e;
+    font-size:0.85rem;
      clear: both;
     display: inline-block;
     overflow: hidden;
@@ -122,9 +132,10 @@ export default {
     width: 94%;
 }
 .type{
-  color:#8d8d8d;
-    font-size:0.6rem;
-      font-family: yekanBold!important;
+    color:#8e8e8e;
+    font-size:0.85rem;
+     font-family: IranYekanFN !important;
+     flex-direction: row-reverse;
  
 }
 
