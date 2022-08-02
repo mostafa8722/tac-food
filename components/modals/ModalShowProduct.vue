@@ -41,8 +41,8 @@
       <v-rating
       v-model="product.rating"
       background-color="warning lighten-1"
-      color="red"
-      size="14"
+      color="#fd5e63"
+      size="20"
       class="rating-section flex flex-row-reverse ml-2"
         
     ></v-rating>
@@ -239,4 +239,8 @@ button {
   height: 0.04rem;
 }
 .bold{font-weight: bold;}
+.price span{
+  color:#606060;
+    font-size:0.9rem;
+ 
 </style>

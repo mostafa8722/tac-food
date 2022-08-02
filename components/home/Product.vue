@@ -34,7 +34,7 @@
     <v-rating
       v-model="product.vote"
       background-color="warning lighten-1"
-      color="red"
+      color="#fd5e63"
       size="20"
       class="rating-section mt-1"
         
