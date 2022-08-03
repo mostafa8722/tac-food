@@ -2,17 +2,19 @@
    <div>
     <v-tabs
       v-model="tab"
-      background-color="#f5f5f5"
+      background-color="#f6f6f6"
       centered
       dark
       icons-and-text
        slider-color="yellow"
+     
     >
   
 
       <v-tab href="#tab-1">
      
           <v-img
+            v-if="title!=''"
         src="/icons/fruit.svg"
        height="20"
       width="20"
@@ -24,8 +26,9 @@
       </v-tab>
 
       <v-tab href="#tab-2">
-     
+      
           <v-img
+         v-if="title!=''" 
         src="/icons/comment.svg"
        height="20"
       width="20"
@@ -38,7 +41,7 @@
 
       <v-tab href="#tab-3">
   
-        <v-icon>mdi-information-outline</v-icon>
+        <v-icon   v-if="title!=''" >mdi-information-outline</v-icon>
       </v-tab>
     </v-tabs>
 
@@ -65,22 +68,20 @@ import Categories from './Categories.vue';
 import Info from './Info.vue';
 import Comments from './Comments.vue';
 import Products from './Products.vue';
+import {mapGetters} from "vuex"
 export default {
    components: { Categories,Info,Comments,Products},
-    
+   computed: {
+      ...mapGetters({
+         
+             title: 'products/title',
+        
+            })
+         },    
   
     data : ()  =>({
           tab: null,
-               text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-               categories : [
-                   {id:1,title:"پیتزا"},
-                   {id:1,title:"ساندویچ "},
-                   {id:1,title:"برگر "},
-                   {id:1,title:"سوخاری"},
-                   {id:1,title:"کتلت "},
-                   {id:1,title:"مرغ"},
-               ]
-
+             
     })
 }
 </script>
@@ -101,7 +102,7 @@ color:#fe5c67!important;;
 filter: invert(49%) sepia(54%) saturate(5146%) hue-rotate(329deg) brightness(118%) contrast(99%);
 }
 .tab-item{
-   background-color: #f5f5f5!important;
+   background-color: #f6f6f6!important;
 }
 .active-tab{
   color:#fe5c67!important;;

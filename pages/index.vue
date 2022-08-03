@@ -54,7 +54,7 @@ async asyncData(context){
 await context.$axios.post('v2/customer/home', context.store.getters['general/location'])
   
   .then((res:any) => {
- 
+
    // context.store.dispatch('toast/showErrorToast') 
      context.store.dispatch('home/homePage3',res.data)
      setTimeout(()=>{

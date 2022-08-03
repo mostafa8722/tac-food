@@ -27,10 +27,10 @@
     >
      <template v-slot:placeholder>
          <v-img
-        src="/icons/logo_.svg"
-       height="200"
-      width="400"
-      class="flex-none rounded-xl"
+        src="/icons/logo.svg"
+       height="180"
+      width="200"
+      class="flex-none  img-placeholder rounded-xl"
     
     
     ></v-img>
@@ -61,10 +61,11 @@
 
   </v-card>
          </div>
-         <div class="flex justify-between mb-5 mr-2 ml-2 mt-5 ">
+         <div class="flex justify-between items-center mb-2 mr-2 ml-2 mt-5 ">
                                 <button @click.prevent="$emit('close-modal')" class="btn-close pointer "> بستن </button>
 
-                      <button @click.prevent="addToCart" class="btn-save pointer "> افزودن </button>
+                      <button v-if="product.status==1" @click.prevent="addToCart" class="btn-save pointer "> افزودن </button>
+                       <span   v-if="product.status==0"  class="type height-30 mr-2  ml-2">اتمام موجودی</span>
 
          </div>
          </div>
@@ -196,6 +197,7 @@ button {
   font-size: 14px;
   border-radius: 16px;
   margin-top: 50px;
+  font-family: IranYekanFN !important;
 }
 .modal-fade-enter,
 .modal-fade-leave-to {
@@ -242,5 +244,15 @@ button {
 .price {
   color:#606060;
     font-size:0.9rem;
+      font-family: IranYekanFN !important;
  }
+  .img-placeholder{
+       position: absolute;
+    left: 50px;
+    top: 10px;
+
+    }
+    .height-30{
+      height: 30px;
+    }
 </style>

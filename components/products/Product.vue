@@ -56,10 +56,14 @@
   <div class="flex justify-between items-center mr-2 ml-2 mt-2">
   <span class=" price ">  {{formatPrice(product.price)}}</span>
   
-    <div v-if="page=='store'" class="flex flex-row-reverse ">
+    <div v-if="page=='store' && product.status==1 " class="flex flex-row-reverse ">
       <font-awesome-icon @click.stop.prevent="addToCart" class="icon-custom pointer" :icon="`fa-solid  fa-add`" />
       <span v-if="cart_product.count" class="type mr-2  ml-2">{{cart_product.count}}</span>
         <font-awesome-icon v-if="cart_product.count" @click.stop.prevent="removeFromCart" class="icon-custom pointer" :icon="`fa-solid  fa-minus`" />
+    </div>
+    <div v-if="page=='store' && product.status==0 " class="flex flex-row-reverse ">
+      <span  class="type mr-2  ml-2">اتمام موجودی</span>
+       
     </div>
     <div v-if="page=='search'" class="flex flex-row-reverse items-center ">
       <font-awesome-icon  class="icon-left-angle-store pointer" :icon="`fa-solid  fa-angle-left`" />
@@ -220,6 +224,38 @@ export default {
     }
       
 
-    
+    .shape-octagon {
+      background: #fd5e63;
+      width: 20px;
+      height: 20px;
+      top:5px;
+      left:5px;
+          border-radius: 2px;
+      position: absolute;
+      text-align: center;
+      transform: rotate(20deg);
+      color:#fff;
+      display:flex;
+      justify-content:center;
+      align-items :center;
+    }
+    .shape-octagon:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 20px;
+      width: 20px;
+          border-radius: 2px;
+      background: #fd5e63;
+      transform: rotate(135deg);
+    }
+   .shape-octagon span {
+      position: absolute;
+      font-size: 0.85rem;
+      transform: rotate(-20deg);
+      left:4px;
+       font-family: yekanBold!important;
+    }
   
 </style>

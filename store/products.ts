@@ -19,6 +19,7 @@ export const state = () => ({
   products:[] ,
   comments:[] ,
   catgoriesStore:[] ,
+  title:""
 
   
 })
@@ -27,6 +28,7 @@ export type AuthState = ReturnType<typeof state>
 export const getters: GetterTree<AuthState, any> = {
   products: (state: any) => state.products,
   comments: (state: any) => state.comments,
+  title: (state: any) => state.title,
   catgoriesStore: (state: any) => state.catgoriesStore,
  
 
@@ -47,6 +49,7 @@ export const mutations: MutationTree<AuthState> = {
     state.catgoriesStore = cats ;
   },
   commentsPage(state:any, data:result) {state.comments = data.result},
+  setTitle(state:any, data:result) {state.title = data},
  
   
 
@@ -149,6 +152,10 @@ export const actions: ActionTree<AuthState, any> = {
        // Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       })
   },
+  setTitle({ commit, dispatch }, data) {
+    commit('setTitle',data)
+  },
+
 
 
 }

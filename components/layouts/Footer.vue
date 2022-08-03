@@ -27,7 +27,11 @@
       >
        <NuxtLink :to="link.link">
        <span class="flex flex-col">
+        <v-icon v-if="index==0"  :class="`${getUrl(index)? 'active':''}`">mdi-home-outline</v-icon>
+        <v-icon v-else-if="index==3"  :class="`${getUrl(index)? 'active':''}`">mdi-account-outline</v-icon>
+        <v-icon v-else-if="index==2"  :class="`${getUrl(index)? 'active':''}`">mdi-credit-card-outline</v-icon>
  <font-awesome-icon 
+ v-else
  class="custom-footer-icon" 
    :class="`${getUrl(index)? 'active':''}`"
  :icon="`fa-solid  ${link.icon}`" />
@@ -166,7 +170,7 @@ import { mapGetters } from 'vuex'
   font-size:0.75rem;
 }
 .active{
-  color:#ea7c85;
+  color:#fd5e63!important;
 }
 .add-home{
   position: absolute;

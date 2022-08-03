@@ -3,7 +3,7 @@
 <v-card
     class="flex flex-col mt-2  overflow-hidden  content-product"
  
-    height="136"
+    height="160"
 
      color="#ffffff"
   
@@ -13,8 +13,8 @@
     <div class="flex flex-row mr-1 mt-1">
       <v-img
        
-      height="60"
-      width="60"
+      height="70"
+      width="70"
       class="flex-none rounded-xl"
       :src="product.logo"
     
@@ -32,20 +32,31 @@
     </v-img>
 
     <div class="flex flex-col mr-2">
+
+
+       <div v-if="getActiveTime(product)" class="active-time-shape-green">
+          <div class="active-time-shape-green-inline"></div>
+        </div>
+             <div v-else  class="active-time-shape">
+          <div class="active-time-shape-inline"></div>
+        </div>
      <div>
-          <span class=" title">  {{product.name}}</span>
-             <span class=" circle-parent circle-green"> 
-               <span class="circle-child"></span>
-             </span>
+         <div class="d-flex">
+           <span class=" title">  {{product.name}}</span>
+           <div  class="shape-octagon"><v-icon>mdi-exclamation</v-icon></div>
+         </div>
+             
+          
      </div>
-      <span class=" body flex mt-1"> 
+      <span class=" body  mt-1"> 
         <span v-for="(cat,index) in product.categories" >  {{index==0?cat:`,${cat}`}}</span>
        </span>
-      <span class=" address ">   {{product.address}}</span>
+      <span class=" address mt-3">   {{product.address}}</span>
 
     </div>
     </div>
   
+
 <div class="divider mt-5"></div>
     
   <div class="flex justify-between items-center mt-2 mr-2 ml-2">
@@ -85,6 +96,37 @@ export default {
       formatPrice(price) {
          return  Number(price).toLocaleString()+" "+"";
       },
+      getActiveTime(product){
+
+
+     let active_times = product.activity_times;
+   let is_active = true;
+   
+    active_times.map((time,index)=>{
+ 
+        let hour_start = parseInt(time.start.substring(0,2));
+        let min_start = parseInt(time.start.substring(3,5));
+
+          let hour_end = parseInt(time.end.substring(0,2));
+        let min_end = parseInt(time.end.substring(3,5));
+         let date  = new Date();
+              let hour = date.getHours();
+              let min = date.getMinutes();
+
+         if( hour< hour_start || hour>hour_end ){
+                is_active = false;
+               }else  if( hour== hour_start || min<min_start ){
+                is_active = false;
+               }
+               else  if( hour== hour_end || min>min_end ){
+                is_active = false;
+               }
+       
+      });
+
+      return is_active;
+       
+      }
   }
 }
 </script>
@@ -130,6 +172,7 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 94%;
+    display: flex;
 }
 .type{
     color:#8e8e8e;
@@ -186,5 +229,75 @@ export default {
     left: 10px;
     top: 10px;
     }
-  
+
+.active-time-shape{
+    position: absolute;
+  left: 10px;
+  top:10px;
+  height: 12px;
+  width: 12px;
+  border:0.05rem solid #fe5c67;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.active-time-shape-inline{
+  height: 7px;
+  width: 7px;
+  background-color: #fe5c67;
+  border-radius: 50%;
+}
+.active-time-shape-green{
+  position: absolute;
+  left: 10px;
+  top:10px;
+  height: 12px;
+  width: 12px;
+  border:0.05rem solid #6cb066;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.active-time-shape-green-inline{
+
+  height: 7px;
+  width: 7px;
+  background-color: #6cb066;
+  border-radius: 50%;
+}
+.d-flex{display: flex;}
+ .shape-octagon {
+      background: #ffc107;
+      width: 15px;
+      height: 15px;
+       margin-right: 10px;
+          border-radius: 2px;
+   
+      text-align: center;
+      transform: rotate(20deg);
+      color:#fff;
+      display:flex;
+      justify-content:center;
+      align-items :center;
+    }
+    .shape-octagon:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 15px;
+      width: 15px;
+          border-radius: 2px;
+      background: #ffc107;
+      transform: rotate(135deg);
+    }
+   .shape-octagon span {
+      position: absolute;
+      font-size: 0.85rem;
+      transform: rotate(-20deg);
+      left:4px;
+       font-family: yekanBold!important;
+    }
 </style>

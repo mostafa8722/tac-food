@@ -2,7 +2,7 @@
    <section class=" bg ">
      
      
-     <div class="  mr-2 ml-2 ">
+     <div v-if="comments.length>0" class="  mr-2 ml-2 ">
 
      <div class="mt-3 flex flex-col  header-comment">
         <HeaderComment :key="1" :item="getItem(comments,'high')" class="mb-2" />
@@ -17,15 +17,20 @@
            
       </div>
      </div>
+      <div v-else class="  mr-2 ml-2 ">
+        <EmptyComment />
+        
+     </div>
     </section>
 
 </template>
 <script>
 import HeaderComment from './HeaderComment.vue';
 import Comment from './Comment.vue';
+import EmptyComment from './EmptyComment.vue';
 import { mapGetters } from 'vuex'
 export default {
-    components: { HeaderComment ,Comment},
+    components: { HeaderComment ,Comment,EmptyComment},
       props: {
           title:{
               type:String
@@ -57,7 +62,9 @@ export default {
 
         
          })
-         let percent  = Math.ceil(count /comments.length) * 100 ;
+         let percent = 0 ;
+         if(comments.length!=0)
+         percent = Math.ceil(count /comments.length) * 100 ;
          let color = type == "high" ? "#4baf52" : type == "middle" ? "#ff9501":"#f65457" ; 
          let icon = type == "high" ? "/images/emoj1.png" : type == "middle" ? "/images/emoj2.png":"/images/emoj3.png" ; 
          

@@ -36,15 +36,15 @@
       </v-tab-item>
       
     </v-tabs-items>
-    <div class="custom-active-time" >
+    <div v-if="getShopInfo(shops,products)" class="custom-active-time" >
         <div class="active-time-shape">
           <div class="active-time-shape-inline"></div>
         </div>
-        <span class="active-time-text mr-2">فعالیت از 2000تا 2200</span>
+        <span class="active-time-text mr-2">فعالیت از {{getShopInfo(shops,products)}}</span>
       </div>
      <HeaderSection class="mt-2" :title= "title"/>
      
-     <div class="mt-3 flex flex-col ml-3 mr-3">
+     <div class="mt-1 flex flex-col ml-3 mr-3 pb-70">
         <SkeletonLoaders v-if="isLoading" v-for="(item,index) in [1,2,3,4,5,6,7,8]" :key="index"  />
     
   
@@ -80,6 +80,7 @@ export default {
                  products: 'products/products',
                  catgoriesStore: 'products/catgoriesStore',
                   isLoading: 'home/isLoading',
+                    shops: 'categories/shops',
                  })
          },
          methods:{
@@ -91,7 +92,46 @@ export default {
                
             this.title = cat.name;
              this.catProducts =  this.products.filter(item=> item.category==this.title);
-            }
+            },
+              getShopInfo(shops,products){
+            
+           
+           
+           let product = products[0];
+          
+
+                  
+           let shop = shops.filter(item=> item.id == product.store_id)[0];
+        
+        if(shop){
+            this.$store.dispatch('products/setTitle',product.store_name)
+            let hour_start = parseInt(shop.activity_times[0].start.substring(0,2));
+            let min_start =parseInt( shop.activity_times[0].start.substring(3,5));
+              
+          let hour_end = parseInt(shop.activity_times[0].end.substring(0,2));
+            let min_end = parseInt(shop.activity_times[0].end.substring(3,5));
+
+              let date  = new Date();
+              let hour = date.getHours();
+              let min = date.getMinutes();
+               if( hour< hour_start || hour>hour_end ){
+                return false;
+               }else  if( hour== hour_start || min<min_start ){
+                return false;
+               }
+               else  if( hour== hour_end || min>min_end ){
+                return false;
+               }
+         return  hour_start + ":"+min_start +" الی "+hour_end + ":"+min_end;
+        }
+        
+           
+      return false;
+            
+          
+           
+
+      },
          }
          ,
          watch :{
@@ -103,6 +143,12 @@ export default {
                         this.show_tab = true;
                     
                    },150);
+
+                    
+            },
+            isLoading(new_val,old_val){
+
+             
             }
          }
   
@@ -151,5 +197,5 @@ export default {
   background-color: #fe5c67;
   border-radius: 50%;
 }
-
+.pb-70{padding-bottom: 70px;}
 </style>

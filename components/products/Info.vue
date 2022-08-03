@@ -16,14 +16,14 @@
   
   >
          <div class="flex flex-col justify-center items-center  "> 
-              <v-icon>mdi-phone</v-icon>
+              <v-icon>mdi-wallet</v-icon>
               <span class="header-title mt-1">حداقل سفارش</span>
               <span class="header-value  mt-1">{{getShopInfo(shops,products,"min_cost")}} </span>
               
         </div>
 
            <div class="flex flex-col justify-center  items-center "> 
-              <v-icon>mdi-phone</v-icon>
+              <v-icon>mdi-motorbike</v-icon>
               <span  class="header-title  mt-1" > هزینه ارسال</span>
               <span class="header-value  mt-1">{{getShopInfo(shops,products,"delivery_cost")}} </span>
               
@@ -31,31 +31,31 @@
      </v-card>
 
      <div class="mt-3">
-           <v-icon class="address" >mdi-phone</v-icon> 
+           <v-icon  >mdi-map-marker-outline</v-icon> 
            <span class="address"> {{getShopInfo(shops,products,"address")}}    </span>
      </div>
      
 
     
-           <div class="mt-10 mb-3 mr-2 ml-2 rounded-xl relative" style="position:relative;height: 130px">
+           <div class="mt-2 mb-3 mr-2 ml-2 rounded-xl relative" style="position:relative;height: 130px">
            
            <Map :center="getShopInfo(shops,products,'lat')"  :markerLatLng="getShopInfo(shops,products,'lat') " v-if="show_map" /></div>
     
 
-     <div class="mt-10">
-           <v-icon class="title-item" >mdi-phone</v-icon> 
+     <div class="mt-7">
+           <v-icon  >mdi-clock-outline</v-icon> 
            <span class="title-item">ساعات کاری </span>
            <p class="item-value">{{getShopInfo(shops,products,"activeTime")}}  </p>
      </div>
 
       <div class="mt-3">
-           <v-icon class="title-item" >mdi-phone</v-icon> 
+           <v-icon  >mdi-calendar-today</v-icon> 
            <span class="title-item">روزهای تعطیل  </span>
            <p class="item-value">{{getShopInfo(shops,products,"activeTime")}} </p>
      </div>
 
       <div class="mt-3 mb-10">
-           <v-icon class="title-item" >mdi-information-outline</v-icon> 
+           <v-icon  >mdi-information-outline</v-icon> 
            <span class="title-item"> درباره ی فروشگاه  </span>
            <p class="item-value">{{getShopInfo(shops,products,"description")}} </p>
      </div>
@@ -110,11 +110,11 @@ export default {
           if(type=="lat")
            return [shop.lat,shop.lng];
            else if(type=="activeTime")
-           return shop.activity_times[0].start +" الی "+shop.activity_times[0].end;
+           return shop.activity_times[0].start.substring(0,5) +" الی "+shop.activity_times[0].end.substring(0,5);
             else if(type=="delivery_cost")
            return shop.delivery_cost==0?"رایگان":this.formatPrice(shop.delivery_cost);
            else if(type=="min_cost")
-           return this.formatPrice(shop.min_cost);
+           return shop.min_cost?this.formatPrice(shop.min_cost):0;
            else if(type=="description")
            return shop.description;
            else if(type=="address")

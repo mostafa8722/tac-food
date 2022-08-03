@@ -147,6 +147,7 @@ background-color: #eeeeee;
 .img-placeholder .v-image__image{
   filter: invert(99%) sepia(0%) saturate(3238%) hue-rotate(32deg) brightness(114%) contrast(87%);
 }
+
 .flex-header-container  .v-image__image{
   filter: invert(99%) sepia(0%) saturate(239%) hue-rotate(178deg) brightness(87%) contrast(103%);
 }

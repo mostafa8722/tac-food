@@ -154,7 +154,7 @@ async handleUrl(e){
  
  max-width: 500px;
   position: fixed;
-  bottom: 50px;
+  bottom: 75px;
   border-radius: 5px;
   left: 50%;
     transform: translate(-50%, 0);
