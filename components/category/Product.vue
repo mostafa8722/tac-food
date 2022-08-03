@@ -43,7 +43,7 @@
      <div>
          <div class="d-flex">
            <span class=" title">  {{product.name}}</span>
-           <div  class="shape-octagon"><v-icon>mdi-exclamation</v-icon></div>
+           <div  class="shape-octagon-cat"><v-icon>mdi-exclamation</v-icon></div>
          </div>
              
           
@@ -268,7 +268,7 @@ export default {
   border-radius: 50%;
 }
 .d-flex{display: flex;}
- .shape-octagon {
+ .shape-octagon-cat {
       background: #ffc107;
       width: 15px;
       height: 15px;
@@ -282,7 +282,7 @@ export default {
       justify-content:center;
       align-items :center;
     }
-    .shape-octagon:before {
+    .shape-octagon-cat:before {
       content: "";
       position: absolute;
       top: 0;
@@ -293,10 +293,11 @@ export default {
       background: #ffc107;
       transform: rotate(135deg);
     }
-   .shape-octagon span {
+   .shape-octagon-cat i {
       position: absolute;
       font-size: 0.85rem;
       transform: rotate(-20deg);
+      color:#ffffff;
       left:4px;
        font-family: yekanBold!important;
     }
