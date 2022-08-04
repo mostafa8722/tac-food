@@ -12,7 +12,7 @@
     height="400"
     hide-delimiter-background
     :show-arrows="false"
-     
+     reverse
   >
   
     <v-carousel-item
