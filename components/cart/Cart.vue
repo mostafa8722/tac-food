@@ -3,7 +3,7 @@
     class=" overflow-hidden pb-2 mt-2  rounded-xl"
     width="100%"
   
-     
+        height="70"     
      dir="rtl"
     outlined 
  
@@ -31,7 +31,7 @@
     </v-img>
 
 
-  <div class="flex flex-col mr-2 mt-1">
+  <div class="flex flex-col mr-2 mt-3">
       <span class=" title">  {{product.name}}</span>
  
   <span class=" price"> {{formatPrice(product.count)}} 	&#215; {{formatPrice(product.price)}} </span>
@@ -122,12 +122,12 @@ CartOption
 }
 .title{
   color:#717171;
-  font-size:0.75rem;
+  font-size:0.85rem;
 }
 .price{
   color:#717171;
     font-size:0.5rem;
-  font-family: yekanBold!important;
+  font-family: yekanNumRegular!important;
   
 }
 .type{

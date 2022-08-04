@@ -138,11 +138,7 @@ import { mapGetters } from 'vuex'
 
       addHome(){
           
-        //    this.$toast.success('Profile saved.', {})
-
- 
-
-        return ;
+        
           if(this.installPromptEvent){
            
             this.installPromptEvent.prompt();

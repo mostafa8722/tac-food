@@ -3,13 +3,13 @@
        <div class="flex justify-between ">
             <div class="d-flex items-center">
              <v-icon  color="#4caf50">mdi-emoticon-happy-outline</v-icon>
-           <span class="mr-2">{{comment.name}}</span>
+           <span class="mr-2 comment-title">{{comment.name}}</span>
             </div>
            <span class="date-c">{{comment.date}}</span>
 
            
        </div>
-       <p>{{comment.body}}</p>
+       <p class="comment-body mt-2">{{comment.body}}</p>
       <div class="flex justify-between mt-2 mb-1">
           <p class=" title">{{comment.products[0]}}</p>
           <div class="flex flex-row-reverse">
@@ -56,7 +56,7 @@ export default {
 }
 .bg-comment{
     background:#ffffff;
-    min-height:90px;
+    min-height:120px;
     padding:10px;
 
 }
@@ -69,7 +69,22 @@ p{
 .title{
 font-size:0.8rem;
 color:#ababab;
- font-family: yekanBold !important;
+ font-family: IranYekanFN !important;
+}
+.comment-body{
+ 
+font-size:0.75rem;
+color:#606060;
+ font-family: yekanNumRegular !important;
+ min-height: 70px;
+
+}
+.comment-title{
+ 
+font-size:0.85rem;
+color:#606060;
+ font-family: IranYekanFN !important;
+
 }
 .icon-item{
     color:#9c9c9c;
@@ -77,7 +92,7 @@ color:#ababab;
 }
 .d-flex{display: flex;}
 .date-c{
-    font-size:0.5rem;
+    font-size:0.65rem;
 color:#ababab;
  font-family: IranYekanFN !important;
 }    

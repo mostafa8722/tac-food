@@ -5,9 +5,9 @@
          
            <font-awesome-icon class=" icon-triangle mt-5 " :icon="`fa-solid fa-triangle-exclamation`" />
               
-         <p class="mt-2">سبد خرید خالی می باشد!</p>
-         <p class="mt-2"> از طریق صفحه ای فروشگاه محصول خود را به سبد اضافه کنید.</p>
-          <button @click.prevent="handleButton" class="add-address pointer mt-4"> فروشگاه </button>
+         <p class="mt-5 p-cart">سبد خرید خالی می باشد!</p>
+         <p class="mt-2 p-cart"> از طریق صفحه ای فروشگاه محصول خود را به سبد اضافه کنید.</p>
+          <button @click.prevent="handleButton" class="btn-add-return pointer mt-5"> فروشگاه </button>
          
                  
            
@@ -43,21 +43,24 @@ export default {
 .flex-none{
     flex:none;
 }
-p{
-    color :#cccccc;
-    font-size:0.6rem;
-    font-family: yekanBold!important;
+
+.p-cart{
+    color :#8e8e8e;
+    font-size:0.8rem;
+    font-family: yekanNumRegular!important;
 }
 .icon-triangle{
     color :#cccccc;
     font-size:3rem;
     height: 50px;
 }
-.add-address{
+.btn-add-return {
     background-color:#fd5e63;
    color: #ffffff;
-    padding:0.3rem 1.5rem;
+    padding:0rem 1.5rem;
     border-radius: 0.3rem;
+    font-size: 0.9rem;
+    height:45px;
 
 }
 </style>

@@ -44,7 +44,7 @@
           ></v-text-field>
 
 
-    <p>
+    <p class="mt-5">
         <span>ثبت نام به معنای پذیرش </span>
         <span class="privcy-link">قوانین و مقررات</span>
         <span>است</span>
@@ -150,12 +150,13 @@ computed: {
     width: 100%;
 }
 p{
-    color :#cccccc;
-    font-size:0.6rem;
-    font-family: yekanBold!important;
+    color :#606060;
+    font-size:0.8rem;
+    font-family: yekanNumRegular!important;
 }
 .btn-add{
     background-color : #fd5e63!important;
+    height: 45px!important;
     width:200px;
 }
 .white{
@@ -176,10 +177,12 @@ p{
 
 .privcy-link{
     color:#fd5e63;
-    font-size:0.7rem;
+  
+     font-size:0.8rem;
+    font-family: yekanNumRegular!important;
 }
 span{
-  font-size:0.7rem;   
+  font-size:0.84rem;   
 }
 .h-20{
   height:20px;

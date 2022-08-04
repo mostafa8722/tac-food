@@ -3,7 +3,7 @@
 
   
   <NuxtLink  v-if="totalCart>0 && show_button" :to="url">
-      <div @click.prevent.stop="handleUrl($event)" class="cart-container relative flex" :class="`${isDataSent?'justify-center items-center':''}`">
+      <div @click.prevent.stop="handleUrl($event)" class="cart-container relative flex" :class="`${isDataSent?'justify-center items-center':''}  ${url=='/payment'?'cart-mb-10':''}`">
        <v-progress-circular
        v-show="url=='/payment' && isDataSent"
       indeterminate
@@ -149,7 +149,7 @@ async handleUrl(e){
 
 .cart-container{
   background-color:#fd5e63;
-  height: 45px;
+  height: 50px;
   width: 80%;
  
  max-width: 500px;
@@ -160,6 +160,9 @@ async handleUrl(e){
     transform: translate(-50%, 0);
   
   
+}
+.cart-mb-10{
+  bottom: 10px;
 }
 .white{
   color:#ffffff;

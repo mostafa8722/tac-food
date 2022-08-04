@@ -58,6 +58,9 @@ height:100%;
 }
 .item-percent{
    font-family: IranYekanFN !important;
+   color:#afafaf;
+   width: 30px;
+   text-align: left;
 }
 
 </style>

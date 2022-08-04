@@ -9,7 +9,7 @@
            <v-card 
     class="flex items-center border-a justify-around rounded-xl pt-2 mt-3 pb-2 "
     width="100%"
-    height="80"
+    height="100"
     
      color="#ffffff"
    outlined
@@ -37,7 +37,7 @@
      
 
     
-           <div class="mt-2 mb-3 mr-2 ml-2 rounded-xl relative" style="position:relative;height: 130px">
+           <div class="mt-2 mb-3 mr-2 ml-2 rounded-xl relative" style="position:relative;height: 200px">
            
            <Map :center="getShopInfo(shops,products,'lat')"  :markerLatLng="getShopInfo(shops,products,'lat') " v-if="show_map" /></div>
     
@@ -48,13 +48,13 @@
            <p class="item-value">{{getShopInfo(shops,products,"activeTime")}}  </p>
      </div>
 
-      <div class="mt-3">
+      <div class="mt-5">
            <v-icon  >mdi-calendar-today</v-icon> 
            <span class="title-item">روزهای تعطیل  </span>
            <p class="item-value">{{getShopInfo(shops,products,"activeTime")}} </p>
      </div>
 
-      <div class="mt-3 mb-10">
+      <div class="mt-5 mb-10">
            <v-icon  >mdi-information-outline</v-icon> 
            <span class="title-item"> درباره ی فروشگاه  </span>
            <p class="item-value">{{getShopInfo(shops,products,"description")}} </p>

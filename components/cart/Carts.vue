@@ -11,7 +11,7 @@
   outlined
  
   >
-  <h3 class="text-center">{{cart.store_name}} </h3>
+  <h3 class="text-center cart-store-name">{{cart.store_name}} </h3>
   <p class="text-center txt-ago" v-if="cart.ago && 1>2">{{cart.ago}}</p>
   <HeaderCart class="mt-1" title="زمان"   value="فوری" />
   <HeaderCart class="mt-1" title="ارسال"   :value="formatPrice(cart.cost_delivery)" />
@@ -93,6 +93,10 @@ export default {
 <style scoped>
 h3{
     font-size: 0.85rem;
+}
+.cart-store-name{
+    font-size: 0.90rem;
+    color:#606060;
 }
 .flex-none{
     flex:none;

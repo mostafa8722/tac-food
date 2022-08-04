@@ -42,32 +42,32 @@
         </div>
      <div>
          <div class="d-flex">
-           <span class=" title">  {{product.name}}</span>
+           <span class=" title mt-1">  {{product.name}}</span>
            <div v-if="product.is_new" class="shape-octagon-cat"><v-icon>mdi-exclamation</v-icon></div>
          </div>
              
           
      </div>
-      <span class=" body  mt-1"> 
+      <span class=" body  mt-2"> 
         <span v-for="(cat,index) in product.categories" >  {{index==0?cat:`,${cat}`}}</span>
        </span>
-      <span class=" address mt-3">   {{product.address}}</span>
+      <span class=" address mt-1">   {{product.address}}</span>
 
     </div>
     </div>
   
 
-<div class="divider mt-5"></div>
+<div class="divider mt-7"></div>
     
-  <div class="flex justify-between items-center mt-2 mr-2 ml-2">
-  <span v-if="product.delivery_cost==0" class=" price "> رایگان</span>
-  <span v-else class=" price flex">
+  <div class="flex justify-between items-center mt-3 mr-2 ml-2">
+  <span v-if="product.delivery_cost==0" class=" price-tag "> پیک رایگان</span>
+  <span v-else class=" price-tag flex">
     <span>{{formatPrice(product.delivery_cost)}}</span>
     <span class="mr-2">تومان</span>
   </span>
  
    <div class="grid grid-cols-2 ">
-      <div class=" type flex ml-2  ">  {{product.vote}} رای</div>
+      <div v-if="product.vote>0" class=" type-cat flex ml-2  ">  {{product.vote}} رای</div>
      
       <v-rating
       v-model="product.rating"
@@ -113,12 +113,12 @@ export default {
               let hour = date.getHours();
               let min = date.getMinutes();
 
-         if( hour< hour_start || hour>hour_end ){
+         if( hour< hour_start &&  hour>hour_end ){
                 is_active = false;
-               }else  if( hour== hour_start || min<min_start ){
+               }else  if( hour== hour_start &&  min<min_start ){
                 is_active = false;
                }
-               else  if( hour== hour_end || min>min_end ){
+               else  if( hour== hour_end &&  min>min_end ){
                 is_active = false;
                }
        
@@ -148,19 +148,20 @@ export default {
     font-size:0.85rem;
      font-family: IranYekanFN !important;
 }
-.price{
-  color:#8e8e8e;
-    font-size:0.85rem;
-     font-family: IranYekanFN !important;
-}
-.price span{
+.price-tag{
   color:#8e8e8e;
     font-size:0.75rem;
      font-family: IranYekanFN !important;
 }
+.price-tag span{
+  color:#8e8e8e;
+    font-size:0.85rem;
+     font-family: IranYekanFN !important;
+}
 .address{
-  color:#717171;
-    font-size:0.5rem;
+  color:#8e8e8e;
+    font-size:0.7rem;
+      font-family: yekanNumRegular !important;
 }
 
 .body{
@@ -174,10 +175,16 @@ export default {
     width: 94%;
     display: flex;
 }
-.type{
+.body span{
+  color:#8e8e8e;
+    font-size:0.8rem;
+     font-family: IranYekanFN !important;
+    
+}
+.type-cat{
     color:#8e8e8e;
     font-size:0.85rem;
-     font-family: IranYekanFN !important;
+     font-family: yekanNumRegular !important;
      flex-direction: row-reverse;
  
 }

@@ -68,7 +68,7 @@ export const actions: ActionTree<AuthState, any> = {
       .productsPage(data)
       .then((res:any) => {
 
-        console.log("tttt",res.data)
+     
         this.dispatch("home/handleLoading",false)
         commit('productsPage',res.data)
       })

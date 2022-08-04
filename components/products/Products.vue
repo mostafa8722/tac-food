@@ -48,11 +48,11 @@
         <SkeletonLoaders v-if="isLoading" v-for="(item,index) in [1,2,3,4,5,6,7,8]" :key="index"  />
     
   
-        <Product   v-if="!isLoading" v-for="(item, index) in catProducts"  @select-product="showProduct" page="store" :key="item.id"  :product="item" />
+        <Product   v-if="!isLoading" v-for="(item, index) in catProducts"  :is_store_online="getShopInfo(shops,products)" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
       
       <Empty v-show="products.length==0 && !isLoading" />
      </div>
-     <ModalShowProduct :product="selectedProduct"  v-show="showModal" @close-modal="showModal = false" />
+     <ModalShowProduct :product="selectedProduct" :is_store_online="getShopInfo(shops,products)"  v-show="showModal" @close-modal="showModal = false" />
     </section>
 
 </template>
@@ -116,7 +116,7 @@ export default {
           let hour_end = parseInt(item.end.substring(0,2));
             let min_end = parseInt(item.end.substring(3,5));
 
-              console.log("dddd",hour_start)
+              
               let date  = new Date();
               let hour = date.getHours();
               let min = date.getMinutes();

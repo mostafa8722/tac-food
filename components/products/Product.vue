@@ -48,7 +48,7 @@
         
     ></v-rating>
 
-      <span class=" type flex-100 text-left  ml-1">  {{product.vote}} نفر</span>
+      <span v-if="product.vote>0" class=" type flex-100 text-left  ml-1">  {{product.vote}} نفر</span>
 
     </div>
 <div class="divider"></div>
@@ -93,7 +93,7 @@ library.add(faMinus,faTrash,faAngleLeft)
 import { mapGetters } from 'vuex'
 
 export default {
-  props : ["product","page"],
+  props : ["product","page","is_store_online"],
    computed: {
       ...mapGetters({
            carts: 'carts/carts',
@@ -107,14 +107,19 @@ export default {
   methods:{
       
      addToCart(){
-      
      
-      
-      this.$store.dispatch('carts/addCart', this.product)
+     if(!this.is_store_online)
+       this.$store.dispatch('carts/addCart', this.product)
+       else 
+       this.$toast.error("!فروشگاه بسته است ")
+     
     },
      removeFromCart(){
-    //  console.log(this.product)
-      this.$store.dispatch('carts/removeCart', this.product)
+     if(!this.is_store_online)
+       this.$store.dispatch('carts/removeCart', this.product)
+       else 
+       this.$toast.error("!فروشگاه بسته است ")
+     
     },
       formatPrice(price) {
          return  Number(price).toLocaleString()+" "+"تومان";

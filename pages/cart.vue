@@ -15,7 +15,7 @@ import Cart from '~/components/cart/CartComponent.vue'
 import CartButton from '~/components/app/AddToCartButton.vue'
 
 export default Vue.extend({
-    layout: 'custom',
+    layout: 'cart',
   components:{
     Cart,CartButton
 }

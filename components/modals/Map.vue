@@ -3,7 +3,7 @@
      
 <div id="map-wrap">
  <client-only>
-  <l-map style="height: 150px;width:100%" :zoom="zoom" :center="center">
+  <l-map style="height: 200px;width:100%" :zoom="zoom" :center="center">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
     <l-marker :lat-lng="markerLatLng">
     <l-icon

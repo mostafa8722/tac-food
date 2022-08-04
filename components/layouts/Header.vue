@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <header >
+    <div class="relative">
+       <font-awesome-icon  v-show="layout=='cart'" @click.prevent="handleBackBtn" class=" mr-2 pointer btn-back " :icon="`fa-solid fa-arrow-right`" />
+
        <div v-if="!isSendingData" class=" flex justify-center items-center flex-col mt-2">
               <div class="flex justify-center ">
                 <span  class="text-sm ml-2">
@@ -28,6 +31,7 @@
 
        
   </div>
+  </header>
     
 </template>
 
@@ -50,6 +54,7 @@ import Cookies from "js-cookie"
 import {GetStorage} from "~/utils/helpers"
 
   export default {
+    props :["layout"],
     components:{
     ModalMap,ModalAddress,ModalAddAddress,ModalDelete
     },
@@ -152,6 +157,9 @@ import {GetStorage} from "~/utils/helpers"
                 this.$store.dispatch('user/deleteAddress',data)
                    this.showDeleteAddress = false;
             }
+             ,handleBackBtn(){
+          this.$router.back();
+      }
 
     }
   }
@@ -162,4 +170,22 @@ import {GetStorage} from "~/utils/helpers"
   width: 25px!important;
 
 }
+  .btn-back{
+    font-size:0.7rem;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+  }
+  header{
+   
+    width: 100%;;
+      display: flex;
+         justify-content: center;
+  }
+   header>div{
+    display: flex;
+     max-width: 600px;
+    width: 100%;;
+    justify-content: center;
+  }
 </style>

@@ -155,18 +155,15 @@ export const mutations: MutationTree<AuthState> = {
   },
 
   addCartOption(state:any, data:any) {
-    console.log("ttttt",data)
+  
     let cart = data.cart;
     let detail = data.detail;
     let count = data.count;
-  //  state.totalCart = state.totalCart + data.price;
+ 
     
-  console.log("ttttt1",cart)
-  console.log("ttttt2",detail)
-  console.log("ttttt3",count)
+
     let index = cart.details.findIndex((item:any) => item.id==detail.id);
-    console.log("ttttt",index)
-    console.log("ttttt",cart.details[index])
+   
 
     if(count==0){
       state.totalCart = state.totalCart -  cart.details[index].price *(   cart.details[index].count )
@@ -180,7 +177,7 @@ export const mutations: MutationTree<AuthState> = {
 
     }
 
-    console.log("ttt",state.totalCart)
+  
   
 
       let index_cart = state.carts.findIndex((item:any) => item.store_name==cart.store_name);
@@ -188,7 +185,7 @@ export const mutations: MutationTree<AuthState> = {
       let index2 = state.carts[index_cart].products.findIndex((item:any) => item.id==data.id);
 
    
-      console.log("ttttt,",cart)
+  
 
   state.carts[index_cart].products.splice(index2,1,cart);
 
@@ -223,7 +220,7 @@ export const mutations: MutationTree<AuthState> = {
        
     })
   
-    console.log("ttttt","cart5")
+  
       updateCarts(state); 
 
 
@@ -238,7 +235,7 @@ export const mutations: MutationTree<AuthState> = {
 
 function updateCarts(state:any){
     
-  console.log("ttttt","cart")
+
   let  initialtTotalCart = 0;
   state.carts.map((item:any,index:any)=>{
 
@@ -252,7 +249,7 @@ function updateCarts(state:any){
  
    state.carts[index].store_total_price =  products_total_price + item.cost_delivery + item.tax;
    initialtTotalCart  += state.carts[index].store_total_price;
-   console.log("ttttt",state.carts[index])
+ 
   });
     state.totalCart = initialtTotalCart;
 }

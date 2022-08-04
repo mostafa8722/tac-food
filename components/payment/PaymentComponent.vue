@@ -10,15 +10,16 @@
       
        <div class="flex justify-center mt-5 mb-20">
          <button  @click.prevent="showModal = true" class="add-discount   pointer mt-2 ">
-            <font-awesome-icon   class="text-p2 height-20 " icon="fa-solid fa-check mt-3  " />
+         <v-icon  class="text-p2 " >mdi-tag</v-icon>
+            
             <span class="text-p2 mr-2"> وارد کردن کد تخفیف </span>
          </button>
        
        </div>
 
        <div class="flex justify-center mt-5">
-            <span class="text-p2">مبلغ پرداخت:</span>
-            <span class="text-p2 mr-2 ml-2">{{formatPrice(totalCart)}}</span>
+            <span class="text-p2  text-p2-bold">مبلغ پرداخت:</span>
+            <span class="text-p2 text-p2-bold  mr-2 ml-2">{{formatPrice(totalCart)}}</span>
             
        </div>
 
@@ -34,8 +35,9 @@
     >
     <div class="flex flex-col items-center flex-1">
           <div class="flex flex-col  mb-1 mr-4">
-            <font-awesome-icon :class="`${pay_type=='wallet'?'red':''}  height-20`" :icon="`fa-solid fa-wallet`" />
-            <span :class="`mt-1 ${pay_type=='wallet'?'red':''}`">کیف پول</span>
+                        <v-icon :class="` icon-style ${pay_type=='wallet'?'active-style':''} `">mdi-wallet-outline</v-icon>
+
+            <span :class="`mt-1 text-style ${pay_type=='wallet'?'active-style':''}`">کیف پول</span>
           </div>
 <v-radio
      color="#ff2200"
@@ -46,8 +48,9 @@
 
      <div class="flex flex-col items-center flex-1">
           <div class="flex flex-col  mb-1 mr-4">
-            <font-awesome-icon :class="`${pay_type=='online'?'red':''} height-20`" :icon="`fa-solid fa-credit-card`" />
-            <span :class="`mt-1 ${pay_type=='online'?'red':''}`">درگاه پرداخت</span>
+                        <v-icon :class="` icon-style ${pay_type=='online'?'active-style':''} `">mdi-credit-card-outline</v-icon>
+
+            <span :class="`mt-1 text-style ${pay_type=='online'?'active-style':''}`">درگاه پرداخت</span>
           </div>
 <v-radio
      color="#ff2200"
@@ -59,9 +62,9 @@
      
       <div class="flex flex-col items-center flex-1">
           <div class="flex flex-col  mb-1 mr-4">
+            <v-icon :class="` icon-style ${pay_type=='cod'?'active-style':''} `">mdi-cash-multiple</v-icon>
             
-            <font-awesome-icon :class="`${pay_type=='cod'?'red':''} height-20`" :icon="`fa-solid fa-money-bills`" />
-            <span :class="`mt-1 ${pay_type=='cod'?'red':''}`">در محل</span>
+            <span :class="`mt-1  text-style ${pay_type=='cod'?'active-style':''}`">در محل</span>
           </div>
 <v-radio
      color="#ff2200"
@@ -83,11 +86,11 @@
 
         <div class="flex justify-center mb-5 mt-5">
                <div v-if="payment_btn.type!=='login'" @click.prevent =" hanlePayment"  class="btn-send pointer text-center relative mt-3">
-                  <span class="white" style="font-size: 0.8rem;"> {{payment_btn.title}} </span>
+                  <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
                    <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
                 </div>
                 <NuxtLink v-else   class="btn-send pointer text-center relative mt-3" to="/login">
-                  <span class="white" style="font-size: 0.8rem;"> {{payment_btn.title}} </span>
+                  <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
                    <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
                 </NuxtLink>
 
@@ -303,17 +306,29 @@ p{
   
     color : #ffffff!important;
 }
-.red{
+.icon-style{
+ color : #606060;
+    font-size: 1.05rem;
+    font-family: yekanNumRegular  !important;
+}
+.text-style{
+ color : #606060;
+    font-size: 0.85rem;
+    font-family: yekanNumRegular  !important;
+}
+.active-style{
   
     color : #fd5e63!important;
-    font-size: 0.75rem;
+        
+
 }
 .add-discount{
    
     border:0.1rem solid #959595;
-    padding:0.5rem 1rem;
+    padding:0rem 1rem;
     border-radius: 0.3rem;
     background-color: #ffffff;
+    height: 55px;;
 }
 .payment-box{
    
@@ -321,25 +336,30 @@ p{
     padding:0.2rem 1rem;
     border-radius: 0.3rem;
     background-color: #ffffff;
-    max-width: 400px;
+    max-width: 600px;
     width: calc(100% - 2rem);
     margin-right: 1rem;
     margin-left: 1rem;
+    height: 150px;;
    
 }
 
 
 .text-p{
-    color:#acacac;
-    font-size: 0.75rem;
+    color:#606060;
+    font-size: 0.85rem;
+       font-family: yekanNumRegular!important;
 }
 .text-p2{
-    color:#676767;
-    font-size: 0.9rem;
-     font-family: yekanBold!important;
+    color:#606060;
+    font-size: 0.85rem;
+      font-family: yekanNumRegular!important;
+}
+.text-p2-bold{
+    font-family: IranYekanFN!important;
 }
 .btn-send{
-    height:40px ;
+    height:45px ;
     width:250px;
     border-radius: 5px;
     background-color: #fd5e63;
@@ -351,6 +371,7 @@ p{
     left:20px;
     top:10px;
     color: #ffffff;
+
 }
 .white{
     color: #fff;

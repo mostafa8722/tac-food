@@ -5,7 +5,7 @@
         <Carts v-if="carts.length>0" v-for="cart in carts" :cart="cart"  />
         <div v-if="carts.length==0" > <Empty   /></div>
 
-        <div v-show="carts.length>0 && descriptionCart==''" @click.prevent="handleAddDescription" class="add-address pointer mt-2">افزودن توضیحات </div>
+        <div v-show="carts.length>0 && descriptionCart==''" @click.prevent="handleAddDescription" class="btn-add-desc-cart pointer mt-2">افزودن توضیحات </div>
        
        
         <ModalDescription v-show="showModal" @close-modal="showModal = false"  />
@@ -125,18 +125,22 @@ p{
   
     color : #fd5e63!important;
 }
-.add-address{
+.btn-add-desc-cart{
     color:#fd5e63;
     border:0.1rem solid #fd5e63;
     padding:0.5rem 1rem;
     border-radius: 0.3rem;
+    height: 45px;
 
 }
 .add-desc-cart{
     border-top: 0.05rem solid #dedede;
-    width: 600px;
+    max-width: 600px;
+    width: 100%;
 }
 .txt_description{
-    color:#787878;
+    color:#8e8e8e;
+    font-size: 0.85rem;
+    font-family: yekanNumRegular  !important;
 }
 </style>

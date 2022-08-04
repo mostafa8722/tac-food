@@ -43,7 +43,7 @@
       background-color="warning lighten-1"
       color="#fd5e63"
       size="20"
-      class="rating-section flex flex-row-reverse ml-2"
+      class="rating-section flex  justify-center flex-row-reverse ml-2"
         
     ></v-rating>
 
@@ -88,7 +88,12 @@ export default {
      product : {
     type:Object,
     default : true,
-   }
+   },
+     is_store_online : {
+    type:Boolean,
+    default : true,
+   },
+   
   },
    data : ()=>({
    
@@ -100,15 +105,15 @@ export default {
       this.$emit('close-modal');
     },
      addToCart(){
-      
+       if(!this.is_store_online){
+          this.$store.dispatch('carts/addCart', this.product)
+          this.$emit('close-modal');
+       } else 
+       this.$toast.error("!فروشگاه بسته است ")
      
-      this.$store.dispatch('carts/addCart', this.product)
-        this.$emit('close-modal');
+    
     },
-     removeFromCart(){
-    //  console.log(this.product)
-      this.$store.dispatch('carts/removeCart', this.product)
-    },
+   
       formatPrice(price) {
          return  Number(price).toLocaleString()+" "+"تومان";
       },

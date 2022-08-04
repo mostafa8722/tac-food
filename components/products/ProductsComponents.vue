@@ -27,16 +27,7 @@
 
       <v-tab href="#tab-2">
       
-          <v-img
-         v-if="title!=''" 
-        src="/icons/comment.svg"
-       height="20"
-      width="20"
-      class="flex-none rounded-none"
-      
-    
-    
-    ></v-img>
+           <v-icon   v-if="title!=''" >mdi-message-reply-text</v-icon>
       </v-tab>
 
       <v-tab href="#tab-3">

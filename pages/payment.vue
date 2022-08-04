@@ -15,7 +15,7 @@ import Payment from '~/components/payment/PaymentComponent.vue'
 
 
 export default Vue.extend({
-    layout: 'headerLayout',
+    layout: 'cart',
 
   components:{
     Payment,

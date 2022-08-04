@@ -5,12 +5,12 @@
      <div class="mt-3 flex flex-col items-center mr-3">
 
          <div class="circle-border flex flex-col justify-center items-center">
-             <span>موجودی</span>
-             <span>{{formatPrice(walletCredit)}}</span>
-             <span>تومان</span>
+             <span >موجودی</span>
+             <span class="mt-3">{{formatPrice(walletCredit)}}</span>
+             <span class="mt-3">تومان</span>
          </div>
-         <p class="mt-2">مبلغ مورد نظر را در فیلد پایین وارد کنید</p>
-         <p class="mt-1">حداقل افزایش 5000 تومان</p>
+         <p class="mt-2  p-text">مبلغ مورد نظر را در فیلد پایین وارد کنید</p>
+         <p class="mt-1 p-text">حداقل افزایش 5000 تومان</p>
 
             <v-text-field
             
@@ -23,8 +23,8 @@
 
                 <v-btn @click.prevent="sendPyment" class="btn-add">
                      <span  v-if="!isDataSent" class="white"> افزایش</span>
-                    <font-awesome-icon  v-if="!isDataSent" class="absolute white left-0" :icon="`fa-solid fa-credit-card`" />
-              
+               <v-icon v-if="!isDataSent"  class="absolute-i white left-0" color="#ffffff">mdi-credit-card-outline</v-icon>
+
                <div  v-if="isDataSent" class="container-progress">
                 <span class="white ml-2">لطفا صبر کنید</span>
                 <v-progress-circular
@@ -35,7 +35,7 @@
               color="#ffffff"/>
                </div>
                 </v-btn>
-         <p class="mt-3 mb-3">با افزایش کیف پول خود با اطمینان و با سرعت پرداخت کنید</p>
+         <p class="mt-3 mb-3 p-text ">با افزایش کیف پول خود با اطمینان و با سرعت پرداخت کنید</p>
         
      </div>
     </section>
@@ -133,31 +133,35 @@ export default {
     flex:none;
 }
 .circle-border{
-  height:110px;  
-  width:110px;  
+  height:150px;  
+  width:150px;  
   border : 4px solid #fe606a;
   border-radius:50%;
 
 }
 .circle-border span{
     color :#676767;
-    font-size:0.75rem;
+    font-size:0.85rem;
     font-family: yekanBold!important;
 }
-p{
-    color :#cccccc;
-    font-size:0.6rem;
-    font-family: yekanBold!important;
+.p-text{
+    color :#8e8e8e;
+    font-size:0.8rem;
+    font-family: yekanNumRegular!important;
 }
 .btn-add{
     background-color : #fd5e63!important;
     width: 200px;
     margin-top: 1rem;
+    height: 50px!important;
    
 }
 .white{
   
     color : #ffffff!important;
+}
+.absolute-i{
+  position: absolute!important;
 }
 .progress-circular{
   height: 25px!important;

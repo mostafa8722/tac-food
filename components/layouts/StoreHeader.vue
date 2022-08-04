@@ -60,9 +60,11 @@ library.add(faArrowRight)
     display: flex;
     justify-content: center;
   }
-  header > div{max-width: 600px;}
+  header > div{max-width: 600px;    width: 100%;}
   .title{
-    font-size:0.7rem;
+    font-size:0.85rem;
+    color:#606060;
+    
   }
   .btn-back{
     font-size:0.7rem;

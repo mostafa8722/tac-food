@@ -1,9 +1,9 @@
 <template>
 
      <div class="flex-header-container flex ">
-  <div class="header-side">{{title}}</div>
+  <div class="header-side" :class="title.trim()=='مجموع'?'header-side-total':''">{{title}}</div>
     <h3 class="cart-header-center"></h3>
-  <div class="header-side header-side-left">{{value}}</div>
+  <div class="header-side header-side-left" :class="title.trim()=='مجموع'?'header-side-total':''">{{value}}</div>
 
    </div>
 </template>
@@ -28,10 +28,15 @@ export default {
 }
 
 .header-side {
-   font-family: yekanBold!important;
-  font-size:0.6rem;
+   font-family: yekanNumRegular!important;
+  font-size:0.9rem;
   margin-left:5px;
   margin-right:5px;
+  color:#606060;
+}
+.header-side-total {
+   font-family: IranYekanFN!important;
+ 
 }
 .header-side-left{
   width:64px;

@@ -40,7 +40,7 @@ export default {
 </script>
 <style scoped>
 .container-category{
-    height:80px;
+    height:100px;
   width:calc(100% - 20px);
   margin:5px 10px;
   border : 0.5px solid #eeeeee;
