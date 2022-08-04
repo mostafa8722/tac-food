@@ -2,16 +2,10 @@
      <div class=" bg-comment  ">
        <div class="flex justify-between ">
             <div class="d-flex items-center">
-             <v-img
-                        height="35"
-                        width="35"
-                        class="profile-image"
-                        src="/images/emoj1.png"
-                        
-                        ></v-img>
+             <v-icon  color="#4caf50">mdi-emoticon-happy-outline</v-icon>
            <span class="mr-2">{{comment.name}}</span>
             </div>
-           <span>{{comment.date}}</span>
+           <span class="date-c">{{comment.date}}</span>
 
            
        </div>
@@ -73,7 +67,7 @@ p{
     font-size:0.6rem;
 }
 .title{
-font-size:0.5rem;
+font-size:0.8rem;
 color:#ababab;
  font-family: yekanBold !important;
 }
@@ -82,5 +76,9 @@ color:#ababab;
     font-size: 0.7rem;
 }
 .d-flex{display: flex;}
-    
+.date-c{
+    font-size:0.5rem;
+color:#ababab;
+ font-family: IranYekanFN !important;
+}    
 </style>

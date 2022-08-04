@@ -1,15 +1,11 @@
 <template>
  
        <div class="flex">
-             <span>{{item.percent}}%</span>
+             <span class="item-percent">{{item.percent}}%</span>
              <span class="flex-100 bar-comment "><span class="bar-comment-percent" :style="`background:${item.color};width:${item.percent}%`"></span></span>
-            <v-img
-                        height="35"
-                        width="35"
-                        class="profile-image"
-                        :src="item.icon"
-                        
-                        ></v-img>
+            <v-icon v-if="type=='low'" :color="item.color">mdi-emoticon-sad-outline</v-icon>
+            <v-icon v-else-if="type=='middle'" :color="item.color">mdi-emoticon-neutral-outline</v-icon>
+            <v-icon v-else :color="item.color">mdi-emoticon-happy-outline</v-icon>
          </div>
      
    
@@ -23,7 +19,11 @@ export default {
           item:{
               type:Object,
               require:true
-          }
+          },
+            type:{
+              type:String,
+              require:true
+          },
       },
       data() { return {
     accentColor: '#fff300',
@@ -55,6 +55,9 @@ position :absolute;
 height:100%;
   
   left:0px;
+}
+.item-percent{
+   font-family: IranYekanFN !important;
 }
 
 </style>

@@ -5,9 +5,9 @@
      <div v-if="comments.length>0" class="  mr-2 ml-2 ">
 
      <div class="mt-3 flex flex-col  header-comment">
-        <HeaderComment :key="1" :item="getItem(comments,'high')" class="mb-2" />
-        <HeaderComment :key="2" :item="getItem(comments,'middle')" class="mb-2" />
-        <HeaderComment :key="3" :item="getItem(comments,'low')" class="mb-2" />
+        <HeaderComment :key="1" :item="getItem(comments,'high')" type="hight" class="mb-2" />
+        <HeaderComment :key="2" :item="getItem(comments,'middle')" type="middle"  class="mb-2" />
+        <HeaderComment :key="3" :item="getItem(comments,'low')" type="low" class="mb-2" />
      
      </div>
           
@@ -65,7 +65,7 @@ export default {
          let percent = 0 ;
          if(comments.length!=0)
          percent = Math.ceil(count /comments.length) * 100 ;
-         let color = type == "high" ? "#4baf52" : type == "middle" ? "#ff9501":"#f65457" ; 
+         let color = type == "high" ? "#4caf50" : type == "middle" ? "#ff9b08":"#ff5252" ; 
          let icon = type == "high" ? "/images/emoj1.png" : type == "middle" ? "/images/emoj2.png":"/images/emoj3.png" ; 
          
           

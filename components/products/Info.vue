@@ -2,7 +2,7 @@
    <section class=" bg mb-5 ">
      
      
-     <div class="  mr-10 ml-10  ">
+     <div class="  mr-10 ml-10  mb-80 ">
 
           
     
@@ -131,8 +131,9 @@ export default {
 <style scoped>
 .bg{ background-color: #f5f5f5;}
 .border-a{border:0.07rem solid #aeaeae!important;}
-.header-title{font-size: 0.75rem;color:#565656;font-weight: bold;}
-.header-value{font-size: 0.65rem;color:#b2b2b2}
-.address,.title-item{font-size:0.75rem;color:#565656;font-weight: bold;}
-.item-value{font-size:0.7rem;color:#a1a1a1}
+.header-title{font-size: 0.75rem;color:#565656;font-weight: bold; font-family: IranYekanFN !important;}
+.header-value{font-size: 0.65rem;color:#b2b2b2; font-family: IranYekanFN !important;}
+.address,.title-item{font-size:0.75rem;color:#565656;font-weight: bold; font-family: IranYekanFN !important;}
+.item-value{font-size:0.7rem;color:#a1a1a1; font-family: IranYekanFN !important;}
+.mb-80 {margin-bottom: 80px;}
 </style>

@@ -43,7 +43,7 @@
      <div>
          <div class="d-flex">
            <span class=" title">  {{product.name}}</span>
-           <div  class="shape-octagon-cat"><v-icon>mdi-exclamation</v-icon></div>
+           <div v-if="product.is_new" class="shape-octagon-cat"><v-icon>mdi-exclamation</v-icon></div>
          </div>
              
           
@@ -294,11 +294,11 @@ export default {
       transform: rotate(135deg);
     }
    .shape-octagon-cat i {
-      position: absolute;
-      font-size: 0.85rem;
-      transform: rotate(-20deg);
-      color:#ffffff;
-      left:4px;
+      position: absolute  !important;
+      font-size: 0.85rem!important;
+      transform: rotate(-20deg)!important;
+      color:#ffffff!important;
+      left: 0px !important;;
        font-family: yekanBold!important;
     }
 </style>

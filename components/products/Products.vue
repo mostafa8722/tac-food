@@ -105,24 +105,36 @@ export default {
         
         if(shop){
             this.$store.dispatch('products/setTitle',product.store_name)
-            let hour_start = parseInt(shop.activity_times[0].start.substring(0,2));
-            let min_start =parseInt( shop.activity_times[0].start.substring(3,5));
-              
-          let hour_end = parseInt(shop.activity_times[0].end.substring(0,2));
-            let min_end = parseInt(shop.activity_times[0].end.substring(3,5));
 
+           let shop_clock = "";
+            shop.activity_times.map(item=>{
+
+          
+            let hour_start = parseInt(item.start.substring(0,2));
+            let min_start =parseInt( item.start.substring(3,5));
+              
+          let hour_end = parseInt(item.end.substring(0,2));
+            let min_end = parseInt(item.end.substring(3,5));
+
+              console.log("dddd",hour_start)
               let date  = new Date();
               let hour = date.getHours();
               let min = date.getMinutes();
-               if( hour< hour_start || hour>hour_end ){
-                return false;
-               }else  if( hour== hour_start || min<min_start ){
-                return false;
+               if( hour> hour_start &&  hour<hour_end ){
+                shop_clock = false;
+               }else  if( hour== hour_start &&  min<min_start ){
+                shop_clock =  false;
                }
-               else  if( hour== hour_end || min>min_end ){
-                return false;
+               else  if( hour== hour_end &&  min>min_end ){
+                shop_clock = false;
+               }else{
+                
+                shop_clock = !shop_clock?
+                 hour_start + ":"+min_start +" الی "+hour_end + ":"+min_end:
+                " - "+ hour_start + ":"+min_start +" الی "+hour_end + ":"+min_end;
                }
-         return  hour_start + ":"+min_start +" الی "+hour_end + ":"+min_end;
+                 });
+         return  shop_clock;
         }
         
            
@@ -175,6 +187,7 @@ export default {
   display: flex;
   padding-right: 1rem;
   align-items: center;
+  position: relative;
 }
 .active-time-text{
   color:#fe5c67;
@@ -190,6 +203,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  right: 8px;
 }
 .active-time-shape-inline{
   height: 7px;

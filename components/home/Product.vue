@@ -102,7 +102,39 @@ export default {
     
 
     
-    
+    .shape-octagon {
+      background: #fd5e63;
+      width: 20px;
+      height: 20px;
+      top:5px;
+      left:5px;
+          border-radius: 2px;
+      position: absolute;
+      text-align: center;
+      transform: rotate(20deg);
+      color:#fff;
+      display:flex;
+      justify-content:center;
+      align-items :center;
+    }
+    .shape-octagon:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 20px;
+      width: 20px;
+          border-radius: 2px;
+      background: #fd5e63;
+      transform: rotate(135deg);
+    }
+   .shape-octagon span {
+      position: absolute;
+      font-size: 0.85rem;
+      transform: rotate(-20deg);
+      left:4px;
+       font-family: IranYekanFN!important;
+    }
     .img-placeholder{
      position: absolute;
     left: 50px;

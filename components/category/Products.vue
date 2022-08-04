@@ -2,7 +2,7 @@
    <section>
      <HeaderSection :title= "title"/>
      
-     <div class="flex flex-col ml-3 mr-3">
+     <div class="flex flex-col ml-3 mb-70 mr-3">
        <SkeletonLoaders v-if="isLoading" v-for="(item,index) in [1,2,3,4,5,6,7,8]" :key="index" />
 
      <div  v-if="!isLoading" v-for="(item, index) in shops">
@@ -44,4 +44,5 @@ export default {
 .flex-none{
     flex:none;
 }
+.mb-70{margin-bottom: 70px;}
 </style>
