@@ -18,6 +18,7 @@ interface result  {
 export const state = () => ({
   products:[] ,
   comments:[] ,
+  payments:[] ,
   catgoriesStore:[] ,
   title:""
 
@@ -27,7 +28,8 @@ export type AuthState = ReturnType<typeof state>
 
 export const getters: GetterTree<AuthState, any> = {
   products: (state: any) => state.products,
-  comments: (state: any) => state.comments,
+  comments:  (state: any) => state.comments,
+  payments:  (state: any) => state.payments,
   title: (state: any) => state.title,
   catgoriesStore: (state: any) => state.catgoriesStore,
  
@@ -49,6 +51,7 @@ export const mutations: MutationTree<AuthState> = {
     state.catgoriesStore = cats ;
   },
   commentsPage(state:any, data:result) {state.comments = data.result},
+  paymentsPage(state:any, data:result) {state.payments = data.result},
   setTitle(state:any, data:result) {state.title = data},
  
   
@@ -129,7 +132,7 @@ export const actions: ActionTree<AuthState, any> = {
       .customerCommentsPage(data)
       .then((res:any) => {
      
-        commit('commentsPage',res.data)
+        commit('paymentsPage',res.data)
       })
       .catch((error:any) => {
        
@@ -138,14 +141,14 @@ export const actions: ActionTree<AuthState, any> = {
       })
   },
   async customerPaymentSection({ commit, dispatch }, data) {
-    alert()
+   
     await this.$repositories
       .payments()
       .customerPaymentsPage(data)
       .then((res:any) => {
      
         console.log("tttttrrr",res.data)
-       // commit('commentsPage',res.data)
+        commit('commentsPage',res.data)
       })
       .catch((error:any) => {
       

@@ -1,14 +1,52 @@
 <template>
  
-      <NuxtLink :to="`${item.link}`">
+      <NuxtLink v-if="item.id!=4 &&  item.id!=6 " class="w-91" :to="`${item.link}`">
       <div class="flex justify-between mt-5">
           <div class="flex">
-              <font-awesome-icon class=" mr-5 icon-item" :icon="`fa-solid ${item.icon}`" />
-              <span class="icon-item mr-5"> {{item.title}}</span>
+            <v-icon v-if="item.id==1"  class=" mr-5 icon-item-pre">mdi-message-reply-text</v-icon>
+            <v-icon v-else-if="item.id==2"  class=" mr-5 icon-item-pre">mdi-credit-card-outline</v-icon>
+            <v-icon v-else-if="item.id==3"  class=" mr-5 icon-item-pre">mdi-alert-box-outline</v-icon>
+            <v-icon v-else-if="item.id==4"  class=" mr-5 icon-item-pre">mdi-update</v-icon>
+            <v-icon v-else-if="item.id==5"  class=" mr-5 icon-item-pre">mdi-share-variant-outline</v-icon>
+            <v-icon v-else-if="item.id==6"  class=" mr-5 icon-item-pre">mdi-phone-hangup-outline</v-icon>
+            
+              <span class="text-profile-title mr-5"> {{item.title}}</span>
           </div>
-          <font-awesome-icon class=" mr-5  icon-item" :icon="`fa-solid fa-angle-left`" />
+          <font-awesome-icon class=" mr-5  icon-item-arrow" :icon="`fa-solid fa-angle-left`" />
       </div>
       </NuxtLink>
+
+        <a v-else-if="item.id==5  "  @click.prevent="handleShare" class="w-91" :href="`${item.link}`">
+      <div class="flex justify-between mt-5">
+          <div class="flex">
+            <v-icon v-if="item.id==1"  class=" mr-5 icon-item-pre">mdi-message-reply-text</v-icon>
+            <v-icon v-else-if="item.id==2"  class=" mr-5 icon-item-pre">mdi-credit-card-outline</v-icon>
+            <v-icon v-else-if="item.id==3"  class=" mr-5 icon-item-pre">mdi-alert-box-outline</v-icon>
+            <v-icon v-else-if="item.id==4"  class=" mr-5 icon-item-pre">mdi-update</v-icon>
+            <v-icon v-else-if="item.id==5"  class=" mr-5 icon-item-pre">mdi-share-variant-outline</v-icon>
+            <v-icon v-else-if="item.id==6"  class=" mr-5 icon-item-pre">mdi-phone-hangup-outline</v-icon>
+            
+              <span class="text-profile-title mr-5"> {{item.title}}</span>
+          </div>
+          <font-awesome-icon class=" mr-5  icon-item-arrow" :icon="`fa-solid fa-angle-left`" />
+      </div>
+      </a>
+
+        <a  v-else-if="item.id==6  " class="w-91" :href="`${item.link}`">
+      <div class="flex justify-between mt-5">
+          <div class="flex">
+            <v-icon v-if="item.id==1"  class=" mr-5 icon-item-pre">mdi-message-reply-text</v-icon>
+            <v-icon v-else-if="item.id==2"  class=" mr-5 icon-item-pre">mdi-credit-card-outline</v-icon>
+            <v-icon v-else-if="item.id==3"  class=" mr-5 icon-item-pre">mdi-alert-box-outline</v-icon>
+            <v-icon v-else-if="item.id==4"  class=" mr-5 icon-item-pre">mdi-update</v-icon>
+            <v-icon v-else-if="item.id==5"  class=" mr-5 icon-item-pre">mdi-share-variant-outline</v-icon>
+            <v-icon v-else-if="item.id==6"  class=" mr-5 icon-item-pre">mdi-phone-hangup-outline</v-icon>
+            
+              <span class="text-profile-title mr-5"> {{item.title}}</span>
+          </div>
+          <font-awesome-icon class=" mr-5  icon-item-arrow" :icon="`fa-solid fa-angle-left`" />
+      </div>
+      </a>
     
 
 </template>
@@ -28,6 +66,19 @@ export default {
             type:Object,
             require:true,
         }
+    },
+    methods:{
+        handleShare(){
+            if (navigator.share) {
+  navigator.share({
+    title: "",
+    text: "",
+    url: "https://cafebazaar.ir/app/ir.takfood"
+  })
+  .then(() => console.log('Successful share'))
+  .catch(error => console.log('Error sharing:', error));
+}
+        }
     }
   
   
@@ -38,10 +89,13 @@ export default {
     flex:none;
 }
 
-.icon-item{
-   
-    
-    font-size: 0.75rem;
-    color :#9c9c9c;
+.text-profile-title{
+    color : #606060;
+       font-size:0.95rem;
+     font-family: yekanNumRegular !important;
+  
 }
+.w-91{width:91%;}
+.icon-item-arrow{color:#9e9e9e}
+.icon-item-pre{color:#9e9e9e}
 </style>

@@ -32,7 +32,7 @@ getAddresses(state:any,data:any) {
     state.userAddresses = data.result; 
     state.selected_address = data.result.length>0?data.result[0]:{}
       if(!state.selected_address){
-          state.selected_address = data.result.length>0?data.result[0]:{}
+        //  state.selected_address = data.result.length>0?data.result[0]:{}
       }
    
   },

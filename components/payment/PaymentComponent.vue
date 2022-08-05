@@ -89,9 +89,15 @@
                   <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
                    <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
                 </div>
-                <NuxtLink v-else   class="btn-send pointer text-center relative mt-3" to="/login">
+
+                 <div v-if="payment_btn.type!=='address'" @click.prevent =" hanlePayment"  class="btn-send pointer text-center relative mt-3">
                   <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
                    <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
+                </div>
+                <NuxtLink v-else   class="btn-send pointer text-center relative mt-3" to="/login">
+                  <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
+                
+                  <v-icon class=" mr-5  icon-item white height-20" >mdi-credit-card-outline</v-icon>
                 </NuxtLink>
 
            </div>
@@ -177,10 +183,8 @@ export default {
            
          },
          watch :{
-          userAddresses(new_val,old_val){
-            if(new_val.length==0)
-            this.payment_btn = {title:"ثبت آدرس ",icon:"fa-credit-card",type:"address" } 
-            else
+          selected_address(new_val,old_val){
+           
              this.payment_btn = {title:"پرداخت ",icon:"fa-credit-card",type:"payment" } 
           }
          },

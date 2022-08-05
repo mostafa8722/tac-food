@@ -1,10 +1,10 @@
 <template>
  
 
-    <div>
-     <div  class="flex justify-center">
+    <div class="mb-70 ">
+     <div  class="flex justify-center ">
 <v-card
-    class="rounded-xl  "
+    class="rounded-xl mt-70  "
     width="300"
     height="170"
      color="#ffffff"
@@ -35,7 +35,7 @@
      
 
     <div class="flex  flex-col items-center mt-10">
-      <span class=" red mt-2"> {{ name}}</span>
+      <span class=" text-red mt-2"> {{ name}}</span>
       <span class=" text-profile mt-2">  {{mobile}}</span>
       <span class=" text-profile mt-2">  کد معرف {{code}}</span>
       
@@ -44,13 +44,13 @@
 
     <div class="flex justify-evenly mt-2">
       <div class="pointer" @click.prevent="edit">
-               <font-awesome-icon class=" mr-5  icon-item red" :icon="`fa-solid fa-pencil`" />
+      <v-icon class=" mr-5  icon-item icon-red">mdi-pencil</v-icon>
+             
             <span class=" text-profile-edit mr-1"> ویرایش </span>
       </div>
 
        <div class="pointer" @click.prevent="logOut">
-           
-            <font-awesome-icon class=" mr-5  icon-item red" :icon="`fa-solid fa-arrow-right-from-bracket`" />
+            <v-icon class=" mr-5  icon-item icon-red">mdi-exit-to-app</v-icon>
             <span  class=" text-profile-edit mr-1">  خروج</span>
           
       </div>
@@ -106,8 +106,9 @@ export default {
             {id:1,title:"نظرات ",icon:"fa-message",link:"/profile/comments"},
             {id:2,title:"سوابق پرداخت",icon:"fa-credit-card",link:"/profile/payments"},
             {id:3,title:"انتقادات و پیشنهادات",icon:"fa-exclamation",link:"/profile/proposals"},
-            {id:4,title:"معرفی به دوستان",icon:"fa-share-nodes",link:"/profile/share"},
-            {id:5,title:"تماس با پشتیبانی",icon:"fa-phone",link:"/profile/contact"},
+            {id:4,title:"به روز رسانی ",icon:"fa-exclamation",link:"/profile/proposals"},
+            {id:5,title:"2معرفی به دوستان",icon:"fa-share-nodes",link:"/profile/share"},
+            {id:6,title:"تماس با پشتیبانی",icon:"fa-phone",link:"tel:086-4242-0000"},
         ]
     }),
      
@@ -152,18 +153,25 @@ p{
     font-size:0.6rem;
     font-family: yekanBold!important;
 }
+.mt-70{margin-top: 70px;}
 .btn-add{
     background-color : #fd5e63!important;
 }
-.red{
+.text-red{
   
-    color : #f75c67!important;
-    font-size:0.8rem;
+    color : #fd5e63!important;
+    font-size:0.95rem;
+}
+
+.icon-red{
+  
+    color : #fd5e63!important;
+    font-size:1.6rem;
 }
 .text-profile{
-    color : #9c9c9c!important;
-    font-size:0.8rem;
-     font-family: yekanBold !important;
+    color : #9e9e9e;
+    font-size:0.95rem;
+     font-family: yekanNumRegular !important;
 }
 .icon-users{
    
@@ -171,8 +179,9 @@ p{
     color :#cccccc;
 }
 .text-profile-edit{
-    color : #6b6b6b!important;
-    font-size:0.8rem;
+    color : #606060!important;
+    font-size:0.95rem;
+      font-family: IranYekanFN !important;
 }
 .cover-profile-img{
     width: 80px;
@@ -180,10 +189,13 @@ p{
     position: absolute;
     right:calc(50% - 40px);
     top: -45px;
+    border-radius: 50%;;
 }
 .profile-image{
    position: absolute;
    left:15px;
    top:15px;
+   filter: invert(39%) sepia(43%) saturate(2653%) hue-rotate(329deg) brightness(113%) contrast(98%);
 }
+.mb-70{margin-bottom: 70px;}
 </style>

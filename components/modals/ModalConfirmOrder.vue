@@ -6,15 +6,15 @@
            
            
          <div class=" mb-2">
-          <h3 class="header-modal pt-2">تایید سفارش</h3>
+          <h3 class="header-modal ">تایید سفارش</h3>
          <div class="flex flex-col text-right">
-          <p class="red mt-4 mr-1 ml-1 text-center bold "> -> در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
+          <p class="text-red mt-4 mr-1 ml-1 text-center bold "> -> در صورت تایید سفارش امکان لغو آن وجود ندارد </p>
            <span class="mt-4 pr-2">سفارش شما -></span>
-            <p class="red  mr-1 ml-1  pr-2 ">  {{getTitleCart(carts)}}</p>
+            <p class="text-red  mr-1 ml-1  pr-2 ">  {{getTitleCart(carts)}}</p>
 
           <div class="mt-2 mr-2 ml-2 line-break"></div>
           <span class="mt-4  pr-2">به آدرس  -></span>
-            <p class="red mr-1 ml-1  pr-2 ">  {{selected_address.address?selected_address.address:""}} </p>
+            <p class="text-red mr-1 ml-1  pr-2 ">  {{selected_address.address?selected_address.address:""}} </p>
 
          </div>
          <div class="flex justify-end mb-5 mt-5 relative ">
@@ -178,13 +178,15 @@ button {
   transition: opacity 0.5s ease;
 }
 .header-modal{
-  height: 35px;
+  height: 45px;
     background-color:#fd5e63;
    color: #ffffff;
    text-align: right;
    padding-right: 10px;
    border-top-left-radius: 1rem;
    border-top-right-radius: 1rem;
+   display: flex;
+   align-items: center;
 }
 .btn-save{
    background-color:#fd5e63;
@@ -203,8 +205,8 @@ button {
     padding:0.3rem 1.5rem;
     border-radius: 0.3rem;
 }
-.red{
-  font-size: 0.9rem;
+.text-red{
+  font-size: 0.95rem;
   color:#fd5e63;
 
 }

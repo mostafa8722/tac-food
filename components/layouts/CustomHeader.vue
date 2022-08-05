@@ -72,7 +72,8 @@ library.add(faArrowRight)
     height:30px;
   }
   .title{
-    font-size:0.7rem;
+    font-size:0.95rem;
+    color:#606060;
   }
   .btn-back{
     font-size:0.7rem;

@@ -7,8 +7,8 @@
 
          
              <h2 class="proposal-title">بازخورد خود را برای ما ارسال کنید!</h2>
-             <p class="mt-4">آیا شما پیشنهادی دارید یا مشکلی پیدا کرده اید ؟</p>
-             <p class="mt-1"> از طریق فیلد پایین به ما اطلاعا بدهید </p>
+             <p class="mt-4 text-p">آیا شما پیشنهادی دارید یا مشکلی پیدا کرده اید ؟</p>
+             <p class="mt-1 text-p"> از طریق فیلد پایین به ما اطلاعا بدهید </p>
         <div class="flex">
             <div class="flex-header-right mt-3"></div>
         </div>
@@ -20,37 +20,18 @@
              <div class="container-experiment  flex mt-3 ">
 
                  <div @click="setExperiance('good')" class="flex-col flex container-item items-center justify-center ml-1r" :class="experiance=='good'?'experiance-selected':''" >
-                      <v-img
-                        height="35"
-                        width="35"
-                        class="profile-image"
-                        src="/icons/good-emoj.png"
-
-                        
-                        ></v-img>
-                     <span>خوب </span>
+                      <v-icon  class="icon-emoj" >mdi-emoticon-happy-outline</v-icon>
+                     <span class="text-emoj">خوب </span>
                  </div>
                  <div  @click="setExperiance('average')"  class="flex-col flex container-item items-center justify-center  ml-1r"  :class="experiance=='average'?'experiance-selected':''" >
-                      <v-img
-                        height="25"
-                        width="25"
-                        class="profile-image"
-                        src="/icons/good-emoj.png"
-                        
-                        ></v-img>
-                     <span>متوسط </span>
+                        <v-icon  class="icon-emoj" >mdi-emoticon-neutral-outline</v-icon>
+                     <span class="text-emoj">متوسط </span>
                  </div>
                  
 
                  <div  @click="setExperiance('bad')" class="flex flex-col container-item items-center justify-center"  :class="experiance=='bad'?'experiance-selected':''">
-                      <v-img
-                        height="30"
-                        width="30"
-                        class="profile-image"
-                        src="/icons/good-emoj.png"
-                        
-                        ></v-img>
-                     <span>بد </span>
+                       <v-icon  class="icon-emoj" >mdi-emoticon-sad-outline</v-icon>
+                     <span class="text-emoj">بد </span>
                  </div>
 
                  <div>
@@ -72,8 +53,10 @@
           class="text-right"
           name="input-7-4"
           label="توضیحات خود را در این قسمت وارد کنید"
+           maxlength="300"
+        counter="300"
         ></v-textarea>
-        <div class="red flex flex-row-reverse">0/300</div>
+       
          </div>
          <div>
                 <v-radio-group row class="flex-row" v-model="subject">
@@ -88,10 +71,11 @@
       ></v-radio>
     </v-radio-group>
          </div>
-           <div class="flex justify-center mb-5 mt-5">
+           <div class="flex justify-center mb-5 mt-2">
                <div @click.prevent ="sendProposal"  class="btn-location pointer text-center relative mt-3">
                   <span class="white" style="font-size: 0.8rem;"> ارسال </span>
-                   <font-awesome-icon class=" mr-5  icon-item white" :icon="`fa-solid fa-location-dot`" />
+                  <v-icon class=" mr-5  icon-item-send white">mdi-send</v-icon>
+                  
                 </div>
 
            </div>
@@ -176,21 +160,22 @@ export default {
                 experiance : final_exprience,
                 describe : this.description,
             }
-              await DB.users.count(async (count)=> {
-            if(count==0  ){
-              this.$router.push('/login')
-            }else{
-                 await   DB.users.each( (item) =>{
-                    data . api_token = item.api_token;
+
+               if(Cookies.get("user")){
+                  let user = JSON.parse (Cookies.get("user"));
+               
+                     data . api_token = user.api_token;
                 
                    this.$store.dispatch('home/addProposal', data)
-                });
-              
-              // this.isLogin = true;
-            }
-           
-          
-            });
+                 
+               
+                  
+                }else{
+                
+                 this.$store.dispatch('home/authenticatedCode',{status:401})
+                }
+   
+            
           
      
         }
@@ -218,11 +203,11 @@ export default {
 }
 .proposal-title{
     font-size: 1rem;
-    color:#767676;
+    color:#606060;
 }
 .proposal-title2{
-    font-size: 0.8rem;
-    color:#767676;
+    font-size: 0.9rem;
+    color:#606060;
 }
 p{
     color :#cccccc;
@@ -231,7 +216,7 @@ p{
 }
 
 .flex-header-right {
-   background-color: #eee;
+   background-color: #c2c2c2;
 
   flex: 100%;
   height: 1px;
@@ -252,7 +237,10 @@ p{
 
 .btn-location{
     height:40px ;
-    width:250px;
+   max-width:450px;
+   width: 96%;
+   margin-left: 7%;
+   margin-right: 7%;
     border-radius: 5px;
     background-color: #fd5e63;
     line-height: 35px;
@@ -273,5 +261,27 @@ p{
 .experiance-selected{
     background-color: #f76068;
      color: #fff;
+}
+.icon-emoj{
+    color:#606060;
+    font-size: 1.5rem;
+}
+.text-emoj{
+    color:#606060;
+    font-size: 0.95rem;
+}
+.text-p{
+     color:#8e8e8e;
+    font-size: 0.85rem;
+      font-family: yekanNumRegular !important;
+}
+.experiance-selected .icon-emoj{color:#ffffff!important}
+.experiance-selected .text-emoj{color:#ffffff!important}
+
+.icon-item-send{
+    transform: rotate(180deg);
+    position: absolute;
+    left: 15px;
+    top: 5px;
 }
 </style>
