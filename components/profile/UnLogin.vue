@@ -8,7 +8,7 @@
 
                 <v-btn class="btn-add mt-5">
                       <NuxtLink to="/login">
-                     <span class="white"> ثبت نام</span>
+                     <span class="white" style="font-size:0.94rem;"> ثبت نام</span>
                     <font-awesome-icon class=" white mr-5 h-15" :icon="`fa-solid fa-user`" />
                      </NuxtLink>
                 </v-btn>
@@ -64,14 +64,14 @@ p{
 }
 .icon-users{
    
-    height:40px;
+    height:45px;
     font-size:1.5rem;
     color :#cccccc;
-    filter: invert(89%) sepia(0%) saturate(83%) hue-rotate(136deg) brightness(95%) contrast(87%);
+ filter: invert(81%) sepia(0%) saturate(156%) hue-rotate(224deg) brightness(80%) contrast(79%);
 }
 .text-unregister{
 font-size: 0.95rem;
-color:#cccccc;
+color:#9e9e9e;
 }
 .h-15{
     height:15px;
