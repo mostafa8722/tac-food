@@ -55,8 +55,11 @@
           
       </a>
 
-                <v-btn @click.prevent="login" class="btn-add pointer mt-10">
-                     <span    v-if="!isDataSent" class="white"> ثبت </span>
+               
+        
+     </div>
+      <v-btn @click.prevent="login" class="btn-add pointer mt-10">
+                     <span    v-if="!isDataSent" class="white btn-add-text"> ثبت </span>
                     <font-awesome-icon  v-if="!isDataSent" class="absolute left-2 white mr-5 h-20" :icon="`fa-solid fa-angle-left`" />
               <div  v-if="isDataSent" class="container-progress">
                 <span class="white ml-2">لطفا صبر کنید</span>
@@ -68,8 +71,6 @@
               color="#ffffff"/>
                </div>
                 </v-btn>
-        
-     </div>
      </div>
     </section>
 
@@ -156,8 +157,13 @@ p{
 }
 .btn-add{
     background-color : #fd5e63!important;
-    height: 45px!important;
-    width:200px;
+    height: 50px!important;
+    width:calc(100% - 20px);
+    max-width: 400px;
+}
+.btn-add-text{
+ font-size: 0.95rem;
+ color:#ffffff;
 }
 .white{
   

@@ -46,12 +46,12 @@ export default {
 
 .p-cart{
     color :#8e8e8e;
-    font-size:0.8rem;
+    font-size:0.95rem;
     font-family: yekanNumRegular!important;
 }
 .icon-triangle{
     color :#cccccc;
-    font-size:3rem;
+    font-size:4rem;
     height: 50px;
 }
 .btn-add-return {
@@ -60,7 +60,7 @@ export default {
     padding:0rem 1.5rem;
     border-radius: 0.3rem;
     font-size: 0.9rem;
-    height:45px;
+    height:50px;
 
 }
 </style>

@@ -42,7 +42,7 @@ export default {
     flex:none;
 }
 .tab-box{
-    height:35px;
+    height:45px;
     border-radius : 5px;
     background-color : #ffffff;
     color : #9a9a9a;

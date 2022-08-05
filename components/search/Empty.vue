@@ -5,7 +5,7 @@
          
            <font-awesome-icon class=" icon-triangle mt-2 " :icon="`fa-solid  fa-magnifying-glass`" />
               
-         <p class="mt-5">  موردی یافت نشد !</p>
+         <p class="mt-5 text-search-empty">  موردی یافت نشد !</p>
          
                  
            
@@ -37,9 +37,9 @@ export default {
 .flex-none{
     flex:none;
 }
-p{
+ text-search-empty{
     color :#cccccc;
-    font-size:0.6rem;
+    font-size:0.95rem;
     font-family: yekanBold!important;
 }
 .icon-triangle{

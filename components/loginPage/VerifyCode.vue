@@ -7,17 +7,17 @@
 
 
 
-            <p class="red text-center mt-2">شما یک پیام حاوی کد تایید به شماره زیر دریافت خواهید کرد</p>
+            <p class="text-verify-red text-center mt-4">شما یک پیام حاوی کد تایید به شماره زیر دریافت خواهید کرد</p>
 
-            <div class="flex justify-center mt-3">
+            <div class="flex justify-center mt-4">
              
                 <font-awesome-icon class=" ml-2 h-20  icon-item green" :icon="`fa-solid fa-solid fa-circle-check`" />
-                <span>{{mobile}}</span>
+                <span class="text-verify-number">{{mobile}}</span>
 
             </div>
             
            
-            <p class="mt-2 text-center">کد دریافتی را در قسمت زیر وارد کنید </p>
+            <p class="mt-2 text-center text-verify-code mt-3">کد دریافتی را در قسمت زیر وارد کنید </p>
              <div class="flex justify-center ltr mt-5">
             
                 <v-otp-input
@@ -27,12 +27,12 @@
                 type="number"
                 ></v-otp-input>
             </div>
-            <p class="mt-5 text-center">{{showTime}}</p>
-            <p class="mt-1 text-center">زمان باقی مانده  </p>
-            <div class="flex justify-center mb-5 mt-5">
+            <p class="mt-5 text-center text-verify-code">{{showTime}}</p>
+            <p class="mt-1 text-center text-verify-code">زمان باقی مانده  </p>
+            <div class="flex justify-center mb-2 mt-20">
                <div @click.prevent="confirm" class="btn-location text-center pointer relative mt-3">
-                  <span class="white" v-if="!isDataSent && countDown>0" style="font-size: 0.8rem;"> تایید </span>
-                  <span class="white" v-if="!isDataSent && countDown==0" style="font-size: 0.8rem;"> تلاش دوباره  </span>
+                  <span class="white" v-if="!isDataSent && countDown>0" style="font-size: 0.95rem;"> تایید </span>
+                  <span class="white" v-if="!isDataSent && countDown==0" style="font-size: 0.95rem;"> تلاش دوباره  </span>
                    <font-awesome-icon v-if="!isDataSent && countDown>0" class=" mr-5 h-20 icon-item white" :icon="`fa-solid fa-clipboard-check`" />
                    <font-awesome-icon v-else-if="!isDataSent && countDown==0" class=" mr-5 h-20 icon-item white" :icon="`fa-solid fa-rotate-right`" />
                 <div  v-if="isDataSent" class="container-progress">
@@ -170,14 +170,30 @@ p{
     font-family: yekanBold!important;
 }
 
-.red{
+.text-verify-red{
   
-    color : #f75c67!important;
-    font-size:0.7rem;
+    color : #fe5c67!important;
+    font-size:0.9rem;
+       font-family: yekanNumRegular!important;
+}
+.text-verify-code{
+  
+    color : #606060!important;
+    font-size:0.9rem;
+       font-family: yekanNumRegular!important;
+}
+.text-verify-number{
+  
+    color : #606060!important;
+    font-size:0.9rem;
+ 
 }
 .btn-location{
-    height:40px ;
-    width:250px;
+    height:45px ;
+    width:86%;
+    margin-right: 7%;
+    margin-left:7%;
+    max-width:450px;
     border-radius: 5px;
     background-color: #fd5e63;
     line-height: 35px;

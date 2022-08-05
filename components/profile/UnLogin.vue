@@ -4,7 +4,7 @@
 
          
          <img  class="icon-users" src="/icons/users.svg" />
-         <p class="mt-3">شما ثبت نام نکردید</p>
+         <p class="mt-3 text-unregister">شما ثبت نام نکردید</p>
 
                 <v-btn class="btn-add mt-5">
                       <NuxtLink to="/login">
@@ -64,10 +64,14 @@ p{
 }
 .icon-users{
    
-    height:30px;
-    font-size:1rem;
+    height:40px;
+    font-size:1.5rem;
     color :#cccccc;
     filter: invert(89%) sepia(0%) saturate(83%) hue-rotate(136deg) brightness(95%) contrast(87%);
+}
+.text-unregister{
+font-size: 0.95rem;
+color:#cccccc;
 }
 .h-15{
     height:15px;

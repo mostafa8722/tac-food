@@ -10,12 +10,13 @@
   outlined
  
   >
-    <div class="flex flex-row mr-1 mt-1">
+    <div class="flex flex-row  mt-1">
       <v-img
        
       height="70"
       width="70"
-      class="flex-none rounded-xl"
+
+      class="flex-none rounded-xl mr-1"
       :src="product.logo"
     
     >
@@ -138,7 +139,9 @@ export default {
 .content-product{
   border-radius:0.3rem!important;
   border:0.5rem solid #dddddd;
-  width:calc(100% - 10px)
+  width:100%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 .rounded-none{
   border-radius:0rem!important;

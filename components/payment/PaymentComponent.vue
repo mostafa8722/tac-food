@@ -5,12 +5,12 @@
      <div class="flex mr-5 mt-1 ">
     
         <font-awesome-icon   class="red height-20" icon="fa-solid fa-check mt-3 " />
-            <p class="red mr-2">{{selected_address.address}} </p>
+            <p class="red mr-2">{{selected_address.address?selected_address.address:location_address.address_postal}} </p>
      </div>
       
        <div class="flex justify-center mt-5 mb-20">
          <button  @click.prevent="showModal = true" class="add-discount   pointer mt-2 ">
-         <v-icon  class="text-p2 " >mdi-tag</v-icon>
+         <v-icon  class="text-p2-tag " >mdi-tag</v-icon>
             
             <span class="text-p2 mr-2"> وارد کردن کد تخفیف </span>
          </button>
@@ -34,7 +34,7 @@
       class="flex radio-group"
     >
     <div class="flex flex-col items-center flex-1">
-          <div class="flex flex-col  mb-1 mr-4">
+          <div class="flex flex-col  mr-4">
                         <v-icon :class="` icon-style ${pay_type=='wallet'?'active-style':''} `">mdi-wallet-outline</v-icon>
 
             <span :class="`mt-1 text-style ${pay_type=='wallet'?'active-style':''}`">کیف پول</span>
@@ -47,7 +47,7 @@
     </div>
 
      <div class="flex flex-col items-center flex-1">
-          <div class="flex flex-col  mb-1 mr-4">
+          <div class="flex flex-col   mr-4">
                         <v-icon :class="` icon-style ${pay_type=='online'?'active-style':''} `">mdi-credit-card-outline</v-icon>
 
             <span :class="`mt-1 text-style ${pay_type=='online'?'active-style':''}`">درگاه پرداخت</span>
@@ -61,7 +61,7 @@
       
      
       <div class="flex flex-col items-center flex-1">
-          <div class="flex flex-col  mb-1 mr-4">
+          <div class="flex flex-col   mr-4">
             <v-icon :class="` icon-style ${pay_type=='cod'?'active-style':''} `">mdi-cash-multiple</v-icon>
             
             <span :class="`mt-1  text-style ${pay_type=='cod'?'active-style':''}`">در محل</span>
@@ -76,7 +76,7 @@
     </v-radio-group>
              </div>
 
-              <div class="flex justify-center mt-2">
+              <div class="flex justify-center ">
                 <span class="text-p2">کیف پول :</span>
                 <span class="text-p2 mr-2 ml-2">{{formatPrice(walletCredit)}}</span>
                
@@ -141,7 +141,7 @@ export default {
            userAddresses: 'user/userAddresses',
              walletCredit: 'home/walletCredit',
             
-       
+          location_address: 'general/location_address',
         
             })
          },
@@ -308,12 +308,12 @@ p{
 }
 .icon-style{
  color : #606060;
-    font-size: 1.05rem;
+    font-size: 1.5rem;
     font-family: yekanNumRegular  !important;
 }
 .text-style{
  color : #606060;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-family: yekanNumRegular  !important;
 }
 .active-style{
@@ -347,13 +347,18 @@ p{
 
 .text-p{
     color:#606060;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
        font-family: yekanNumRegular!important;
 }
 .text-p2{
     color:#606060;
-    font-size: 0.85rem;
-      font-family: yekanNumRegular!important;
+    font-size: 0.95rem;
+      font-family: IranYekanFN!important;
+}
+.text-p2-tag{
+    color:#606060;
+    font-size: 1.5rem;
+      font-family: IranYekanFN!important;
 }
 .text-p2-bold{
     font-family: IranYekanFN!important;
