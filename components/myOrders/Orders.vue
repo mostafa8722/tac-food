@@ -337,8 +337,10 @@ h3{
  
     display: flex;
     justify-content: center;
-     width:92%;
-       padding-bottom: 70px;
+     width:90%;
+     margin-left: 5%;
+     margin-right: 5%;
+       padding-bottom: 10px;
 }
 .card-content{
  border:0.1rem solid #dddddd;
@@ -371,7 +373,7 @@ h3{
     color:#ff4d5c;
 }
 .timer-text{
-    font-family: yekanNumRegular;
+    font-family: yekanNumRegular!important;
     color:#8e8e8e;
 }
 .report-active{

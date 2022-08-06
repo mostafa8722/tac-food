@@ -1,5 +1,5 @@
-<template>
-   <section>
+ <template>
+   <section class="mb-70">
      
      
         <Empty  v-if="myOrders.length==0" />
@@ -87,4 +87,5 @@ p{
   
     color : #ffffff!important;
 }
+.mb-70{margin-bottom: 70px;}
 </style>

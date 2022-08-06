@@ -114,7 +114,7 @@ h3{
 }
 .title{font-size: 0.95rem;}
 .type{font-size: 0.85rem;color:#9c9c9c;}
-.payment-date{left:50px;top:20px;}
+.payment-date{left:50px;top:20px; font-family: yekanNumRegular!important;}
 @media screen and (max-width:500px){
   .content-section{
 

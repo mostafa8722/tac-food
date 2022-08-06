@@ -90,16 +90,16 @@
                  
                   <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
                 
-                  <v-icon class=" mr-5  icon-item white height-20" >mdi-credit-card-outline</v-icon>
+                  <v-icon class=" mr-5  btn-icon-item white height-20" >mdi-credit-card-outline</v-icon>
                 </div>
 
                  <div v-else-if="payment_btn.type=='address'" @click.prevent =" hanlePayment"  class="btn-send pointer text-center relative mt-3">
                   <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
-                   <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
+                   <font-awesome-icon class=" mr-5 btn-icon-item  white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
                 </div>
                 <NuxtLink v-else-if="payment_btn.type=='login'"   class="btn-send pointer text-center relative mt-3" to="/login">
                  <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
-                   <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
+                   <font-awesome-icon class=" mr-5  btn-icon-item  white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
                 </NuxtLink>
 
            </div>
@@ -396,5 +396,10 @@ width:500px;
 }
 .flex-1{
   flex:1;
+}
+.btn-icon-item {
+  position: absolute;
+  left: 10px;
+  top: 12px;
 }
 </style>

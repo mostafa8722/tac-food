@@ -71,11 +71,11 @@ export default {
 .rounded-xl{
   border-radius:0rem!important;
   border:unset;
-  border-bottom: 0.1rem solid  #dddddd;
+  border-bottom: 0.05rem solid  #cccccc;
 }
 .rounded{
   border-radius:50%!important;
-   border: 1px solid  #dddddd;
+   border: 1px solid  #cccccc;
   
 }
 .title{
