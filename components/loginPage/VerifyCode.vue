@@ -3,11 +3,12 @@
 
     
      
-        <div class="mt-20 flex flex-col ml-3 flex-items profile-container  mr-3">
+        <div class="mt-20 flex flex-col ml-3 justify-center  profile-container  mr-3">
 
 
 
-            <p class="text-verify-red text-center mt-4">شما یک پیام حاوی کد تایید به شماره زیر دریافت خواهید کرد</p>
+            <p class="text-verify-red text-center mt-4">شما یک پیام حاوی کد تایید به شماره زیر </p>
+            <p class="text-verify-red text-center "> دریافت خواهید کرد</p>
 
             <div class="flex justify-center mt-4">
              
@@ -163,6 +164,7 @@ export default {
 .profile-container{
     width: 400px;
     margin:  0px auto;
+    
 }
 p{
     color :#747474;

@@ -232,7 +232,7 @@ p{
     background-color: #ffffff;
     
 }
-.container-item span{font-size: 0.6rem;color:#707070;}
+
 .ml-1r{margin-left: 0.1rem;}
 
 .btn-location{

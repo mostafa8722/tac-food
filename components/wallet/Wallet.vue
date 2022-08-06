@@ -142,7 +142,7 @@ export default {
 .circle-border span{
     color :#676767;
     font-size:0.85rem;
-    font-family: yekanBold!important;
+    font-family: yekanNumRegular!important;
 }
 .p-text{
     color :#8e8e8e;

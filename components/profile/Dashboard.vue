@@ -65,7 +65,8 @@
          <div class="mt-20 flex flex-col ml-3 flex-items profile-container  mr-3">
 
          
-      <ProfileTitle v-for="item in items" :key="item.id"  :item="item" />
+      <ProfileTitle v-for="item in items" :key="item.id"  :item="item"
+       />
 
         
      </div>
@@ -107,7 +108,7 @@ export default {
             {id:2,title:"سوابق پرداخت",icon:"fa-credit-card",link:"/profile/payments"},
             {id:3,title:"انتقادات و پیشنهادات",icon:"fa-exclamation",link:"/profile/proposals"},
             {id:4,title:"به روز رسانی ",icon:"fa-exclamation",link:"/profile/proposals"},
-            {id:5,title:"2معرفی به دوستان",icon:"fa-share-nodes",link:"/profile/share"},
+            {id:5,title:" به دوستان",icon:"fa-share-nodes",link:"/profile/share"},
             {id:6,title:"تماس با پشتیبانی",icon:"fa-phone",link:"tel:086-4242-0000"},
         ]
     }),
