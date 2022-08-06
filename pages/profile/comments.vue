@@ -15,6 +15,7 @@ import Comments from '~/components/profile/Comments.vue'
 
 
 export default Vue.extend({
+    layout: 'custom',
   components:{
     Comments
 },

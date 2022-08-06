@@ -170,6 +170,14 @@ background-color: #eeeeee;
   transition: unset !important;;
   opacity: 0!important;
 }
+.color-60{
+  color:#606060;
+}
+.color-8e{
+  color:#8e8e8e;
+}
+.custom-icon-size{font-size: 1.6rem}
+.custom-text-size{font-size: 0.9rem}
 .product-tab .v-item-group{background-color: #ffffff!important;}
   @media screen and (max-width:600px){
     .slider-skeleton .v-skeleton-loader__image {

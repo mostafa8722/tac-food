@@ -15,6 +15,7 @@ import Propsals from '~/components/profile/Proposals.vue'
 
 
 export default Vue.extend({
+   layout: 'custom',
   components:{
     Propsals
 }

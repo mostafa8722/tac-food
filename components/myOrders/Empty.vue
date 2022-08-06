@@ -39,12 +39,12 @@ export default {
 }
 p{
     color :#cccccc;
-    font-size:0.6rem;
-    font-family: yekanBold!important;
+    font-size:0.95rem;
+    font-family: yekanNumRegular!important;
 }
 .icon-triangle{
     color :#cccccc;
-    font-size:3rem;
-    height: 30px;
+    font-size:4rem;
+    height: 50px;
 }
 </style>

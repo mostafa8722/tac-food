@@ -4,7 +4,7 @@
   
     
          <font-awesome-icon v-if="back" @click.prevent="handleBackBtn"  class="pointer btn-back absolute right-3 top-2" :icon="`fa-solid fa-arrow-right`" />
-              
+                <v-icon v-if="url=='/myOrders'" @click.prevent="refreshOrders"  class="pointer icon-refresh left-5 top-1">mdi-refresh</v-icon>
   </header>
       
 </template>
@@ -22,11 +22,14 @@ library.add(faArrowRight)
   export default {
     props :["back"],
    data : ()=>({
-    
+    url :"",
    
    }),
    mounted(){
+
+
      let url = this.$route.path;
+     this.url = url;
      if(url=="/login")
      this.title = "ورود و ثبت نام"
      else  if(url=="/myOrders")
@@ -35,8 +38,13 @@ library.add(faArrowRight)
      this.title = "سفارشات"
       else  if(url=="/wallet")
      this.title = "کیف پول"
-       else  if(url=="/profile")
-     this.title = "پروفایل"
+     
+     else  if(url=="/profile/comments")
+     this.title = "نظرات "
+       else  if(url=="/profile/comments")
+     this.title = "سوابق پرداخت"
+       else  if(url=="/profile/proposals")
+     this.title = "انتقادات و پیشنهادات"
 
 
    },
@@ -51,17 +59,25 @@ library.add(faArrowRight)
         return "سفارشات";
         else if(url=="/wallet")
         return "کیف پول";
-        else if(url=="/profile" )
-        return "پروفایل";
+             else  if(url=="/profile/comments")
+      return "نظرات ";
+       else  if(url=="/profile/payments")
+      return "سوابق پرداخت";
+       else  if(url=="/profile/proposals")
+      return "انتقادات و پیشنهادات";
           else if(url=="/login" )
         return "ورود و ثبت نام";  
          else if(url=="/login/verifyCode" )
         return " کد تایید  "; 
+        else
           return "";
            
       },
       handleBackBtn(){
           this.$router.back();
+      },
+      refreshOrders(){
+       this.$router.go();
       }
    }
   }
@@ -79,5 +95,5 @@ library.add(faArrowRight)
     font-size:0.7rem;
     height: 20px;
   }
-
+.icon-refresh{position: absolute!important;}
 </style>

@@ -22,20 +22,21 @@
   >
 
 
-  <HeaderOrder class="mt-2" title="نام فروشگاه "  icon="fa-store"  :value="orderState.store_name" />
-  <HeaderOrder class="mt-3" title="زمان تحویل "  icon="fa-clock"  :value="deliveryTime()" />
-  <HeaderOrder class="mt-3" title=" هزینه ارسال "  icon="fa-moped"  :value="formatPrice(order.delivery)" />
-  <HeaderOrder class="mt-2" title=" تخفیف "  icon="fa-tag"  :value="formatPrice(order.discount)" />
-  <HeaderOrder class="mt-2" title=" نوع پرداخت "  icon="fa-angle-left"  :value="order.type" />
-  <HeaderOrder class="mt-2" title="مبلغ "  icon="fa-money-bills"  :value="formatPrice(order.payment)" />
+  <HeaderOrder class="mt-2" title="نام فروشگاه "  icon="mdi-storefront-outline"  :value="orderState.store_name" />
+  <HeaderOrder class="mt-3" title="زمان تحویل "  icon="mdi-clock-time-four-outline"  :value="deliveryTime()" />
+  <HeaderOrder class="mt-3" title=" هزینه ارسال "  icon="mdi-motorbike"  :value="formatPrice(order.delivery)" />
+  <HeaderOrder class="mt-2" title=" تخفیف "  icon="mdi-tag-outline"  :value="formatPrice(order.discount)" />
+  <HeaderOrder class="mt-2" title=" نوع پرداخت "  icon="mdi-cached"  :value="order.type" />
+  <HeaderOrder class="mt-2" title="مبلغ "  icon="mdi-cash-multiple"  :value="formatPrice(order.payment)" />
  
 
   <div @click.prevent="showOrders=!showOrders" class="flex-header-container  mt-10 mb-5 pointer pr-3 pl-3 flex ">
 
-   <font-awesome-icon    class=" height-20 mr-5"  :class="`${showOrders?'show-orders-active':''}`" :icon="`fa-solid  fa-basket-shopping ` " />
-  <div class="header-side mr-10" :class="`${showOrders?'show-orders-active':''}`" > لیست خرید</div>
+    <v-icon   class=" height-20 mr-5  custom-icon-size color-60"  :class="`${showOrders?'show-orders-active':''}`" >mdi-basket</v-icon>
+   
+  <div class="header-side mr-10 color-60 custom-text-size" :class="`${showOrders?'show-orders-active':''}`" > لیست خرید</div>
     <h3 class="order-header-center"></h3>
- <font-awesome-icon    class=" height-15 ml-5" :class="`${showOrders?'show-orders-active':''}`" :icon="`fa-solid ${showOrders?'fa-angle-up':'fa-angle-down'} ` " />    
+ <font-awesome-icon    class=" height-15 ml-5  color-60" :class="`${showOrders?'show-orders-active':''}`" :icon="`fa-solid ${showOrders?'fa-angle-up':'fa-angle-down'} ` " />    
 
 
    </div>
@@ -358,21 +359,22 @@ h3{
 .btn-report{
   padding:0.5rem 1.5rem;
   border-radius: 0.4rem;
-   background-color: #dddddd;
+   background-color: #cccccc;
 }
 .btn-comment{
   padding:0.5rem 1.5rem;
   border-radius: 0.4rem;
-   background-color: #3bb151;
+   background-color: #61b15a;
 }
 .white{color:#ffffff;}
 .show-orders-active{
     color:#ff4d5c;
 }
 .timer-text{
-    font-family: "yekanBold";
+    font-family: yekanNumRegular;
+    color:#8e8e8e;
 }
 .report-active{
-  background-color:#ff4d5c ;
+  background-color:#fd5e63 ;
 }
 </style>

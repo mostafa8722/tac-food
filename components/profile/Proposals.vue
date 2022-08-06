@@ -6,7 +6,7 @@
          <div class="mt-20 flex flex-col ml-3 flex-items profile-container  mr-3">
 
          
-             <h2 class="proposal-title">بازخورد خود را برای ما ارسال کنید!</h2>
+             <h2 class="proposal-title mt-10">بازخورد خود را برای ما ارسال کنید!</h2>
              <p class="mt-4 text-p">آیا شما پیشنهادی دارید یا مشکلی پیدا کرده اید ؟</p>
              <p class="mt-1 text-p"> از طریق فیلد پایین به ما اطلاعا بدهید </p>
         <div class="flex">
@@ -73,7 +73,7 @@
          </div>
            <div class="flex justify-center mb-5 mt-2">
                <div @click.prevent ="sendProposal"  class="btn-location pointer text-center relative mt-3">
-                  <span class="white" style="font-size: 0.8rem;"> ارسال </span>
+                  <span class="white" style="font-size: 0.95rem;"> ارسال </span>
                   <v-icon class=" mr-5  icon-item-send white">mdi-send</v-icon>
                   
                 </div>
@@ -241,7 +241,7 @@ p{
 .ml-1r{margin-left: 0.1rem;}
 
 .btn-location{
-    height:40px ;
+    height:48px ;
    max-width:450px;
    width: 96%;
    margin-left: 7%;

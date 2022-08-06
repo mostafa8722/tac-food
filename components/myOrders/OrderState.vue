@@ -125,6 +125,6 @@ h3{
    background-color: #dddddd;
 }
 .white{color:#ffffff;}
-.active{color:#3bb151}
-.bg-active{background-color:#3bb151}
+.active{color:#61b15a}
+.bg-active{background-color:#61b15a}
 </style>

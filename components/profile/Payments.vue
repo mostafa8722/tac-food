@@ -1,5 +1,5 @@
 <template>
-   <section class=" bg ">
+   <section class=" bg flex justify-center ">
      
      
      <div class="  mr-2 ml-2 ">
@@ -7,10 +7,10 @@
     
   
           
-     <div v-if="payments.length>0"  v-for="(item, index) in payments" class="`${index==0?'':'mt-1'}`">
-         <Payment :key="item.id" :payment="item" />
+  
+         <Payment v-if="payments.length>0"  v-for="(item, index) in payments" :key="item.id" :payment="item" />
            
-      </div>
+     
       <Empty v-if="payments.length==0"  />
       
      </div>
@@ -35,18 +35,7 @@ export default {
   computed: {
              ...mapGetters({ payments: 'products/payments' })
          },
-    data : ()  =>({
-        payments2 : [
-             {date:"1401/3/3",type:"برگشت وجه",price:200000},
-             {date:"1401/3/3",type:"برگشت وجه",price:200000},
-             {date:"1401/3/3",type:"برگشت وجه",price:200000},
-             {date:"1401/3/3",type:"برگشت وجه",price:200000},
-             {date:"1401/3/3",type:"برگشت وجه",price:200000},
-             {date:"1401/3/3",type:"برگشت وجه",price:200000},
-        ]
-       
-       
-    }),
+ 
 
     created(){
 

@@ -32,7 +32,13 @@
         </template>
     </v-img>
     <div class="flex flex-col mr-2">
-      <span class=" title">  {{product.name}}</span>
+      <div class="flex">
+          <span class=" title">  {{product.name}}</span>
+          <div v-if="product.discount!=0" class="shape-octagon"><span>{{product.discount}}%</span></div>
+      </div>
+     
+      
+
       <span class=" body">  {{product.description}}</span>
       
 
@@ -236,7 +242,8 @@ export default {
       top:5px;
       left:5px;
           border-radius: 2px;
-      position: absolute;
+          margin-right: 15pxpau;
+      position: relative;
       text-align: center;
       transform: rotate(20deg);
       color:#fff;
@@ -260,7 +267,7 @@ export default {
       font-size: 0.85rem;
       transform: rotate(-20deg);
       left:4px;
-       font-family: yekanBold!important;
+       font-family: yekanNumRegular!important;
     }
   
 </style>

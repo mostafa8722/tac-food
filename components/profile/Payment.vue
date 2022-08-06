@@ -5,7 +5,7 @@
      <div class="mt-3 content-section ml-3 mr-3">
          <v-card
     class=" items-center card-content pt-2 pb-2 pl-1 pr-1  rounded-xl"
-    width="600"
+    width="100%"
     
      dir="rtl"
   outlined
@@ -13,30 +13,34 @@
   >
   <div>
 
-     <div class="flex justify-between">
-        <div class="flex">
-            <font-awesome-icon class="icon-item pointer ml-2" icon="fa-solid fa-credit-card" />
-            <div class="flex flex-col">
-                <span class="title">{{payment.price}} تومان</span>
-                <span class="type">{{payment.type}} </span>
+     <div class="flex justify-between pointer " @click.prevent="handleActive(!isActive)" >
+        <div class="flex items-start">
+            <v-icon class="icon-item pointer ml-2" :class="`${isActive?'icon-active':''}`" >mdi-credit-card-outline</v-icon>
+         
+            <div class="flex flex-col mr-3">
+                <span class="title" :class="`${isActive?'icon-active':''}`">{{formatPrice(payment.payment)}} </span>
+                <span class="type">{{payment.detail}} </span>
             </div>
           
         </div>
 
           <div class="flex flex-row-reverse">
                
+                <v-icon v-if="isActive" class="icon-item  icon-active pointer ml-2 " >mdi-chevron-up</v-icon>
+                <v-icon v-else  class="icon-item pointer ml-2" >mdi-chevron-down</v-icon>
               
-                <font-awesome-icon class="icon-item pointer ml-2" icon="fa-solid fa-chevron-down" />
-                 <span class="mt-3 type">{{payment.date}}</span>
+                 <span class="mt-3 payment-date absolute">{{payment.date}}</span>
             </div>
      </div>
   </div>
-
-  <HeaderCart class="mt-1" title="نحوه ی پرداخت "   value="فوری" />
-  <HeaderCart class="mt-1" title="هزینه ارسال "   value="5000 تومان" />
-  <HeaderCart class="mt-1" title="تخفیف"   value="رایگان" />
-  <HeaderCart class="mt-1" title="خرید"   value="123000 تومان" />
-  <HeaderCart class="mt-1" title="مجموع"   value="13000 تومان" />
+ <div v-if="isActive">
+   <HeaderCart class="mt-1" title="نحوه ی پرداخت "  :value="payment.method=='online'?'درگاه':''" />
+  <HeaderCart v-if="3>4" class="mt-1" title="هزینه ارسال "   value="5000 تومان" />
+  <HeaderCart v-if="3>4" class="mt-1" title="تخفیف"   value="رایگان" />
+  <HeaderCart v-if="3>4" class="mt-1" title="خرید"   value="123000 تومان" />
+  <HeaderCart v-if="3>4" class="mt-1" title="مجموع"   value="13000 تومان" />
+ </div>
+  
   
   
   </v-card>
@@ -71,14 +75,16 @@ export default {
       },
   
     data : ()  =>({
-        products : [
-            {title:"گوجه فرنگی ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"موز ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"هلو ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-            {title:"انبه ",type:"میوه خلیلی",discount:10,rate:4,price:350000,img:"https://cdn.vuetifyjs.com/images/cards/cooking.png"},
-    
-        ]
-    })
+       isActive :false
+    }),
+    methods:{
+        handleActive (active){
+          this.isActive  = active;
+        },
+         formatPrice(price) {
+         return  Number(price).toLocaleString()+" "+"تومان";
+      },
+    }
 }
 </script>
 <style scoped>
@@ -90,16 +96,38 @@ h3{
 }
 .content-section{
     max-width:600px;
-    border-bottom:1px solid #dddddd;
+    min-width: 450px;
+    width: 100%;
+    border-bottom:1px solid #d7d7d7;
 }
 .card-content{
  border:unset;
  background-color: transparent;
 }
 .icon-item{
-    color:#9c9c9c;
-    font-size: 0.7rem;
+    color:#8e8e8e;
+    font-size: 1.6rem;
 }
-.title{font-size: 0.7rem;}
-.type{font-size: 0.6rem;color:#9c9c9c;}
+.icon-active{
+    color:#fd5e63;
+ 
+}
+.title{font-size: 0.95rem;}
+.type{font-size: 0.85rem;color:#9c9c9c;}
+.payment-date{left:50px;top:20px;}
+@media screen and (max-width:500px){
+  .content-section{
+
+    min-width: 400px;
+ 
+}
+}
+@media screen and (max-width:430px){
+  .content-section{
+
+    min-width: 300px;
+ 
+}
+}
+
 </style>

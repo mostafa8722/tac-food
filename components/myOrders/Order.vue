@@ -32,14 +32,14 @@
 
 
   <div class="flex flex-col mr-2 mt-1">
-      <span class=" title">{{product.name}}</span>
+      <span class=" title color-60">{{product.name}}</span>
  
-  <span class=" price"> {{formatPrice(product.count)}} عدد </span>
+  <span class=" price color-60"> {{formatPrice(product.count)}} عدد </span>
   </div>
     </div>
 
  <div class="flex flex-row-reverse mt-2 ml-2">
-      <span class=" price"> {{formatPrice(product.price)}} ت  </span>
+      <span class=" price color-60"> {{formatPrice(product.price)}} ت  </span>
    </div>
  
  
@@ -79,13 +79,15 @@ export default {
   
 }
 .title{
-  color:#717171;
-  font-size:0.75rem;
+
+
+      font-size:0.75rem;
+  font-family: yekanNumRegular!important;
 }
 .price{
-  color:#717171;
-    font-size:0.5rem;
-  font-family: yekanBold!important;
+ 
+    font-size:0.75rem;
+  font-family: yekanNumRegular!important;
   
 }
 .type{

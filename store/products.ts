@@ -131,8 +131,8 @@ export const actions: ActionTree<AuthState, any> = {
       .comments()
       .customerCommentsPage(data)
       .then((res:any) => {
-     
-        commit('paymentsPage',res.data)
+        commit('commentsPage',res.data)
+      
       })
       .catch((error:any) => {
        
@@ -147,8 +147,8 @@ export const actions: ActionTree<AuthState, any> = {
       .customerPaymentsPage(data)
       .then((res:any) => {
      
-        console.log("tttttrrr",res.data)
-        commit('commentsPage',res.data)
+        commit('paymentsPage',res.data)
+       
       })
       .catch((error:any) => {
       

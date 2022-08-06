@@ -15,6 +15,7 @@ import Payments from '~/components/profile/Payments.vue'
 
 
 export default Vue.extend({
+    layout: 'custom',
   components:{
     Payments
 }

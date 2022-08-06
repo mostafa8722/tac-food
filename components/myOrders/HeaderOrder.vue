@@ -2,10 +2,11 @@
 
      <div class="flex-header-container pr-3 pl-3 flex ">
 
-   <font-awesome-icon    class=" height-15" :icon="`fa-solid ${icon}` " />
-  <div class="header-side mr-2">{{title}}</div>
+
+   <v-icon class="color-60 pre-icon-size">{{icon}}</v-icon>
+  <div class="header-side mr-2 color-60">{{title}}</div>
     <h3 class="order-header-center"></h3>
-  <div class="header-side header-side-left">{{value}}</div>
+  <div class="header-side header-side-left color-8e">{{value}}</div>
 
    </div>
 </template>
@@ -34,10 +35,15 @@ export default {
   align-items: center;
   
 }
-
+.color-60{
+  color:#606060;
+}
+.color-8e{
+  color:#8e8e8e;
+}
 .header-side {
-   font-family: yekanBold!important;
-  font-size:0.75rem;
+   font-family: yekanNumRegular!important;
+  font-size:0.85rem;
   margin-left:5px;
   margin-right:5px;
 }
@@ -45,11 +51,14 @@ export default {
   height: 15px;
 }
 .order-header-center {
-border-bottom: 0.1rem dotted;
+    border-bottom: 0.05rem dashed #cccccc;
     height: 2px;
   flex: 1;
   padding : 0px 5px;
  
+}
+.pre-icon-size{
+  font-size: 1.6rem;
 }
 
 

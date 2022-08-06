@@ -34,7 +34,7 @@
       class="flex radio-group"
     >
     <div class="flex flex-col items-center flex-1">
-          <div class="flex flex-col  mr-4">
+          <div class="flex flex-col  ">
                         <v-icon :class="` icon-style ${pay_type=='wallet'?'active-style':''} `">mdi-wallet-outline</v-icon>
 
             <span :class="`mt-1 text-style ${pay_type=='wallet'?'active-style':''}`">کیف پول</span>
@@ -47,7 +47,7 @@
     </div>
 
      <div class="flex flex-col items-center flex-1">
-          <div class="flex flex-col   mr-4">
+          <div class="flex flex-col   ">
                         <v-icon :class="` icon-style ${pay_type=='online'?'active-style':''} `">mdi-credit-card-outline</v-icon>
 
             <span :class="`mt-1 text-style ${pay_type=='online'?'active-style':''}`">درگاه پرداخت</span>
@@ -61,7 +61,7 @@
       
      
       <div class="flex flex-col items-center flex-1">
-          <div class="flex flex-col   mr-4">
+          <div class="flex flex-col  ">
             <v-icon :class="` icon-style ${pay_type=='cod'?'active-style':''} `">mdi-cash-multiple</v-icon>
             
             <span :class="`mt-1  text-style ${pay_type=='cod'?'active-style':''}`">در محل</span>
@@ -85,19 +85,21 @@
        </div>
 
         <div class="flex justify-center mb-5 mt-5">
-               <div v-if="payment_btn.type!=='login'" @click.prevent =" hanlePayment"  class="btn-send pointer text-center relative mt-3">
-                  <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
-                   <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
-                </div>
-
-                 <div v-if="payment_btn.type!=='address'" @click.prevent =" hanlePayment"  class="btn-send pointer text-center relative mt-3">
-                  <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
-                   <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
-                </div>
-                <NuxtLink v-else   class="btn-send pointer text-center relative mt-3" to="/login">
+          
+               <div v-if="payment_btn.type=='payment'" @click.prevent =" hanlePayment"  class="btn-send pointer text-center relative mt-3">
+                 
                   <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
                 
                   <v-icon class=" mr-5  icon-item white height-20" >mdi-credit-card-outline</v-icon>
+                </div>
+
+                 <div v-else-if="payment_btn.type=='address'" @click.prevent =" hanlePayment"  class="btn-send pointer text-center relative mt-3">
+                  <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
+                   <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
+                </div>
+                <NuxtLink v-else-if="payment_btn.type=='login'"   class="btn-send pointer text-center relative mt-3" to="/login">
+                 <span class="white" style="font-size: 0.9rem;"> {{payment_btn.title}} </span>
+                   <font-awesome-icon class=" mr-5  icon-item white height-20" :icon="`fa-solid ${payment_btn.icon} `" />
                 </NuxtLink>
 
            </div>

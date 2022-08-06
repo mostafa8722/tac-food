@@ -38,13 +38,11 @@ export default {
    font-family: IranYekanFN!important;
  
 }
-.header-side-left{
-  width:64px;
-}
+
 .cart-header-center {
-border-bottom: 1px dotted;
+  border-bottom: 0.05rem dashed #cccccc;
     height: 2px;
-  flex: 95%;
+  flex: 1;
   padding : 0px 5px;
  
 }
