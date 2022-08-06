@@ -1,14 +1,14 @@
 <template>
  
-     <div class="mt-20 flex flex-col items-center justify-center mr-3">
+     <div class="mt-20 flex flex-col items-center h-100 justify-center mr-3">
 
          
 
 
 
         <v-img
-      height="50"
-      width="50"
+      height="100"
+      width="100"
        class="comment-image"
      src="/icons/comment.svg"
     
@@ -54,4 +54,5 @@ export default {
       filter: invert(39%) sepia(43%) saturate(2653%) hue-rotate(329deg) brightness(113%) contrast(98%);
 
 }
+.h-100{height: 100%;}
 </style>

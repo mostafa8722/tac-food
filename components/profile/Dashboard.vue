@@ -190,7 +190,7 @@ p{
     position: absolute;
     right:calc(50% - 40px);
     top: -45px;
-    border-radius: 50%;;
+    border-radius: 50%!important;;
 }
 .profile-image{
    position: absolute;

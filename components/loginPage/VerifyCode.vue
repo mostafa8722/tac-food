@@ -162,8 +162,11 @@ export default {
     flex:none;
 }
 .profile-container{
-    width: 400px;
+    max-width: 400px;
     margin:  0px auto;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
     
 }
 p{

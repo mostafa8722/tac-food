@@ -197,10 +197,14 @@ export default {
     flex:none;
 }
 .profile-container{
-    width: 400px;
+    max-width: 400px;
     margin:  0px auto;
     padding-bottom: 60px;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
+
 .proposal-title{
     font-size: 1rem;
     color:#606060;
@@ -223,9 +227,10 @@ p{
 }
 .container-experiment{
     border-radius: 5px;
+    width: 74%;
     border: 0.1rem solid #eaeaea;
     height: 70px;
-    width: 250px;
+    max-width: 250px;
 }
 .container-item {
     flex:1;

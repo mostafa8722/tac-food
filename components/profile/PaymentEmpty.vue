@@ -1,6 +1,6 @@
 <template>
  
-     <div class="mt-20 flex flex-col items-center justify-center mr-3">
+     <div class="mt-20 flex flex-col items-center h-100 justify-center mr-3">
 
          
 
@@ -40,8 +40,9 @@ export default {
 }
 .pay-alert-i{
         color : #cccccc;
-    font-size:3.4rem;
+    font-size:4.6rem;
      font-family: yekanNumRegular !important;
 
 }
+.h-100{height: 100%;}
 </style>
