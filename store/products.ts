@@ -39,6 +39,9 @@ export const getters: GetterTree<AuthState, any> = {
 export const mutations: MutationTree<AuthState> = {
  
   
+  clearSearch(state:any){
+    state.products  = [];
+  },
   productsPage(state:any, data:result) {
     state.products = data.result
 
@@ -91,7 +94,7 @@ export const actions: ActionTree<AuthState, any> = {
       .searchPage(data)
       .then((res:any) => {
 
-        console.log("tttt45",res.data)
+       
         this.dispatch("home/handleLoading",false)
         this.dispatch("home/addDataSent",false)
         if(data.category=='product')
@@ -157,6 +160,10 @@ export const actions: ActionTree<AuthState, any> = {
   },
   setTitle({ commit, dispatch }, data) {
     commit('setTitle',data)
+  },
+  clearSearch({ commit, dispatch }, data) {
+    commit('clearSearch',data);
+    this.dispatch("categories/addShops",{result:[]})
   },
 
 

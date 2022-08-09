@@ -18,6 +18,12 @@
     <v-carousel-item
       v-for="(slide, i) in sliders"
       :key="i"
+       v-touch="{
+      left: () => swipe('Left'),
+      right: () => swipe('Right'),
+      up: () => swipe('Up'),
+      down: () => swipe('Down')
+    }"
     >
      
        <div class="costom-image-cover">
@@ -51,6 +57,13 @@ export default {
        isLoading: 'home/isLoading',
         })
       },
+      methods :{
+         swipe (direction) {
+       // this.swipeDirection = direction
+       console.log("ss",direction)
+
+      },
+      }
    
 }
 </script>

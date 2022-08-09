@@ -32,9 +32,9 @@
         </template>
     </v-img>
     <div class="flex flex-col mr-2">
-      <div class="flex">
+      <div class="d-flex">
           <span class=" title">  {{product.name}}</span>
-          <div v-if="product.discount!=0" class="shape-octagon"><span>{{product.discount}}%</span></div>
+          <div v-if="product.discount && product.discount!=0" class="shape-octagon"><span>{{product.discount}}%</span></div>
       </div>
      
       
@@ -175,11 +175,12 @@ export default {
 }
 .title{
   color:#606060;
-  font-size:0.95rem;
+  font-size:0.85rem;
+    font-family: IranYekanFN!important;
 }
 .price{
   color:#606060;
-    font-size:0.9rem;
+    font-size:0.8rem;
   font-family: IranYekanFN!important;
   
 }
@@ -191,7 +192,8 @@ export default {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: calc(100% - 70px);
+    width: calc(100% - 10px);
+    
 }
 .type{
   color:#8e8e8e;
@@ -242,7 +244,7 @@ export default {
       top:5px;
       left:5px;
           border-radius: 2px;
-          margin-right: 15pxpau;
+          margin-right: 15px;
       position: relative;
       text-align: center;
       transform: rotate(20deg);

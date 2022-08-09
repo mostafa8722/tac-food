@@ -1,6 +1,6 @@
 <template>
  
-     <div class="mt-2 flex flex-col items-center justify-center mr-3">
+     <div class="mt-2 flex flex-col items-center justify-center ">
 
          
        
@@ -53,6 +53,10 @@ export default {
     color:#ffffff;
     background-color :#fd5e63;
      cursor:unset;
+     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 span{
     flex: 50%;

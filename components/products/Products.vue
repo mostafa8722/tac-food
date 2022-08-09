@@ -44,7 +44,7 @@
       </div>
      <HeaderSection class="mt-2" :title= "title"/>
      
-     <div class="mt-1 flex flex-col ml-3 mr-3 pb-70">
+     <div class="mt-1 flex flex-col items-center ml-3 mr-3 pb-70">
         <SkeletonLoaders v-if="isLoading" v-for="(item,index) in [1,2,3,4,5,6,7,8]" :key="index"  />
     
   

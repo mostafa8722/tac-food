@@ -16,11 +16,13 @@ import SearchBox from '~/components/app/SearchBox.vue'
 import SearchComponent from '~/components/search/SearchComponent.vue'
 import {mapGetters} from "vuex"
 export default Vue.extend({
-    layout: 'custom',
+    layout: 'cart',
      computed: {
              ...mapGetters({
                
                   isDataSent: 'home/isDataSent',
+                    products: 'products/products',
+                   shops: 'categories/shops',
                  })
          },
    
@@ -29,22 +31,38 @@ export default Vue.extend({
     SearchComponent,
    
 },
+created(){
+   this.$store.dispatch('products/clearSearch');
+},
 data : ()=>({
 type : "product",
+title : ""
 }),
 methods :{
  handleTab(tab:string){
-  console.log(tab)
+  
   this.type = tab;
+
+    let data = {
+      word:this.title,
+      category : tab,
+      lat:35.022731 ,
+       lng : 50.357277 ,
+       page:1,};
+
+  if( this.title!=""){
+   this.$store.dispatch('products/searchPage',data);
+  }
  },
   handleSearchInput(e:any){
 
-console.log(e)
+
    
 
    if(e.target.value.length<3 && !this.isDataSent ){
     return ;
    }
+       this.title = e.target.value;
     let data = {
       word:e.target.value,
       category : this.type,

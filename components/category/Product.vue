@@ -1,5 +1,5 @@
 <template>
-<NuxtLink v-if="product.id" :class="`${page=='search'?'w-100':''}`" :to="`/products/${product.id}`">
+<NuxtLink v-if="product.id" :class="` d-flex ${page=='search'?'w-100':'w-100'}`" :to="`/products/${product.id}`">
 <v-card
     class="flex flex-col mt-2  overflow-hidden  content-product"
  

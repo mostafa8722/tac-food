@@ -5,7 +5,7 @@ background-color: #f5f5f5;
 .pointer{
     cursor: pointer;
 }
-
+.d-flex{display: flex;}
 .ltr{direction:ltr;}
 .v-label{
     right: 0px !important;;
@@ -91,17 +91,22 @@ background-color: #f5f5f5;
   margin-top: -20px;
 }
 .product-skeleton  .v-skeleton-loader__sentences  .v-skeleton-loader__text:nth-child(1){
- width: 200px;
+ max-width: 200px;
+ width: 50%;
  
 } 
 .product-skeleton .v-skeleton-loader__sentences   .v-skeleton-loader__text:nth-child(2){
-  width: 400px!important;
+  max-width: 400px!important;
   float: unset!important;
+  width:70% ;
   
  }
  .product-skeleton  .v-skeleton-loader__text:nth-child(2){
-  width: 200px;
-  float: left; }
+  max-width: 200px;
+  float: left;
+  width: 45%;
+
+}
 
   .product-skeleton  .v-skeleton-loader__text:nth-child(3){clear: both;
    clear: both;

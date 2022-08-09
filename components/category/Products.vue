@@ -2,7 +2,7 @@
    <section>
      <HeaderSection :title= "title"/>
      
-     <div class="flex flex-col ml-3 mb-70 mr-3">
+     <div class="flex flex-col mb-70  ">
        <SkeletonLoaders v-if="isLoading" v-for="(item,index) in [1,2,3,4,5,6,7,8]" :key="index" />
 
      <div  v-if="!isLoading" v-for="(item, index) in shops">

@@ -37,7 +37,7 @@ export default {
 .flex-none{
     flex:none;
 }
- text-search-empty{
+ .text-search-empty{
     color :#cccccc;
     font-size:0.95rem;
     font-family: yekanBold!important;
