@@ -2,27 +2,30 @@
    <section  >
     
      <HeaderSection title="پیشنهادات"/>
+     <HeaderSection :title="currentIndex"/>
  
      <div class="sliders-section">
      
        <v-carousel
       
        hide-delimiters
-    cycle
+   :cycle="false"
     height="400"
     hide-delimiter-background
     :show-arrows="false"
      reverse
+       transition="fade-transition"
   >
   
     <v-carousel-item
       v-for="(slide, i) in sliders"
       :key="i"
+      
+       :value="i"
        v-touch="{
-      left: () => swipe('Left'),
-      right: () => swipe('Right'),
-      up: () => swipe('Up'),
-      down: () => swipe('Down')
+      left: () => swipe('left'),
+      right: () => swipe('right'),
+   
     }"
     >
      
@@ -30,15 +33,16 @@
           
 
                 
-      <NuxtLink :to="`/products/${slide.store_id}`">
+      <NuxtLink :to="`/products/${sliders[currentIndex].store_id}`">
     <img  class="flex-none custom-image-slider"
-      :src="slide.url" />
+      :src="sliders[currentIndex].url" />
       </NuxtLink>
           </div>
 
     </v-carousel-item>
   </v-carousel>
   <SliderLoaders v-if="isLoading" />
+
   </div>
   
     </section>
@@ -57,12 +61,39 @@ export default {
        isLoading: 'home/isLoading',
         })
       },
+      data :()=>({
+        currentIndex : 0,
+        interavl : null,
+      }),
+      created(){
+          this.customInterval();
+      }
+       
+      ,
       methods :{
          swipe (direction) {
-       // this.swipeDirection = direction
-       console.log("ss",direction)
 
+clearInterval(this.interavl);
+       if(direction=="left"){
+    if(this.currentIndex>0)
+      this.currentIndex = Math.max(this.currentIndex - 1, 0)
+       }else if(direction=="right"){
+    
+              if(this.currentIndex<this.sliders.length-1)
+              this.currentIndex = Math.min(this.currentIndex + 1, this.sliders.length-1)
+       }
+         this.customInterval();
+       
+           
       },
+      customInterval(){
+      this.interavl =   setInterval(() => {
+           if(this.currentIndex ==this.sliders.length-1 )
+           this.currentIndex=0
+           else
+           this.currentIndex++;
+        }, 7000);
+      }
       }
    
 }
