@@ -1,6 +1,6 @@
 <template>
  
-     <div class="flex-header-container flex">
+     <div class="flex-header-container flex w-100">
   <div class="flex-header-left"></div>
     <h3 v-show="title" :class="`header-title ${getUrl()?'title-width':''}`">{{title}}</h3>
   <div class="flex-header-right"></div>

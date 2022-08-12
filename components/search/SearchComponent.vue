@@ -1,5 +1,5 @@
 <template>
-   <section class="flex  items-center flex-col">
+   <section class="flex  items-center flex-col " :class="type=='product'?'mr-4 ml-4':''">
         <SearchTab  @change-tab="handleTab" />
         <Empty v-if="products.length==0 && shops.length==0"/>
        

@@ -3,7 +3,7 @@
      <div class="search-container relative flex">
        
           
-  <font-awesome-icon v-if="this.url!='/search'" color="#9d9d9d" class="absolute icon-search left-2 top-2" icon="fa-solid fa-magnifying-glass" />
+  <font-awesome-icon v-if="this.url!='/search'" color="#9d9d9d" class="absolute icon-search left-2 top-3" icon="fa-solid fa-magnifying-glass" />
   <v-progress-circular
        v-show="url=='/search' && isDataSent"
       indeterminate

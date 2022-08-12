@@ -4,14 +4,14 @@
        <font-awesome-icon  v-show="layout=='cart'" @click.prevent="handleBackBtn" class=" mr-2 pointer btn-back " :icon="`fa-solid fa-arrow-right`" />
 
        <div v-if="!isSendingData" class=" flex justify-center items-center flex-col mt-2">
-              <div class="flex justify-center ">
+              <div  @click.prevent="handleMap" class="flex justify-center ">
                 <span  class="text-sm ml-2">
                   {{location_address.address_title}}
                 </span>
-                <font-awesome-icon @click.prevent="handleMap"  class="pointer h-4 text-sm" icon="fa-solid fa-angle-down" />
+                <font-awesome-icon   class="pointer h-4 text-sm" icon="fa-solid fa-angle-down" />
                 
               </div>
-              <span class="text-xs">{{location_address.address_postal}}</span>
+              <span  @click.prevent="handleMap" class="text-xs">{{location_address.address_postal}}</span>
          
       </div>
        <div v-else class=" flex justify-center items-center  mt-2">

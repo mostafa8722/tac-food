@@ -140,8 +140,8 @@ export default {
   border-radius:0.3rem!important;
   border:0.5rem solid #dddddd;
   width:100%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .rounded-none{
   border-radius:0rem!important;

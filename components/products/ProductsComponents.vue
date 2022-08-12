@@ -6,7 +6,8 @@
       centered
       dark
       icons-and-text
-       slider-color="yellow"
+     :right="true"
+     fixed-tabs
      
     >
   
@@ -36,12 +37,17 @@
       </v-tab>
     </v-tabs>
 
-    <v-tabs-items v-model="tab">
+    <v-tabs-items v-model="tab" touchless>
       <v-tab-item
         v-for="i in 3"
         :key="i"
         :value="'tab-' + i"
         class="tab-item"
+           v-touch="{
+      left: () => swipe('left'),
+      right: () => swipe('right'),
+   
+    }"
       >
         
          <Products v-if="i==1"/>
@@ -72,8 +78,31 @@ export default {
   
     data : ()  =>({
           tab: null,
+          tab2: 1,
              
-    })
+    }),
+      methods :{
+         swipe (direction) {
+
+
+
+       if(direction=="left"){
+    if(this.tab2>1)
+       this.tab2 --
+       }else if(direction=="right"){
+        if(this.tab2<3)
+       this.tab2 ++;
+       }
+     
+         if(this.tab2==1)
+         this.tab = "tab-1";
+         else  if(this.tab2==2)
+         this.tab = "tab-2";
+          else  if(this.tab2==3)
+         this.tab = "tab-3";
+       
+           
+      },}
 }
 </script>
 <style scoped>

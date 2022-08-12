@@ -6,7 +6,7 @@
    <SearchBox /> 
      
   
-   <Sliders class="mt-4"/>
+   <Sliders class="mt-2"/>
    
    <Categories class="mt-3" />
  

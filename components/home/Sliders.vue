@@ -2,7 +2,7 @@
    <section  >
     
      <HeaderSection title="پیشنهادات"/>
-     <HeaderSection :title="currentIndex"/>
+
  
      <div class="sliders-section">
      

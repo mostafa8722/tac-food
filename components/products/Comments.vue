@@ -1,10 +1,10 @@
 <template>
-   <section class=" bg ">
+   <section class=" bg  pr-3 pl-3">
      
      
      <div v-if="comments.length>0" class="  mr-2 ml-2 ">
 
-     <div class="mt-3 flex flex-col  header-comment">
+     <div class="mt-3  mb-2 flex flex-col  header-comment">
         <HeaderComment :key="1" :item="getItem(comments,'high')" type="hight" class="mb-2" />
         <HeaderComment :key="2" :item="getItem(comments,'middle')" type="middle"  class="mb-2" />
         <HeaderComment :key="3" :item="getItem(comments,'low')" type="low" class="mb-2" />

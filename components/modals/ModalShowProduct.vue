@@ -9,7 +9,7 @@
         
          <div class="flex flex-col text-right">
           <v-card
-    class="flex flex-col   overflow-hidden content-product pointer "
+    class="flex flex-col   m-0 overflow-hidden content-product pointer "
     width="100%"
     height="300"
      color="#ffffff"
@@ -20,7 +20,7 @@
     <div class="flex flex-col  ">
       <v-img
       height="200"
-      width="400"
+      width="300"
       class="flex-none rounded-xl"
       :src="product.logo"
     
@@ -260,4 +260,5 @@ button {
     .height-30{
       height: 30px;
     }
+    .m-0{margin:0px;}
 </style>

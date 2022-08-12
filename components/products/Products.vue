@@ -8,12 +8,13 @@
       centered
       dark
       icons-and-text
-      
-    >
+       fixed-tabs
+       class="tabs-style"
+      >
      
 
-      <v-tab v-for="(cat,index) in catgoriesStore" :href="`#tab-${index+1}`" @click.prevent="handleTabSelected(cat)">
-         <span class="tab-title">{{cat.name}}</span>
+      <v-tab v-for="(cat,index) in catgoriesStore" :href="`#tab-${index+1}`" @click.prevent="handleTab" >
+         <a :href="`#tab-${index+1}`" class="tab-title">{{cat.name}}</a>
         
       </v-tab>
 
@@ -42,16 +43,21 @@
         </div>
         <span class="active-time-text mr-2">فعالیت از {{getShopInfo(shops,products)}}</span>
       </div>
-     <HeaderSection class="mt-2" :title= "title"/>
+    
      
-     <div class="mt-1 flex flex-col items-center ml-3 mr-3 pb-70">
+     <div @scroll="handleScroll(true)"  id="tab-content" :style="`height:${height}`"  class="mt-1 flex flex-col items-center ml-3 mr-3 pb-70 ">
         <SkeletonLoaders v-if="isLoading" v-for="(item,index) in [1,2,3,4,5,6,7,8]" :key="index"  />
     
-  
-        <Product   v-if="!isLoading" v-for="(item, index) in catProducts"  :is_store_online="getShopInfo(shops,products)" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
+         <div class="w-100 d-flex flex-col items-center"  v-for="(cat, index) in catgoriesStore" :id='`tab-${index+1}`' >
+            <HeaderSection class="mt-2" :title= "cat.name"/>
+            <Product   v-if="!isLoading" v-for="(item, index) in handleTabSelected(cat)"  :is_store_online="getShopInfo(shops,products)" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
       
-      <Empty v-show="products.length==0 && !isLoading" />
+         </div>
+         
+     
      </div>
+      <Empty v-show="products.length==0 && !isLoading" />
+
      <ModalShowProduct :product="selectedProduct" :is_store_online="getShopInfo(shops,products)"  v-show="showModal" @close-modal="showModal = false" />
     </section>
 
@@ -70,7 +76,11 @@ export default {
         catProducts :[],
         showModal: false,
         title :"",
-        show_tab :false
+        show_tab :false,
+        isScrolling :true,
+        tab:null,
+        height :"400px",
+  
     }),
       
       
@@ -85,13 +95,51 @@ export default {
          },
          methods:{
             showProduct(product){
-                this.showModal = true;
-             this.selectedProduct = product
+              this.showModal = true;
+              this.selectedProduct = product
             },
             handleTabSelected(cat){
-               
-            this.title = cat.name;
-             this.catProducts =  this.products.filter(item=> item.category==this.title);
+              
+            return   this.products.filter(item=> item.category==cat.name);
+            },
+            
+            handleTab(e){
+           
+
+             this.isScrolling = false;
+                 setTimeout(()=>{
+                        this.isScrolling = true;
+                    
+                   },150);
+            },
+            handleScroll(event){
+
+
+              if(this.isScrolling){
+              
+             let scroll_top = document.getElementById("tab-content").scrollTop ;
+
+             let cats = this.catgoriesStore;
+             let initial = 0;
+             let is_set = false;
+             let selected_index = 0;
+
+             for(let i=0;i<=cats.length-1;i++){
+               let products = this.products.filter(item=> item.category==cats[i].name);
+             
+  
+             if(initial<=scroll_top && scroll_top < (initial+products.length*150 +40)){
+                
+                this.isScrolling = true
+               this.tab = "tab-"+(i+1);
+             
+               }
+                initial += products.length*150 +40;
+                
+          
+             }
+           
+              }
             },
               getShopInfo(shops,products){
             
@@ -149,6 +197,7 @@ export default {
          watch :{
             products(new_val ,old_val){
              this.title = this.catgoriesStore[0].name;
+             this.height = "900px";
            this.catProducts = new_val.filter(item=> item.category==this.title);
 
                    setTimeout(()=>{
@@ -158,10 +207,46 @@ export default {
 
                     
             },
-            isLoading(new_val,old_val){
+            tab(new_val,old_val){
 
+            
+              let ele = document.getElementById(new_val); 
+              let products = this.handleTabSelected( this.catgoriesStore[new_val.substring(4)-1])  
+               var topPos = ele.offsetTop;
+              
+                
+             if(!this.isScrolling){
+            
+              let cats = this.catgoriesStore;
+             let initial = 0;
+             let is_set = false;
+             let selected_index = new_val.substring(4);
+
+             for(let i=0;i<=selected_index-2;i++){
+            let products = this.products.filter(item=> item.category==cats[i].name);
+             
+              if(i<=selected_index-1){
+               initial += products.length*150 +40;
+              }
+              
+  
+              if(i>selected_index-1)
+              break;
+                
+                
+          
+             }
+
+
+
+            
+               document.getElementById("tab-content").scrollTop = initial ;
+
+             }
+             
              
             }
+            
          }
   
    
@@ -213,4 +298,6 @@ export default {
   border-radius: 50%;
 }
 .pb-70{padding-bottom: 70px;}
+.mt-100{margin-top: 100px;}
+#tab-content{margin-top: 10px;overflow-y: scroll;}
 </style>

@@ -2,7 +2,7 @@
    <section class=" bg mb-5 ">
      
      
-     <div class="  mr-10 ml-10  mb-80 ">
+     <div class="  mr-3 ml-3  mb-80 ">
 
           
     
