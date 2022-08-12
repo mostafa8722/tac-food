@@ -37,7 +37,8 @@ data :()=>({
     let params = this.$route.params;
     let id = params.id;
 
- 
+    this.$store.dispatch('products/clearSearch');
+
    this.$store.dispatch('products/productsPage',{store_id:id})
    this.$store.dispatch('products/commentSection',{store_id:id})
    this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:1})

@@ -79,7 +79,7 @@ export default {
         show_tab :false,
         isScrolling :true,
         tab:null,
-        height :"400px",
+        height :"750px",
   
     }),
       
@@ -152,6 +152,7 @@ export default {
            let shop = shops.filter(item=> item.id == product.store_id)[0];
         
         if(shop){
+          console.log("ggg1",product.store_name);
             this.$store.dispatch('products/setTitle',product.store_name)
 
            let shop_clock = "";

@@ -192,8 +192,8 @@ export default {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: calc(100% - 10px);
-    
+    width: calc(100% - 80px);
+        margin-top: 0.25rem;
 }
 .type{
   color:#8e8e8e;

@@ -36,7 +36,7 @@ export const actions: ActionTree<AuthState, any> = {
       .categoriesPage(data)
       .then((res:any) => {
      
-        this.dispatch("home/handleLoading",false)
+        setTimeout(()=>{this.dispatch("home/handleLoading",false)},500)
         commit('categoriesPage',res.data)
       })
       .catch((error:any) => {

@@ -15,7 +15,7 @@
       <v-tab href="#tab-1">
      
           <v-img
-            v-if="title!=''"
+           v-if="!isLoading"
         src="/icons/fruit.svg"
        height="20"
       width="20"
@@ -28,12 +28,12 @@
 
       <v-tab href="#tab-2">
       
-           <v-icon   v-if="title!=''" >mdi-message-reply-text</v-icon>
+           <v-icon  v-if="!isLoading"   >mdi-message-reply-text</v-icon>
       </v-tab>
 
       <v-tab href="#tab-3">
   
-        <v-icon   v-if="title!=''" >mdi-information-outline</v-icon>
+        <v-icon   v-if="!isLoading" >mdi-information-outline</v-icon>
       </v-tab>
     </v-tabs>
 
@@ -72,6 +72,7 @@ export default {
       ...mapGetters({
          
              title: 'products/title',
+               isLoading: 'home/isLoading',
         
             })
          },    

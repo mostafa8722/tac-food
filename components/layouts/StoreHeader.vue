@@ -42,6 +42,12 @@ library.add(faArrowRight)
     
    
    }),
+
+   created(){
+  
+
+     this.$store.dispatch('products/setTitle',"");
+   },
  
    methods:{
      
@@ -54,7 +60,7 @@ library.add(faArrowRight)
 <style scoped>
   header{
     background-color: #f5f5f5;
-    height:30px;
+    height:50px;
   
     width: 100%;
     display: flex;

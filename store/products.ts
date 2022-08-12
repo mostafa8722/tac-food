@@ -55,7 +55,7 @@ export const mutations: MutationTree<AuthState> = {
   },
   commentsPage(state:any, data:result) {state.comments = data.result},
   paymentsPage(state:any, data:result) {state.payments = data.result},
-  setTitle(state:any, data:result) {state.title = data},
+  setTitle(state:any, data:string) {state.title = data},
  
   
 
@@ -75,8 +75,12 @@ export const actions: ActionTree<AuthState, any> = {
       .then((res:any) => {
 
      
-        this.dispatch("home/handleLoading",false)
+       
         commit('productsPage',res.data)
+
+        setTimeout(()=>{
+          this.dispatch("home/handleLoading",false)
+        },500)
       })
       .catch((error:any) => {
         this.dispatch("home/handleLoading",false)
@@ -120,7 +124,7 @@ export const actions: ActionTree<AuthState, any> = {
       .comments()
       .commentsPage(data)
       .then((res:any) => {
-        this.dispatch("home/handleLoading",false)
+        //this.dispatch("home/handleLoading",false)
         commit('commentsPage',res.data)
       })
       .catch((error:any) => {
@@ -159,6 +163,7 @@ export const actions: ActionTree<AuthState, any> = {
       })
   },
   setTitle({ commit, dispatch }, data) {
+    console.log("ggg",data)
     commit('setTitle',data)
   },
   clearSearch({ commit, dispatch }, data) {
