@@ -1,17 +1,17 @@
 <template>
   <header >
     <div class="relative">
-       <font-awesome-icon  v-show="layout=='cart'" @click.prevent="handleBackBtn" class=" mr-2 pointer btn-back " :icon="`fa-solid fa-arrow-right`" />
+       <font-awesome-icon  v-show="layout=='cart'" @click.prevent="handleBackBtn" class="mt-2 mr-2 pointer btn-back " :icon="`fa-solid fa-arrow-right`" />
 
        <div v-if="!isSendingData" class=" flex justify-center items-center flex-col mt-2">
               <div  @click.prevent="handleMap" class="flex justify-center ">
-                <span  class="text-sm ml-2">
+                <span  class="text-sm ml-2 pointer">
                   {{location_address.address_title}}
                 </span>
                 <font-awesome-icon   class="pointer h-4 text-sm" icon="fa-solid fa-angle-down" />
                 
               </div>
-              <span  @click.prevent="handleMap" class="text-xs">{{location_address.address_postal}}</span>
+              <span  @click.prevent="handleMap" class="text-xs pointer">{{location_address.address_postal}}</span>
          
       </div>
        <div v-else class=" flex justify-center items-center  mt-2">
@@ -100,7 +100,8 @@ import {GetStorage} from "~/utils/helpers"
           lng :GetStorage("latlng").split(",")[1],
           
         }
-          this.$store.dispatch('general/addLocationAddress', data)
+        if(this.location_address.address_title=="" && this.location_address.address_postal=="")
+         this.$store.dispatch('general/addLocationAddress', data)
       }
       
     },

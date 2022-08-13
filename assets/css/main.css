@@ -107,6 +107,7 @@ scroll-behavior: smooth;
   max-width: 200px;
   float: left;
   width: 45%;
+  margin-left: 20px!important;
 
 }
 
@@ -140,6 +141,9 @@ scroll-behavior: smooth;
   .v-tabs-slider{
     background-color:#fe5c67!important;;
 }
+.v-header .v-skeleton-loader{width: 200px;}
+.v-header .v-skeleton-loader__card-heading{background-color: unset!important;}
+.v-header .v-skeleton-loader__heading{height: 10px;width: 150px;}
 .product-tab .v-slide-group__next , .product-tab .v-slide-group__prev {
 background-color: #eeeeee;
 }
@@ -152,8 +156,10 @@ background-color: #eeeeee;
   max-width: 600px!important;
 }
 .leaflet-marker-pane img{
-  filter: invert(70%) sepia(74%) saturate(3730%) hue-rotate(320deg) brightness(94%) contrast(110%);
+  position: relative;
 }
+
+
 .img-placeholder .v-image__image{
   filter: invert(99%) sepia(0%) saturate(3238%) hue-rotate(32deg) brightness(114%) contrast(87%);
 }

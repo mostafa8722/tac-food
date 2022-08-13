@@ -28,9 +28,10 @@ import Map from '~/components/home/Map.vue'
 
 import VueToast from 'vue-toast-notification';
 
+import {mapGetters} from "vuex"
 Vue.use(VueToast);
 
-
+ 
 export default Vue.extend({
    layout: 'home',
   components:{
@@ -41,12 +42,17 @@ export default Vue.extend({
     Map
 },
 
-
+  computed: {
+    ...mapGetters({
+       sliders: 'home/sliders',
+    
+        })
+      },
 async asyncData(context){
- //   console.log("loading dhhhh28888", context);
-   // console.log("loading dhhhh",this);
+
  
 
+if(context.store.getters['home/sliders'].length==0){
   await context.store.dispatch('general/getLocation')
    context.store.dispatch('home/handleLoading',true)
 
@@ -72,7 +78,7 @@ await context.$axios.post('v2/customer/home', context.store.getters['general/loc
   })
 
  
-
+}
 },
 created(){
    setTimeout(()=>{

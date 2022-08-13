@@ -10,14 +10,19 @@ import Vue from "vue"
 import CategoryComponents from '~/components/category/CategoryComponents.vue'
 
 export default Vue.extend({
-   layout: 'home',
+   layout: 'cart',
   components:{CategoryComponents,},
   created(){
 
-  
+
+
+   let prevInfo = this.$nuxt.context.from;
+
+
+console.log("ggggg11",prevInfo?prevInfo.name:"ooo")
     let params = this.$route.params;
     let id = params.id;
- 
+   if(!prevInfo || prevInfo.name!="products-id")
    this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:id})
     }
 })

@@ -10,13 +10,18 @@
 </template>
 
 <script lang="ts">
+
 import Vue from 'vue'
 import Wallet from '~/components/wallet/Wallet.vue'
 
 
 export default Vue.extend({
+  
   components:{
     Wallet
+},
+created(){
+  console.log("wallet")
 }
 })
 </script>

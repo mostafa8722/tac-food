@@ -308,7 +308,7 @@ export default {
       font-size: 0.85rem!important;
       transform: rotate(-20deg)!important;
       color:#ffffff!important;
-      left: 0px !important;;
+      left: 1px !important;;
        font-family: yekanBold!important;
     }
 </style>

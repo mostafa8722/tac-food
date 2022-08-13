@@ -9,6 +9,7 @@ export const state = () => ({
   
 
   status: '',
+  prevousPage : '',
   isSendingData: false,
   isHomeIconAdd: false,
   location: LOCATION_DEFAULT,
@@ -22,6 +23,7 @@ export const getters: GetterTree<AuthState, any> = {
   location: (state: any) => state.location,
   location_address: (state: any) => state.location_address,
   isSendingData: (state: any) => state.isSendingData,
+  prevousPage: (state: any) => state.prevousPage,
   
 }
 
@@ -40,6 +42,10 @@ export const mutations: MutationTree<AuthState> = {
   setSendingData(state:any, data:boolean) {
    
     state.isSendingData =  data ;
+  },
+  setPrevousPage(state:any, data:boolean) {
+   
+    state.prevousPage =  data ;
   },
 }
 
@@ -84,6 +90,9 @@ async addLocationAddress({ commit, dispatch }, data) {
 },
 async addLocalLocationAddress({ commit, dispatch }, data) {
   commit('setLocationAddress',data)
+},
+ handlePrevousPage({ commit, dispatch }, data) {
+  commit('setPrevousPage',data)
 }
   
 }

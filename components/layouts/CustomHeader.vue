@@ -4,7 +4,8 @@
   
     
          <font-awesome-icon v-if="back" @click.prevent="handleBackBtn"  class="pointer btn-back absolute right-3 top-2" :icon="`fa-solid fa-arrow-right`" />
-                <v-icon v-if="url=='/myOrders'" @click.prevent="refreshOrders"  class="pointer icon-refresh left-5 top-1">mdi-refresh</v-icon>
+                <v-icon v-if="handleUrl()=='/myOrders'" @click.prevent="refreshOrders"  class="pointer icon-refresh left-5 top-1">mdi-refresh</v-icon>
+             
   </header>
       
 </template>
@@ -71,6 +72,13 @@ library.add(faArrowRight)
         return " کد تایید  "; 
         else
           return "";
+           
+      },
+      handleUrl(){
+        let url = this.$route.path;
+       
+       return url;
+     
            
       },
       handleBackBtn(){

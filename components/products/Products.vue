@@ -45,17 +45,19 @@
       </div>
     
      
-     <div @scroll="handleScroll(true)"  id="tab-content" :style="`height:${height}`"  class="mt-1 flex flex-col items-center ml-3 mr-3 pb-70 ">
-        <SkeletonLoaders v-if="isLoading" v-for="(item,index) in [1,2,3,4,5,6,7,8]" :key="index"  />
+     <SkeletonLoaders  v-for="(item,index) in [1,2,3,4,5,6,7,8]"  v-if="isLoading && title==''"  :key="index"  />
     
+     <div @scroll="handleScroll(true)"  id="tab-content" :style="`height:${height}`"  class="mt-1 flex flex-col items-center ml-3 mr-3 pb-70 ">
+       
          <div class="w-100 d-flex flex-col items-center"  v-for="(cat, index) in catgoriesStore" :id='`tab-${index+1}`' >
             <HeaderSection class="mt-2" :title= "cat.name"/>
-            <Product   v-if="!isLoading" v-for="(item, index) in handleTabSelected(cat)"  :is_store_online="getShopInfo(shops,products)" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
+            <Product   v-for="(item, index) in handleTabSelected(cat)"  :is_store_online="getShopInfo(shops,products)" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
       
          </div>
          
      
      </div>
+        
       <Empty v-show="products.length==0 && !isLoading" />
 
      <ModalShowProduct :product="selectedProduct" :is_store_online="getShopInfo(shops,products)"  v-show="showModal" @close-modal="showModal = false" />
@@ -91,6 +93,7 @@ export default {
                  catgoriesStore: 'products/catgoriesStore',
                   isLoading: 'home/isLoading',
                     shops: 'categories/shops',
+                       title: 'products/title',
                  })
          },
          methods:{
@@ -152,7 +155,7 @@ export default {
            let shop = shops.filter(item=> item.id == product.store_id)[0];
         
         if(shop){
-          console.log("ggg1",product.store_name);
+       
             this.$store.dispatch('products/setTitle',product.store_name)
 
            let shop_clock = "";

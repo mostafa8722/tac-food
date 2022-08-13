@@ -31,8 +31,8 @@ export default {
     components: { Empty,Carts,SearchTab ,Product,ProductCat},
       computed: {
              ...mapGetters({
-                 products: 'products/products',
-                 shops: 'categories/shops',
+                 products: 'products/searchProducts',
+                 shops: 'categories/searchShops',
                   isDataSent: 'home/isDataSent',
                  })
          },

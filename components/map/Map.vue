@@ -6,12 +6,17 @@
  <client-only>
   <l-map   @update:center="$emit('handle-drag-map',$event)" @click="$emit('handle-map',$event)" class="absolute" style="height: 100%;width:100%" :zoom="zoom" :center="center">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-    <l-marker    :lat-lng="markerLatLng">
+    <l-marker   :lat-lng="markerLatLng">
+  
       <l-icon
+ 
           :icon-size="icon.iconSize"
           :icon-anchor="icon.iconAnchor"
           :icon-url="icon.iconUrl"
-        />
+        >
+      
+        </l-icon>
+       
     </l-marker>
   </l-map>
 </client-only>
@@ -38,8 +43,9 @@ export default {
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 15,
          icon: {
-        iconUrl: "icons/gps_fixed.svg",
-        iconSize: [32, 37],
+           className: "my-custom-pin",
+        iconUrl: "icons/location_home.png",
+        iconSize: [40, 45],
         iconAnchor: [16, 37]
       },
      

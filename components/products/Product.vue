@@ -131,6 +131,27 @@ export default {
          return  Number(price).toLocaleString()+" "+"تومان";
       },
   },
+  created(){
+    let item_remove = true;
+  if(this.carts.length>0 )
+     this.carts.map((item,index)=>{
+       item.products.map(item_detail=>{
+       
+           if(item_detail.id == this.product.id){
+             item_remove = false;
+              this.cart_product = item_detail;
+            
+              
+           }
+             
+        
+           
+       });
+     })
+
+     if(item_remove)
+  this.cart_product = [];
+  },
   watch:{
     totalCart(new_val,old_val){
     
@@ -145,6 +166,8 @@ export default {
            if(item_detail.id == this.product.id){
              item_remove = false;
               this.cart_product = item_detail;
+             
+              
            }
              
         
@@ -217,6 +240,7 @@ export default {
 .icon-custom{
   color:#fd5e63!important;
   height: 10px;
+  width: 10px;
   padding:0.1rem;
   border:0.1rem solid #fd5e63;
   border-radius: 50%;

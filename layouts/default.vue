@@ -1,6 +1,6 @@
 <template>
   <div dir="rtl">
-    <Header :back="false"/>
+    <Header  :back="false"/>
     <Nuxt />
     <Footer/>
   </div>

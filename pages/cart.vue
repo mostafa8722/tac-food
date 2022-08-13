@@ -18,7 +18,8 @@ export default Vue.extend({
     layout: 'cart',
   components:{
     Cart,CartButton
-}
+},
+
 })
 </script>
 

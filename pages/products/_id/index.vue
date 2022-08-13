@@ -16,7 +16,7 @@ import ModalMap from '~/components/map/ModalMap.vue'
 import CartButton from '~/components/app/AddToCartButton.vue'
 import ProductsComponents from '~/components/products/ProductsComponents.vue'
 import ModalDelete from '~/components/modals/ModalDelete.vue'
-
+import {mapGetters} from "vuex"
 
 export default Vue.extend({
    layout: 'store',
@@ -28,21 +28,41 @@ export default Vue.extend({
     ProductsComponents,ModalMap,CartButton,ModalDelete
    
 },
+ computed: {
+      ...mapGetters({
+           
+           prevousPage: 'general/prevousPage',
+          
+          
+            })
+         },
 data :()=>({
    showModal: false,
 }),
   created(){
 
   
+
+
+
+
+let prevInfo = this.$nuxt.context.from;
+
+
+
     let params = this.$route.params;
     let id = params.id;
 
+
+   if( !prevInfo || prevInfo.name!="cart"){
     this.$store.dispatch('products/clearSearch');
 
    this.$store.dispatch('products/productsPage',{store_id:id})
    this.$store.dispatch('products/commentSection',{store_id:id})
    this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:1})
     }
+  }
+ 
 })
 </script>
 
