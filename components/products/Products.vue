@@ -37,7 +37,8 @@
       </v-tab-item>
       
     </v-tabs-items>
-    <div v-show="!getShopInfo(shops,products,1) && !isLoading" class="custom-active-time" >
+    
+    <div v-show="!getShopInfo(shops,products,1) && shop_clock!=''" class="custom-active-time" >
         <div class="active-time-shape">
           <div class="active-time-shape-inline"></div>
         </div>
@@ -83,6 +84,7 @@ export default {
         isScrolling :true,
         tab:null,
         height :"750px",
+        shop_clock :""
   
     }),
       
@@ -192,7 +194,7 @@ export default {
                     min_end = min_end<10?("0"+min_end):min_end ;
                     
                   shop_clock += index_txt + hour_start +":"+min_start + " الی " + hour_end+":"+min_end;
-        
+                  this.shop_clock = shop_clock;  
                  });
          return  type==1?is_active:shop_clock;
         }

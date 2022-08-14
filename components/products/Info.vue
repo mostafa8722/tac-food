@@ -109,9 +109,7 @@ export default {
                  
           if(type=="lat")
            return [shop.lat,shop.lng];
-           else if(type=="activeTime")
-           return shop.activity_times[0].start.substring(0,5) +" الی "+shop.activity_times[0].end.substring(0,5);
-            else if(type=="delivery_cost")
+           else if(type=="delivery_cost")
            return shop.delivery_cost==0?"رایگان":this.formatPrice(shop.delivery_cost);
            else if(type=="min_cost")
            return shop.min_cost?this.formatPrice(shop.min_cost):0;
@@ -119,7 +117,30 @@ export default {
            return shop.description;
            else if(type=="address")
            return shop.address;
+            else if(type=="activeTime"){
+
+            }
+
+           let shop_clock = "";
+           shop.activity_times.map((item,index)=>{
+            let hour_start = parseInt(item.start.substring(0,2));
+            let min_start =parseInt( item.start.substring(3,5));
+              
+          let hour_end = parseInt(item.end.substring(0,2));
+            let min_end = parseInt(item.end.substring(3,5));
+
+      
+                  let index_txt =  index==0?"":" - " ;
+                    hour_start = hour_start<10?("0"+hour_start):hour_start ;
+                    hour_end = hour_end<10?("0"+hour_end):hour_end ;
+                    min_start = min_start<10?("0"+min_start):min_start ;
+                    min_end = min_end<10?("0"+min_end):min_end ;
+                    
+                  shop_clock += index_txt + hour_start +":"+min_start + " الی " + hour_end+":"+min_end;
+        
+           })
            
+           return shop_clock;
 
       },
         formatPrice(price) {
