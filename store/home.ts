@@ -79,7 +79,7 @@ export const actions: ActionTree<AuthState, any> = {
 */
 
 /*nuxtServerInit ({ commit }, data) {
-  console.log("loading data................");
+
   return this.$repositories
   .home()
   .HomeCustomer(data)

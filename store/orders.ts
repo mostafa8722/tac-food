@@ -54,7 +54,7 @@ export const actions: ActionTree<AuthState, any> = {
       .then((res:any) => {
         this.dispatch("home/addDataSent",false);
 
-        console.log("bbbnnn1",res.data)
+     
      
         if(res.data.url && res.data.status==0){
           let url = res.data.url;
@@ -68,7 +68,6 @@ export const actions: ActionTree<AuthState, any> = {
        // commit('productsPage',res.data)
       })
       .catch((error:any) => {
-        console.log("bbbnnn2",error)
         this.dispatch("home/addDataSent",false);
       
       })
@@ -104,9 +103,8 @@ export const actions: ActionTree<AuthState, any> = {
       .then((res:any) => {
         this.dispatch("home/handleLoading",false)
         commit("setMyOrders",res.data.result)
-        console.log("updateStoreCart11",res.data)
-       // this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
-        
+       
+       
       
       
       })
@@ -124,10 +122,9 @@ export const actions: ActionTree<AuthState, any> = {
       .showOrdersState(data)
       .then((res:any) => {
         this.dispatch("home/handleLoading",false)
-        console.log("updateStoreCart12",res)
-        commit("setMyOrdersState",res.data.result)
-       // this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
         
+        commit("setMyOrdersState",res.data.result)
+      
       
       
       })
@@ -152,7 +149,7 @@ export const actions: ActionTree<AuthState, any> = {
       .sendReport(data)
       .then((res:any) => {
         this.dispatch('home/addDataSent',false)
-        console.log("updateStoreCart12",res)
+       
       
     
   this.dispatch('orders/showMyOrders',token)      
@@ -184,8 +181,7 @@ export const actions: ActionTree<AuthState, any> = {
       .then((res:any) => {
         this.dispatch('home/addDataSent',false)
         
-        console.log("updateStoreCart1233",res)
-      
+       
     
   this.dispatch('orders/updateOrdersState',token)      
   this.dispatch('orders/showMyOrders',token)      
@@ -210,7 +206,7 @@ export const actions: ActionTree<AuthState, any> = {
       .updateOrdersState(data)
       .then((res:any) => {
         this.dispatch("home/handleLoading",false)
-        console.log("updateStoreCart12",res)
+       
         commit("setMyOrdersState",res.data.result)
        // this.dispatch('carts/updateStoreCart',res.data.result,{ root:true });
         

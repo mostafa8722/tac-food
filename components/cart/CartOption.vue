@@ -65,7 +65,7 @@ export default {
       }
     },
     created(){
-      console.log("eeeee",this.$vuetify.breakpoint.width)
+    
       this.count  = this.product.count;
     },
   methods:{
@@ -79,7 +79,7 @@ export default {
           count:this.product.count+1,
         }
 
-        console.log("count",this.product.count)
+    
       if(this.product.status)
        this.$store.dispatch('carts/addCartOption', data);
       },
@@ -110,8 +110,7 @@ export default {
   },
   watch:{
       totalCart(new_val,old_val){
-            console.log("total1",old_val)
-            console.log("total1", this.product.count)
+          
             
             this.count =this.product.count ;
           // this.product = data;

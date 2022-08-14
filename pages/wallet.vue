@@ -21,7 +21,7 @@ export default Vue.extend({
     Wallet
 },
 created(){
-  console.log("wallet")
+ 
 }
 })
 </script>

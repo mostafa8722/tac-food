@@ -85,7 +85,7 @@ beforeDestroy() {
 
 methods :{
   onScroll(e) {
-    //console.log(e)
+   
   //  this.windowTop = window.top.scrollY /* or: e.target.documentElement.scrollTop */
    //this.show_button = false;
     setTimeout(()=>{

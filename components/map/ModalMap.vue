@@ -133,13 +133,13 @@ return ;
        
       },
       geoError(err){
-     console.log(err.message);
+
      switch(err.code){
       case 0 :
-        console.log("unknown error");
+       
         break;
           case 1 :
-        console.log("User denied Geolocation");
+        
         break;
         default :
         break;

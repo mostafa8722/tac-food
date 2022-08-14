@@ -54,11 +54,6 @@ export const actions: ActionTree<ToastState, any> = {
       //  commit("SHOW_SUCCESS", data)
     },
     showErrorToast({ commit }, error) {
-      console.log(error)
-       //Vue.$toast.error("settings updated successfully",)
-       
-       
-        
-      //  commit("SHOW_ERROR", data)
+    
     }
 }

@@ -81,7 +81,7 @@ export default {
       },
       watch:{
         totalCart(new_val,old_val){
-            console.log("total",new_val)
+       
             this.totalPrice2(this.cart)
          
         }

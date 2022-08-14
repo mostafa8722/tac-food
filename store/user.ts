@@ -62,7 +62,7 @@ export const actions: ActionTree<AuthState, any> = {
         commit('getAddresses',res.data)
       })
       .catch((error:any) => {
-        console.log("pppp",error)
+    
       
         Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       })
@@ -82,8 +82,7 @@ export const actions: ActionTree<AuthState, any> = {
        // commit('getAddresses',res.data)
       })
       .catch((error:any) => {
-        //console.log(error.code)
-      
+    
         Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       })
   },
@@ -100,7 +99,7 @@ export const actions: ActionTree<AuthState, any> = {
         this.dispatch('user/userAddresses',token)
       })
       .catch((error:any) => {
-        //console.log(error.code)
+       
       
         Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
       })
@@ -125,7 +124,7 @@ export const actions: ActionTree<AuthState, any> = {
        }
       })
       .catch((error:any) => {
-        //console.log(error.code)
+        
       
        
       })

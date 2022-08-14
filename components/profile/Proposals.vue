@@ -182,7 +182,7 @@ export default {
      },
      watch:{
         isDataSent(new_val,old_val){
-            console.log("kkkk",new_val)
+           
             if(new_val){
 
             }

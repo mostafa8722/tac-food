@@ -176,7 +176,7 @@ export const actions: ActionTree<AuthState, any> = {
       })
   },
   setTitle({ commit, dispatch }, data) {
-    console.log("ggg",data)
+
     commit('setTitle',data)
   },
   clearSearch({ commit, dispatch }, data) {

@@ -42,9 +42,9 @@ export default {
     watch:{
         comments(new_val,old_val){
            
-            console.log(new_val)
+        
          new_val.map(item=>{
-             console.log(item)
+        
          })
         }
     },
@@ -52,7 +52,7 @@ export default {
 
 
           if(Cookies.get("user")){
-            console.log("user_login",)
+          
         let user = JSON.parse (Cookies.get("user"));
          
                  let token  = {

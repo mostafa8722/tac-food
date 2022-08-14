@@ -75,10 +75,10 @@ export default {
     watch:{
         isLoading(new_val,old_val){
           
-            console.log("pppp33",new_val)
+        
             if(!new_val)
          this.comments.map(item=>{
-             console.log("pppp",item)
+           
          })
         }
     }

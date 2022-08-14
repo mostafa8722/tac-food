@@ -19,7 +19,7 @@ export default {
    
 },
 created(){
-  console.log("ttttt",this.error)
+ 
 }
 }
 </script>

@@ -26,7 +26,7 @@ self.addEventListener('install',(event)=>{
 self.addEventListener('activate',(event)=>{
   
   let expectedCacheNames = Object.values(CURRENT_CACHE)
-  // console.log(expectedCacheNames)
+ 
 
    event.waitUntil(
        caches.keys().then(cacheNames =>{
@@ -34,7 +34,7 @@ self.addEventListener('activate',(event)=>{
            return Promise.all(
                cacheNames.forEach(cacheName =>{
                    if(!expectedCacheNames.includes(cacheName)){
-                     //  console.log("deleting out of date cache :",cacheName)
+                     
                        return caches.delete(cacheName)
                    }
 
@@ -60,12 +60,12 @@ self.addEventListener('fetch',(event)=>{
                   }).catch(err=>{
                     return  caches.open(CURRENT_CACHE.static)
                         .then(cache =>{
-                            console.log("tteet")
+                          
                          return cache.match("/offline.html")
                         })
                   })
           }).catch(err=>{
-            //  console.log("tttttttttttttttttttt")
+           
       })
   )
   
