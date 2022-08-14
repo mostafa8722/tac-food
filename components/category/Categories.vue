@@ -32,8 +32,8 @@ export default {
        this.tab_selectd = id;
        let params = this.$route.params;
     let id2 = params.id;
- 
-   this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:id2})
+     this.$emit("select-tab",id)
+  // this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:id2})
       }
     }
 }

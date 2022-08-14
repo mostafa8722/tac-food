@@ -45,7 +45,7 @@ export default {
          icon: {
            className: "my-custom-pin",
         iconUrl: "icons/location_home.png",
-        iconSize: [40, 45],
+        iconSize: [45, 45],
         iconAnchor: [16, 37]
       },
      

@@ -144,6 +144,8 @@ CartOption
   color:#717171!important;
   font-size:0.9rem!important;
   padding:0.1rem;
+  height: 15px;
+  width: 15px;
   border:0.1rem solid #717171;
   border-radius: 50%;
 

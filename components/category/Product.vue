@@ -101,7 +101,7 @@ export default {
 
 
      let active_times = product.activity_times;
-   let is_active = true;
+   let is_active = false;
    
     active_times.map((time,index)=>{
  
@@ -114,20 +114,45 @@ export default {
               let hour = date.getHours();
               let min = date.getMinutes();
 
-         if( hour< hour_start &&  hour>hour_end ){
-                is_active = false;
-               }else  if( hour== hour_start &&  min<min_start ){
-                is_active = false;
+         if( hour> hour_start &&   hour<hour_end ){
+                is_active = true;
+               }else  if( hour== hour_start &&  min>=min_start ){
+                is_active = true;
                }
-               else  if( hour== hour_end &&  min>min_end ){
-                is_active = false;
+               else  if( hour== hour_end &&  min<=min_end ){
+                is_active = true;
                }
        
       });
 
       return is_active;
        
-      }
+      },
+      getActiveTime2(product){
+
+
+     let active_times = product.activity_times;
+      let date  = new Date();
+              let hour = date.getHours();
+              let min = date.getMinutes();
+   let is_active = hour+":"+min +" - ";
+   
+    active_times.map((time,index)=>{
+ 
+        let hour_start = parseInt(time.start.substring(0,2));
+        let min_start = parseInt(time.start.substring(3,5));
+
+          let hour_end = parseInt(time.end.substring(0,2));
+        let min_end = parseInt(time.end.substring(3,5));
+        
+            is_active += hour_start +":"+min_start + "الی" + hour_end+":"+min_end+" - ";
+        
+       
+      });
+
+      return is_active;
+       
+      },
   }
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
    <div>
        <SearchBox />  
-       <Categories v-show="id==1"/>
+       <Categories @select-tab="handleSelectTab"  v-show="id==1"/>
          
-        <Products   />
+        <Products :tab="tab"   />
 
         
        
@@ -21,17 +21,25 @@ export default {
   
 
     data : ()  =>({
-          tab: null,
+          tab: 1,
           id : 0,
               
 
     }),
     created(){
        
-     
+         
         this.id = this.$route.params.id ;
 
 
+    },
+    methods:{
+    handleSelectTab(id){
+       this.tab = id;
+      
+ 
+  // this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:id2})
+      }
     }
 }
 </script>

@@ -2,10 +2,11 @@
    <section>
      <HeaderSection :title= "title"/>
      
+  
      <div class="flex flex-col mb-70  ">
        <SkeletonLoaders v-if="isLoading" v-for="(item,index) in [1,2,3,4,5,6,7,8]" :key="index" />
 
-     <div  v-if="!isLoading" v-for="(item, index) in shops">
+     <div  v-if="!isLoading" v-for="(item, index) in selected_shops">
   
         <Product :key="item.id"  page="category" :product="item" />
       </div>
@@ -32,12 +33,60 @@ export default {
       props: {
           title:{
               type:String
+          },
+          tab : {
+            type:Number
           }
       },
   
     data : ()  =>({
+        selected_shops : [],
+    }),
+
+    created(){
+  let prevInfo = this.$nuxt.context.from;
+
+
+console.log("ggggg112",prevInfo?prevInfo.name:"ooo")
+    let params = this.$route.params;
+    let id = params.id;
+   if(prevInfo  &&  prevInfo.name=="products-id")
+    this.selected_shops = this.shops ;
+
+    },
+    methods:{
+      isCat(cats,cat){
+       
+        let is_cat = cats.filter(item=>item==cat);
+
+         return is_cat.length;
+      }
+    },
+    watch:{
+      isLoading(new_val,old_val){
+        if(!new_val)
+        this.selected_shops = this.shops;
+      },
+
+       tab(new_val,old_val){
+        let selected_tab = new_val;
+         let tab_name = selected_tab ==1 ? "همه": selected_tab ==2 ? "فست فود":selected_tab ==3 ? "ایرانی":"بین الملل";
+
+
+        if(selected_tab==1)
+        this.selected_shops = this.shops;
+        else
+        this.selected_shops = this.shops
+        .filter(item =>  this.isCat(item.categories,tab_name)
         
-    })
+        
+        );
+       
+
+      },
+
+
+    }
 }
 </script>
 <style>

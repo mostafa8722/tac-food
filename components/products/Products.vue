@@ -37,11 +37,12 @@
       </v-tab-item>
       
     </v-tabs-items>
-    <div v-if="getShopInfo(shops,products)" class="custom-active-time" >
+    <div v-show="!getShopInfo(shops,products,1) && !isLoading" class="custom-active-time" >
         <div class="active-time-shape">
           <div class="active-time-shape-inline"></div>
         </div>
-        <span class="active-time-text mr-2">فعالیت از {{getShopInfo(shops,products)}}</span>
+        
+        <span class="active-time-text mr-2">فعالیت از {{getShopInfo(shops,products,2)}}</span>
       </div>
     
      
@@ -51,7 +52,7 @@
        
          <div class="w-100 d-flex flex-col items-center"  v-for="(cat, index) in catgoriesStore" :id='`tab-${index+1}`' >
             <HeaderSection class="mt-2" :title= "cat.name"/>
-            <Product   v-for="(item, index) in handleTabSelected(cat)"  :is_store_online="getShopInfo(shops,products)" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
+            <Product   v-for="(item, index) in handleTabSelected(cat)"  :is_store_online="!getShopInfo(shops,products,1)" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
       
          </div>
          
@@ -60,7 +61,7 @@
         
       <Empty v-show="products.length==0 && !isLoading" />
 
-     <ModalShowProduct :product="selectedProduct" :is_store_online="getShopInfo(shops,products)"  v-show="showModal" @close-modal="showModal = false" />
+     <ModalShowProduct :product="selectedProduct" :is_store_online="!getShopInfo(shops,products,1)"  v-show="showModal" @close-modal="showModal = false" />
     </section>
 
 </template>
@@ -144,7 +145,7 @@ export default {
            
               }
             },
-              getShopInfo(shops,products){
+              getShopInfo(shops,products,type){
             
            
            
@@ -158,8 +159,9 @@ export default {
        
             this.$store.dispatch('products/setTitle',product.store_name)
 
+              let is_active = false;
            let shop_clock = "";
-            shop.activity_times.map(item=>{
+            shop.activity_times.map((item,index)=>{
 
           
             let hour_start = parseInt(item.start.substring(0,2));
@@ -172,25 +174,31 @@ export default {
               let date  = new Date();
               let hour = date.getHours();
               let min = date.getMinutes();
-               if( hour> hour_start &&  hour<hour_end ){
-                shop_clock = false;
-               }else  if( hour== hour_start &&  min<min_start ){
-                shop_clock =  false;
+                    
+             
+         if( hour> hour_start &&   hour<hour_end ){
+                is_active = true;
+               }else  if( hour== hour_start &&  min>=min_start ){
+                is_active = true;
                }
-               else  if( hour== hour_end &&  min>min_end ){
-                shop_clock = false;
-               }else{
-                
-                shop_clock = !shop_clock?
-                 hour_start + ":"+min_start +" الی "+hour_end + ":"+min_end:
-                " - "+ hour_start + ":"+min_start +" الی "+hour_end + ":"+min_end;
+               else  if( hour== hour_end &&  min<=min_end ){
+                is_active = true;
                }
+
+                  let index_txt =  index==0?"":" - " ;
+                    hour_start = hour_start<10?("0"+hour_start):hour_start ;
+                    hour_end = hour_end<10?("0"+hour_end):hour_end ;
+                    min_start = min_start<10?("0"+min_start):min_start ;
+                    min_end = min_end<10?("0"+min_end):min_end ;
+                    
+                  shop_clock += index_txt + hour_start +":"+min_start + " الی " + hour_end+":"+min_end;
+        
                  });
-         return  shop_clock;
+         return  type==1?is_active:shop_clock;
         }
         
            
-      return false;
+   
             
           
            

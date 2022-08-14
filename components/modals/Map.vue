@@ -35,8 +35,8 @@ export default {
       zoom: 15,
 
    icon: {
-        iconUrl: "/icons/gps_fixed.svg",
-        iconSize: [32, 37],
+        iconUrl: "icons/location_home.png",
+        iconSize: [45, 45],
         iconAnchor: [16, 37]
       },
     };
