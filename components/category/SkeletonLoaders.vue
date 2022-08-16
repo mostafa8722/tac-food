@@ -59,7 +59,10 @@
 .content-product{
   border-radius:0.3rem!important;
   border:0.5rem solid #dddddd;
-  width:calc(100% - 10px)
+  width:calc(100% - 20px);
+   margin-right:10px ;
+   margin-left:10px ;
+  
 }
 
 

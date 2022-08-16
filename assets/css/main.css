@@ -72,6 +72,7 @@ scroll-behavior: smooth;
 .product-skeleton-2 .v-skeleton-loader--tile .v-skeleton-loader__bone{
   margin-left: 5px!important;
 }
+.product-skeleton .v-skeleton-loader__sentences .v-skeleton-loader__bone{margin-right:5px;}
 .product-skeleton .v-skeleton-loader__list-item-avatar-two-line{
 
   height: 70px;

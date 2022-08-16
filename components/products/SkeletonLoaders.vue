@@ -1,6 +1,6 @@
 <template>
 <v-card
-    class="flex flex-col mt-2  overflow-hidden  content-product product-skeleton-2 product-skeleton"
+    class="flex flex-col mt-2  overflow-hidden  content-product product-skeleton-cat product-skeleton"
  
     height="140"
      color="#ffffff"
@@ -64,8 +64,14 @@
 .content-product{
   border-radius:0.3rem!important;
   border:0.5rem solid #dddddd;
-  width:calc(100% - 10px)
+  width:calc(100% - 20px);
+   margin-right:10px ;
+   margin-left:10px ;
+
 }
+
+
+
 
 
 .body{

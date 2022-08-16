@@ -91,7 +91,14 @@ export const actions: ActionTree<AuthState, any> = {
        
         commit('productsPage',res.data)
 
+        let products = res.data.result;
+        if(products.length>0)
+        this.dispatch('products/setTitle',products[0].store_name)
+
+
+
         setTimeout(()=>{
+          
           this.dispatch("home/handleLoading",false)
         },500)
       })

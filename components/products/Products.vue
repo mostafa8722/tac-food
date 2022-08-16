@@ -38,12 +38,12 @@
       
     </v-tabs-items>
     
-    <div v-show="!getShopInfo(shops,products,1) && shop_clock!=''" class="custom-active-time" >
+    <div v-show="!is_active && shop_clock!=''" class="custom-active-time" >
         <div class="active-time-shape">
           <div class="active-time-shape-inline"></div>
         </div>
         
-        <span class="active-time-text mr-2">فعالیت از {{getShopInfo(shops,products,2)}}</span>
+        <span class="active-time-text mr-2">فعالیت از {{shop_clock}}</span>
       </div>
     
      
@@ -53,7 +53,7 @@
        
          <div class="w-100 d-flex flex-col items-center"  v-for="(cat, index) in catgoriesStore" :id='`tab-${index+1}`' >
             <HeaderSection class="mt-2" :title= "cat.name"/>
-            <Product   v-for="(item, index) in handleTabSelected(cat)"  :is_store_online="!getShopInfo(shops,products,1)" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
+            <Product   v-for="(item, index) in handleTabSelected(cat)"  :is_store_online="!is_active" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
       
          </div>
          
@@ -62,7 +62,7 @@
         
       <Empty v-show="products.length==0 && !isLoading" />
 
-     <ModalShowProduct :product="selectedProduct" :is_store_online="!getShopInfo(shops,products,1)"  v-show="showModal" @close-modal="showModal = false" />
+     <ModalShowProduct :product="selectedProduct" :is_store_online="!is_active"  v-show="showModal" @close-modal="showModal = false" />
     </section>
 
 </template>
@@ -84,8 +84,8 @@ export default {
         isScrolling :true,
         tab:null,
         height :"750px",
-        shop_clock :""
-  
+        shop_clock :"",
+        is_active : false,
     }),
       
       
@@ -147,10 +147,15 @@ export default {
            
               }
             },
-              getShopInfo(shops,products,type){
-            
+              getShopInfo(shops,products){
+                
+
            
+
+           console.log("shopss",shops)
+           console.log("shopss2",products)
            
+         
            let product = products[0];
           
 
@@ -159,10 +164,8 @@ export default {
         
         if(shop){
        
-            this.$store.dispatch('products/setTitle',product.store_name)
-
-              let is_active = false;
-           let shop_clock = "";
+          
+         
             shop.activity_times.map((item,index)=>{
 
           
@@ -179,12 +182,12 @@ export default {
                     
              
          if( hour> hour_start &&   hour<hour_end ){
-                is_active = true;
+                this.is_active = true;
                }else  if( hour== hour_start &&  min>=min_start ){
-                is_active = true;
+                this.is_active = true;
                }
                else  if( hour== hour_end &&  min<=min_end ){
-                is_active = true;
+                this.is_active = true;
                }
 
                   let index_txt =  index==0?"":" - " ;
@@ -193,10 +196,10 @@ export default {
                     min_start = min_start<10?("0"+min_start):min_start ;
                     min_end = min_end<10?("0"+min_end):min_end ;
                     
-                  shop_clock += index_txt + hour_start +":"+min_start + " الی " + hour_end+":"+min_end;
-                  this.shop_clock = shop_clock;  
+                  this.shop_clock += index_txt + hour_start +":"+min_start + " الی " + hour_end+":"+min_end;
+                  
                  });
-         return  type==1?is_active:shop_clock;
+        
         }
         
            
@@ -214,10 +217,18 @@ export default {
              this.height = "900px";
            this.catProducts = new_val.filter(item=> item.category==this.title);
 
+             
                    setTimeout(()=>{
                         this.show_tab = true;
                     
                    },150);
+
+                    
+            },
+             shops(new_val ,old_val){
+            
+              this.getShopInfo(this.shops,this.products)
+                   
 
                     
             },
@@ -259,7 +270,9 @@ export default {
              }
              
              
-            }
+            },
+            
+           
             
          }
   
