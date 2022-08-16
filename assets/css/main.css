@@ -200,4 +200,15 @@ background-color: #eeeeee;
     .v-slide-group__prev,.v-slide-group__next{display: none !important;}
     }
 
+    .v-slide-group__wrapper {
+      overflow-x: auto!important; /* Enables the horizontal scrollbar */
+      /* Next lines hides scrollbar in different browsers for styling purposes */
+      -ms-overflow-style: none!important; /* IE and Edge */
+      scrollbar-width: none!important; /* Firefox */
+    }
+    .v-slide-group__wrapper::-webkit-scrollbar {
+      display: none; /* Chrome opera and Safary */
+      width: 0px;
+      background: transparent;
+    }
   

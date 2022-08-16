@@ -3,10 +3,11 @@
      <HeaderSection title="دسته بندی"/>
    
      
-     <div  class="mt-3 flex flex-row mr-3">
+     <div    class="mt-3 flex flex-row mr-3">
    
 
   <v-slide-group
+
       v-model="model"
       class="pa-4"
       mandatory
@@ -19,27 +20,32 @@
       
         v-for="(item, index) in [1,2,3,4,5,6,7,8]"
       :key="index"
-  
+     v-slot="{ active, toggle }"
       >
        <CategoryLoaders   :key="index"  />
       </v-slide-item>
     </v-slide-group>
      <v-slide-group
-     v-else
+     v-if="show_slider "
       v-model="model"
-      class="pa-4"
+    
+      class="pa-4 "
+    :class="slider_class" 
       mandatory
       show-arrows
-      
+
+      @change="change"
+
+   
     >
     
       <v-slide-item
       
         v-for="(item, index) in categories"
       :key="item.id"
-  
+     v-slot="{ active, toggle }"
       >
-       <Category  :key="item.id" :category="item" />
+       <Category  :key="item.id" :active="active" :category="item" />
       </v-slide-item>
     </v-slide-group>
      </div>
@@ -58,12 +64,31 @@ export default {
        categories: 'home/categories'
        ,title:"home/status"
        ,isLoading:"home/isLoading"
+       
 
         })
   },
-  data :()=>(()=>{
-    model : null
-  })
+  data :()=>({
+    model : null,
+    slider_class:"slider--class",
+    show_slider :false
+  }),
+  created(){
+    let prevInfo = this.$nuxt.context.from;
+    if(prevInfo)
+      this.show_slider=true
+
+     
+  }
+  ,
+  watch:{
+    isLoading(e1,e2){
+      if(!e1)
+     setTimeout(()=>{
+         this.show_slider = true;
+     },100)
+    }
+  }
   
    
 }

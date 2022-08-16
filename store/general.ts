@@ -13,7 +13,7 @@ export const state = () => ({
   isSendingData: false,
   isHomeIconAdd: false,
   location: LOCATION_DEFAULT,
-  location_address :{address_title:"",address_postal:""}
+  location_address :{address_title:"موقعیت فعلی",address_postal:"موقعیت فعلی"}
 })
 export type AuthState = ReturnType<typeof state>
 

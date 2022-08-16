@@ -4,16 +4,16 @@
     padless
    
     v-bind="attrs"
-     class="bg-white "
+     class="bg-white2 bg-[#fbfbfb] shadow-[0px_-2px_5px_rgba(221,221,221,0.9)] flex justify-center "
   >
 
 
-   <font-awesome-icon @click.prevent="addHome" class="add-home pointer" :icon="`fa-solid  fa-add`" />
+   <font-awesome-icon v-show="1>2" @click.prevent="addHome" class="add-home pointer" :icon="`fa-solid  fa-add`" />
    
     <v-row
       justify="center"
       no-gutters
-      class="justify-center bg-[#fbfbfb] shadow-[0px_-2px_5px_rgba(221,221,221,0.9)] "
+      class="justify-between bg-[#fbfbfb] max-w-600 shadow-[0px_-2px_5px_rgba(221,221,221,0.9)] "
     >
     
       <v-btn
@@ -161,6 +161,7 @@ import { mapGetters } from 'vuex'
 </script>
 <style scoped>
 
+.max-w-600{max-width: 600px;}
 .bottom-text{
   color: #727272;
   font-size:0.75rem;

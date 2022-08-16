@@ -60,7 +60,7 @@
 
 <div class="divider mt-7"></div>
     
-  <div class="flex justify-between items-center mt-3 mr-2 ml-2">
+  <div class="flex justify-between items-center mt-4 mr-2 ml-2">
   <span v-if="product.delivery_cost==0" class=" price-tag "> پیک رایگان</span>
   <span v-else class=" price-tag flex">
     <span>{{formatPrice(product.delivery_cost)}}</span>

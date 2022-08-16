@@ -1,6 +1,6 @@
 <template>
 <v-card
-    class="flex mb-3 mt-2  ml-2 flex-col items-center overflow-hidden  rounded-xl product-skeleton"
+    class="flex mb-3 mt-2  ml-2  items-center overflow-hidden  rounded-xl product-skeleton"
     width="140"
     height="180"
      color="#ffffff"

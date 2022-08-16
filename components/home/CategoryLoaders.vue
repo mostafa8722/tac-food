@@ -1,6 +1,6 @@
 <template>
    <div
-    class="flex flex-col mt-2 ml-2 overflow-hidden   category-home-skeleton"
+    class="flex  mt-2 ml-2 overflow-hidden   category-home-skeleton"
 
  
   >

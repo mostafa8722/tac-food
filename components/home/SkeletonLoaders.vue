@@ -1,6 +1,6 @@
 <template>
 <v-card
-    class="flex flex-col mt-2  overflow-hidden  content-product product-skeleton"
+    class="flex  mt-2  overflow-hidden  content-product product-skeleton"
  
     height="140"
      color="#ffffff"

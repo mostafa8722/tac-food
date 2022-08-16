@@ -1,9 +1,9 @@
 <template>
   <header >
     <div class="relative">
-       <font-awesome-icon  v-show="layout=='cart'" @click.prevent="handleBackBtn" class="mt-2 mr-2 pointer btn-back " :icon="`fa-solid fa-arrow-right`" />
+       <font-awesome-icon  v-show="layout=='cart'" @click.prevent="handleBackBtn" class="mt-2 mr-2 pointer btn-back p-2 " :icon="`fa-solid fa-arrow-right`" />
 
-       <div v-if="!isSendingData" class=" flex justify-center items-center flex-col mt-2">
+       <div v-if="!isSendingData" class=" flex justify-center items-center flex-col mt-4">
               <div  @click.prevent="handleMap" class="flex justify-center ">
                 <span  class="text-sm ml-2 pointer">
                   {{location_address.address_title}}
@@ -172,7 +172,7 @@ import {GetStorage} from "~/utils/helpers"
 
 }
   .btn-back{
-    font-size:0.7rem;
+    font-size:0.9rem;
     height: 20px;
     position: absolute;
     right: 10px;

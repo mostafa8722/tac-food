@@ -3,7 +3,7 @@
     <h4 class="title">{{getUrl()}}</h4>
   
     
-         <font-awesome-icon v-if="back" @click.prevent="handleBackBtn"  class="pointer btn-back absolute right-3 top-2" :icon="`fa-solid fa-arrow-right`" />
+         <font-awesome-icon v-if="back" @click.prevent="handleBackBtn"  class="pointer btn-back absolute right-3 top-2 p-2" :icon="`fa-solid fa-arrow-right`" />
                 <v-icon v-if="handleUrl()=='/myOrders'" @click.prevent="refreshOrders"  class="pointer icon-refresh left-5 top-1">mdi-refresh</v-icon>
              
   </header>
@@ -100,7 +100,7 @@ library.add(faArrowRight)
     color:#606060;
   }
   .btn-back{
-    font-size:0.7rem;
+    font-size:0.9rem;
     height: 20px;
   }
 .icon-refresh{position: absolute!important;}

@@ -5,8 +5,8 @@
          
        
         <div class="tab-box flex items-center justify-center">
-            <span @click="changeTab(0)" :class="`${selected_tab==0?'active':''}`">محصول</span>
-            <span  @click="changeTab(1)" :class="`${selected_tab==1?'active':''}`">فروشگاه </span>
+            <button @click="changeTab(0)" :class="`${selected_tab==0?'active':''}`">محصول</button>
+            <button  @click="changeTab(1)" :class="`${selected_tab==1?'active':''}`">فروشگاه </button>
             
         </div>          
            
@@ -58,7 +58,7 @@ export default {
     justify-content: center;
     align-items: center;
 }
-span{
+.tab-box button{
     flex: 50%;
     text-align: center;
     line-height: 36px;

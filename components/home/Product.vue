@@ -130,9 +130,9 @@ export default {
     }
    .shape-octagon span {
       position: absolute;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       transform: rotate(-20deg);
-      left:4px;
+      left:2px;
        font-family: IranYekanFN!important;
     }
     .img-placeholder{
