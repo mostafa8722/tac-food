@@ -6,25 +6,7 @@
      <div    class="mt-3 flex flex-row mr-3">
    
 
-  <v-slide-group
-
-      v-model="model"
-      class="pa-4 flex flex-row"
-      mandatory
-      show-arrows
-   
-      
-    >
-    
-      <v-slide-item
-      
-        v-for="(item, index) in [1,2,3,4,5,6,7,8]"
-      :key="index"
-     v-slot="{ active, toggle }"
-      >
-       <CategoryLoaders   :key="index"  />
-      </v-slide-item>
-    </v-slide-group>
+ 
      <v-slide-group
      v-if="show_slider "
       v-model="model"

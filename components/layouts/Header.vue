@@ -52,6 +52,7 @@ import ModalDelete from '~/components/modals/ModalDelete.vue'
 import { mapGetters } from 'vuex'
 import Cookies from "js-cookie"
 import {GetStorage} from "~/utils/helpers"
+import {LOCATION_DEFAULT} from "~/data/default"
 
   export default {
     props :["layout"],
@@ -91,9 +92,15 @@ import {GetStorage} from "~/utils/helpers"
       }else
       this.isLogin = false
 
-      if(!GetStorage("latlng"))
+      if(!GetStorage("latlng")){
       setTimeout(()=>{this.showModalMap = true},200)
-      else{
+       let data ={
+          lat :LOCATION_DEFAULT.lan,
+          lng :LOCATION_DEFAULT.lng,
+          
+        }
+        this.$store.dispatch('general/addLocationAddress', data)
+      }else{
        
         let data ={
           lat :GetStorage("latlng").split(",")[0],
