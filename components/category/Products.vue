@@ -50,7 +50,7 @@ export default {
 
     let params = this.$route.params;
     let id = params.id;
-   if(prevInfo  &&  prevInfo.name=="products-id")
+ //  if(prevInfo  &&  prevInfo.name=="products-id")
     this.selected_shops = this.shops ;
 
     },

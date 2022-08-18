@@ -14,7 +14,7 @@
       >
      
 
-      <v-tab v-for="(cat,index) in catgoriesStore" :href="`#tab-${index+1}`" @click.prevent="handleTab" >
+      <v-tab  v-for="(cat,index) in catgoriesStore" :href="`#tab-${index+1}`" v-if="catProducts.length>0" @click.prevent="handleTab" >
        
       <a class="tab-title" :href="`#tab-${index+1}`">{{cat.name}}</a>
 
@@ -26,8 +26,9 @@
     
     </v-tabs>
 
-    <v-tabs-items v-model="tab">
+    <v-tabs-items  v-if="catProducts.length>0" v-model="tab">
       <v-tab-item
+     
         v-for="tab_item in catgoriesStore"
         :key="tab_item.id"
         :value="'tab-' + tab_item.id"
@@ -40,7 +41,7 @@
       </v-tab-item>
       
     </v-tabs-items>
-    
+   
     <div v-show="!is_active && shop_clock!=''" class="custom-active-time" >
         <div class="active-time-shape">
           <div class="active-time-shape-inline"></div>
@@ -66,6 +67,24 @@
         
       <Empty v-show="products.length==0 && !isLoading" />
 
+
+ <v-fab-transition>
+      <v-btn
+        key="mdi-share-variant"
+        color="#ffffff"
+        fab
+        large
+        dark
+        bottom
+        left
+        class="v-btn--search"
+        @click="showModalSearch = true"
+      >
+        <v-icon color="#fd5e63">mdi-magnify</v-icon>
+      </v-btn>
+    </v-fab-transition>
+         <ModalSearch  :showModalSearch="showModalSearch" :is_active="is_active" @select-product="showProduct"   v-show="showModalSearch" @close-modal="showModalSearch = false" />
+
      <ModalShowProduct :product="selectedProduct" :is_store_online="!is_active"  v-show="showModal" @close-modal="showModal = false" />
     </section>
 
@@ -78,8 +97,9 @@ import SkeletonLoaders from './SkeletonLoaders';
 import Empty from './Empty';
 import { mapGetters } from 'vuex'
 import { off } from 'process';
+import ModalSearch from './ModalSearch.vue';
 export default {
-    components: { HeaderSection ,Product,ModalShowProduct,SkeletonLoaders,Empty},
+    components: { HeaderSection, Product, ModalShowProduct, SkeletonLoaders, Empty, ModalSearch },
     data:()=>({
         selectedProduct :{},
         catProducts :[],
@@ -91,6 +111,7 @@ export default {
         height :"750px",
         shop_clock :"",
         is_active : false,
+        showModalSearch : false,
         path: "",
         
     }),
@@ -367,5 +388,11 @@ export default {
 ::-webkit-scrollbar-thumb {
   background: #fe5c67; 
   border-radius: 1px;
+}
+.v-btn--search{
+  z-index: 1000;
+  bottom: 200px;
+  left:20px;
+
 }
 </style>

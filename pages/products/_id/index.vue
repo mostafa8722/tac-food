@@ -32,6 +32,7 @@ export default Vue.extend({
       ...mapGetters({
            
            prevousPage: 'general/prevousPage',
+            products: 'products/products',
           
           
             })
@@ -54,7 +55,7 @@ let prevInfo = this.$nuxt.context.from;
     let id = params.id;
 
 
-   if( !prevInfo || prevInfo.name!="cart"){
+   if( !prevInfo || prevInfo.name!="cart" || this.products.length==0){
     this.$store.dispatch('products/clearSearch');
 
    this.$store.dispatch('products/productsPage',{store_id:id})

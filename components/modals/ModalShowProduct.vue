@@ -137,7 +137,7 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #000000da;
-  z-index: 101;
+  z-index: 1000;
 }
 .w-100{width:100%;font-size: 0.75rem;}
 .modal {
@@ -148,6 +148,7 @@ export default {
   margin:20px  30px;
 
   border-radius: 20px;
+  z-index: 1000;
 }
 .close {
   margin: 20px 0 0 16px;

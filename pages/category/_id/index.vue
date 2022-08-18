@@ -19,7 +19,7 @@ export default Vue.extend({
    let prevInfo = this.$nuxt.context.from;
 
 
-console.log("ggggg11",prevInfo?prevInfo.name:"ooo")
+
     let params = this.$route.params;
     let id = params.id;
    if(!prevInfo || prevInfo.name!="products-id")

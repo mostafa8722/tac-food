@@ -73,6 +73,7 @@ export default {
          
              title: 'products/title',
                isLoading: 'home/isLoading',
+                   
         
             })
          },    

@@ -75,26 +75,7 @@ this.title = "سبد خرید"
      }
 
 
-     setTimeout(()=>{
-         let lat = GetStorage("latlng")?GetStorage("latlng").split(',')[0]: LOCATION_DEFAULT.lat;
-     let lng = GetStorage("latlng")?GetStorage("latlng").split(',')[1]: LOCATION_DEFAULT.lng;
-     let id = "[";
-
-     this.carts.map((item,index)=>{
-         if(this.carts.length-1 == index)
-         id += item.store_id ;
-         else 
-         id += item.store_id +","
-     })
-     id += "]";
-     let data = {
-      lat : lat +"",
-      lng : lng +"",
-      id : id ,
-       show_payemnt :true
-     }
- this.$store.dispatch('orders/updateOrder',data);
-     },4000)
+     
      
   },
   mounted() {

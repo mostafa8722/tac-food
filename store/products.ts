@@ -55,16 +55,10 @@ export const mutations: MutationTree<AuthState> = {
     })
     state.catgoriesStore = cats ;
   },
-  searchProducts(state:any, data:result) {
-    state.products = data.result
+  searchProductsPage(state:any, data:result) {
+    state.searchProducts = data.result
 
-    let cats:any = [];
-      data.result .map((item:any,index:number)=>{
-       let isIndex= cats.find((cat:any,index:number) => cat.name == item.category) 
-       if(!isIndex)
-      cats.push({id:index+1 , name :item.category   })
-    })
-    state.catgoriesStore = cats ;
+  
   },
   commentsPage(state:any, data:result) {state.comments = data.result},
   paymentsPage(state:any, data:result) {state.payments = data.result},
@@ -121,10 +115,12 @@ export const actions: ActionTree<AuthState, any> = {
        
         this.dispatch("home/handleLoading",false)
         this.dispatch("home/addDataSent",false)
+
+     
         if(data.category=='product')
         commit('searchProductsPage',res.data)
         else
-        this.dispatch("categories/searchShops",res.data)
+        this.dispatch("categories/searchShopsPage",res.data)
         
       })
       .catch((error:any) => {

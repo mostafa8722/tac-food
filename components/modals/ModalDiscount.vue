@@ -17,7 +17,7 @@
           ></v-text-field>
          <div class="flex">
           
-           <span class="desc-text block mr-2">{{text_character}}</span>
+       
          </div>
          <div class="flex justify-evenly mb-5 mt-5 ">
                       <button @click.prevent="handleAddDescription" class="btn-save pointer mt-4"> بررسی کد </button>

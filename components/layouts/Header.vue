@@ -6,12 +6,12 @@
        <div v-if="!isSendingData" class=" flex justify-center items-center flex-col mt-4">
               <div  @click.prevent="handleMap" class="flex justify-center ">
                 <span  class="text-sm ml-2 pointer">
-                  {{location_address.address_title}}
+                  {{title}}
                 </span>
                 <font-awesome-icon   class="pointer h-4 text-sm" icon="fa-solid fa-angle-down" />
                 
               </div>
-              <span  @click.prevent="handleMap" class="text-xs pointer">{{location_address.address_postal}}</span>
+              <span  @click.prevent="handleMap" class="text-xs pointer">{{address}}</span>
          
       </div>
        <div v-else class=" flex justify-center items-center  mt-2">
@@ -66,6 +66,8 @@ import {LOCATION_DEFAULT} from "~/data/default"
            location_address: 'general/location_address',
             selected_address: 'user/selected_address',
             showUserAddresses: 'user/showUserAddresses',
+                totalCart: 'carts/totalCart',
+           carts: 'carts/carts',
           
             })
          },
@@ -77,7 +79,9 @@ import {LOCATION_DEFAULT} from "~/data/default"
       editAddress : "",
       showDeleteAddress :false,
       deleteData :{title:"هشدار!",description:"آیا برای حذف این آیتم مطمئن هستید؟",cancelBtn:"انصراف",confirmBtn:"بله" },
-       latlng :[]
+       latlng :[],
+       title:"",
+       address:"",
         
     }),  
     created(){
@@ -95,11 +99,11 @@ import {LOCATION_DEFAULT} from "~/data/default"
       if(!GetStorage("latlng")){
       setTimeout(()=>{this.showModalMap = true},200)
        let data ={
-          lat :LOCATION_DEFAULT.lan,
+          lat :LOCATION_DEFAULT.lat,
           lng :LOCATION_DEFAULT.lng,
           
         }
-      //  this.$store.dispatch('general/addLocationAddress', data)
+       this.$store.dispatch('general/addLocationAddress', data)
       }else{
        
         let data ={
@@ -107,8 +111,15 @@ import {LOCATION_DEFAULT} from "~/data/default"
           lng :GetStorage("latlng").split(",")[1],
           
         }
+ 
+
         if(this.location_address.address_title=="" && this.location_address.address_postal=="")
          this.$store.dispatch('general/addLocationAddress', data)
+         else{
+     
+          this.title = this.location_address.address_title;
+         this.address = this.location_address.address_postal;
+         }
       }
       
     },
@@ -118,6 +129,38 @@ import {LOCATION_DEFAULT} from "~/data/default"
         this.showModal = true
 
       },
+      location_address(new_val,old_val){
+        
+        console.log("ttt",new_val)
+        this.title = new_val.address_title;
+        this.address = new_val.address_postal;
+
+        if(this.title=="")
+        this.title=="موقعیت فعلی"
+
+        if(this.address=="")
+        this.address=="موقعیت فعلی"
+
+                 let lat = GetStorage("latlng")?GetStorage("latlng").split(',')[0]: LOCATION_DEFAULT.lat;
+     let lng = GetStorage("latlng")?GetStorage("latlng").split(',')[1]: LOCATION_DEFAULT.lng;
+     let id = "[";
+
+     this.carts.map((item,index)=>{
+         if(this.carts.length-1 == index)
+         id += item.store_id ;
+         else 
+         id += item.store_id +","
+     })
+     id += "]";
+     let data = {
+      lat : lat +"",
+      lng : lng +"",
+      id : id ,
+       show_payemnt :false
+     }
+ this.$store.dispatch('orders/updateOrder',data);
+      },
+      
     },
     methods:{
       handleMap(){

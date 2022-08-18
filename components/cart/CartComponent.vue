@@ -55,8 +55,9 @@ export default {
              showModal: false,
             }),
          created(){
-           let lat = GetStorage("lat")?GetStorage("lat"): LOCATION_DEFAULT.lat;
-            let lng = GetStorage("lng")?GetStorage("lng"): LOCATION_DEFAULT.lng;
+
+            let lat = GetStorage("latlng")?GetStorage("latlng").split(',')[0]: LOCATION_DEFAULT.lat;
+            let lng = GetStorage("latlng")?GetStorage("latlng").split(',')[1]: LOCATION_DEFAULT.lng;
             let id = "[";
 
             this.carts.map((item,index)=>{

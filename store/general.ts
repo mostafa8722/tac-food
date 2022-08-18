@@ -13,7 +13,7 @@ export const state = () => ({
   isSendingData: false,
   isHomeIconAdd: false,
   location: LOCATION_DEFAULT,
-  location_address :{address_title:"موقعیت فعلی",address_postal:"موقعیت فعلی"}
+  location_address :{address_title:"",address_postal:""}
 })
 export type AuthState = ReturnType<typeof state>
 
@@ -80,6 +80,8 @@ async addLocationAddress({ commit, dispatch }, data) {
     .then((res:any) => {
       commit('setSendingData',false)
           
+
+    
       commit('setLocationAddress',res.data.result)
 
     })

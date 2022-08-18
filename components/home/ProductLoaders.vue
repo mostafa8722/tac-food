@@ -41,7 +41,7 @@
     // Vuetify components provide
     // a theme variable that is
     // used to determine dark
-    inject: ['theme'],
+ 
 
     data: () => ({
       boilerplate: false,
