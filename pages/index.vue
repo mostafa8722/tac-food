@@ -1,6 +1,6 @@
 <template>
   <div class="home-containers pb-10">
-    <div>
+    <div v-if="a>1">
 
 
    <SearchBox /> 
@@ -48,6 +48,9 @@ export default Vue.extend({
     
         })
       },
+      data :()=>({
+        a:0
+      }),
 async asyncData(context){
 
  
@@ -81,6 +84,7 @@ await context.$axios.post('v2/customer/home', context.store.getters['general/loc
 }
 },
 created(){
+  setTimeout(()=>{this.a=2},100)
    setTimeout(()=>{
        this.$store.dispatch('home/handleLoading',false)
      },1000)
