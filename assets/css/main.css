@@ -46,7 +46,7 @@ background-color: #f5f5f5;
 }
 .v-otp-input{max-width: 300px;}
 .theme--light.v-otp-input .v-input .v-input__control .v-input__slot{background-color: unset!important;width: 50px;}
-.v-slide-group__content{flex-direction: row-reverse;}
+.v-slide-group__content{display: flex!important;flex-direction: row-reverse;}
 .category-skeleton .v-skeleton-loader--tile .v-skeleton-loader__bone{
   margin-left: 5px!important;
 }

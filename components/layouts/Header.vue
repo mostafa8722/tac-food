@@ -99,7 +99,7 @@ import {LOCATION_DEFAULT} from "~/data/default"
           lng :LOCATION_DEFAULT.lng,
           
         }
-        this.$store.dispatch('general/addLocationAddress', data)
+      //  this.$store.dispatch('general/addLocationAddress', data)
       }else{
        
         let data ={
