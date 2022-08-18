@@ -1,7 +1,7 @@
 html,body{
 margin :0px;
 background-color: #f5f5f5;
-scroll-behavior: smooth;
+
 }
 
 .pointer{
@@ -211,4 +211,6 @@ background-color: #eeeeee;
       width: 0px;
       background: transparent;
     }
-  
+    html{
+      
+    }

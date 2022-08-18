@@ -308,6 +308,7 @@ export default {
       width: 15px;
       height: 15px;
        margin-right: 10px;
+       margin-top: 6px;
           border-radius: 2px;
    
       text-align: center;

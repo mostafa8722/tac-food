@@ -9,10 +9,10 @@
   <v-slide-group
 
       v-model="model"
-      class="pa-4"
+      class="pa-4 flex flex-row"
       mandatory
       show-arrows
-      v-if="isLoading"
+   
       
     >
     

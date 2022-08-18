@@ -1,5 +1,5 @@
 <template>
-<div class="content-product mt-2">
+<div :id="`content-product-${product.id}`" class="content-product mt-2">
  <NuxtLink :to="`/products/${product.store_id}`">
 <v-card
     class="flex flex-col pt-2   overflow-hidden  pointer "
@@ -34,6 +34,8 @@
     <div class="flex flex-col mr-2">
       <div class="d-flex">
           <span class=" title">  {{product.name}}</span>
+                
+
           <div v-if="product.discount && product.discount!=0" class="shape-octagon"><span>{{product.discount}}%</span></div>
       </div>
      
@@ -216,7 +218,8 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     width: calc(100% - 80px);
-        margin-top: 0.25rem;
+    margin-top: 0.5rem;
+    display:flex;
 }
 .type{
   color:#8e8e8e;
@@ -239,8 +242,8 @@ export default {
 }
 .icon-custom{
   color:#fd5e63!important;
-  height: 10px;
-  width: 10px;
+  height: 13px;
+  width: 13px;
   padding:0.1rem;
   border:0.1rem solid #fd5e63;
   border-radius: 50%;

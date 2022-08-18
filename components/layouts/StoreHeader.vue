@@ -52,6 +52,8 @@ library.add(faArrowRight)
    created(){
   
 
+    let prevInfo = this.$nuxt.context.from;
+    if(!prevInfo)
      this.$store.dispatch('products/setTitle',"");
    },
  

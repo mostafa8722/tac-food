@@ -113,6 +113,8 @@ import { mapGetters } from 'vuex'
     methods:{
       getUrl(index){
 
+        console.log("ggggd",this.$route)
+
         
         let url = this.$route.path;
         let name  = this.$route.name;

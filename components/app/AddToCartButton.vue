@@ -10,7 +10,7 @@
       color="#ffffff"
     ></v-progress-circular>
           
-  <font-awesome-icon v-show="!isDataSent" @click.prevent="clearCart"   class="absolute white right-3 top-4 pr-1 pl-1 pointer" icon="fa-solid fa-trash" />
+  <font-awesome-icon v-show="!isDataSent" @click.prevent.stop="clearCart"   class="absolute white right-3 top-4 pr-1 pl-1 pointer" icon="fa-solid fa-trash" />
           <span v-show="!isDataSent" class="white absolute white right-10 top-3 number-format"> {{formatPrice(totalCart)}} تومان</span>  
           <span v-show="!isDataSent" class="white absolute white left-6 top-3"> {{title}}</span>  
            <font-awesome-icon    class="absolute  white left-3 top-4" icon="fa-solid fa-angle-left" />
@@ -150,7 +150,7 @@ async handleUrl(e){
 .cart-container{
   background-color:#fd5e63;
   height: 50px;
-  width: 80%;
+  width: 91%;
  
  max-width: 500px;
   position: fixed;

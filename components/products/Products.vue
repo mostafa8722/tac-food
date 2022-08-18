@@ -10,11 +10,14 @@
       icons-and-text
        fixed-tabs
        class="tabs-style"
+       id="tabss"
       >
      
 
       <v-tab v-for="(cat,index) in catgoriesStore" :href="`#tab-${index+1}`" @click.prevent="handleTab" >
-         <a :href="`#tab-${index+1}`" class="tab-title">{{cat.name}}</a>
+       
+      <a class="tab-title" :href="`#tab-${index+1}`">{{cat.name}}</a>
+
         
       </v-tab>
 
@@ -50,12 +53,13 @@
      <SkeletonLoaders  v-for="(item,index) in [1,2,3,4,5,6,7,8]"  v-if="isLoading && title==''"  :key="index"  />
     
      <div @scroll="handleScroll(true)"  id="tab-content" :style="`height:${height}`"  class="mt-1 flex flex-col items-center ml-3 mr-3 pb-70 ">
-       
+         
          <div class="w-100 d-flex flex-col items-center"  v-for="(cat, index) in catgoriesStore" :id='`tab-${index+1}`' >
             <HeaderSection class="mt-2" :title= "cat.name"/>
-            <Product   v-for="(item, index) in handleTabSelected(cat)"  :is_store_online="!is_active" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
+            <Product   v-for="(item) in handleTabSelected(cat)" :index="index" :is_store_online="!is_active" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
       
          </div>
+     
          
      
      </div>
@@ -73,6 +77,7 @@ import Product from './Product.vue';
 import SkeletonLoaders from './SkeletonLoaders';
 import Empty from './Empty';
 import { mapGetters } from 'vuex'
+import { off } from 'process';
 export default {
     components: { HeaderSection ,Product,ModalShowProduct,SkeletonLoaders,Empty},
     data:()=>({
@@ -86,9 +91,20 @@ export default {
         height :"750px",
         shop_clock :"",
         is_active : false,
+        path: "",
+        
     }),
       
-      
+      created(){
+       this.path =  this.$route.path ;
+         let prevInfo = this.$nuxt.context.from;
+        if(prevInfo){
+        this.getShopInfo(this.shops,this.products);
+          this.catProducts = this.products.filter(item=> item.category==this.title);
+          this.show_tab = true;
+        }
+
+      },
       
        computed: {
              ...mapGetters({
@@ -100,6 +116,7 @@ export default {
                  })
          },
          methods:{
+       
             showProduct(product){
               this.showModal = true;
               this.selectedProduct = product
@@ -120,31 +137,39 @@ export default {
             },
             handleScroll(event){
 
+ let scroll_top = document.getElementById("tab-content").scrollTop ;
 
               if(this.isScrolling){
               
-             let scroll_top = document.getElementById("tab-content").scrollTop ;
+            
 
              let cats = this.catgoriesStore;
              let initial = 0;
              let is_set = false;
              let selected_index = 0;
-
+ 
              for(let i=0;i<=cats.length-1;i++){
                let products = this.products.filter(item=> item.category==cats[i].name);
+               console.log("ttt4_scroll_",i+"==>"+products.length)
+              
+             if(initial<=scroll_top && scroll_top < (initial+products.length*155 +40)){
+               
              
-  
-             if(initial<=scroll_top && scroll_top < (initial+products.length*150 +40)){
-                
                 this.isScrolling = true
                this.tab = "tab-"+(i+1);
              
                }
-                initial += products.length*150 +40;
+                initial += products.length*155 +40;
+                        window.scrollTo({
+                        top: 10,
+                        left: 10,
+                        behavior: 'smooth'
+                      });
                 
           
              }
-           
+             
+           // document.getElementById("content-product-3610").scrollTop  = 0;
               }
             },
               getShopInfo(shops,products){
@@ -152,8 +177,6 @@ export default {
 
            
 
-           console.log("shopss",shops)
-           console.log("shopss2",products)
            
          
            let product = products[0];
@@ -209,12 +232,16 @@ export default {
            
 
       },
+     
+
          }
          ,
          watch :{
             products(new_val ,old_val){
              this.title = this.catgoriesStore[0].name;
-             this.height = "900px";
+            // this.height = (window.innerHeight-204)+"px";
+            this.height = "450px";
+            
            this.catProducts = new_val.filter(item=> item.category==this.title);
 
              
@@ -251,7 +278,7 @@ export default {
             let products = this.products.filter(item=> item.category==cats[i].name);
              
               if(i<=selected_index-1){
-               initial += products.length*150 +40;
+               initial += products.length*155 +40;
               }
               
   
@@ -262,10 +289,13 @@ export default {
           
              }
 
+               //document.getElementById("tab-content").scrollTop = initial+offset;
 
-
-            
-               document.getElementById("tab-content").scrollTop = initial ;
+               if(selected_index==1)
+               document.getElementById("tab-content").scrollTop  = 0;
+              else 
+               document.getElementById(new_val).scrollIntoView() ;
+              
 
              }
              
@@ -326,5 +356,16 @@ export default {
 }
 .pb-70{padding-bottom: 70px;}
 .mt-100{margin-top: 100px;}
-#tab-content{margin-top: 10px;overflow-y: scroll;}
+#tab-content{margin-top: 10px;overflow-y: scroll;
+
+
+}
+::-webkit-scrollbar {
+  width: 0.0001rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fe5c67; 
+  border-radius: 1px;
+}
 </style>
