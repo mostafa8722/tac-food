@@ -120,9 +120,12 @@ export default {
       created(){
        this.path =  this.$route.path ;
          let prevInfo = this.$nuxt.context.from;
+
         if(prevInfo){
         this.getShopInfo(this.shops,this.products);
+           this.title = this.catgoriesStore[0].name;
           this.catProducts = this.products.filter(item=> item.category==this.title);
+        
           this.show_tab = true;
         }
 
