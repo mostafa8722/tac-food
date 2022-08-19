@@ -20,7 +20,7 @@
                
            </div>
 
-           <div class="flex relative mt-4" >
+           <div class="flex relative mt-4 v-search-box" >
                  <v-text-field
             outlined
                 persistent-hint
@@ -35,7 +35,7 @@
           </v-text-field>
            </div>
             
-            <div>
+            <div class="search-content-tag">
              <Product   v-for="(item) in searchProducts" :index="index" :is_store_online="!is_active" @select-product="showProduct" page="store" :key="item.id"  :product="item" />
 
             </div>
@@ -207,4 +207,9 @@ button {
   height: 100%;
 }
 .color-0{color:#000000}
+.search-content-tag{
+  height: 500px;
+  overflow-y: scroll;
+  padding-bottom: 100px;
+}
 </style>

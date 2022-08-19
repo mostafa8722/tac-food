@@ -61,23 +61,24 @@
       
          </div>
      
-         
+  
      
      </div>
         
       <Empty v-show="products.length==0 && !isLoading" />
 
 
- <v-fab-transition>
+                 <v-fab-transition>
       <v-btn
         key="mdi-share-variant"
         color="#ffffff"
         fab
-        large
+       
         dark
         bottom
-        left
+        right
         class="v-btn--search"
+        :class="`${totalCart!=0?'bottom-130':''}`"
         @click="showModalSearch = true"
       >
         <v-icon color="#fd5e63">mdi-magnify</v-icon>
@@ -131,9 +132,10 @@ export default {
              ...mapGetters({
                  products: 'products/products',
                  catgoriesStore: 'products/catgoriesStore',
-                  isLoading: 'home/isLoading',
-                    shops: 'categories/shops',
-                       title: 'products/title',
+                 isLoading: 'home/isLoading',
+                 shops: 'categories/shops',
+                 title: 'products/title',
+                 totalCart: 'carts/totalCart',
                  })
          },
          methods:{
@@ -382,7 +384,7 @@ export default {
 
 }
 ::-webkit-scrollbar {
-  width: 0.0001rem;
+  width: 0.05rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -390,9 +392,19 @@ export default {
   border-radius: 1px;
 }
 .v-btn--search{
-  z-index: 1000;
-  bottom: 200px;
-  left:20px;
 
+  position: fixed;
+  left:25px;
+  bottom: 80px;
+
+
+}
+.bottom-130{
+   bottom: 130px;
+}
+@media screen and (min-width:600px){
+  .v-btn--search{
+  left:calc(50% - 270px);
+}
 }
 </style>

@@ -115,7 +115,7 @@ export default {
   methods:{
       
      addToCart(){
-     
+       this.$store.dispatch('carts/addCart', this.product)
      if(!this.is_store_online)
        this.$store.dispatch('carts/addCart', this.product)
        else 

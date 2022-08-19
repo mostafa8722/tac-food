@@ -21,6 +21,13 @@ background-color: #f5f5f5;
     left: auto!important;
     position: absolute;
   }
+
+  .v-search-box .v-label--active,.v-search-box .v-label.v-label--active.theme--light  {
+ 
+    right: -56px!important;
+ 
+  }
+  
    legend{
     right: 0px;
     position: absolute;
