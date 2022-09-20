@@ -22,8 +22,12 @@ export default Vue.extend({
 
     let params = this.$route.params;
     let id = params.id;
+   
    if(!prevInfo || prevInfo.name!="products-id")
-   this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:id})
+   {
+    this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:id})
+   }
+  
     }
 })
 </script>

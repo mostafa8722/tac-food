@@ -6,12 +6,14 @@
          <img  class="icon-users" src="/icons/users.svg" />
          <p class="mt-3 text-unregister">شما ثبت نام نکردید</p>
 
-                <v-btn class="btn-add mt-5">
-                      <NuxtLink to="/login">
+         <NuxtLink class="mt-5" to="/login">
+                <v-btn class="btn-add ">
+                     
                      <span class="white" style="font-size:0.94rem;"> ثبت نام</span>
                     <font-awesome-icon class=" white mr-5 h-15" :icon="`fa-solid fa-user`" />
-                     </NuxtLink>
+                     
                 </v-btn>
+            </NuxtLink>
         
      </div>
     

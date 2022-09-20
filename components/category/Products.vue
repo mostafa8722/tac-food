@@ -53,6 +53,8 @@ export default {
  //  if(prevInfo  &&  prevInfo.name=="products-id")
     this.selected_shops = this.shops ;
 
+  
+
     },
     methods:{
       isCat(cats,cat){

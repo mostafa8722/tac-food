@@ -13,9 +13,11 @@
       <div class="flex justify-between mt-2 mb-1">
           <p class=" title">{{comment.products[0]}}</p>
           <div class="flex flex-row-reverse">
-            <font-awesome-icon class="icon-item pointer ml-2" icon="fa-solid fa-thumbs-up" />
+          
+            <font-awesome-icon v-if="getRoute " @click="handleLike" :class="`icon-item pointer ml-2 ${comment.favorite?'icon-item-active':''}`"  icon="fa-solid fa-thumbs-up" />
             <p class=" title ml-2">{{comment.like}}</p>
-            <font-awesome-icon class="icon-item pointer ml-2" icon="fa-solid fa-trash" />
+          
+            <font-awesome-icon  v-if="2>3" @click="handleLike"   class="icon-item pointer ml-2" icon="fa-solid fa-trash" />
           </div>
            
       </div>
@@ -32,6 +34,7 @@ import Vue from "vue"
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faTrash,faThumbsUp} from '@fortawesome/free-solid-svg-icons'
+import Cookies from "js-cookie"
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -39,6 +42,14 @@ library.add(faTrash,faThumbsUp)
 
 
 export default {
+    computed:{
+        
+        getRoute:function(){
+     
+              console.log("tttt",this.comment);
+              return this.$route.name =='products-id' && Cookies.get("user");
+            }
+    },
     components: { },
       props: {
           comment:{
@@ -46,6 +57,25 @@ export default {
               require :true
           }
       },
+      methods:{
+        handleLike(){
+
+            //console.log(this.$route.params)
+            if(Cookies.get("user") && this.$route.name=='products-id'){
+           let user = JSON.parse (Cookies.get("user"));
+                 let data  = {
+                       api_token: user.api_token,
+                       favorite_id:this.comment.id,
+                       store_id:this.$route.params.id,
+                       command:"comment"
+                    };
+
+            this.$store.dispatch('products/likeCommentSection',data);
+
+                }
+          
+        }
+      }
   
    
 }
@@ -88,7 +118,11 @@ color:#606060;
 }
 .icon-item{
     color:#9c9c9c;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
+}
+.icon-item-active{
+    color:#fe5c67;
+ 
 }
 .d-flex{display: flex;}
 .date-c{

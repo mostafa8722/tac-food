@@ -10,6 +10,7 @@
         <HeaderComment :key="3" :item="getItem(comments,'low')" type="low" class="mb-2" />
      
      </div>
+
           
             
      <div  class="mt-1" v-for="(item, index) in comments">

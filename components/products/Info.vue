@@ -105,8 +105,11 @@ export default {
            let product = products[0];
           
                   
+           console.log("ttttt1",products);
+           console.log("ttttt2",shops);
            let shop = shops.filter(item=> item.id == product.store_id)[0];
-                 
+           console.log("ttttt3",shop);
+           console.log("ttttt34",product.store_id);
           if(type=="lat")
            return [shop.lat,shop.lng];
            else if(type=="delivery_cost")

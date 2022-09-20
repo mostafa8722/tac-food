@@ -94,10 +94,10 @@
 import ModalShowProduct from '~/components/modals/ModalShowProduct.vue'
 import HeaderSection from '../app/HeaderSection.vue';
 import Product from './Product.vue';
-import SkeletonLoaders from './SkeletonLoaders';
-import Empty from './Empty';
+import SkeletonLoaders from './SkeletonLoaders.vue';
+import Empty from './Empty.vue';
 import { mapGetters } from 'vuex'
-import { off } from 'process';
+
 import ModalSearch from './ModalSearch.vue';
 export default {
     components: { HeaderSection, Product, ModalShowProduct, SkeletonLoaders, Empty, ModalSearch },
@@ -121,7 +121,8 @@ export default {
        this.path =  this.$route.path ;
          let prevInfo = this.$nuxt.context.from;
 
-        if(prevInfo){
+
+        if(prevInfo && prevInfo.name=="cart"){
         this.getShopInfo(this.shops,this.products);
            this.title = this.catgoriesStore[0].name;
           this.catProducts = this.products.filter(item=> item.category==this.title);
@@ -176,7 +177,7 @@ export default {
  
              for(let i=0;i<=cats.length-1;i++){
                let products = this.products.filter(item=> item.category==cats[i].name);
-               console.log("ttt4_scroll_",i+"==>"+products.length)
+           
               
              if(initial<=scroll_top && scroll_top < (initial+products.length*155 +40)){
                
@@ -265,6 +266,12 @@ export default {
          watch :{
             products(new_val ,old_val){
              this.title = this.catgoriesStore[0].name;
+
+             console.log("ttttb",this.shops)
+             if(new_val.length>0){
+              this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:new_val[0].type_id})
+
+             }
             // this.height = (window.innerHeight-204)+"px";
             this.height = "450px";
             
@@ -285,6 +292,7 @@ export default {
 
                     
             },
+
             tab(new_val,old_val){
 
             

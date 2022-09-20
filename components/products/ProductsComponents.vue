@@ -51,8 +51,8 @@
       >
         
          <Products v-if="i==1"/>
-         <Comments v-else-if="i==2" />
-         <Info v-else-if="i==3" />
+         <Comments v-else-if="i==2 " />
+         <Info v-else-if="i==3 && shops.length>0" />
          
        
       </v-tab-item>
@@ -72,7 +72,8 @@ export default {
       ...mapGetters({
          
              title: 'products/title',
-               isLoading: 'home/isLoading',
+             isLoading: 'home/isLoading',
+             shops: 'categories/shops',
                    
         
             })

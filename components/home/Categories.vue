@@ -2,9 +2,10 @@
    <section>
      <HeaderSection title="دسته بندی"/>
    
-     
+
+
+
      <div    class="mt-3 flex flex-row mr-3">
-   
 
   <v-slide-group
 
@@ -66,12 +67,15 @@ export default {
        ,isLoading:"home/isLoading"
        
 
-        })
+        }),
+        
+  
   },
   data :()=>({
     model : null,
     slider_class:"slider--class",
-    show_slider :false
+    show_slider :false,
+    message: "umbrella"
   }),
   created(){
     let prevInfo = this.$nuxt.context.from;

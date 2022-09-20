@@ -135,7 +135,11 @@ export const actions: ActionTree<AuthState, any> = {
 
   async commentSection({ commit, dispatch }, data) {
       
-    this.dispatch("home/handleLoading",true)
+    if(data.loading && data.loading =="not")
+    this.dispatch("home/handleLoading",false)
+    else
+    this.dispatch("home/handleLoading",true) 
+
     await this.$repositories
       .comments()
       .commentsPage(data)
@@ -146,6 +150,24 @@ export const actions: ActionTree<AuthState, any> = {
       .catch((error:any) => {
         this.dispatch("home/handleLoading",false)
         //Vue.$toast.error("خطا ! لطفا دوباره  یا بعدا تلاش کنید")
+      
+      })
+  },
+  async likeCommentSection({ commit, dispatch }, data) {
+      
+
+    await this.$repositories
+      .comments()
+      .likeComment(data)
+
+      .then((res:any) => {
+       
+        this.dispatch("products/commentSection",{store_id:data.store_id,api_token:data.api_token,loading:"not"})
+    
+      })
+      .catch((error:any) => {
+        this.dispatch("home/handleLoading",false); 
+      
       
       })
   },

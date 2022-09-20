@@ -17,6 +17,7 @@ import CartButton from '~/components/app/AddToCartButton.vue'
 import ProductsComponents from '~/components/products/ProductsComponents.vue'
 import ModalDelete from '~/components/modals/ModalDelete.vue'
 import {mapGetters} from "vuex"
+import Cookies from "js-cookie"
 
 export default Vue.extend({
    layout: 'store',
@@ -35,7 +36,8 @@ export default Vue.extend({
             products: 'products/products',
           
           
-            })
+            }),
+
          },
 data :()=>({
    showModal: false,
@@ -55,12 +57,16 @@ let prevInfo = this.$nuxt.context.from;
     let id = params.id;
 
 
+   
    if( !prevInfo || prevInfo.name!="cart" || this.products.length==0){
-    this.$store.dispatch('products/clearSearch');
+    //this.$store.dispatch('products/clearSearch');
 
    this.$store.dispatch('products/productsPage',{store_id:id})
+   if(Cookies.get("user")){
+    let user = JSON.parse (Cookies.get("user")!);
+    this.$store.dispatch('products/commentSection',{store_id:id,api_token:user.api_token})
+   }else
    this.$store.dispatch('products/commentSection',{store_id:id})
-   this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:1})
     }
   }
  

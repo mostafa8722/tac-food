@@ -4,7 +4,7 @@
     <div class="flex  justify-between items-center ">
       <div class=" v-header flex items-center pt-2 pb-2">
        <font-awesome-icon v-if="title!=''" @click.prevent="handleBackBtn"  class=" mr-2 pointer btn-back p-2" :icon="`fa-solid fa-arrow-right`" />
-    <h4 class="title mr-4">{{title}}</h4>
+    <h4 class="title mr-4">{{isLoading?"":title}}</h4>
 
     
         <v-skeleton-loader
@@ -40,6 +40,8 @@ library.add(faArrowRight)
       ...mapGetters({
          
              title: 'products/title',
+             isLoading: 'home/isLoading',
+
         
             })
          },

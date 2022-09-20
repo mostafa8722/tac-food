@@ -12,6 +12,7 @@ interface result  {
 
 interface inputData {
   store_id: number,
+  api_token:string
 
 }
 interface inputDataCustomer {
@@ -26,12 +27,21 @@ interface inputComment {
   rating: string,
 
 }
+
+interface likeComment {
+  api_token: string,
+  favorite_id: number,
+  command: string,
+  
+
+}
 export default class CommentsRepository extends Repository {
 
  
 
   async commentsPage(data: inputData): Promise<any> {
 
+    console.log("tttthhh",data)
     const response = await this.axios.post('v1/comments', data)
    
     return response
@@ -47,6 +57,15 @@ export default class CommentsRepository extends Repository {
 
   
     const response = await this.axios.post('v1/comments/insert', data)
+   
+    return response
+  }
+
+  async likeComment(data: likeComment): Promise<any> {
+
+    console.log("ttffff",data);
+  
+    const response = await this.axios.post('v1/favorites', data)
    
     return response
   }
