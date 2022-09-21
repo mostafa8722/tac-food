@@ -16,7 +16,7 @@
   <HeaderCart class="mt-1" title="زمان"   value="فوری" />
   <HeaderCart class="mt-1" title="ارسال"   :value="formatPrice(cart.cost_delivery)" />
   <HeaderCart class="mt-1" title="مالیات"  :value="tax==0?'رایگان':formatPrice(cart.tax)" />
-  <HeaderCart class="mt-1" title="خرید"   :value="formatPrice(totalPrice)" />
+  <HeaderCart class="mt-1" title="خرید"   :value="formatPrice(cart.store_total_price - cart.tax - cart.cost_delivery)" />
   <HeaderCart class="mt-1" title="مجموع"   :value="formatPrice(cart.store_total_price)" />
   
   <div  class="pl-2 pr-2" v-for="(item, index) in cart.products">
@@ -61,6 +61,8 @@ export default {
 
       methods:{
              totalPrice2(cart){
+
+              console.log("bbb",cart)
                 this.totalPrice = 0 ;
 
                 let index = this.carts.findIndex((item) => item.id==cart.id);

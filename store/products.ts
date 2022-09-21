@@ -172,6 +172,7 @@ export const actions: ActionTree<AuthState, any> = {
       })
   },
   async customerCommentSection({ commit, dispatch }, data) {
+    commit('commentsPage',{result:[]});
     await this.$repositories
       .comments()
       .customerCommentsPage(data)

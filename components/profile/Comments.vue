@@ -59,7 +59,7 @@ export default {
                        api_token: user.api_token
                     };
                  
-                  this.$store.dispatch('products/customerCommentSection',token)
+                  this.$store.dispatch('products/pr',token)
                   
                 }else{
     

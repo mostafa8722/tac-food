@@ -13,11 +13,34 @@
 import Vue from 'vue'
 import Comments from '~/components/profile/Comments.vue'
 
+import Cookies from 'js-cookie';
 
 export default Vue.extend({
     layout: 'custom',
   components:{
     Comments
+},
+created(){
+
+
+if(Cookies.get("user")){
+
+let user = JSON.parse (Cookies.get("user")!);
+
+       let token  = {
+             api_token: user.api_token
+          };
+       
+        this.$store.dispatch('products/customerCommentSection',token)
+        
+      }else{
+
+       this.$store.dispatch('home/authenticatedCode',{status:401})
+      }
+
+
+
+
 },
 
   

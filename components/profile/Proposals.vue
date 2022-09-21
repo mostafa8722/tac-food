@@ -19,17 +19,17 @@
          <div class="flex justify-center">
              <div class="container-experiment  flex mt-3 ">
 
-                 <div @click="setExperiance('good')" class="flex-col flex container-item items-center justify-center ml-1r" :class="experiance=='good'?'experiance-selected':''" >
+                 <div @click="setExperiance('good')" class="flex-col flex container-item items-center justify-center ml-1r pointer" :class="experiance=='good'?'experiance-selected':''" >
                       <v-icon  class="icon-emoj" >mdi-emoticon-happy-outline</v-icon>
                      <span class="text-emoj">خوب </span>
                  </div>
-                 <div  @click="setExperiance('average')"  class="flex-col flex container-item items-center justify-center  ml-1r"  :class="experiance=='average'?'experiance-selected':''" >
+                 <div  @click="setExperiance('average')"  class="flex-col flex container-item items-center justify-center  ml-1r pointer"  :class="experiance=='average'?'experiance-selected':''" >
                         <v-icon  class="icon-emoj" >mdi-emoticon-neutral-outline</v-icon>
                      <span class="text-emoj">متوسط </span>
                  </div>
                  
 
-                 <div  @click="setExperiance('bad')" class="flex flex-col container-item items-center justify-center"  :class="experiance=='bad'?'experiance-selected':''">
+                 <div  @click="setExperiance('bad')" class="flex flex-col container-item items-center justify-center pointer"  :class="experiance=='bad'?'experiance-selected':''">
                        <v-icon  class="icon-emoj" >mdi-emoticon-sad-outline</v-icon>
                      <span class="text-emoj">بد </span>
                  </div>
@@ -185,6 +185,9 @@ export default {
            
             if(new_val){
 
+                this.subject  = 1; 
+                this.experiance = '';
+                this. description ="";
             }
         }
      }
