@@ -49,9 +49,10 @@
         
         <span class="active-time-text mr-2">فعالیت از {{shop_clock}}</span>
       </div>
+ 
     
      
-     <SkeletonLoaders  v-for="(item,index) in [1,2,3,4,5,6,7,8]"  v-if="isLoading && title==''"  :key="index"  />
+     <SkeletonLoaders  v-for="(item,index) in [1,2,3,4,5,6,7,8]"  v-if=" !isLoadedShop "  :key="index"  />
     
      <div @scroll="handleScroll(true)"  id="tab-content" :style="`height:${height}`"  class="mt-1 flex flex-col items-center ml-3 mr-3 pb-70 ">
          
@@ -97,13 +98,15 @@ import Product from './Product.vue';
 import SkeletonLoaders from './SkeletonLoaders.vue';
 import Empty from './Empty.vue';
 import { mapGetters } from 'vuex'
-
+import { LOCATION_DEFAULT } from "~/data/default"
+import {GetStorage,SetStorage} from "~/utils/helpers"
 import ModalSearch from './ModalSearch.vue';
 export default {
     components: { HeaderSection, Product, ModalShowProduct, SkeletonLoaders, Empty, ModalSearch },
     data:()=>({
         selectedProduct :{},
         catProducts :[],
+        isLoadedShop:false,
         showModal: false,
         title :"",
         show_tab :false,
@@ -120,9 +123,11 @@ export default {
       created(){
        this.path =  this.$route.path ;
          let prevInfo = this.$nuxt.context.from;
+   
 
-
+      
         if(prevInfo && prevInfo.name=="cart"){
+        
         this.getShopInfo(this.shops,this.products);
            this.title = this.catgoriesStore[0].name;
           this.catProducts = this.products.filter(item=> item.category==this.title);
@@ -204,7 +209,7 @@ export default {
 
            
 
-           
+          
          
            let product = products[0];
           
@@ -215,10 +220,12 @@ export default {
         if(shop){
        
           
-         
+          
+           this.isLoadedShop = true;
             shop.activity_times.map((item,index)=>{
 
-          
+            
+              
             let hour_start = parseInt(item.start.substring(0,2));
             let min_start =parseInt( item.start.substring(3,5));
               
@@ -239,6 +246,7 @@ export default {
                else  if( hour== hour_end &&  min<=min_end ){
                 this.is_active = true;
                }
+            
 
                   let index_txt =  index==0?"":" - " ;
                     hour_start = hour_start<10?("0"+hour_start):hour_start ;
@@ -267,12 +275,14 @@ export default {
             products(new_val ,old_val){
              this.title = this.catgoriesStore[0].name;
 
-             console.log("ttttb",this.shops)
              if(new_val.length>0){
-              this.$store.dispatch('categories/categoriesPage',{lat:35.022731 , lng : 50.357277 ,type:new_val[0].type_id})
+              this.$store.dispatch('categories/categoriesPage',
+              {lat:GetStorage("latlng")?GetStorage("latlng").split(',')[0]:LOCATION_DEFAULT.lat ,
+               lng : GetStorage("latlng")?GetStorage("latlng").split(',')[1]:
+               LOCATION_DEFAULT.lng ,type:new_val[0].type_id})
 
              }
-            // this.height = (window.innerHeight-204)+"px";
+           
             this.height = "450px";
             
            this.catProducts = new_val.filter(item=> item.category==this.title);
@@ -286,7 +296,7 @@ export default {
                     
             },
              shops(new_val ,old_val){
-            
+          
               this.getShopInfo(this.shops,this.products)
                    
 
